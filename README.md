@@ -19,6 +19,8 @@
 
 - docs: 문서,주석 추가/수정의 경우
 
+- chore: 빌드 업무 수정, 패키지매니저 수정의 경우
+
 ## ⚙️ Package Manager Version
 
 ```bash
