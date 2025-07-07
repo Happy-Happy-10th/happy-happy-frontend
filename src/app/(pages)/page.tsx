@@ -1,7 +1,18 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import { getAppEnv } from '@/utils';
+import { signIn } from 'next-auth/react';
 
 export default function Home() {
+  const kakaoLogin = () => {
+    signIn('kakao', { redirect: true, callbackUrl: '/user' });
+  };
+
+  const googleLogin = () => {
+    signIn('google', { redirect: true, callbackUrl: '/user' });
+  };
+
   return (
     <div>
       <p>
@@ -17,6 +28,14 @@ export default function Home() {
       <p>{getAppEnv()}환경</p>
 
       <Button>button</Button>
+
+      <button onClick={kakaoLogin} className="bg-yellow-400 text-black h-10 w-full rounded-sm">
+        카카오 로그인
+      </button>
+
+      <button onClick={googleLogin} className="border-gray-500 border-1 text-black h-10 w-full rounded-sm">
+        구글 로그인
+      </button>
     </div>
   );
 }
