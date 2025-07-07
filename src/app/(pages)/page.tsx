@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { getAppEnv } from "@/utils";
 
 export default function Home() {
   return (
@@ -17,6 +18,8 @@ export default function Home() {
         labore possimus, suscipit nostrum nobis eos autem minima blanditiis a
         maxime.
       </p>
+
+      <p>{getAppEnv()}환경</p>
 
       <Button>button</Button>
     </div>
