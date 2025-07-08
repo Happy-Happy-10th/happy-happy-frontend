@@ -32,3 +32,24 @@ v22.15.0
 ```
 
 > 초기 버전이므로 변경될수있음.
+
+## 📂 Folder Architecture
+
+```bash
+🗂️ src
+┣ 📂 @types // 타입 정의
+┣ 📂 api
+   ┗ fragments // API Endpoint + Headers
+   ┗ service // 디렉토리 개별 [queryFn,mutationFn]
+┣ 📂 app
+┃  ┗ (pages)
+┣ 📂 components
+┃  ┣ base // 기본적인 Base 컴포넌트
+┃  ┣ features // 비즈니스 로직이 포함된 유기적 결합체 컴포넌트
+┃  ┗ ui //shadcn 컴포넌트 원본
+┣ 📂 hooks // React Hooks
+┣ 📂 store // 상태관리 Store
+┣ 📂 styles // global,theme Style
+┣ 📂 utils // 유틸함수
+
+```
