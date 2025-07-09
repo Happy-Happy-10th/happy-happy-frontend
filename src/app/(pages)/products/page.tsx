@@ -1,5 +1,6 @@
 'use client';
 
+import { queryKeys } from '@/api';
 import { productService } from '@/api/service';
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
@@ -7,7 +8,7 @@ import React from 'react';
 
 function Page() {
   const { data } = useQuery({
-    queryKey: ['get-productss'],
+    queryKey: queryKeys.products.list().queryKey,
     queryFn: productService.list,
   });
 
