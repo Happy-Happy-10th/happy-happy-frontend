@@ -1,5 +1,6 @@
 'use client';
 
+import { queryKeys } from '@/api';
 import { productService } from '@/api/service';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
@@ -11,7 +12,7 @@ function Page() {
   const id = params?.id;
 
   const { data } = useQuery({
-    queryKey: ['get-product', id],
+    queryKey: queryKeys.products.detail(id?.toString() ?? '').queryKey,
     queryFn: () => productService.detail(id?.toString() ?? ''),
   });
 
