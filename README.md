@@ -37,9 +37,11 @@ v22.15.0
 
 ```bash
 🗂️ src
+┣ 📂 @mock // Mock Data
 ┣ 📂 @types // 타입 정의
 ┣ 📂 api
    ┗ fragments // API Endpoint + Headers
+   ┗ key-factory // ReactQuery Key Object
    ┗ service // 디렉토리 개별 [queryFn,mutationFn]
 ┣ 📂 app
 ┃  ┗ (pages)
