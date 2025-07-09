@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { getAppEnv } from '@/utils';
+import Link from 'next/link';
 import { useEffect } from 'react';
 
 export default function Home() {
@@ -77,20 +78,12 @@ export default function Home() {
     });
   };
   return (
-    <div>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus distinctio inventore perferendis hic iste,
-        nemo pariatur incidunt corrupti nesciunt aut illum tenetur non fugiat. Corrupti officiis nemo eaque quidem
-        corporis quos ipsa rem id. Ad minus animi mollitia saepe. Ad adipisci ipsum ipsam quae veritatis dignissimos
-        libero ipsa necessitatibus ducimus quod, ea quidem in eaque cupiditate ut consequuntur impedit reprehenderit
-        voluptates beatae, praesentium officiis? Officia qui corrupti impedit ducimus voluptatum praesentium quibusdam
-        in? Facilis consequatur facere, optio, voluptas dignissimos quam voluptatibus nobis, inventore ut id similique
-        eius. Neque, ut labore possimus, suscipit nostrum nobis eos autem minima blanditiis a maxime.
-      </p>
-
+    <div className="flex flex-col gap-4">
       <p>{getAppEnv()}환경</p>
 
       <Button onClick={handleShare}>카카오톡 공유하기</Button>
+
+      <Link href="/products">Products 페이지 이동 &#40;API 통신 플로우&#41; </Link>
     </div>
   );
 }
