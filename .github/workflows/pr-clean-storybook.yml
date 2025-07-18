@@ -1,0 +1,23 @@
+name: Clean Storybook from PR
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  remove-storybook:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+
+      # Remove Storybook files
+      - name: Remove Storybook files
+        run: |
+          rm -rf .storybook
+          rm -rf src/stories
+          npx json -I -f package.json -e "this.devDependencies && Object.keys(this.devDependencies).forEach(k => { if (k.startsWith('@storybook')) delete this.devDependencies[k] })"
+
+      - name: Show package.json (debug)
+        run: cat package.json

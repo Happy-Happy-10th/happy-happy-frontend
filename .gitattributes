@@ -1,0 +1,8 @@
+# Storybook 관련 파일 PR 무시
+.storybook/* merge=ours
+src/stories/* merge=ours
+
+# GitHub에서 diff 시 보여줄 필요 없는 파일 설정
+*.log linguist-generated
+
+# git config merge.ours.driver true
