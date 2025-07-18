@@ -23,6 +23,7 @@ jobs:
         run: |
           rm -rf .storybook
           rm -rf src/stories
+          rm -f .github/workflows/storybook-deploy.yml
 
       # Storybook 관련 devDependencies 제거 (있다면)
       - name: Remove Storybook dependencies from package.json
