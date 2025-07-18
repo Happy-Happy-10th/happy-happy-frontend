@@ -1,0 +1,40 @@
+name: Clean Storybook from PR
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  clean-storybook:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+
+      # Node.js 환경 설정 (package.json 검사 필요 시)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      # Storybook 관련 파일 제거
+      - name: Remove Storybook files
+        run: |
+          rm -rf .storybook
+          rm -rf src/stories
+
+      # Storybook 관련 devDependencies 제거 (있다면)
+      - name: Remove Storybook dependencies from package.json
+        run: |
+          npx json -I -f package.json -e "this.devDependencies && Object.keys(this.devDependencies).forEach(k => { if (k.startsWith('@storybook')) delete this.devDependencies[k] })"
+
+      # 디버깅용 - 수정된 package.json 확인
+      - name: Show package.json
+        run: cat package.json
+
+      # 빌드 테스트 (main에서 스토리북 제외 상태로 문제없는지 확인)
+      - name: Install & Build
+        run: |
+          npm install
+          npm run build
