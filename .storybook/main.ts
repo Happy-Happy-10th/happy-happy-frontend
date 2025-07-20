@@ -11,7 +11,10 @@ const config: StorybookConfig = {
     "options": {}
   },
   "staticDirs": [
-    "../public"
-  ]
+    {
+      from: '../public',
+      to: '/'
+    }
+  ],
 };
 export default config;
