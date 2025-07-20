@@ -13,7 +13,7 @@ const config: StorybookConfig = {
   staticDirs: ['../public'],
   webpackFinal: async (config) => {
   if (process.env.NODE_ENV === 'production' && config.output) {
-    config.output.publicPath = './';
+    config.output.publicPath = '/happy-happy-frontend/';
   }
   return config;
 }
