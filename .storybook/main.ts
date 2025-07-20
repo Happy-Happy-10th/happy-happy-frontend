@@ -13,7 +13,7 @@ const config: StorybookConfig = {
   "staticDirs": [
     {
       from: '../public',
-      to: '/'
+      to: '/happy-happy-frontend'
     }
   ],
 };
