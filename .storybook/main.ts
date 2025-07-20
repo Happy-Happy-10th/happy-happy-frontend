@@ -12,12 +12,11 @@ const config: StorybookConfig = {
   },
   staticDirs: ['../public'],
   webpackFinal: async (config) => {
-    // 배포 환경(GitHub Actions)에서만 publicPath 수정
-    if (process.env.NODE_ENV === 'production' && config.output) {
-      config.output.publicPath = '/happy-happy-frontend/';
-    }
-    return config;
-  },
+  if (process.env.NODE_ENV === 'production' && config.output) {
+    config.output.publicPath = './';
+  }
+  return config;
+}
 };
 
 export default config;

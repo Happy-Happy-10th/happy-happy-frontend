@@ -27,7 +27,7 @@ jobs:
 
       # Storybook 빌드
       - name: Build Storybook
-        run: yarn build-storybook
+        run: NODE_ENV=production yarn build-storybook
         
       # 디버깅: storybook-static 폴더 확인
       - name: Check build output
