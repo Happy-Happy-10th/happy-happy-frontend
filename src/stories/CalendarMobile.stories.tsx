@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { useState } from 'react';
 import CustomCalendar from '@/components/features/calendar';
-import { calendarEventsMock } from '@/@mock/calendar';
+import { calendarEvents } from '@/@mock/calendar';
 import { CalendarContext } from '@/components/features/calendar/provider/CalendarContext';
 
 
@@ -32,7 +32,7 @@ export const MobileSize: Story = {
         <div className='w-[363px]'>
         <CalendarContext.Provider
           value={{
-            events: calendarEventsMock,
+            events: calendarEvents,
             isMondayStart: true,
             currentDate,
             setCurrentDate,
