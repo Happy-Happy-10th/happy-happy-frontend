@@ -1,3 +1,5 @@
+import { CalendarEventType } from "@/@types/calendar";
+
 export const calendarEventsMock = [
   {
     title: "팀 회의를 해야하는데 아마 이때가 적당하지 않을까 생각하는데요...?",
@@ -36,6 +38,54 @@ export const calendarEventsMock = [
     start: new Date(2025, 6, 11, 13, 0),
     end: new Date(2025, 6, 12, 12, 0),
     color: "#F97316",
+    stage: 2,
+    allDay : true
+  },
+];
+
+export const calendarEvents:CalendarEventType[] = [
+  {
+    title: "올리브영",
+    start: new Date(2025, 6, 8, 10, 0),
+    end: new Date(2025, 6, 8, 11, 30),
+    color: "#1A73E8",
+    colorType:"type1",
+    stage: 1,
+    allDay: false,
+  },
+  {
+    title: "무신사",
+    start: new Date(2025, 6, 9, 13, 0),
+    end: new Date(2025, 6, 9, 14, 0),
+    color: "#F97316",
+    colorType:"type2",
+    stage: 2,
+    allDay : false
+  },
+  {
+    title: "에잇세컨즈",
+    start: new Date(2025, 6, 11),
+    end: new Date(2025, 6, 11),
+    color: "#22C55E",
+    colorType:"type3",
+    stage: 3,
+    allDay: true,
+  },
+  {
+    title: "SSG",
+    start: new Date(2025, 6, 11),
+    end: new Date(2025, 6, 17),
+    color: "#F97316",
+    colorType:"type4",
+    stage: 2,
+    allDay : true
+  },
+  {
+    title: "홈플러스",
+    start: new Date(2025, 6, 11, 13, 0),
+    end: new Date(2025, 6, 12, 12, 0),
+    color: "#F97316",
+    colorType:"type1",
     stage: 2,
     allDay : true
   },

@@ -5,9 +5,15 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /*앱 테마 정의*/
   --color-main : #B063FF;
   --color-sub : #D8FF7C;
   --color-error : #FF6366;
+  /*이밴트 테마 정의*/
+  --color-event-type1 : var(--event-type1);
+  --color-event-type2 : var(--event-type2);
+  --color-event-type3 : var(--event-type3);
+  --color-event-type4 : var(--event-type4);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -49,9 +55,15 @@
 }
 
 :root {
+  /*메인 테마 색상 정의*/
   --main : #B063FF;
   --sub : #D8FF7C;
   --error : #FF6366;
+  /*캘린더 이밴트 색상 정의*/
+  --event-type1 : #FF6767;
+  --event-type2 : #6289ff;
+  --event-type3 : #984BFF;
+  --event-type4 : #19AF5D;
 
   --radius: 0.625rem;
   --background: oklch(1 0 0);

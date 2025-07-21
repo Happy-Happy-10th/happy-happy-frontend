@@ -7,10 +7,10 @@ import { format, parse, startOfWeek, getDay, addMonths, subMonths } from 'date-f
 import { ko } from 'date-fns/locale';
 
 import { useCalendarContext } from "../provider/CalendarContext";
-import CalendarEvent from "./Event";
 import CalendarToolbar from "./Toolbar";
 import CalendarMonthHeader from "./MonthHead";
 import CalendarDateHeader from "./DateHeader";
+import EventBar from "./EventBar";
 
 const calendarVariants = cva(
   `w-full h-full
@@ -86,7 +86,7 @@ export default function CalendarView() {
         style={{ height: calendarHight }}
         popup
         components={{
-          event: (eventProps) => <CalendarEvent {...eventProps.event} />,
+          event: (eventProps) => <EventBar {...eventProps.event} />,
           toolbar: CalendarToolbar,
           month: {
             header: CalendarMonthHeader,
