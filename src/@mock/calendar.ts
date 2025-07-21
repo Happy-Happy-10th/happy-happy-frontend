@@ -45,7 +45,7 @@ export const calendarEventsMock = [
 
 export const calendarEvents:CalendarEventType[] = [
   {
-    title: "올리브영",
+    title: "무신사",
     start: new Date(2025, 6, 8, 10, 0),
     end: new Date(2025, 6, 8, 11, 30),
     color: "#1A73E8",
@@ -54,7 +54,7 @@ export const calendarEvents:CalendarEventType[] = [
     allDay: false,
   },
   {
-    title: "무신사",
+    title: "올리브영",
     start: new Date(2025, 6, 9, 13, 0),
     end: new Date(2025, 6, 9, 14, 0),
     color: "#F97316",
@@ -63,7 +63,7 @@ export const calendarEvents:CalendarEventType[] = [
     allDay : false
   },
   {
-    title: "에잇세컨즈",
+    title: "하이마트",
     start: new Date(2025, 6, 11),
     end: new Date(2025, 6, 11),
     color: "#22C55E",
@@ -72,11 +72,20 @@ export const calendarEvents:CalendarEventType[] = [
     allDay: true,
   },
   {
-    title: "SSG",
+    title: "쿠팡",
     start: new Date(2025, 6, 11),
     end: new Date(2025, 6, 17),
     color: "#F97316",
     colorType:"type4",
+    stage: 2,
+    allDay : true
+  },
+    {
+    title: "CGV",
+    start: new Date(2025, 6, 15),
+    end: new Date(2025, 6, 18),
+    color: "#F97316",
+    colorType:"type2",
     stage: 2,
     allDay : true
   },

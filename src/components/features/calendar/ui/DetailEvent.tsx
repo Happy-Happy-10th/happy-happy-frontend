@@ -1,26 +1,47 @@
 import { CalendarEventType } from "@/@types/calendar";
-import selectStageBadge from "@/utils/calendar/selectStageBadge";
+import { cn } from "@/utils/tailwind-utils";
+import { cva } from "class-variance-authority";
 
-//TODO : 이밴트에 대한 Text 색상과 Event 왼쪽 디자인 요소 색상을 어떻게 추출할지 고민필요(ex 투명도 처리 등)
-//TODO : Color Picker를 쓸경우 어두운 색일경우는 위 요소가 원하는 안보여질 가능성이 있음.
+const evnetBarVariants = cva(
+  `w-full h-full flex flex-row justify-between rounded-[4px] text-[11px] overflow-hidden`,{
+    variants:{
+      variant:{
+        type1 : `bg-event-type1-sub text-event-type1`,
+        type2 : `bg-event-type2-sub text-event-type2`,
+        type3 : `bg-event-type3-sub text-event-type3`,
+        type4 : `bg-event-type4-sub text-event-type4`,
+        default : `bg-main text-[white]`,
+      }
+    }
+  }
+)
+
+const eventChildVariants = cva(
+  `pl-[5px] w-[2px] h-[16.5px] rounded-[4px]`, {
+  variants: {
+    variant: {
+      type1: "bg-event-type1",
+      type2: "bg-event-type2",
+      type3: "bg-event-type3",
+      type4: "bg-event-type4",
+      default : `bg-main`,
+    },
+  },
+});
+
 export default function CalendarEvent({
   start,
   end,
   title,
   color,
+  colorType,
   stage,
   allDay
 }: CalendarEventType) {
-  const imagePath = selectStageBadge(stage);
   return (
-    <div
-      className="flex flex-row h-[20px] rounded-[4px] text-[11px] overflow-hidden"
-      style={{ backgroundColor: color }}
-    >
-      <div className="w-[2px] h-full bg-amber-500"></div>
-      <div className="w-full flex justify-center">
-        <div className="truncate flex items-center">{title}</div>
-      </div>
+    <div className={cn(evnetBarVariants({variant:colorType}))}>
+      <div className={cn(eventChildVariants({variant:colorType}))}></div>
+      <div className="w-[95%] flex justify-center">{title}</div>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cva } from "class-variance-authority";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -11,6 +11,7 @@ import CalendarToolbar from "./Toolbar";
 import CalendarMonthHeader from "./MonthHead";
 import CalendarDateHeader from "./DateHeader";
 import EventBar from "./EventBar";
+import CalendarEvent from "./DetailEvent";
 
 const calendarVariants = cva(
   `w-full h-full
@@ -46,6 +47,8 @@ export default function CalendarView() {
   const lastScrollTime = useRef(0);
   const cooldown = 500;
 
+  const [isWide, setIsWide] = useState<boolean>(false);
+
   const localizer = dateFnsLocalizer({
     format,
     parse,
@@ -68,8 +71,18 @@ export default function CalendarView() {
         setCurrentDate(prev => subMonths(prev, 1));
       }
     };
+
+    // ResizeObserver로 width 체크
+    const observer = new ResizeObserver(([entry]) => {
+      setIsWide(entry.contentRect.width >= 800);
+    });
+    observer.observe(container);
+
     container.addEventListener('wheel', handleWheel, { passive: false });
-    return () => container.removeEventListener('wheel', handleWheel);
+    return () => {
+      container.removeEventListener('wheel', handleWheel);
+      observer.disconnect();
+    }
   }, [isMondayStart]);
 
   return (
@@ -86,7 +99,9 @@ export default function CalendarView() {
         style={{ height: calendarHight }}
         popup
         components={{
-          event: (eventProps) => <EventBar {...eventProps.event} />,
+          event: (eventProps) => isWide
+            ? <CalendarEvent {...eventProps.event} />
+            : <EventBar {...eventProps.event} />,
           toolbar: CalendarToolbar,
           month: {
             header: CalendarMonthHeader,
