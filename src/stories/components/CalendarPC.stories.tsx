@@ -11,6 +11,7 @@ const meta: Meta<typeof CustomCalendar> = {
   component: CustomCalendar,
   args: {
     calendarHightPx: '645px',
+    calendarWidthPx: '1280px', 
   },
   argTypes: {
     calendarHightPx: {
@@ -37,6 +38,7 @@ export const PCSize: Story = {
             currentDate,
             setCurrentDate,
             calendarHight: args.calendarHightPx,
+            calendarWidth : args.calendarWidthPx
           }}
         >
           <CustomCalendar.View />

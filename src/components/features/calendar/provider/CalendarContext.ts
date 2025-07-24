@@ -8,6 +8,7 @@ type CalendarContextType = {
   currentDate : Date;
   setCurrentDate : React.Dispatch<React.SetStateAction<Date>>;
   calendarHight: string;
+  calendarWidth :string;
 }
 
 export const CalendarContext = createContext<CalendarContextType|null>(null);
