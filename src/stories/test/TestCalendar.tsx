@@ -17,7 +17,7 @@ const viewSize = clsx(
   "min-w-[393px] min-h-[852px] max-w-[1280px] max-h-[800px]",
   "w-full h-full",
   "flex flex-col lg:flex-row",
-  "bg-default"
+  "bg-yoteyo-gray-100"
 )
 
 const calendarSize = clsx(
@@ -26,8 +26,9 @@ const calendarSize = clsx(
 )
 
 const eventList = clsx(
-  "m-0 p-0",
-  "w-[30%] h-[100%]"
+  "m-0 p-[30px]",
+  "w-[30%]",
+  ""
 )
 export default function TestCalendar(){
   const [currentDate, setCurrentDate] = useState(new Date());

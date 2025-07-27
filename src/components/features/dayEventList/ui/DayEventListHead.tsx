@@ -5,7 +5,8 @@ import {ko} from "date-fns/locale";
 import { Plus } from 'lucide-react';
 
 const head = clsx(
-  "mb-[18px]",
+  "mb-[30px] pl-[24px] pr-[24px] pt-[20px] pb-[14px]",
+  "w-full h-[24px]",
   "flex flex-row justify-between"
 )
 
@@ -15,7 +16,7 @@ export default function DayEventListHead({date=new Date()}:props){
   return (
     <div className={head}>
       <span className='font-bold text-[22px]'>{day}</span>
-      <Button className='rounded-[50px] bg-[#C0C0C0]'>
+      <Button className='rounded-[50px] bg-[#C0C0C0] w-[24px] h-[24px]'>
         <Plus size={24}/>
       </Button>
     </div>

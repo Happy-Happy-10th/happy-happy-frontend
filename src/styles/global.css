@@ -6,19 +6,25 @@
 
 @theme inline {
   /*앱 테마 정의*/
-  --color-main : #B063FF;
-  --color-sub : #D8FF7C;
-  --color-error : #FF6366;
-  --color-default : #FAFAFA;
+  --color-yoteyo-main : var(--yoteyo-main);
+  --color-yoteyo-sub : var(--yoteyo-sub);
+  --color-yoteyo-error : var(--yoteyo-error);
+  --color-yoteyo-black : var(--yoteyo-black);
+  --color-yoteyo-gray-100 : var(--yoteyo-gray-100);
+  --color-yoteyo-gray-200 : var(--yoteyo-gray-200);
+  --color-yoteyo-gray-300 : var(--yoteyo-gray-300);
+
   /*이밴트 테마 정의*/
-  --color-event-type1 : var(--event-type1);
-  --color-event-type1-sub : var(--event-type1-sub);
-  --color-event-type2 : var(--event-type2);
-  --color-event-type2-sub : var(--event-type2-sub);
-  --color-event-type3 : var(--event-type3);
-  --color-event-type3-sub : var(--event-type3-sub);
-  --color-event-type4 : var(--event-type4);
-  --color-event-type4-sub : var(--event-type4-sub);
+  --color-yoteyo-red : var(--yoteyo-red);
+  --color-yoteyo-orange : var(--yoteyo-orange);
+  --color-yoteyo-yellow : var(--yoteyo-yellow);
+  --color-yoteyo-green : var(--yoteyo-green);
+  --color-yoteyo-emerald : var(--yoteyo-emerald);
+  --color-yoteyo-sky : var(--yoteyo-sky);
+  --color-yoteyo-blue : var(--yoteyo-blue);
+  --color-yoteyo-purple : var(--yoteyo-purple);
+  --color-yoteyo-pink : var(--yoteyo-pink);
+  --color-yoteyo-black : var(--yoteyo-black);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -61,18 +67,33 @@
 
 :root {
   /*메인 테마 색상 정의*/
-  --main : #B063FF;
-  --sub : #D8FF7C;
-  --error : #FF6366;
+  --yoteyo-main : #B063FF;
+  --yoteyo-sub : #D8FF7C;
+  --yoteyo-error : #FF6366;
+  --yoteyo-black : #222222;
+  --yoteyo-gray-100 : #FAFAFA;
+  --yoteyo-gray-200 : #C0C0C0;
+  --yoteyo-gray-300 : #999999;
+  --yoteyo-gray-400 : #666666;
+
+  /* 택스트 크기 정의*/
+  --yoteyo-title-main : 24px;
+  --yoteyo-title-sub : 20px;
+  --yoteyo-body-lg : 16px;
+  --yoteyo-body-md : 14px;
+  --yoteyo-body-sm : 12px;
+
   /*캘린더 이밴트 색상 정의*/
-  --event-type1: #FF6767;
-  --event-type1-sub: #FFB3B3;
-  --event-type2: #6289FF;
-  --event-type2-sub: #B0C3FF;
-  --event-type3: #984BFF;
-  --event-type3-sub: #CBA4FF;
-  --event-type4: #19AF5D;
-  --event-type4-sub: #77EBAC;
+  --yoteyo-red: #FB5445;
+  --yoteyo-orange: #FF8132;
+  --yoteyo-yellow: #FFC43D;
+  --yoteyo-green: #2EC94E;
+  --yoteyo-emerald: #01D0A4;
+  --yoteyo-sky: #1DC1FF;
+  --yoteyo-blue: #6284E7;
+  --yoteyo-purple: #7671EC;
+  --yoteyo-pink: #EB7ACF;
+  --yoteyo-black: #010001;
 
   --radius: 0.625rem;
   --background: oklch(1 0 0);

@@ -5,8 +5,10 @@ import DayEventBox from "./ui/DayEventBox";
 import clsx from "clsx";
 
 const datEvnetListStyle = clsx(
-  "mt-[74px] mr-[30px] p-[24px]",
-  "bg-white rounded-[8px]"
+  "rounded-[8px]",
+  "w-full h-full",
+  "bg-white",
+  "flex flex-col"
 )
 
 type PropsType = {
@@ -17,7 +19,7 @@ export default function DayEventList({selectedDate,dayEvents}:PropsType){
   return(
     <div className={datEvnetListStyle}>
       <DayEventListHead date={selectedDate}/>
-      <div className="flex flex-col gap-[10px]">
+      <div className="flex flex-col gap-[10px] w-full overflow-y-auto p-2 flex-1 min-h-0">
         {dayEvents.map((event)=>(
           <DayEventBox event={event}/>
         ))}

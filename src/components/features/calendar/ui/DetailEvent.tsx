@@ -6,11 +6,17 @@ const evnetBarVariants = cva(
   `w-full h-full flex flex-row justify-between rounded-[4px] text-[11px] overflow-hidden`,{
     variants:{
       variant:{
-        type1 : `bg-event-type1-sub text-event-type1`,
-        type2 : `bg-event-type2-sub text-event-type2`,
-        type3 : `bg-event-type3-sub text-event-type3`,
-        type4 : `bg-event-type4-sub text-event-type4`,
-        default : `bg-main text-[white]`,
+        yoteyoRed: "bg-yoteyo-red",
+        yoteyoOrange: "bg-yoteyo-orange",
+        yoteyoYellow: "bg-yoteyo-yellow",
+        yoteyoGreen: "bg-yoteyo-green",
+        yoteyoEmerald: "bg-yoteyo-emerald",
+        yoteyoSky: "bg-yoteyo-sky",
+        yoteyoBlue: "bg-yoteyo-blue",
+        yoteyoPurple: "bg-yoteyo-purple",
+        yoteyoPink: "bg-yoteyo-pink",
+        yoteyoBlack: "bg-yoteyo-black",
+        default : `bg-yoteyo-main`,
       }
     }
   }
@@ -20,11 +26,17 @@ const eventChildVariants = cva(
   `pl-[5px] w-[2px] h-[16.5px] rounded-[4px]`, {
   variants: {
     variant: {
-      type1: "bg-event-type1",
-      type2: "bg-event-type2",
-      type3: "bg-event-type3",
-      type4: "bg-event-type4",
-      default : `bg-main`,
+      yoteyoRed: "bg-yoteyo-red",
+      yoteyoOrange: "bg-yoteyo-orange",
+      yoteyoYellow: "bg-yoteyo-yellow",
+      yoteyoGreen: "bg-yoteyo-green",
+      yoteyoEmerald: "bg-yoteyo-emerald",
+      yoteyoSky: "bg-yoteyo-sky",
+      yoteyoBlue: "bg-yoteyo-blue",
+      yoteyoPurple: "bg-yoteyo-purple",
+      yoteyoPink: "bg-yoteyo-pink",
+      yoteyoBlack: "bg-yoteyo-black",
+      default : `bg-yoteyo-main`,
     },
   },
 });
