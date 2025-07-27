@@ -1,8 +1,6 @@
 import TestCalendar from '../test/TestCalendar';
 import type { Meta, StoryObj } from '@storybook/nextjs';
 
-import { fn } from 'storybook/test';
-
 const meta = {
   title: 'Pages/CalendarPage',
   component: TestCalendar,

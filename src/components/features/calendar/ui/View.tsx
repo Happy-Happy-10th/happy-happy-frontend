@@ -14,8 +14,7 @@ import EventBar from "./EventBar";
 import CalendarEvent from "./DetailEvent";
 
 const calendarVariants = cva(
-  `w-full h-full
-  [&_.rbc-row-bg]:!right-[0]
+  `[&_.rbc-row-bg]:!right-[0]
   [&_.rbc-date-cell]:!pr-0
   [&_.rbc-event]:!p-0
   [&_.rbc-today]:!bg-transparent
@@ -26,6 +25,7 @@ const calendarVariants = cva(
   [&_.rbc-event-content]:truncate text-[12px]
   [&_.rbc-date-cell]:!flex
   [&_.rbc-date-cell]:!justify-center
+  [&_.rbc-month-view]:!rounded-[8px]
   `,{
     variants : {
       variant : {
@@ -42,7 +42,7 @@ const calendarVariants = cva(
 )
 
 export default function CalendarView() {
-  const { events, isMondayStart, currentDate, setCurrentDate, calendarHight } = useCalendarContext();
+  const { events, isMondayStart, currentDate, setCurrentDate } = useCalendarContext();
   const containerRef = useRef<HTMLDivElement>(null);
   const lastScrollTime = useRef(0);
   const cooldown = 500;
@@ -86,7 +86,7 @@ export default function CalendarView() {
   }, [isMondayStart]);
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} className="h-full w-full">
       <Calendar
         className={calendarVariants({ variant: 'clearBorder' })}
         localizer={localizer}
@@ -96,7 +96,7 @@ export default function CalendarView() {
         view="month"
         date={currentDate}
         onNavigate={setCurrentDate}
-        style={{ height: calendarHight }}
+        style={{ height: '100%', width : "100%" }}
         popup
         components={{
           event: (eventProps) => isWide

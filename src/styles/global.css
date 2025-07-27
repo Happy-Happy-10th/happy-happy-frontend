@@ -9,6 +9,7 @@
   --color-main : #B063FF;
   --color-sub : #D8FF7C;
   --color-error : #FF6366;
+  --color-default : #FAFAFA;
   /*이밴트 테마 정의*/
   --color-event-type1 : var(--event-type1);
   --color-event-type1-sub : var(--event-type1-sub);

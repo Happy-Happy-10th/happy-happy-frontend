@@ -11,7 +11,7 @@ export default function CalendarToolbar({
 }: ToolbarProps<CalendarEventType>) {
   const formatted = format(date, 'yyyy.M', { locale: enUS });
   return (
-    <div className="w-full flex justify-between">
+    <div className="w-full flex justify-between bg-default pb-[20px]">
       <div className='flex flex-row items-center gap-[6px]'>
         <span className="text-[30px] font-bold">{formatted}</span>
         <ChevronDown />

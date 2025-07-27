@@ -13,7 +13,7 @@ type CustomCalendarType = {
   calendarHightPx : string
   calendarWidthPx : string
 }
-function CustomCalendar({children, calendarHightPx, calendarWidthPx}:CustomCalendarType){
+export default function CustomCalendar({children, calendarHightPx, calendarWidthPx}:CustomCalendarType){
   const {data,status} = useQuery({
     queryKey : queryKeys.calendar.events().queryKey,
     queryFn : calendarService.events 
@@ -29,8 +29,6 @@ function CustomCalendar({children, calendarHightPx, calendarWidthPx}:CustomCalen
       isMondayStart : data?.isMondayStart||true,
       currentDate:currentDate,
       setCurrentDate : setCurrentDate,
-      calendarHight: calendarHightPx,
-      calendarWidth : calendarWidthPx
       }}>
       {children}
     </CalendarContext.Provider>
@@ -38,5 +36,3 @@ function CustomCalendar({children, calendarHightPx, calendarWidthPx}:CustomCalen
 }
 
 CustomCalendar.View = CalendarView;
-
-export default CustomCalendar;

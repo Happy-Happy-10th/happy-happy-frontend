@@ -15,6 +15,7 @@ export type ApiCalendarEventType = {
   end: string;
   title: string;
   color: string;
+  colorType : EventColor;
   stage : number;
   allDay : boolean;
 }

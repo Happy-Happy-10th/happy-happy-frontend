@@ -5,18 +5,34 @@ import { ApiCalendarEventType, CalendarEventType } from "@/@types/calendar";
  * @param apiResponse api를통해 가져온 이밴트 결과값
  * @returns 캘린더에 등록할 event 배열
  */
-export function convertStringToDate
+export function convertEventStringToDate
+(event:ApiCalendarEventType):CalendarEventType{
+  return {
+    ...event,
+    start : fixDate(parseDateString(event.start)),
+    end : fixDate(parseDateString(event.end)),
+  }
+}
+export function convertEventsStringToDate
 (apiResponse:ApiCalendarEventType[]):CalendarEventType[]{
-console.log(apiResponse[0].start)
-  return apiResponse.map((res)=>({
-    ...res,
-    start : fixDate(parseDateString(res.start)),
-    end : fixDate(parseDateString(res.end)),
-  }))
+  return apiResponse.map((res)=>(
+    convertEventStringToDate(res)
+  ))
 }
 
-export function convertDateToString(events:CalendarEventType[]){
-
+export function convertEventDateToString
+(event:CalendarEventType):ApiCalendarEventType{
+  return {
+    ...event,
+    start : formatDateToString(event.start),
+    end : formatDateToString(event.end),
+  }
+}
+export function convertEventsDateToString
+(events:CalendarEventType[]):ApiCalendarEventType[]{
+  return events.map((event)=>(
+    convertEventDateToString(event)
+  ))
 }
 
 /* String 날짜 데이터를 Date 객채로 변경하기 위한 서브 함수들 */
@@ -38,10 +54,10 @@ function fixDate({ year, month, day, hour = 0, minute = 0 }: DateInput): Date {
 
 export function formatDateToString(date: Date): string {
   const year = date.getFullYear();
-  const month = date.getMonth(); // JS는 0부터 시작하므로 +1
+  const month = date.getMonth()+1; // JS는 0부터 시작하므로 +1
   const day = date.getDate();
   const hour = date.getHours();
-  const minute = date.getMinutes();
+  // const minute = date.getMinutes();
 
-  return `${year}-${month}-${day}-${hour}-${minute}`;
+  return `${year}-${month}-${day}-${hour}`;
 }

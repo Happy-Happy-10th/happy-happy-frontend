@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/nextjs';
 import { fn } from 'storybook/test';
 
 const meta = {
-  title: 'Example/Button',
+  title: 'Components/Button',
   component: Button,
   parameters: {
     layout: 'centered',
