@@ -20,9 +20,9 @@ const calendarVariants = cva(
   [&_.rbc-today]:!bg-transparent
   [&_.rbc-off-range-bg]:!bg-transparent
   [&_.rbc-date-cell]:!pb-[4px]
-  [&_.rbc-event]:!mb-[3px]
+  [&_.rbc-event]:!mb-[1px]
   [&_.rbc-event]:!bg-transparent
-  [&_.rbc-event-content]:truncate text-[12px]
+  [&_.rbc-event-content]:truncate text-[11px]
   [&_.rbc-date-cell]:!flex
   [&_.rbc-date-cell]:!justify-center
   [&_.rbc-month-view]:!rounded-[8px]

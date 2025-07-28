@@ -14,6 +14,13 @@
   --color-yoteyo-gray-200 : var(--yoteyo-gray-200);
   --color-yoteyo-gray-300 : var(--yoteyo-gray-300);
 
+  /* 앱 폰트 크기 정의 */
+  --font-yoteyo-title-main : var(--yoteyo-title-main);
+  --font-yoteyo-title-sub : var(--yoteyo-title-sub);
+  --font-yoteyo-body-lg :  var(--yoteyo-body-lg);
+  --font-yoteyo-body-md :  var(--yoteyo-body-md);
+  --font-yoteyo-body-sm :  var(--yoteyo-body-sm);
+
   /*이밴트 테마 정의*/
   --color-yoteyo-red : var(--yoteyo-red);
   --color-yoteyo-orange : var(--yoteyo-orange);
@@ -26,6 +33,7 @@
   --color-yoteyo-pink : var(--yoteyo-pink);
   --color-yoteyo-black : var(--yoteyo-black);
 
+  /* 설치된 기본 테마들*/
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -95,6 +103,7 @@
   --yoteyo-pink: #EB7ACF;
   --yoteyo-black: #010001;
 
+  /* 설치된 기본 설정 값*/
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -170,4 +179,22 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* react-big-calendar 오버라이드 */
+.rbc-month-row {
+  min-height: 95px !important;
+}
+
+.rbc-event {
+  padding: 1px 3px !important;
+  margin-bottom: 1px !important;
+  font-size: 12px !important;
+  line-height: 1.2 !important;
+}
+
+.rbc-event-content {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

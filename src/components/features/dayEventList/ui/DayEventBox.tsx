@@ -25,7 +25,7 @@ const eventChildVariants = cva(
 
 const eventBox=clsx(
   "border-1 border-solid rounded-[8px] border-[#EAEAEA]",
-  "w-[260px] h-[64px]",
+  "w-full h-[64px]",
   "flex flex-row"
 );
 

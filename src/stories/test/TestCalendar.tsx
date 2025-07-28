@@ -1,41 +1,35 @@
 import { useState } from "react";
 import clsx from "clsx";
 
-import { format } from 'date-fns';
-import {ko} from "date-fns/locale";
-
 import { CustomCalendar, CalendarContext } from '@/components/features/calendar';
 import { calendarEvents } from '@/@mock/calendar';
-import CalendarEvent from "@/components/features/calendar/ui/DetailEvent";
-import { Plus } from "lucide-react";
-import DayEventListHead from "@/components/features/dayEventList/ui/DayEventListHead";
-import DayEventBox from "@/components/features/dayEventList/ui/DayEventBox";
 import DayEventList from "@/components/features/dayEventList/DayEventList";
 
-const viewSize = clsx(
-  "m-0 p-0 box-content border-1 border-soild",
-  "min-w-[393px] min-h-[852px] max-w-[1280px] max-h-[800px]",
-  "w-full h-full",
-  "flex flex-col lg:flex-row",
-  "bg-yoteyo-gray-100"
+const contents =clsx(
+  "w-full h-full flex gap-[20px]",
+  "flex-col xl:flex-row",
 )
 
 const calendarSize = clsx(
-  "m-[30px] p-0 bg-white r",
-  "h-[90%] w-[70%]"
+  "bg-white flex-1",
+  "min-h-[220px] xl:min-h-0"
+  // "xl:w-[calc(100%-304px)] xl:h-full",
+  // "w-full h-[calc(100%-220px)]"
 )
 
 const eventList = clsx(
-  "m-0 p-[30px]",
-  "w-[30%]",
-  ""
+  "bg-white",
+  "xl:w-[304px] h-[220px] xl:h-auto",
+  "rounded-[8px]"
+  // "xl:w-[304px] xl:h-full",
+  // "w-full h-[220px]"
 )
 export default function TestCalendar(){
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   return (
-    <div className={viewSize}>
+    <div className={contents}>
       <div className={calendarSize}>
         <CalendarContext.Provider
           value={{

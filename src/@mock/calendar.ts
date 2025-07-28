@@ -161,4 +161,49 @@ export const calendarEvents:CalendarEventType[] = [
     stage: 2,
     allDay : true
   },
+  {
+    title: "30",
+    start: new Date(2025, 6, 30, 13, 0),
+    end: new Date(2025, 6, 30, 12, 0),
+    color: "#F97316",
+    colorType:"yoteyoBlack",
+    stage: 2,
+    allDay : true
+  },
+    {
+    title: "30",
+    start: new Date(2025, 6, 30, 13, 0),
+    end: new Date(2025, 7, 1, 12, 0),
+    color: "#F97316",
+    colorType:"yoteyoEmerald",
+    stage: 2,
+    allDay : true
+  },
+    {
+    title: "30",
+    start: new Date(2025, 6, 29, 13, 0),
+    end: new Date(2025, 6, 30, 12, 0),
+    color: "#F97316",
+    colorType:"yoteyoRed",
+    stage: 2,
+    allDay : true
+  },
+    {
+    title: "30",
+    start: new Date(2025, 6, 30, 13, 0),
+    end: new Date(2025, 6, 30, 12, 0),
+    color: "#F97316",
+    colorType:"yoteyoOrange",
+    stage: 2,
+    allDay : true
+  },
+    {
+    title: "30",
+    start: new Date(2025, 6, 30, 13, 0),
+    end: new Date(2025, 6, 31, 12, 0),
+    color: "#F97316",
+    colorType:"yoteyoBlack",
+    stage: 2,
+    allDay : true
+  },
 ];

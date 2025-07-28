@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
-import * as nextNavigation from "next/navigation";
 import { Navigator } from '@/components/base';
 
 interface NavigatorStoryArgs {
