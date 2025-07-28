@@ -7,11 +7,17 @@ const evnetBarVariants = cva(
   `w-full h-[6px] rounded-[2px]`,{
   variants:{
     variant:{
-      type1 : `bg-event-type1`,
-      type2 : `bg-event-type2`,
-      type3: `bg-event-type3`,
-      type4 : `bg-event-type4`,
-      default : `bg-main`,
+      yoteyoRed: "bg-yoteyo-red",
+      yoteyoOrange: "bg-yoteyo-orange",
+      yoteyoYellow: "bg-yoteyo-yellow",
+      yoteyoGreen: "bg-yoteyo-green",
+      yoteyoEmerald: "bg-yoteyo-emerald",
+      yoteyoSky: "bg-yoteyo-sky",
+      yoteyoBlue: "bg-yoteyo-blue",
+      yoteyoPurple: "bg-yoteyo-purple",
+      yoteyoPink: "bg-yoteyo-pink",
+      yoteyoBlack: "bg-yoteyo-black",
+      default : `bg-yoteyo-main`,
     }
   }
 })

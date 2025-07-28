@@ -9,10 +9,11 @@ import { CalendarContext } from "./provider/CalendarContext";
 import CalendarView from "./ui/View";
 
 type CustomCalendarType = {
-  children : ReactNode,
+  children : ReactNode
   calendarHightPx : string
+  calendarWidthPx : string
 }
-function CustomCalendar({children, calendarHightPx}:CustomCalendarType){
+export default function CustomCalendar({children, calendarHightPx, calendarWidthPx}:CustomCalendarType){
   const {data,status} = useQuery({
     queryKey : queryKeys.calendar.events().queryKey,
     queryFn : calendarService.events 
@@ -28,7 +29,6 @@ function CustomCalendar({children, calendarHightPx}:CustomCalendarType){
       isMondayStart : data?.isMondayStart||true,
       currentDate:currentDate,
       setCurrentDate : setCurrentDate,
-      calendarHight: calendarHightPx,
       }}>
       {children}
     </CalendarContext.Provider>
@@ -36,5 +36,3 @@ function CustomCalendar({children, calendarHightPx}:CustomCalendarType){
 }
 
 CustomCalendar.View = CalendarView;
-
-export default CustomCalendar;

@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { useState } from 'react';
-import CustomCalendar from '@/components/features/calendar';
+
 import { calendarEvents } from '@/@mock/calendar';
-import { CalendarContext } from '@/components/features/calendar/provider/CalendarContext';
+import {CustomCalendar} from '@/components/features/calendar';
+import { CalendarContext } from '@/components/features/calendar';
+
 
 
 const meta: Meta<typeof CustomCalendar> = {
@@ -11,6 +13,7 @@ const meta: Meta<typeof CustomCalendar> = {
   component: CustomCalendar,
   args: {
     calendarHightPx: '645px',
+    calendarWidthPx: '1150px', 
   },
   argTypes: {
     calendarHightPx: {
@@ -23,20 +26,19 @@ const meta: Meta<typeof CustomCalendar> = {
 export default meta;
 type Story = StoryObj<typeof CustomCalendar>;
 
-export const MobileSize: Story = {
-  render: (args) => {
+export const PCSize: Story = {
+  render: () => {
     const [currentDate, setCurrentDate] = useState(new Date());
 
     return (
       <div className='w-screen flex justify-center'>
-        <div className='w-[363px]'>
+        <div className='w-[870px] h-[696px]'>
         <CalendarContext.Provider
           value={{
             events: calendarEvents,
             isMondayStart: true,
             currentDate,
             setCurrentDate,
-            calendarHight: args.calendarHightPx,
           }}
         >
           <CustomCalendar.View />

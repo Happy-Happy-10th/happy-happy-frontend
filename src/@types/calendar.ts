@@ -1,5 +1,15 @@
 //이밴트 색상 타입 선언
-export type EventColor = "type1" | "type2" | "type3" | "type4" | "default";
+export type EventColor = 
+"yoteyoRed" | 
+"yoteyoOrange" | 
+"yoteyoYellow" | 
+"yoteyoGreen" | 
+"yoteyoEmerald"|
+"yoteyoSky"|
+"yoteyoBlue"|
+"yoteyoPurple"|
+"yoteyoPink"|
+"yoteyoBlack";
 export type CalendarEventType = {
   start: Date;
   end: Date;
@@ -15,6 +25,7 @@ export type ApiCalendarEventType = {
   end: string;
   title: string;
   color: string;
+  colorType : EventColor;
   stage : number;
   allDay : boolean;
 }

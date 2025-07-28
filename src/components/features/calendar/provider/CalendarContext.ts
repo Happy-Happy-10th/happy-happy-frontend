@@ -7,7 +7,6 @@ type CalendarContextType = {
   isMondayStart : boolean;
   currentDate : Date;
   setCurrentDate : React.Dispatch<React.SetStateAction<Date>>;
-  calendarHight: string;
 }
 
 export const CalendarContext = createContext<CalendarContextType|null>(null);

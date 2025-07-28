@@ -8,7 +8,9 @@ const config: StorybookConfig = {
   "addons": [],
   "framework": {
     "name": "@storybook/nextjs",
-    "options": {}
+    "options": {
+      panelPosition: 'right'
+    }
   },
   "staticDirs": [
     "../public"
