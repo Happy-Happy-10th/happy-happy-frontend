@@ -6,7 +6,7 @@ import { calendarEvents } from '@/@mock/calendar';
 import DayEventList from "@/components/features/dayEventList/DayEventList";
 
 const contents =clsx(
-  "w-full h-full flex gap-[20px]",
+  "w-full h-full flex gap-[20px] bg-yoteyo-gray-100",
   "flex-col xl:flex-row",
 )
 
@@ -19,7 +19,7 @@ const calendarSize = clsx(
 
 const eventList = clsx(
   "bg-white",
-  "xl:w-[304px] h-[220px] xl:h-auto",
+  "xl:w-[304px] h-[220px] xl:h-auto xl:mt-[48px]",
   "rounded-[8px]"
   // "xl:w-[304px] xl:h-full",
   // "w-full h-[220px]"

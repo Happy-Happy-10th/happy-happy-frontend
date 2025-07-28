@@ -27,13 +27,13 @@ const meta: Meta<typeof TestCalendar> = {
 export default meta;
 type Story = StoryObj<typeof meta & { args: NavigatorStoryArgs }>;
 
-export const Calendar2: Story = {
+export const Calendar: Story = {
   args: {
     deviceWidthPx: 1200
   },
 
   render: (args) => (
-    <div className="w-screen h-screen flex justify-center items-center bg-black">
+    <div className="w-screen h-screen flex justify-center items-center">
       <div
         style={{
           width: `${args.deviceWidthPx}px`,

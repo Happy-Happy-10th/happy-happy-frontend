@@ -1,14 +1,15 @@
+import { BottomTab } from '@/components/features';
 import type { Meta, StoryObj } from '@storybook/nextjs';
-import { Navigator } from '@/components/base';
 
-interface NavigatorStoryArgs {
+
+interface BottomTabStoryArgs {
   deviceWidthPx: number;
   deviceHeightPx: number;
 }
 
-const meta: Meta<typeof Navigator> = {
-  title: 'Components/Navigator',
-  component: Navigator,
+const meta: Meta<typeof BottomTab> = {
+  title: 'Components/BottomTab',
+  component: BottomTab,
   args: {
     deviceWidthPx: 1200,
     deviceHeightPx: 800,
@@ -24,7 +25,7 @@ const meta: Meta<typeof Navigator> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof meta & { args: NavigatorStoryArgs }>;
+type Story = StoryObj<typeof meta & { args: BottomTabStoryArgs }>;
 
 export const Default: Story = {
   args: {
@@ -40,7 +41,7 @@ export const Default: Story = {
         }}
         className="border border-solid flex flex-col justify-end"
       >
-        <Navigator />
+        <BottomTab />
       </div>
     </div>
   )

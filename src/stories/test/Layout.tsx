@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { ReactNode } from "react";
-import { Navigator } from "@/components/base";
+import { BottomTab } from "@/components/features";
 
 const rootFrame = clsx(
   "w-full h-full flex flex-col",
@@ -35,7 +35,7 @@ export default function RootLayout({ children }: PropsType) {
         </div>
       </div>
       <div className={navigator}>
-        <Navigator />
+        <BottomTab />
       </div>
     </div>
   );
