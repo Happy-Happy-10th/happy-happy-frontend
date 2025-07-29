@@ -12,20 +12,28 @@ const contents =clsx(
 
 const calendarSize = clsx(
   "bg-white flex-1",
-  "min-h-[220px] xl:min-h-0"
+  "min-h-[220px] xl:min-h-0",
+  "ml-[20px] mr-[20px] mt-[26px]",
+  "xl:ml-0 xl:mr-0 xl:mt-0"
   // "xl:w-[calc(100%-304px)] xl:h-full",
   // "w-full h-[calc(100%-220px)]"
 )
 
 const eventList = clsx(
   "bg-white",
-  "xl:w-[304px] h-[220px] xl:h-auto xl:mt-[48px]",
+  "xl:w-[304px] h-[187px] xl:h-auto xl:mt-[48px]",
   "rounded-[8px]"
   // "xl:w-[304px] xl:h-full",
   // "w-full h-[220px]"
 )
 export default function TestCalendar(){
+  //캘린더에 View 될 날짜 데이터
   const [currentDate, setCurrentDate] = useState(new Date());
+  const handleCurrentDate = (updater: Date | ((prev: Date) => Date)) => {
+    setCurrentDate(typeof updater === "function" ? updater(currentDate) : updater);
+  };
+
+  //캘린더에서 선택될 날짜 데이터
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   return (
@@ -36,7 +44,7 @@ export default function TestCalendar(){
             events: calendarEvents,
             isMondayStart: true,
             currentDate,
-            setCurrentDate,
+            handleCurrentDate,
           }}
         >
           <CustomCalendar.View />

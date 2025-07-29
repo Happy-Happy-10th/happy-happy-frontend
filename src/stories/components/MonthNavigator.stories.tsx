@@ -18,12 +18,16 @@ export const monthNavigator: Story = {
       setCurrentDate(typeof updater === "function" ? updater(currentDate) : updater);
     };
 
+    const handleMonthPickerOff = ()=>{}
     useEffect(()=>{
       alert(currentDate);
     },[currentDate])
     return (
       <div>
-        <MonthNavigator currentDate={currentDate} handleCurrentDate={handleCurrentDate}/>
+        <MonthNavigator 
+        currentDate={currentDate} 
+        handleCurrentDate={handleCurrentDate} 
+        handleMonthPickerOff={handleMonthPickerOff}/>
       </div>
     );
   },

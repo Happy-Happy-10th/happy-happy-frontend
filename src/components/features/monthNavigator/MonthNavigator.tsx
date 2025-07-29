@@ -12,17 +12,21 @@ const MonthNavigatorFrame = clsx(
 type PropsType = {
   currentDate : Date,
   handleCurrentDate : (updater:Date| ((prev: Date)=>Date)) => void
+  handleMonthPickerOff:()=>void
 }
 /**
  * @currentDate @handleCurrentDate 둘다 외부의 State와 State를 변경하는 핸들러 함수에 의존
  */
-export default function MonthNavigator({currentDate,handleCurrentDate}:PropsType){
+export default function MonthNavigator({currentDate,handleCurrentDate,handleMonthPickerOff}:PropsType){
   const handlePrevYear = () => handleCurrentDate((prev) => subYears(prev, 1));
   const handleNextYear = () => handleCurrentDate((prev) => addYears(prev, 1));
   return (
     <div className={MonthNavigatorFrame}>
       <MonthNavigaotrHead currentDate={currentDate} onPrevYear={handlePrevYear} onNextYear={handleNextYear}/>
-      <MonthNavigatorBody currentDate={currentDate} handleCurrentDate={handleCurrentDate}/>
+      <MonthNavigatorBody 
+        currentDate={currentDate}
+        handleCurrentDate={handleCurrentDate}
+        handleMonthPickerOff={handleMonthPickerOff}/>
     </div>
   )
 }

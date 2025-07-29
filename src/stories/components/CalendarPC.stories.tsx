@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
 import { calendarEvents } from '@/@mock/calendar';
-import {CustomCalendar} from '@/components/features/calendar';
+import { CustomCalendar } from '@/components/features/calendar';
 import { CalendarContext } from '@/components/features/calendar';
 
 
@@ -29,6 +29,9 @@ type Story = StoryObj<typeof CustomCalendar>;
 export const PCSize: Story = {
   render: () => {
     const [currentDate, setCurrentDate] = useState(new Date());
+    const handleCurrentDate = (updater: Date | ((prev: Date) => Date)) => {
+      setCurrentDate(typeof updater === "function" ? updater(currentDate) : updater);
+    };
 
     return (
       <div className='w-screen flex justify-center'>
@@ -38,7 +41,7 @@ export const PCSize: Story = {
             events: calendarEvents,
             isMondayStart: true,
             currentDate,
-            setCurrentDate,
+            handleCurrentDate,
           }}
         >
           <CustomCalendar.View />
