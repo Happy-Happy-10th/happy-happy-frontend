@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Box, Button, Text } from '@/components/base';
 import type { Meta, StoryObj } from '@storybook/nextjs';
 
 import { fn } from 'storybook/test';
@@ -17,7 +17,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
-  args: {
-    children: <>버튼</>,
+  render: () => {
+    return (
+      <Box className="w-100">
+        <Button>
+          <Text variant="head3">버튼</Text>
+        </Button>
+      </Box>
+    );
   },
 };
