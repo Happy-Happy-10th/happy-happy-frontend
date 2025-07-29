@@ -231,7 +231,7 @@
 
 /* react-big-calendar 오버라이드 */
 .rbc-month-row {
-  min-height: 95px !important;
+  min-height: 81.2px !important;
 }
 
 .rbc-event {

@@ -206,4 +206,13 @@ export const calendarEvents:CalendarEventType[] = [
     stage: 2,
     allDay : true
   },
+  {
+    title: "30",
+    start: new Date(2025, 6, 30, 13, 0),
+    end: new Date(2025, 6, 31, 12, 0),
+    color: "#F97316",
+    colorType:"yoteyoBlack",
+    stage: 2,
+    allDay : true
+  },
 ];

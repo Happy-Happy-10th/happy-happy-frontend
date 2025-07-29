@@ -8,20 +8,18 @@ const rootFrame = clsx(
 );
 
 const contentsFrame = clsx(
-  "flex-1 flex",          // 남은 공간 채우기
-  "xl:p-[30px] xl:pb-[5px]",    // 여백 관리 (padding)
-  "xl:pb-[calc(30px)]",
-  "pl-[20px] pr-[20px]",
-  "overflow-hidden"       // 자식이 넘칠 경우 안전하게 처리
+  "flex-1 flex",          
+  "xl:p-[30px] xl:pb-[5px]",
+  "overflow-hidden"       
 );
 
 const contentsBody = clsx(
-  "flex-1 w-full",        // 가로·세로 자동 확장
-  "rounded-[8px] bg-white" // 필요 시 스타일
+  "flex-1 w-full",        
+  "rounded-[8px] bg-white" 
 );
 
 const navigator = clsx(
-  "w-full shrink-0"        // 높이 고정 (플로팅 버튼 영역)
+  "w-full shrink-0"  
 );
 
 type PropsType = { children: ReactNode };
