@@ -1,3 +1,5 @@
+@import './utilities.css';
+
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "./theme.css";
@@ -32,6 +34,9 @@
   --color-yoteyo-purple : var(--yoteyo-purple);
   --color-yoteyo-pink : var(--yoteyo-pink);
   --color-yoteyo-black : var(--yoteyo-black);
+
+  /*앱 Border 정의*/
+  --radius-yoteyo : var(--yoteyo-radius);
 
   /* 설치된 기본 테마들*/
   --color-background: var(--background);
@@ -102,6 +107,9 @@
   --yoteyo-purple: #7671EC;
   --yoteyo-pink: #EB7ACF;
   --yoteyo-black: #010001;
+
+  /* 앱 메인 radius*/
+  --yoteyo-radius : 8px;
 
   /* 설치된 기본 설정 값*/
   --radius: 0.625rem;

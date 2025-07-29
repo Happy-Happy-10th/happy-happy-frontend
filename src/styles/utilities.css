@@ -1,0 +1,19 @@
+@utility text-yoteyo-title-main {
+  font-size: var(--font-yoteyo-title-main);
+}
+@utility text-yoteyo-title-sub {
+  font-size: var(--font-yoteyo-title-sub);
+}
+@utility text-yoteyo-body-lg {
+  font-size: var(--font-yoteyo-body-lg);
+}
+@utility text-yoteyo-body-md {
+  font-size: var(--font-yoteyo-body-md);
+}
+@utility text-yoteyo-body-sm {
+  font-size: var(--font-yoteyo-body-sm);
+}
+
+@utility rounded-yoteyo {
+  border-radius: var(--radius-yoteyo);
+}
