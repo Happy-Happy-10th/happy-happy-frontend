@@ -34,7 +34,7 @@ export default function CalendarToolbar({
               {monthPickerOpen?<ChevronUp />:<ChevronDown />}
             </Button>
           </PopoverTrigger>
-          <PopoverContent>
+          <PopoverContent className='w-[230px] h-[231px] p-0 m-0'>
             <MonthNavigator 
               currentDate={currentDate} 
               handleCurrentDate={handleCurrentDate} 

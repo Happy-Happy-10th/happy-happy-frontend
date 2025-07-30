@@ -7,7 +7,6 @@ import MonthNavigatorBody from "./ui/MonthNavigatorBody";
 
 const MonthNavigatorFrame = clsx(
   "w-[230px] h-[230px]",
-  "ml-[16px] mr-[16px]",
 )
 type PropsType = {
   currentDate : Date,
