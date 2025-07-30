@@ -28,7 +28,7 @@ export default function RootLayout({
         <QueryProvider>
           <ReactQueryDevtools initialIsOpen={false} />
           {children}
-          <Navigator/>
+          {/* <Navigator/> */}
         </QueryProvider>
       </body>
     </html>
