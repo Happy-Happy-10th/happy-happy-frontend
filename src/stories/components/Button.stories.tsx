@@ -16,13 +16,31 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const Base: Story = {
   render: () => {
     return (
       <Box className="w-100">
-        <Button>
-          <Text variant="head3">버튼</Text>
-        </Button>
+        <Button>버튼</Button>
+      </Box>
+    );
+  },
+};
+
+export const Outline: Story = {
+  render: () => {
+    return (
+      <Box className="w-100">
+        <Button variant="outline">버튼</Button>
+      </Box>
+    );
+  },
+};
+
+export const Disabled: Story = {
+  render: () => {
+    return (
+      <Box className="w-100">
+        <Button disabled>버튼</Button>
       </Box>
     );
   },
