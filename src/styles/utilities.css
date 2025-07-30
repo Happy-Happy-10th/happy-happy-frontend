@@ -50,6 +50,12 @@
   /* line-height: var(--yoteyo-lh-150); */
 }
 
+@utility text-yoteyo-m-detail-sm {
+  font-size: var(--yoteyo-m-detail-sm);
+  font-weight: var(--yoteyo-fw-regular);
+  /* line-height: var(--yoteyo-lh-150); */
+}
+
 /* 텍스트 PC */
 @utility text-yoteyo-p-title-lg {
   font-size: var(--yoteyo-p-title-lg);
@@ -98,6 +104,12 @@
 
 @utility text-yoteyo-p-detail-md {
   font-size: var(--yoteyo-p-detail-md);
+  font-weight: var(--yoteyo-fw-regular);
+  /* line-height: var(--yoteyo-lh-150); */
+}
+
+@utility text-yoteyo-p-detail-md {
+  font-size: var(--yoteyo-p-detail-sm);
   font-weight: var(--yoteyo-fw-regular);
   /* line-height: var(--yoteyo-lh-150); */
 }

@@ -3,7 +3,7 @@ import { createContext, useContext } from "react";
 
 
 type CalendarContextType = {
-  events : CalendarEventType[];
+  events : CalendarEventType[]|[];
   isMondayStart : boolean;
   currentDate : Date;
   handleCurrentDate : (updater: Date | ((prev: Date) => Date)) => void

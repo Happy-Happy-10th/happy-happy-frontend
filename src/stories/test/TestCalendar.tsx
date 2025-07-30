@@ -2,7 +2,7 @@ import { useState } from "react";
 import clsx from "clsx";
 
 import { CustomCalendar, CalendarContext } from '@/components/features/calendar';
-import { calendarEvents } from '@/@mock/calendar';
+import { calendarEvents, calendarEventsNone } from '@/@mock/calendar';
 import DayEventList from "@/components/features/dayEventList/DayEventList";
 
 const contents =clsx(
@@ -41,7 +41,7 @@ export default function TestCalendar(){
       <div className={calendarSize}>
         <CalendarContext.Provider
           value={{
-            events: calendarEvents,
+            events: calendarEventsNone,
             isMondayStart: true,
             currentDate,
             handleCurrentDate,
@@ -51,7 +51,7 @@ export default function TestCalendar(){
         </CalendarContext.Provider>
       </div>
       <div className={eventList}>
-        <DayEventList selectedDate={selectedDate} dayEvents={calendarEvents}/>
+        <DayEventList selectedDate={selectedDate} dayEvents={calendarEventsNone}/>
       </div>
     </div>
   );

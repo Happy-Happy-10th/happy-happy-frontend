@@ -123,6 +123,7 @@
 
   --yoteyo-m-detail-lg : 20px;
   --yoteyo-m-detail-md : 14px;
+  --yoteyo-m-detail-sm : 11px;
 
   /* 택스트 크기 정의 PC*/
   --yoteyo-p-title-main-lg : 34px;
@@ -135,6 +136,7 @@
   
   --yoteyo-p-detail-lg : 20px;
   --yoteyo-p-detail-md : 14px;
+  --yoteyo-p-detail-sm : 11px;
 
   /* font Weight 정의 */
   --yoteyo-fw-bold : 700;
