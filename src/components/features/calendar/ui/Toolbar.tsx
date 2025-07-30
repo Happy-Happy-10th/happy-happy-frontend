@@ -27,7 +27,7 @@ export default function CalendarToolbar({
   return (
     <div className="w-full flex justify-between bg-yoteyo-gray-100 pb-[10px]">
       <div className='flex flex-row items-center gap-[6px]'>
-        <span className="text-[30px] font-bold">{formatted}</span>
+        <span className="text-[30px] font-bold w-[105px]">{formatted}</span>
         <Popover open={monthPickerOpen} onOpenChange={setMonthPickerOpen}>
           <PopoverTrigger asChild>
             <Button type='button' variant={"ghost"} onClick={handleMonthPickerOn}>
