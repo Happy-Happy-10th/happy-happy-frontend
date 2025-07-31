@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion"
 import { format } from "date-fns"
 import { ko } from "date-fns/locale"
+import { cn } from "@/utils/tailwind-utils";
 import clsx from "clsx";
 
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { cn } from "@/utils/tailwind-utils";
+
+import MiniCalendar from "./MiniCalendar";
+import { SetDateHandler } from "@/@types";
+import TimeSelector from "./TimeSelector";
 
 const dateBox = clsx(
   "flex justify-center items-center",
@@ -18,16 +22,20 @@ const dateBox = clsx(
 type PropsType = {
   targetDateName : string;
   targetDateValue : Date;
+  targetDateSetFn : SetDateHandler;
   allDayChecked : boolean;
 }
 type AccodianType ="date-pick"|"time-pick"|null;
-export default function SetDate({targetDateName, targetDateValue, allDayChecked}:PropsType){
-
+export default function SetDate({targetDateName, targetDateValue, allDayChecked, targetDateSetFn}:PropsType){
+  //아코디언 State
   const [accodianType, setAccodianType] = useState<AccodianType>(null);
   const handleAccodian = (inputAccodianType:AccodianType)=>{
     setAccodianType((prev) => (prev === inputAccodianType ? null : inputAccodianType));
   }
-
+  useEffect(()=>{
+    console.log(format(targetDateValue,'yyyy-MM-dd-HH-mm'))
+    // handleAccodian(null);
+  },[targetDateValue])
   return (
     <div className="w-full flex flex-col gap-1">
       <div className="w-full flex flex-row justify-between">
@@ -41,7 +49,7 @@ export default function SetDate({targetDateName, targetDateValue, allDayChecked}
             >
             {format(targetDateValue,"yyyy.MM.dd")}
           </Button>
-          {allDayChecked && 
+          {allDayChecked || 
             <Button 
               className={cn(dateBox,accodianType==="time-pick"&&"text-yoteyo-main")}
               variant={"ghost"}
@@ -62,20 +70,14 @@ export default function SetDate({targetDateName, targetDateValue, allDayChecked}
             transition={{ duration: 0.2 }}
             >
             <Separator className="my-1"/>
-            <div className="w-full bg-yoteyo-main">
-              {accodianType === "date-pick" && <DatePcik/>}
-              {accodianType === "time-pick" && <TimePick/>}
+            <div className="w-full">
+              {accodianType === "date-pick" && 
+                <MiniCalendar targetDate={targetDateValue} setTargetDate={targetDateSetFn}/>}
+              {accodianType === "time-pick" && 
+              <TimeSelector targetDate={targetDateValue} setTargetDate={targetDateSetFn}/>}
             </div>
           </motion.div> )}
       </AnimatePresence>
     </div>
   )
-}
-
-function DatePcik(){
-  return <span>요일 선택 캘린더 등장</span>
-}
-
-function TimePick(){
-  return <span>시간선택 등장</span>
 }

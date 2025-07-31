@@ -41,7 +41,7 @@ export default function TestCalendar(){
       <div className={calendarSize}>
         <CalendarContext.Provider
           value={{
-            events: calendarEventsNone,
+            events: calendarEvents,
             isMondayStart: true,
             currentDate,
             handleCurrentDate,

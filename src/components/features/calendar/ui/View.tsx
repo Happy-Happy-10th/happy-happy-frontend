@@ -26,6 +26,7 @@ const calendarVariants = cva(
   [&_.rbc-date-cell]:!flex
   [&_.rbc-date-cell]:!justify-center
   [&_.rbc-month-view]:!rounded-[8px]
+  [&_.rbc-month-row]:!min-h-[81.2px]
   `,{
     variants : {
       variant : {
