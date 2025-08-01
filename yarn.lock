@@ -1752,6 +1752,11 @@
   dependencies:
     dequal "^2.0.3"
 
+"@storybook/addon-viewport@^9.0.8":
+  version "9.0.8"
+  resolved "https://registry.yarnpkg.com/@storybook/addon-viewport/-/addon-viewport-9.0.8.tgz#def767425a92a4bab91c2a09e884fbfb1810e3c5"
+  integrity sha512-HgIFDzNXvMx0zQBM5mhwBoAJlrF9KRlxNCZnJbqrFLCJO4Ps2PMtB0HRGHcg0gm3RLcqyps0DpiF7wll3udb7Q==
+
 "@storybook/builder-webpack5@9.0.16":
   version "9.0.16"
   resolved "https://registry.yarnpkg.com/@storybook/builder-webpack5/-/builder-webpack5-9.0.16.tgz#823e97408f49c7dd0353866363f41dbed3410f79"
