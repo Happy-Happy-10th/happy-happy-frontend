@@ -109,7 +109,7 @@ function DateHeader({date,isOffRange,targetDate, setTargetDate}:DateHeaderType) 
   }
 
   return (
-    <div className="flex justify-center items-center" onClick={handleSetDate}>
+    <div className="flex justify-center items-center hover:cursor-pointer" onClick={handleSetDate}>
       <div
         className={cn(
           'm-0 p-o w-[20px] h-[20px] flex justify-center items-center yoteyo-m-body-md',

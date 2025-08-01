@@ -157,6 +157,8 @@
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -247,4 +249,17 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+@layer utilities {
+  /* 스크롤바를 시각적으로 숨기는 유틸리티 클래스 */
+  .scrollbar-hide {
+    /* For Webkit-based browsers (Chrome, Safari, etc.) */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    /* For IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
 }

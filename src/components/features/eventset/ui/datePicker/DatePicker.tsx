@@ -8,7 +8,7 @@ import SetDate from "./ui/SetDate"
 import { useDateState } from "@/hooks"
 
 const datePickerFrame = clsx(
-  " ml-5 mr-5 mt-2"
+  "pt-2 pb-2 pl-5 pr-5"
 )
 const datePickerbody = clsx(
   "w-full flex flex-row justify-between items-center mt-2 mb-2",
