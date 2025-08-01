@@ -33,10 +33,10 @@ export const customViewports = {
     },
   },
   desktop: {
-    name: 'PC (1920px*1080px)',
+    name: 'PC (1280px*900px)',
     styles: {
-      width: '1920px',
-      height: '1080px',
+      width: '1300px',
+      height: '900px',
     },
   },
 };

@@ -23,7 +23,7 @@ export const monthNavigator: Story = {
       alert(currentDate);
     },[currentDate])
     return (
-      <div>
+      <div className='w-screen h-screen flex justify-center items-center'>
         <MonthNavigator 
         currentDate={currentDate} 
         handleCurrentDate={handleCurrentDate} 

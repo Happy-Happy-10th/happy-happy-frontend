@@ -10,7 +10,7 @@ const rootFrame = clsx(
 const contentsFrame = clsx(
   "flex-1 flex",          
   "xl:p-[30px] xl:pb-[5px]",
-  "overflow-hidden"       
+  "overflow-hidden"    
 );
 
 const contentsBody = clsx(
@@ -24,7 +24,7 @@ const navigator = clsx(
 
 type PropsType = { children: ReactNode };
 
-export default function RootLayout({ children }: PropsType) {
+export default function Layout({ children }: PropsType) {
   return (
     <div className={rootFrame}>
       <div className={contentsFrame}>
