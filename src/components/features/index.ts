@@ -1,2 +1,5 @@
 export {CustomCalendar} from './calendar'
 export {DayEventList} from './dayEventList'
+export {BottomTab} from './bottomTab'
+export {MonthNavigator} from './monthNavigator'
+export {AddEvent} from './eventset'

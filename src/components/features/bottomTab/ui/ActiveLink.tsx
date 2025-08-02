@@ -3,7 +3,7 @@
 import Link from "next/link";
 import clsx from "clsx";
 import { useSelectedLayoutSegment } from "next/navigation";
-import { IconKey, iconMap, setActionLinkValue } from "@/utils/navigator/setActionLinkValue";
+import { IconKey, iconMap, setActionLinkValue } from "@/utils";
 
 type ActiveLinkProps ={navKey : string}
 export function ActiveLink({navKey}: ActiveLinkProps) {

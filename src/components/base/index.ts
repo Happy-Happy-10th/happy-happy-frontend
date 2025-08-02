@@ -1,1 +1,1 @@
-export {default as Navigator} from './items/Navigator';
+export {default as CustomSelect} from './CustomSelect'

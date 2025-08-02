@@ -3,10 +3,10 @@ import { createContext, useContext } from "react";
 
 
 type CalendarContextType = {
-  events : CalendarEventType[];
+  events : CalendarEventType[]|[];
   isMondayStart : boolean;
   currentDate : Date;
-  setCurrentDate : React.Dispatch<React.SetStateAction<Date>>;
+  handleCurrentDate : (updater: Date | ((prev: Date) => Date)) => void
 }
 
 export const CalendarContext = createContext<CalendarContextType|null>(null);

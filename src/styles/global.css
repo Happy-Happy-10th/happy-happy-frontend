@@ -1,3 +1,5 @@
+@import './utilities.css';
+
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "./theme.css";
@@ -13,15 +15,15 @@
   --color-yoteyo-gray-100 : var(--yoteyo-gray-100);
   --color-yoteyo-gray-200 : var(--yoteyo-gray-200);
   --color-yoteyo-gray-300 : var(--yoteyo-gray-300);
+  --color-yoteyo-gray-400 : var(--yoteyo-gray-400);
+  --color-yoteyo-gray-500 : var(--yoteyo-gray-500);
 
-  /* 앱 폰트 크기 정의 */
-  --font-yoteyo-title-main : var(--yoteyo-title-main);
-  --font-yoteyo-title-sub : var(--yoteyo-title-sub);
-  --font-yoteyo-body-lg :  var(--yoteyo-body-lg);
-  --font-yoteyo-body-md :  var(--yoteyo-body-md);
-  --font-yoteyo-body-sm :  var(--yoteyo-body-sm);
+  /*앱 배경 및 outline 색상 정의*/
+  --color-yoteyo-bg-default : var(--yoteyo-bg-default);
+  --color-yoteyo-bg-modal : var(--yoteyo-bg-modal);
+  --color-yoteyo-outline :var(--yoteyo-outline);
 
-  /*이밴트 테마 정의*/
+  /*캘린더 이밴트 테마 정의*/
   --color-yoteyo-red : var(--yoteyo-red);
   --color-yoteyo-orange : var(--yoteyo-orange);
   --color-yoteyo-yellow : var(--yoteyo-yellow);
@@ -32,6 +34,9 @@
   --color-yoteyo-purple : var(--yoteyo-purple);
   --color-yoteyo-pink : var(--yoteyo-pink);
   --color-yoteyo-black : var(--yoteyo-black);
+
+  /*앱 Border 정의*/
+  --radius-yoteyo : var(--yoteyo-radius);
 
   /* 설치된 기본 테마들*/
   --color-background: var(--background);
@@ -79,17 +84,16 @@
   --yoteyo-sub : #D8FF7C;
   --yoteyo-error : #FF6366;
   --yoteyo-black : #222222;
-  --yoteyo-gray-100 : #FAFAFA;
+  --yoteyo-gray-100 : #F0F0F0;
   --yoteyo-gray-200 : #C0C0C0;
   --yoteyo-gray-300 : #999999;
   --yoteyo-gray-400 : #666666;
+  --yoteyo-gray-500 : #222222;
 
-  /* 택스트 크기 정의*/
-  --yoteyo-title-main : 24px;
-  --yoteyo-title-sub : 20px;
-  --yoteyo-body-lg : 16px;
-  --yoteyo-body-md : 14px;
-  --yoteyo-body-sm : 12px;
+  /* 배경 및 외각 색상 정의*/
+  --yoteyo-bg-default :#FAFAFA;
+  --yoteyo-bg-modal :#F9F8FB;
+  --yoteyo-outline : #EAEAEA;
 
   /*캘린더 이밴트 색상 정의*/
   --yoteyo-red: #FB5445;
@@ -103,10 +107,58 @@
   --yoteyo-pink: #EB7ACF;
   --yoteyo-black: #010001;
 
+  /*
+  * title : 템플릿 단위, 모듈 단위의 역할 및 기능강조용
+  * body : 본문 텍스트
+  * detail : 추가정보 또는 작은 항목 텍스트
+  */
+  /* 택스트 크기 정의 MObile*/
+  --yoteyo-m-title-main-lg : 34px;
+  --yoteyo-m-title-main-md : 24px;
+  --yoteyo-m-title-main-sm : 20px;
+
+  --yoteyo-m-body-lg : 18px;
+  --yoteyo-m-body-md : 16px;
+  --yoteyo-m-body-sm : 14px;
+
+  --yoteyo-m-detail-lg : 20px;
+  --yoteyo-m-detail-md : 14px;
+  --yoteyo-m-detail-sm : 11px;
+
+  /* 택스트 크기 정의 PC*/
+  --yoteyo-p-title-main-lg : 34px;
+  --yoteyo-p-title-main-md : 24px;
+  --yoteyo-p-title-main-sm : 20px;
+
+  --yoteyo-p-body-lg : 18px;
+  --yoteyo-p-body-md : 16px;
+  --yoteyo-p-body-sm : 14px;
+  
+  --yoteyo-p-detail-lg : 20px;
+  --yoteyo-p-detail-md : 14px;
+  --yoteyo-p-detail-sm : 11px;
+
+  /* font Weight 정의 */
+  --yoteyo-fw-bold : 700;
+  --yoteyo-fw-semibold : 600;
+  --yoteyo-fw-regular: 400;
+  --yoteyo-fw-medium: 500;
+
+  /* Line Height 정의 */
+  --yoteyo-lh-150: 150%;
+
+  /* letter Spacing 정의 */
+  --yoteyo-ls-2: -0.3px;
+
+  /* 앱 메인 radius*/
+  --yoteyo-radius : 8px;
+
   /* 설치된 기본 설정 값*/
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -183,7 +235,7 @@
 
 /* react-big-calendar 오버라이드 */
 .rbc-month-row {
-  min-height: 95px !important;
+  /* min-height: 81.2px !important; */
 }
 
 .rbc-event {
@@ -197,4 +249,17 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+@layer utilities {
+  /* 스크롤바를 시각적으로 숨기는 유틸리티 클래스 */
+  .scrollbar-hide {
+    /* For Webkit-based browsers (Chrome, Safari, etc.) */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    /* For IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
 }

@@ -32,7 +32,7 @@ export default function CalendarDateHeader(props: DateHeaderProps) {
           day === 0 && 'text-red-500',
           day === 6 && 'text-blue-500',
           isOffRange && 'opacity-50',
-          isToday && 'bg-main rounded-full text-white font-normal'
+          isToday && 'bg-yoteyo-main rounded-full text-white font-normal'
         )}
       >
         {format(date, 'd')} {/* 일(day) 출력 */}

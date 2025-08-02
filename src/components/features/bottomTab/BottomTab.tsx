@@ -1,8 +1,9 @@
 import clsx from "clsx";
-import { ActiveLink } from "./NavActionLink";
+import { ActiveLink } from "./ui/ActiveLink";
+
 
 const navigatorFrame = clsx(
-  "relative w-full h-[60px]", // 높이 60 고정
+  "relative w-full h-[60px]",
   "bg-white flex justify-center items-center overflow-visible",
   "shadow-[0_-4px_8px_rgba(0,0,0,0.08)]",
   "pl-[20px] pr-[20px]"
@@ -28,7 +29,7 @@ const centerButton = clsx(
   "shadow-[0_4px_12px_rgba(0,0,0,0.2)] transition-transform hover:scale-110"
 );
 
-export default function Navigator() {
+export default function BottomTab() {
   return (
     <div className={navigatorFrame}>
       <div className={navigatorMain}>

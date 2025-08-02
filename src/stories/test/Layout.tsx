@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { ReactNode } from "react";
-import { Navigator } from "@/components/base";
+import { BottomTab } from "@/components/features";
 
 const rootFrame = clsx(
   "w-full h-full flex flex-col",
@@ -8,25 +8,23 @@ const rootFrame = clsx(
 );
 
 const contentsFrame = clsx(
-  "flex-1 flex",          // 남은 공간 채우기
-  "xl:p-[30px] xl:pb-[5px]",    // 여백 관리 (padding)
-  "xl:pb-[calc(30px)]",
-  "pl-[20px] pr-[20px]",
-  "overflow-hidden"       // 자식이 넘칠 경우 안전하게 처리
+  "flex-1 flex",          
+  "xl:p-[30px] xl:pb-[5px]",
+  "overflow-hidden"    
 );
 
 const contentsBody = clsx(
-  "flex-1 w-full",        // 가로·세로 자동 확장
-  "rounded-[8px] bg-white" // 필요 시 스타일
+  "flex-1 w-full",        
+  "rounded-[8px] bg-white" 
 );
 
 const navigator = clsx(
-  "w-full shrink-0"        // 높이 고정 (플로팅 버튼 영역)
+  "w-full shrink-0"  
 );
 
 type PropsType = { children: ReactNode };
 
-export default function RootLayout({ children }: PropsType) {
+export default function Layout({ children }: PropsType) {
   return (
     <div className={rootFrame}>
       <div className={contentsFrame}>
@@ -35,7 +33,7 @@ export default function RootLayout({ children }: PropsType) {
         </div>
       </div>
       <div className={navigator}>
-        <Navigator />
+        <BottomTab />
       </div>
     </div>
   );
