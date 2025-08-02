@@ -1,7 +1,9 @@
 import ky from 'ky';
 
+const END_POINT = process.env.YOTEYO_API_URL;
+
 const yoteyoAPI = ky.create({
-  prefixUrl: '/api',
+  prefixUrl: END_POINT,
   hooks: {
     beforeRequest: [
       async () => {

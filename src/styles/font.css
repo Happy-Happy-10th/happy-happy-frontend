@@ -1,0 +1,72 @@
+@theme {
+  --font-sans: Pretendard, Inter var, -apple-system, BlinkMacSystemFont, Noto Sans KR, ui-sans-serif, system-ui,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', Segoe UI Symbol, 'Noto Color Emoji', sans-serif;
+  --font-serif: Pretendard, Pretendard, Inter var, -apple-system, BlinkMacSystemFont, Noto Sans KR, ui-sans-serif,
+    system-ui, serif, 'Apple Color Emoji', 'Segoe UI Emoji', Segoe UI Symbol, 'Noto Color Emoji', sans-serif;
+
+  --default-font-family: var(--font-sans);
+  --default-mono-font-family: var(--font-serif);
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Pretendard';
+  font-weight: 100;
+  src: local('Pretendard-Thin'), url('/fonts/Pretendard-Thin.woff2') format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Pretendard';
+  font-weight: 200;
+  src: local('Pretendard-ExtraLight'), url('/fonts/Pretendard-ExtraLight.woff2') format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Pretendard';
+  font-weight: 300;
+  src: local('Pretendard-Light'), url('/fonts/Pretendard-Light.woff2') format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Pretendard';
+  font-weight: 400;
+  src: local('Pretendard-Regular'), url('/fonts/Pretendard-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Pretendard';
+  font-weight: 500;
+  src: local('Pretendard-Medium'), url('/fonts/Pretendard-Medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Pretendard';
+  font-weight: 600;
+  src: local('Pretendard-SemiBold'), url('/fonts/Pretendard-SemiBold.woff2') format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Pretendard';
+  font-weight: 700;
+  src: local('Pretendard-Bold'), url('/fonts/Pretendard-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Pretendard';
+  font-weight: 800;
+  src: local('Pretendard-ExtraBold'), url('/fonts/Pretendard-ExtraBold.woff2') format('woff2');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'Pretendard';
+  font-weight: 900;
+  src: local('Pretendard-Black'), url('/fonts/Pretendard-Black.woff2') format('woff2');
+}
