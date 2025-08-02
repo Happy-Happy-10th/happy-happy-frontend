@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Icon, SplashIcon, SplashTextIcon } from '@/components/base';
+import { Box, Icon, SplashIcon, SplashTextIcon, Text } from '@/components/base';
 import { Button } from '@/components/ui/button';
 import { getAppEnv } from '@/utils';
 import { motion } from 'motion/react';

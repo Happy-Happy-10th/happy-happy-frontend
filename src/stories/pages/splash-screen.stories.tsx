@@ -33,7 +33,8 @@ export const Base: Story = {
               transition={{ duration: 0.8, delay: 0.8 }}
             >
               <Icon className="w-48">
-                <SplashTextIcon />
+                <img src="/logo.png" alt="" />
+                {/* <SplashTextIcon /> */}
               </Icon>
             </motion.div>
           </Box>

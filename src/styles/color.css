@@ -37,11 +37,20 @@
   --yoteyo-gray-200: #c0c0c0;
   --yoteyo-gray-300: #999999;
   --yoteyo-gray-400: #666666;
+  --yoteyo-gray-500: #222222;
   --yoteyo-disabled: #e2e2e2;
+
+  /* 배경 및 외각 색상 정의*/
+  --yoteyo-bg-default: #fafafa;
+  --yoteyo-bg-modal: #f9f8fb;
+  --yoteyo-outline: #eaeaea;
 
   /* 택스트 크기 정의*/
   --yoteyo-title-main: 24px;
-  --yoteyo-title-sub: 20px;
+  --yoteyo-title-sub: 20px; /* 배경 및 외각 색상 정의*/
+  --yoteyo-bg-default: #fafafa;
+  --yoteyo-bg-modal: #f9f8fb;
+  --yoteyo-outline: #eaeaea;
   --yoteyo-body-lg: 16px;
   --yoteyo-body-md: 14px;
   --yoteyo-body-sm: 12px;
