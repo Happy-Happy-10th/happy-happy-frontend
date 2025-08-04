@@ -31,7 +31,7 @@ jobs:
       # 4. package.json에서 Storybook 의존성을 제거하고 yarn.lock을 업데이트
       - name: Remove Storybook dependencies from package.json
         run: |
-          npx json -I -f package.json -e "this.devDependencies && Object.keys(this.devDependencies).forEach(k => { if (k.startsWith('@storybook')) deletethis.devDependencies[k] })"
+          node -e "const fs = require('fs'); const path = 'package.json'; const pkg = JSON.parse(fs.readFileSync(path, 'utf8')); if (pkg.devDependencies) { for (const key in pkg.devDependencies) { if (key.startsWith('@storybook')) { delete pkg.devDependencies[key]; } } } fs.writeFileSync(path, JSON.stringify(pkg, null, 2) + '\n');"
           rm -f yarn.lock
           yarn install --mode update-lockfile
 
