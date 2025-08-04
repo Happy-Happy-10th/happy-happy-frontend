@@ -1,10 +1,7 @@
 'use client';
 
-import { Box, Icon, SplashIcon, SplashTextIcon } from '@/components/base';
-import { Button } from '@/components/ui/button';
-import { getAppEnv } from '@/utils';
+import { Box, Icon, SplashIcon } from '@/components/base';
 import { motion } from 'motion/react';
-import Link from 'next/link';
 import { useEffect } from 'react';
 
 export default function Home() {
@@ -98,21 +95,10 @@ export default function Home() {
             animate={{ opacity: 1, transform: 'translateY(0px)' }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <Icon className="w-48">
-              <SplashTextIcon />
-            </Icon>
+            <img className="w-48" src="./images/yoteyo-text.png" alt="요때요 텍스트 이미지" />
           </motion.div>
         </Box>
       </Box>
     </Box>
   );
-  // return (
-  //   <div className="flex flex-col gap-4">
-  //     <p>{getAppEnv()}환경</p>
-
-  //     <Button onClick={handleShare}>카카오톡 공유하기</Button>
-
-  //     <Link href="/products">Products 페이지 이동 &#40;API 통신 플로우&#41; </Link>
-  //   </div>
-  // );
 }
