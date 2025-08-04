@@ -9,15 +9,15 @@ const monthFrame = clsx(
 )
 type PropsType = {
   currentDate:Date;
-  handleCurrentDate : (updater:Date| ((prev: Date)=>Date)) => void;
-  handleMonthPickerOff: ()=>void;
+  onCurrentDate : (updater:Date| ((prev: Date)=>Date)) => void;
+  onMonthPickerOff: ()=>void;
 }
-export default function MonthNavigatorBody({currentDate, handleCurrentDate, handleMonthPickerOff}:PropsType){
+export default function MonthNavigatorBody({currentDate, onCurrentDate, onMonthPickerOff}:PropsType){
   const Month = ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"];
   const handleClickMonth = (MonthIndex:number)=>{
     const newDate = setMonth(currentDate,MonthIndex);
-    handleCurrentDate(newDate);
-    handleMonthPickerOff();
+    onCurrentDate(newDate);
+    onMonthPickerOff();
   }
   return (
     <div className={monthFrame}>

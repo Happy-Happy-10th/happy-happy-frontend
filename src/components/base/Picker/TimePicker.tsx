@@ -2,14 +2,17 @@ import { useEffect, useState } from "react"
 import clsx from "clsx"
 
 import { SetDateHandler } from "@/@types"
-import  CustomSelect  from "@/components/base/CustomSelect"
+import  CustomSelect  from "@/components/base/Select/Select"
 
 const timeSelectorFrame= clsx(
   "flex flex-row gap-2 justify-center w-full h-52 pr-[57px] pl-[57px] pt-5 pb-5"
 )
 
-type PropsType = {targetDate : Date, setTargetDate : SetDateHandler}
-export default function TimeSelector({targetDate, setTargetDate}:PropsType){
+type PropsType = {
+  targetDate ?: Date, 
+  setTargetDate ?: SetDateHandler
+}
+export default function TimePicker({targetDate = new Date(), setTargetDate = ()=>{}}:PropsType){
   const [ampm, setAmpm] = useState<'오전' | '오후'>('오전');
   const handleAmpm = (value:string)=>value==='오전'?setAmpm('오전'):setAmpm('오후');
   const [hour, setHour] = useState<string>('1');

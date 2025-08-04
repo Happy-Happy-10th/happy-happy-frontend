@@ -2,7 +2,7 @@ import { useState } from "react"
 import clsx from "clsx"
 import { cn } from "@/utils/tailwind-utils"
 
-const repeatSelectorFrame = clsx(
+const repeatPickerFrame = clsx(
   "w-full h-27 pt-5 pb-5 pl-4 pr-4",
   "yoteyo-m-title-main-sm"
 )
@@ -16,13 +16,13 @@ const buttonStyle = clsx(
 
 type PropsType = {}
 type SelectedType = "day"|"week"|"month"|"year"|null;
-export default function RepeatSelector({}:PropsType){
+export default function RepeatPicker({}:PropsType){
   const [selected, setSelected] = useState<SelectedType>(null);
   const handleSelected = (nowSelected:SelectedType)=>{
     setSelected((prev)=>prev===nowSelected?null:nowSelected);
   }
   return(
-    <div className={repeatSelectorFrame}>
+    <div className={repeatPickerFrame}>
       <span>일정 반복</span>
       <div className="flex flex-row gap-4 mt-[18px]">
         <div 

@@ -8,6 +8,11 @@
   --color-yoteyo-gray-300: var(--yoteyo-gray-300);
   --color-yoteyo-disabled: var(--yoteyo-disabled);
 
+  /* 배경 및 외각 색상 정의*/
+  --color-yoteyo-bg-default : var(--yoteyo-bg-default);
+  --color-yoteyo-bg-modal : var(--yoteyo-bg-modal);
+  --color-yoteyo-outline : var(--yoteyo-outline);
+
   /* 앱 폰트 크기 정의 */
   --font-yoteyo-title-main: var(--yoteyo-title-main);
   --font-yoteyo-title-sub: var(--yoteyo-title-sub);
@@ -42,7 +47,7 @@
 
   /* 배경 및 외각 색상 정의*/
   --yoteyo-bg-default: #fafafa;
-  --yoteyo-bg-modal: #f9f8fb;
+  --yoteyo-bg-modal: #F9F8FB;
   --yoteyo-outline: #eaeaea;
 
   /* 택스트 크기 정의*/

@@ -21,11 +21,14 @@ export default function MonthNavigator({currentDate,handleCurrentDate,handleMont
   const handleNextYear = () => handleCurrentDate((prev) => addYears(prev, 1));
   return (
     <div className={MonthNavigatorFrame}>
-      <MonthNavigaotrHead currentDate={currentDate} onPrevYear={handlePrevYear} onNextYear={handleNextYear}/>
+      <MonthNavigaotrHead 
+        currentDate={currentDate} 
+        onPrevYear={handlePrevYear} 
+        onNextYear={handleNextYear}/>
       <MonthNavigatorBody 
         currentDate={currentDate}
-        handleCurrentDate={handleCurrentDate}
-        handleMonthPickerOff={handleMonthPickerOff}/>
+        onCurrentDate={handleCurrentDate}
+        onMonthPickerOff={handleMonthPickerOff}/>
     </div>
   )
 }

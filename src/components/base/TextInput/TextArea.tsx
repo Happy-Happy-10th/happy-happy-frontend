@@ -1,12 +1,13 @@
+import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/utils/tailwind-utils";
-import { Textarea } from "../ui/textarea";
+
 
 interface PropsType extends React.ComponentProps<"textarea">{
   placeholder:string;
   rows?:number;
   className ?: string;
 }
-export default function CustomTextArea({
+export default function TextArea({
   placeholder,
   rows=1, 
   className,

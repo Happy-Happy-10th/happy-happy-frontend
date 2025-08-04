@@ -1,20 +1,20 @@
-import { DatePicker } from '@/components/features/eventset/ui/datePicker';
+import { DateSelector } from '@/components/features';
 import type { Meta, StoryObj } from '@storybook/react';
 
-const meta: Meta<typeof DatePicker> = {
+const meta: Meta<typeof DateSelector> = {
   title: 'Components/DatePicker',
-  component: DatePicker,
+  component: DateSelector,
 };
 
 export default meta;
-type Story = StoryObj<typeof DatePicker>;
+type Story = StoryObj<typeof DateSelector>;
 
 export const datePicker: Story = {
   render: () => {
     return (
       <div className='w-full h-[96vh] flex justify-center items-center'>
         <div className='w-[354px] border-1 border-soild'>
-          <DatePicker/>
+          <DateSelector/>
         </div>
       </div>
     );
