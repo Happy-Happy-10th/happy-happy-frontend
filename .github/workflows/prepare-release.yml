@@ -1,0 +1,46 @@
+name: Prepare Release Branch
+
+on:
+  push:
+    branches:
+      - 'release/**'
+
+jobs:
+  prepare-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout release branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Remove development files
+        run: |
+          echo "Removing development-only files and directories..."
+          rm -rf .storybook
+          rm -rf src/stories
+          rm -rf src/@mock
+          rm -f .github/workflows/storybook-deploy.yml
+
+      - name: Remove Storybook dependencies
+        run: |
+          echo "Removing Storybook dependencies from package.json..."
+          node -e "const fs = require('fs'); const path = 'package.json'; const pkg = JSON.parse(fs.readFileSync(path, 'utf8')); if (pkg.devDependencies) { for (const key in pkg.devDependencies) { if (key.startsWith('@storybook')) { delete pkg.devDependencies[key]; } } } fs.writeFileSync(path, JSON.stringify(pkg, null, 2) + '\n');"
+
+      - name: Update yarn.lock
+        run: yarn install --mode update-lockfile
+
+      - name: Commit cleaned files
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "build(automated): Clean up files for production release"
+          branch: ${{ github.ref_name }}
+          commit_options: --all
