@@ -14,13 +14,19 @@ const itemsStyle = clsx(
 )
 
 type PropsType = {}
-export default function UserEventCreate({}:PropsType){
+export default function UserEventForm({}:PropsType){
     //크기가 커질때마다 스크롤을 같이 내리기
     const [scrollLocateText, setScrollLocateText] = useState("");
     const [scrollMemoText,setScrollMemoText] = useState("");
     const scrollContainerRef = useRef<HTMLDivElement>(null);
+    const isInitialMount = useRef(true);
   
     useEffect(()=>{
+      if (isInitialMount.current) {
+        isInitialMount.current = false;
+        return;
+      }
+      
       if(scrollContainerRef.current){
         scrollContainerRef.current.scrollTop = scrollContainerRef.current.scrollHeight;
       }
