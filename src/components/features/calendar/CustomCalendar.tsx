@@ -7,6 +7,9 @@ import { calendarService } from "@/api/service/calendar";
 import { CalendarContext } from "./provider/CalendarContext";
 
 import CalendarView from "./ui/View";
+import { useDateState } from "@/hooks";
+import { CalendarEventType } from "@/@types/calendar";
+import { endOfDay, isWithinInterval, startOfDay } from "date-fns";
 
 type CustomCalendarType = {
   children : ReactNode
@@ -18,10 +21,28 @@ export function CustomCalendar({children, calendarHightPx, calendarWidthPx}:Cust
     queryKey : queryKeys.calendar.events().queryKey,
     queryFn : calendarService.events 
   })
+  //캘린더에 view 될 날짜
+  const [currentDate, setCurrentDate] = useDateState(new Date());
 
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const handleCurrentDate = (updater: Date | ((prev: Date) => Date)) => {
-    setCurrentDate(typeof updater === "function" ? updater(currentDate) : updater);
+  //캘린더에서 선택될 날짜 데이터
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [dayEvents, setDayEvents] = useState<CalendarEventType[]>([]);
+  
+  const handleSetSelectedDate = (today: Date) => {
+    setSelectedDate(today);
+    const selectedDayStart = startOfDay(today);
+    const selectedDayEnd = endOfDay(today);
+    const filtered = (data?.events || []).filter((event) => {
+      const eventStart = new Date(event.start);
+      const eventEnd = new Date(event.end);
+  
+      // 선택한 날짜가 이 이벤트 범위 안에 포함되어 있으면 true
+      return isWithinInterval(selectedDayStart, { start: eventStart, end: eventEnd }) ||
+            isWithinInterval(selectedDayEnd, { start: eventStart, end: eventEnd }) ||
+            isWithinInterval(eventStart, { start: selectedDayStart, end: selectedDayEnd });
+    });
+  
+    setDayEvents(filtered);
   };
 
   if (status === 'pending') return <p>이벤트를 불러오는 중입니다...</p>;
@@ -31,7 +52,8 @@ export function CustomCalendar({children, calendarHightPx, calendarWidthPx}:Cust
       events : data?.events || [],
       isMondayStart : data?.isMondayStart||true,
       currentDate:currentDate,
-      handleCurrentDate : handleCurrentDate,
+      handleCurrentDate : setCurrentDate,
+      handleSetSelectedDate
       }}>
       {children}
     </CalendarContext.Provider>

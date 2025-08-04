@@ -20,6 +20,11 @@ export function convertEventsStringToDate
   ))
 }
 
+/**
+ * Date 객체로 처리된 날짜정보를 String객채로 변환하는 함수
+ * @param event 
+ * @returns 
+ */
 export function convertEventDateToString
 (event:CalendarEventType):ApiCalendarEventType{
   return {
@@ -28,6 +33,7 @@ export function convertEventDateToString
     end : formatDateToString(event.end),
   }
 }
+
 export function convertEventsDateToString
 (events:CalendarEventType[]):ApiCalendarEventType[]{
   return events.map((event)=>(

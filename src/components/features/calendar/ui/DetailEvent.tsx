@@ -3,7 +3,7 @@ import { cn } from "@/utils/tailwind-utils";
 import { cva } from "class-variance-authority";
 
 const evnetBarVariants = cva(
-  `w-full h-full flex flex-row justify-between rounded-[4px] text-[11px] overflow-hidden`,{
+  `w-full h-full flex flex-row justify-between rounded-[4px] text-[11px] overflow-hidden select-none opacity-100`,{
     variants:{
       variant:{
         yoteyoRed: "bg-yoteyo-red",
