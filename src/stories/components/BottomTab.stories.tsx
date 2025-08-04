@@ -1,8 +1,5 @@
 import { BottomTab } from '@/components/features';
 import type { Meta, StoryObj } from '@storybook/nextjs';
-import { MINIMAL_VIEWPORTS } from 'storybook/viewport';
-import Layout from '../test/Layout';
-
 
 interface BottomTabStoryArgs {
   deviceWidthPx: number;
