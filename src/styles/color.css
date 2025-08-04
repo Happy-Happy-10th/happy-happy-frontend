@@ -1,0 +1,69 @@
+@theme {
+  --color-yoteyo-main: var(--yoteyo-main);
+  --color-yoteyo-sub: var(--yoteyo-sub);
+  --color-yoteyo-error: var(--yoteyo-error);
+  --color-yoteyo-black: var(--yoteyo-black);
+  --color-yoteyo-gray-100: var(--yoteyo-gray-100);
+  --color-yoteyo-gray-200: var(--yoteyo-gray-200);
+  --color-yoteyo-gray-300: var(--yoteyo-gray-300);
+  --color-yoteyo-disabled: var(--yoteyo-disabled);
+
+  /* 앱 폰트 크기 정의 */
+  --font-yoteyo-title-main: var(--yoteyo-title-main);
+  --font-yoteyo-title-sub: var(--yoteyo-title-sub);
+  --font-yoteyo-body-lg: var(--yoteyo-body-lg);
+  --font-yoteyo-body-md: var(--yoteyo-body-md);
+  --font-yoteyo-body-sm: var(--yoteyo-body-sm);
+
+  /*이밴트 테마 정의*/
+  --color-yoteyo-red: var(--yoteyo-red);
+  --color-yoteyo-orange: var(--yoteyo-orange);
+  --color-yoteyo-yellow: var(--yoteyo-yellow);
+  --color-yoteyo-green: var(--yoteyo-green);
+  --color-yoteyo-emerald: var(--yoteyo-emerald);
+  --color-yoteyo-sky: var(--yoteyo-sky);
+  --color-yoteyo-blue: var(--yoteyo-blue);
+  --color-yoteyo-purple: var(--yoteyo-purple);
+  --color-yoteyo-pink: var(--yoteyo-pink);
+  --color-yoteyo-black: var(--yoteyo-black);
+}
+:root {
+  /*메인 테마 색상 정의*/
+  --yoteyo-main: #b063ff;
+  --yoteyo-sub: #d8ff7c;
+  --yoteyo-error: #ff6366;
+  --yoteyo-black: #222222;
+  --yoteyo-gray-100: #fafafa;
+  --yoteyo-gray-200: #c0c0c0;
+  --yoteyo-gray-300: #999999;
+  --yoteyo-gray-400: #666666;
+  --yoteyo-gray-500: #222222;
+  --yoteyo-disabled: #e2e2e2;
+
+  /* 배경 및 외각 색상 정의*/
+  --yoteyo-bg-default: #fafafa;
+  --yoteyo-bg-modal: #f9f8fb;
+  --yoteyo-outline: #eaeaea;
+
+  /* 택스트 크기 정의*/
+  --yoteyo-title-main: 24px;
+  --yoteyo-title-sub: 20px; /* 배경 및 외각 색상 정의*/
+  --yoteyo-bg-default: #fafafa;
+  --yoteyo-bg-modal: #f9f8fb;
+  --yoteyo-outline: #eaeaea;
+  --yoteyo-body-lg: 16px;
+  --yoteyo-body-md: 14px;
+  --yoteyo-body-sm: 12px;
+
+  /*캘린더 이밴트 색상 정의*/
+  --yoteyo-red: #fb5445;
+  --yoteyo-orange: #ff8132;
+  --yoteyo-yellow: #ffc43d;
+  --yoteyo-green: #2ec94e;
+  --yoteyo-emerald: #01d0a4;
+  --yoteyo-sky: #1dc1ff;
+  --yoteyo-blue: #6284e7;
+  --yoteyo-purple: #7671ec;
+  --yoteyo-pink: #eb7acf;
+  --yoteyo-black: #010001;
+}
