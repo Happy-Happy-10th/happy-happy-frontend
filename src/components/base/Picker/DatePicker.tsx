@@ -36,11 +36,11 @@ const calendarVariants = cva(
   }
 )
 
-type MiniCalendarType = {
-  targetDate : Date
-  setTargetDate:SetDateHandler
+type DatePickerType = {
+  targetDate ?: Date
+  setTargetDate?:SetDateHandler
 }
-export default function MiniCalendar({targetDate,setTargetDate}:MiniCalendarType){
+export default function DatePicker({targetDate = new Date(),setTargetDate=()=>{}}:DatePickerType){
   const isMondayStart = true;
   const localizer = dateFnsLocalizer({
       format,

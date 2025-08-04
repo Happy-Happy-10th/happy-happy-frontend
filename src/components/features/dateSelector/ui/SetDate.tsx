@@ -8,9 +8,11 @@ import clsx from "clsx";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
-import MiniCalendar from "./MiniCalendar";
+
 import { SetDateHandler } from "@/@types";
-import TimeSelector from "./TimeSelector";
+import { DatePicker, TimePicker } from "@/components/base";
+
+
 
 const dateBox = clsx(
   "flex justify-center items-center",
@@ -72,9 +74,9 @@ export default function SetDate({targetDateName, targetDateValue, allDayChecked,
             <Separator className="my-1"/>
             <div className="w-full">
               {accodianType === "date-pick" && 
-                <MiniCalendar targetDate={targetDateValue} setTargetDate={targetDateSetFn}/>}
+                <DatePicker targetDate={targetDateValue} setTargetDate={targetDateSetFn}/>}
               {accodianType === "time-pick" && 
-              <TimeSelector targetDate={targetDateValue} setTargetDate={targetDateSetFn}/>}
+                <TimePicker targetDate={targetDateValue} setTargetDate={targetDateSetFn}/>}
             </div>
           </motion.div> )}
       </AnimatePresence>

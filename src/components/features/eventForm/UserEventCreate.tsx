@@ -3,12 +3,10 @@ import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import { cn } from "@/utils/tailwind-utils";
 
-import CustomTextArea from "@/components/base/CustomTextArea";
-
 import { Input } from "@/components/ui/input";
-import { DatePicker } from "./ui/datePicker";
-import { RepeatSelector } from "./ui/repeatSelector";
-import { ColorPicker } from "./ui/colorPicker";
+import TextArea from "@/components/base/TextInput/TextArea";
+import { ColorPicker, RepeatPicker } from "@/components/base";
+import { DateSelector } from "../dateSelector";
 
 
 const itemsStyle = clsx(
@@ -16,7 +14,7 @@ const itemsStyle = clsx(
 )
 
 type PropsType = {}
-export default function AddEvent({}:PropsType){
+export default function UserEventCreate({}:PropsType){
     //크기가 커질때마다 스크롤을 같이 내리기
     const [scrollLocateText, setScrollLocateText] = useState("");
     const [scrollMemoText,setScrollMemoText] = useState("");
@@ -40,11 +38,11 @@ export default function AddEvent({}:PropsType){
           </div>
           {/* 일정 날짜 시간 선택 */}
           <div className={itemsStyle}>
-            <DatePicker/>
+            <DateSelector/>
           </div>
           {/* 일정 반복 선택 */}
           <div className={itemsStyle}>
-            <RepeatSelector />
+            <RepeatPicker />
           </div>
           {/* 이벤트 색상 선택 */}
           <div className={itemsStyle}>
@@ -53,7 +51,7 @@ export default function AddEvent({}:PropsType){
           {/* 위치 및 메모 */}
           <div className={itemsStyle}>
             <div className="flex flex-col">
-              <CustomTextArea 
+              <TextArea 
                 className="border-none yoteyo-m-detail-lg rounded-b-none"
                 rows={10}
                 placeholder="위치"
@@ -61,7 +59,7 @@ export default function AddEvent({}:PropsType){
                 onChange={(e) => setScrollLocateText(e.target.value)}
               />
               {/* <Separator/> */}
-              <CustomTextArea
+              <TextArea
                 className="border-none yoteyo-m-detail-lg rounded-t-none" 
                 placeholder="메모"
                 value={scrollMemoText}
