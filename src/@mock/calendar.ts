@@ -33,4 +33,44 @@ export const calendarEvents:CalendarEventType[] = [
     locate : "전국 올리브영 매장2",
     memo : "올영세일2"
   },
+  {
+    title: "이마트 깜짝 세일",
+    allDay: true,
+    start: new Date(2025, 7, 6, 13, 0),
+    end: new Date(2025, 7, 21, 14, 30),
+    repeat: null,
+    color: "yoteyoBlue",
+    locate : "전국 이마트 매장",
+    memo : "이마트 깜짝 세일"
+  },
+  {
+    title: "무신사 특급 대방출",
+    allDay: true,
+    start: new Date(2025, 7, 6, 13, 0),
+    end: new Date(2025, 7, 21, 14, 30),
+    repeat: null,
+    color: "yoteyoOrange",
+    locate : "전국 무신사 스튜디오",
+    memo : "무신사 특급 대방출"
+  },
+  {
+    title: "올영세일",
+    allDay: true,
+    start: new Date(2025, 7, 6, 13, 0),
+    end: new Date(2025, 7, 21, 14, 30),
+    repeat: null,
+    color: "yoteyoEmerald",
+    locate : "전국 올리브영",
+    memo : "올영 세일"
+  },
+  {
+    title: "네이버 강세일",
+    allDay: true,
+    start: new Date(2025, 7, 6, 13, 0),
+    end: new Date(2025, 7, 21, 14, 30),
+    repeat: null,
+    color: "yoteyoPurple",
+    locate : "네이버 강세일",
+    memo : "네이버 강세일"
+  },
 ];

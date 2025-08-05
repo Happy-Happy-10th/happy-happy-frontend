@@ -7,7 +7,8 @@ import clsx from "clsx";
 import { CustomDrawer, CustomDrawerHandle } from "@/components/base";
 import UserEventCheck from "@/components/layouts/UserEventCheck";
 import { UserEventForm } from "../Form";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
+import React from "react";
 
 const datEvnetListStyle = clsx(
   "rounded-[8px]",
@@ -22,6 +23,16 @@ type PropsType = {
 };
 
 export default function DayEventList({ selectedDate, dayEvents }: PropsType) {
+  // ✅ ref 배열을 useRef로 고정
+  const viewDrawerRefs = useRef<React.RefObject<CustomDrawerHandle | null>[]>([]);
+  const editDrawerRefs = useRef<React.RefObject<CustomDrawerHandle | null>[]>([]);
+
+  // ✅ 이벤트 수에 따라 ref를 초기화
+  useMemo(() => {
+    viewDrawerRefs.current = dayEvents.map(() => React.createRef<CustomDrawerHandle>());
+    editDrawerRefs.current = dayEvents.map(() => React.createRef<CustomDrawerHandle>());
+  }, [dayEvents]);
+
   return (
     <div className={datEvnetListStyle}>
       <DayEventListHead date={selectedDate} />
@@ -32,8 +43,9 @@ export default function DayEventList({ selectedDate, dayEvents }: PropsType) {
           </div>
         ) : (
           dayEvents.map((event, index) => {
-            const viewDrawerRef = useRef<CustomDrawerHandle>(null);
-            const editDrawerRef = useRef<CustomDrawerHandle>(null);
+            const viewDrawerRef = viewDrawerRefs.current[index];
+            const editDrawerRef = editDrawerRefs.current[index];
+
             return (
               <div key={`dayelist_${index}`}>
                 <CustomDrawer

@@ -97,12 +97,8 @@ export default function CalendarView() {
         endAccessor="end"
         view="month"
         selectable
-        // onSelectEvent={(event) => {
-        //   const date = new Date(event.start); // 또는 event.end
-        //   handleSetSelectedDate(date);
-        // }}
         onSelectSlot={(slotInfo) => {
-          const date = new Date(slotInfo.start); // 또는 slotInfo.end
+          const date = new Date(slotInfo.start);
           handleSetSelectedDate(date);
         }}
         date={currentDate}
