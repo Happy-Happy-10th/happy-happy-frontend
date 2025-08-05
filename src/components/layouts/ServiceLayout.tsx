@@ -10,7 +10,7 @@ const rootFrame = clsx(
 
 const contentsFrame = clsx(
   "flex-1 flex",          
-  "xl:p-[30px] xl:pb-[5px]",
+  // "xl:p-[30px] xl:pb-[5px]",
   "overflow-hidden"    
 );
 

@@ -10,6 +10,7 @@ import { CalendarEventType } from "@/@types/calendar";
 import { endOfDay, isWithinInterval, startOfDay } from 'date-fns';
 const contents =clsx(
   "w-full h-full flex gap-[20px] bg-yoteyo-gray-100",
+  "xl:p-[30px] xl:pb-[5px]",
   "flex-col xl:flex-row",
 )
 
