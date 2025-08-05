@@ -1,6 +1,6 @@
 export * from './Select';
 
-export * from './TextInput';
+export * from './TextArea';
 
 export * from './Picker'
 
@@ -15,3 +15,5 @@ export * from './Icon';
 export * from './CustomDrawer'
 
 export * from './CustomSheet'
+
+export * from './Input'

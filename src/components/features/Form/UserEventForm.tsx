@@ -5,9 +5,10 @@ import clsx from "clsx";
 import { cn } from "@/utils/tailwind-utils";
 
 import { Input } from "@/components/ui/input";
-import TextArea from "@/components/base/TextInput/TextArea";
+
 import { ColorPicker, RepeatPicker } from "@/components/base";
 import { DateSelector } from "../dateSelector";
+import TextArea from "@/components/base/TextArea/TextArea";
 
 
 const itemsStyle = clsx(
