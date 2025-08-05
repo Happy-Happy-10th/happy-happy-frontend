@@ -24,8 +24,8 @@ export default function DayEventList({selectedDate,dayEvents}:PropsType){
         <div className="w-full h-full flex justify-center items-center text-yoteyo-m-detail-sm text-yoteyo-gray-300">
           <span>아직 등록된 일정이 없습니다</span>
         </div> :
-        dayEvents.map((event)=>(
-          <DayEventBox event={event}/>
+        dayEvents.map((event,index)=>(
+          <DayEventBox event={event} key={`dayelist_${index}`}/>
         )) }
       </div>
     </div>
