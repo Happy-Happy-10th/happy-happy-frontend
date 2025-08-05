@@ -8,7 +8,7 @@ export const calendarEvents:CalendarEventType[] = [
     allDay: true,
     start: new Date(2025, 7, 8, 10, 0),
     end: new Date(2025, 7, 8, 11, 30),
-    reoeat:"none",
+    repeat:null,
     color: "yoteyoRed",
     locate : "홍대 무신사 스튜디오",
     memo : "무신사 무진장 세일"
@@ -18,9 +18,19 @@ export const calendarEvents:CalendarEventType[] = [
     allDay: true,
     start: new Date(2025, 7, 8, 10, 0),
     end: new Date(2025, 7, 8, 11, 30),
-    reoeat:"none",
+    repeat:"day",
     color: "yoteyoBlue",
     locate : "전국 올리브영 매장",
     memo : "올영세일"
+  },
+  {
+    title: "올리브영2",
+    allDay: true,
+    start: new Date(2025, 7, 20, 10, 0),
+    end: new Date(2025, 7, 21, 21, 30),
+    repeat:"day",
+    color: "yoteyoBlue",
+    locate : "전국 올리브영 매장2",
+    memo : "올영세일2"
   },
 ];

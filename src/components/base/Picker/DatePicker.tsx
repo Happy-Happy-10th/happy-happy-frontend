@@ -40,7 +40,7 @@ const calendarVariants = cva(
 
 type DatePickerType = {
   targetDate?: Date;
-  setTargetDate?: SetDateHandler;
+  setTargetDate?: (date:Date)=>void;
 };
 export default function DatePicker({ targetDate = new Date(), setTargetDate = () => {} }: DatePickerType) {
   const isMondayStart = true;
@@ -79,8 +79,8 @@ function Toolbar({ date, onNavigate }: ToolbarProps) {
     <div className="flex justify-between items-center p-2">
       <span className="yoteyo-m-detail-lg">{formatted}</span>
       <div className="flex gap-2">
-        <button onClick={goToBack}>◀</button>
-        <button onClick={goToNext}>▶</button>
+        <button type="button" onClick={goToBack}>◀</button>
+        <button type="button" onClick={goToNext}>▶</button>
       </div>
     </div>
   );
@@ -92,7 +92,7 @@ function MonthHeader({ date }: HeaderProps) {
   return <div className="text-center font-bold border-none text-yoteyo-gray-300 yoteyo-m-detail-md">{day}</div>;
 }
 type DateHeaderType = DateHeaderProps & {
-  setTargetDate: SetDateHandler;
+  setTargetDate: (date:Date)=>void;
   targetDate: Date;
 };
 function DateHeader({ date, isOffRange, targetDate, setTargetDate }: DateHeaderType) {

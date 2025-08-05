@@ -5,3 +5,5 @@ export * from './hooks';
 export * from './auth';
 
 export * from './drawer'
+
+export * from './pickerType'

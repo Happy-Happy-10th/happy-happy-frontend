@@ -52,7 +52,7 @@ const CustomDrawer = forwardRef<CustomDrawerHandle, PropsType>(
               <DrawerHeader className="p-0">
                 <DrawerTitle className="sr-only">이벤트 추가/수정</DrawerTitle>
 
-                {type === "view" && (
+                {/* {type === "view" && (
                   <div className="flex flex-row justify-end">
                     <DrawerClose asChild>
                       <Button variant="ghost">
@@ -90,7 +90,7 @@ const CustomDrawer = forwardRef<CustomDrawerHandle, PropsType>(
                       </Button>
                     </DrawerClose>
                   </div>
-                )}
+                )} */}
               </DrawerHeader>
 
               {contents}

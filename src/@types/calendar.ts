@@ -1,22 +1,11 @@
-//이밴트 색상 타입 선언
-export type EventColor = 
-"yoteyoRed" | 
-"yoteyoOrange" | 
-"yoteyoYellow" | 
-"yoteyoGreen" | 
-"yoteyoEmerald"|
-"yoteyoSky"|
-"yoteyoBlue"|
-"yoteyoPurple"|
-"yoteyoPink"|
-"yoteyoBlack";
-export type EventRepeat ="day"|"week"|"month"|"year"|"none";
+import { RepeatType,EventColor } from "./pickerType";
+
 export type CalendarEventType = {
   title: string;
   allDay : boolean;
   start: Date;
   end: Date;
-  reoeat : EventRepeat;
+  repeat : RepeatType;
   color: EventColor;
   locate : string;
   memo : string;
@@ -27,7 +16,7 @@ export type ApiCalendarEventType = {
   allDay : boolean;
   start: string;
   end: string;
-  reoeat : EventRepeat;
+  repeat : RepeatType;
   color: string;
   colorType : EventColor;
   locate : string;
