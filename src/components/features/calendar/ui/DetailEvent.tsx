@@ -42,17 +42,18 @@ const eventChildVariants = cva(
 });
 
 export default function CalendarEvent({
+  title,
+  allDay,
   start,
   end,
-  title,
+  reoeat,
   color,
-  colorType,
-  stage,
-  allDay
+  locate,
+  memo
 }: CalendarEventType) {
   return (
-    <div className={cn(evnetBarVariants({variant:colorType}))}>
-      <div className={cn(eventChildVariants({variant:colorType}))}></div>
+    <div className={cn(evnetBarVariants({variant:color}))}>
+      <div className={cn(eventChildVariants({variant:color}))}></div>
       <div className="w-[95%] flex justify-center">{title}</div>
     </div>
   );

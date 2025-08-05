@@ -1,8 +1,11 @@
-import { Button } from '@/components/ui/button';
 import clsx from 'clsx';
 import { format } from 'date-fns';
 import {ko} from "date-fns/locale";
 import { Plus } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
+import { CustomDrawer } from '@/components/base/CustomDrawer';
+import { UserEventForm } from "@/components/features/Form/";
 
 const head = clsx(
   "mb-[30px] pl-[24px] pr-[24px] pt-[20px] pb-[14px]",
@@ -16,9 +19,13 @@ export default function DayEventListHead({date=new Date()}:props){
   return (
     <div className={head}>
       <span className='font-bold text-[22px]'>{day}</span>
-      <Button className='rounded-[50px] bg-[#C0C0C0] w-[24px] h-[24px]'>
-        <Plus size={24}/>
-      </Button>
+      <CustomDrawer
+        trigger={
+          <Button className='rounded-[50px] bg-[#C0C0C0] w-[24px] h-[24px]'>
+          <Plus size={24}/>
+          </Button>}
+          contents={<UserEventForm/>}
+      />
     </div>
   )
 }

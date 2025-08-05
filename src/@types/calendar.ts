@@ -10,24 +10,28 @@ export type EventColor =
 "yoteyoPurple"|
 "yoteyoPink"|
 "yoteyoBlack";
+export type EventRepeat ="day"|"week"|"month"|"year"|"none";
 export type CalendarEventType = {
+  title: string;
+  allDay : boolean;
   start: Date;
   end: Date;
-  title: string;
-  color: string;
-  colorType : EventColor;
-  stage : number;
-  allDay : boolean;
+  reoeat : EventRepeat;
+  color: EventColor;
+  locate : string;
+  memo : string;
 }
 
 export type ApiCalendarEventType = {
+  title: string;
+  allDay : boolean;
   start: string;
   end: string;
-  title: string;
+  reoeat : EventRepeat;
   color: string;
   colorType : EventColor;
-  stage : number;
-  allDay : boolean;
+  locate : string;
+  memo : string;
 }
 
 export type ApiResponseType = {

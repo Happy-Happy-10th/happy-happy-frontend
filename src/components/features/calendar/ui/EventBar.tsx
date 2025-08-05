@@ -23,15 +23,16 @@ const evnetBarVariants = cva(
 })
 
 export default function EventBar({
+  title,
+  allDay,
   start,
   end,
-  title,
+  reoeat,
   color,
-  colorType,
-  stage,
-  allDay
+  locate,
+  memo
 }: CalendarEventType){
   return (
-    <div className={cn(evnetBarVariants({variant:colorType}))}></div>
+    <div className={cn(evnetBarVariants({variant:color}))}></div>
   )
 }

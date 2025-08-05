@@ -41,7 +41,7 @@ export default function DayEventBox({event}:PropsType){
   const viewEvent = convertEventDateToString(event);
   return(
     <div className={eventBox}>
-      <div className={cn(eventChildVariants({variant:event.colorType}))}></div>
+      <div className={cn(eventChildVariants({variant:event.color}))}></div>
       <div className={eventContents}>
         <div className="font-bold">{viewEvent.title}</div>
         <div>{`${viewEvent.start} ~ ${viewEvent.end}`}</div>

@@ -34,21 +34,22 @@ export default function CalendarPage(){
   const [dayEvents, setDayEvents] = useState<CalendarEventType[]>([]);
   
   const handleSetSelectedDate = (today: Date) => {
-  setSelectedDate(today);
-  const selectedDayStart = startOfDay(today);
-  const selectedDayEnd = endOfDay(today);
-  const filtered = calendarEvents.filter((event) => {
-    const eventStart = new Date(event.start);
-    const eventEnd = new Date(event.end);
+    setSelectedDate(today);
 
-    // 선택한 날짜가 이 이벤트 범위 안에 포함되어 있으면 true
-    return isWithinInterval(selectedDayStart, { start: eventStart, end: eventEnd }) ||
-          isWithinInterval(selectedDayEnd, { start: eventStart, end: eventEnd }) ||
-          isWithinInterval(eventStart, { start: selectedDayStart, end: selectedDayEnd });
-  });
+    const selectedDayStart = startOfDay(today);
+    const selectedDayEnd = endOfDay(today);
 
-  setDayEvents(filtered);
-};
+    const filtered = calendarEvents.filter((event) => {
+      const eventStart = new Date(event.start);
+      const eventEnd = new Date(event.end);
+      // 선택한 날짜가 이 이벤트 범위 안에 포함되어 있으면 true
+      return isWithinInterval(selectedDayStart, { start: eventStart, end: eventEnd }) ||
+            isWithinInterval(selectedDayEnd, { start: eventStart, end: eventEnd }) ||
+            isWithinInterval(eventStart, { start: selectedDayStart, end: selectedDayEnd });
+    });
+
+    setDayEvents(filtered);
+  };
 
   return (
     <div className={contents}>
