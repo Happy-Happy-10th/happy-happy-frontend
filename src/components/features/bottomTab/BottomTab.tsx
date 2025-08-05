@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { ActiveLink } from "./ui/ActiveLink";
-import { Icon, HomeActiveIcon, HomeInActiveIcon, FeedActiveIcon, FeedInActiveIcon } from "@/components/base";
+import Link from "next/link";
+import { Icon, HomeActiveIcon, HomeInActiveIcon, FeedActiveIcon, FeedInActiveIcon, YoteyoChatIcon } from "@/components/base";
 
 const navigatorFrame = clsx(
   "relative w-full h-[60px]",
@@ -24,9 +25,10 @@ const centerButtonWrapper = clsx(
 );
 
 const centerButton = clsx(
-  "w-[56px] h-[56px] rounded-full bg-gradient-to-br from-purple-500 to-blue-400",
+  "w-12 h-12 rounded-full ",
   "flex items-center justify-center text-white font-bold",
-  "shadow-[0_4px_12px_rgba(0,0,0,0.2)] transition-transform hover:scale-110"
+  "shadow-[0_4px_12px_rgba(0,0,0,0.2)] transition-transform hover:scale-110",
+  "hover:cursor-pointer"
 );
 
 export default function BottomTab() {
@@ -41,7 +43,15 @@ export default function BottomTab() {
             />
         </div>
         <div className={centerButtonWrapper}>
-          <div className={centerButton}>AI</div>
+          <Link href={"/yoteyo"}>
+            <div 
+              className={centerButton}
+              >
+              <Icon className="w-17 h-17">
+                <YoteyoChatIcon/>
+              </Icon>
+            </div>
+          </Link>
         </div>
         <div className={navItem}>
           <ActiveLink 

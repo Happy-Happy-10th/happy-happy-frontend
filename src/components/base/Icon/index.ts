@@ -8,3 +8,5 @@ export {default as HomeInActiveIcon} from '../../../../public/icons/home-inactiv
 
 export {default as FeedActiveIcon} from '../../../../public/icons/feed-active-icon.svg?react';
 export {default as FeedInActiveIcon} from '../../../../public/icons/feed-inactive-icon.svg?react';
+
+export {default as YoteyoChatIcon} from '../../../../public/icons/yoteyo-chat-icon.svg?react';
