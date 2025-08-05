@@ -3,6 +3,18 @@ type useSignInPayload = {
   password: string;
 };
 
-type useSignInResponse = any;
-
+type useSignInResponse = {
+  data: {
+    accessToken: string;
+    refreshToken: null | string;
+    memberInfo: {
+      memberId: string;
+      username: string;
+      nickname: string;
+      imageUrl: string;
+    };
+  };
+  status: number;
+  message: string;
+};
 export type { useSignInPayload, useSignInResponse };
