@@ -4,6 +4,7 @@ import UserEventCheck from '@/components/layouts/UserEventCheck';
 import { CustomDrawer } from "@/components/base";
 import { Button } from "@/components/ui/button";
 import { calendarEvents } from '@/@mock/calendar';
+import DayEventBox from '@/components/features/dayEventList/ui/DayEventBox';
 
 const meta: Meta<typeof UserEventCheck> = {
   title: 'pages/UserEventCheck',
@@ -19,7 +20,7 @@ export const userEventCheck: Story = {
       <ServiceLayout>
         <div>
         <CustomDrawer
-          trigger={<Button variant="outline">Open Drawer</Button>}
+          trigger={<DayEventBox event={calendarEvents[0]}/>}
           contents={ <UserEventCheck event={calendarEvents[0]}/>}
       />
         </div>

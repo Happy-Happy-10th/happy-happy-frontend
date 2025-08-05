@@ -3,6 +3,8 @@ import { CalendarEventType } from "@/@types/calendar";
 import DayEventListHead from "./ui/DayEventListHead";
 import DayEventBox from "./ui/DayEventBox";
 import clsx from "clsx";
+import { CustomDrawer } from "@/components/base";
+import UserEventCheck from "@/components/layouts/UserEventCheck";
 
 const datEvnetListStyle = clsx(
   "rounded-[8px]",
@@ -25,7 +27,11 @@ export default function DayEventList({selectedDate,dayEvents}:PropsType){
           <span>아직 등록된 일정이 없습니다</span>
         </div> :
         dayEvents.map((event,index)=>(
-          <DayEventBox event={event} key={`dayelist_${index}`}/>
+          <CustomDrawer
+            key={`dayelist_${index}`}
+            trigger={<DayEventBox event={event}/>}
+            contents={<UserEventCheck event={event}/>}
+          />
         )) }
       </div>
     </div>
