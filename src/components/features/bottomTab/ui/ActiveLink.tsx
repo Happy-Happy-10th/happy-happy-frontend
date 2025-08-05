@@ -9,7 +9,7 @@ import { IconKey, iconMap, setActionLinkValue } from "@/utils";
 
 type ActiveLinkProps ={navKey : string}
 export function ActiveLink({navKey}: ActiveLinkProps) {
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "";
   const {title,href,activeIcon,noneActiveIcon} = setActionLinkValue(navKey);
   const isActive = pathname.startsWith(href);
 
