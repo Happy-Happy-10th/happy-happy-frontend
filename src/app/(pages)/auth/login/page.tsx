@@ -4,9 +4,13 @@ import { useSignIn } from '@/api/service/auth';
 import { Box, Button, Icon, Input, Text } from '@/components/base';
 import AuthLayout from '@/components/layouts/AuthLayout';
 import { Label } from '@/components/ui/label';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+
 function Page() {
+  const router = useRouter();
+
   const {
     trigger,
     register,
@@ -92,7 +96,7 @@ function Page() {
         </Box>
 
         <Box className="w-full justify-end mt-6">
-          <Button size="icon" variant="icon">
+          <Button size="icon" variant="icon" onClick={() => router.push('/auth/sign-up')}>
             <Text variant="detail1" className="text-yoteyo-main">
               회원가입
             </Text>
