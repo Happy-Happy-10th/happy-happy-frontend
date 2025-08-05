@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import { ActiveLink } from "./ui/ActiveLink";
 
-
 const navigatorFrame = clsx(
   "relative w-full h-[60px]",
   "bg-white flex justify-center items-center overflow-visible",

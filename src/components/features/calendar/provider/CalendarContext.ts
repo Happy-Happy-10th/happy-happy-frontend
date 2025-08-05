@@ -1,3 +1,4 @@
+"use client"
 import { CalendarEventType } from "@/@types/calendar";
 import { createContext, useContext } from "react";
 

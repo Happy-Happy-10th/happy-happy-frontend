@@ -27,14 +27,16 @@ type PropsType = { children: ReactNode };
 
 export default function ServiceLayout({ children }: PropsType) {
   return (
-    <div className={rootFrame}>
-      <div className={contentsFrame}>
-        <div className={contentsBody}>
-          {children}
+    <div className="w-screen h-screen flex justify-center ">
+      <div className={rootFrame}>
+        <div className={contentsFrame}>
+          <div className={contentsBody}>
+            {children}
+          </div>
         </div>
-      </div>
-      <div className={navigator}>
-        <BottomTab />
+        <div className={navigator}>
+          <BottomTab />
+        </div>
       </div>
     </div>
   );
