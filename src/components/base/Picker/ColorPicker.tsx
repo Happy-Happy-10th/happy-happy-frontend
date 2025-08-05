@@ -20,7 +20,9 @@ export default function ColorPicker({}:PropsType){
       <span>이벤트 색상</span>
       <div className={colorPrickerStyle}>
         {colors.map((color)=>(
-          <div className={`bg-${color} w-8 h-8 rounded-full hover:cursor-pointer`}></div>
+          <div
+            key={`colorItem_${color}`}
+            className={`bg-${color} w-8 h-8 rounded-full hover:cursor-pointer`}></div>
         ))}
       </div>
     </div>
