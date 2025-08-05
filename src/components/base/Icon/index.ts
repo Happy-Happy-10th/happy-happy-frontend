@@ -10,3 +10,6 @@ export {default as FeedActiveIcon} from '../../../../public/icons/feed-active-ic
 export {default as FeedInActiveIcon} from '../../../../public/icons/feed-inactive-icon.svg?react';
 
 export {default as YoteyoChatIcon} from '../../../../public/icons/yoteyo-chat-icon.svg?react';
+
+export {default as BacktodayIcon} from '../../../../public/icons/back-today.svg?react'
+export {default as SettingIcon} from '../../../../public/icons/setting-icon.svg?react'
