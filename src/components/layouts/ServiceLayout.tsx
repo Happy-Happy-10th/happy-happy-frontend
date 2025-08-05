@@ -4,6 +4,7 @@ import { BottomTab } from "@/components/features";
 
 const rootFrame = clsx(
   "w-full h-full flex flex-col",
+  "max-w-[1280px]",
   "bg-yoteyo-gray-100"
 );
 
@@ -24,7 +25,7 @@ const navigator = clsx(
 
 type PropsType = { children: ReactNode };
 
-export default function Layout({ children }: PropsType) {
+export default function ServiceLayout({ children }: PropsType) {
   return (
     <div className={rootFrame}>
       <div className={contentsFrame}>

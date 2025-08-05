@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
-import RootLayout from '../test/Layout';
+import ServiceLayout from '../../components/layouts/ServiceLayout';
 import TestAddEvent from '../test/TestAddEvent';
 
 const meta: Meta<typeof TestAddEvent> = {
@@ -13,9 +13,9 @@ type Story = StoryObj<typeof TestAddEvent>;
 export const AddEvent: Story = {
   render: () => (
     <div className="w-screen h-screen">
-      <RootLayout>
+      <ServiceLayout>
         <TestAddEvent/>
-      </RootLayout>
+      </ServiceLayout>
     </div>
   )
 };
