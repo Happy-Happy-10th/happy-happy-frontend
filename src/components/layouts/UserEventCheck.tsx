@@ -19,8 +19,9 @@ const dateBox = clsx(
 
 type PropsType = {
   event : CalendarEventType
+  onEdit ?: ()=>void
 }
-export default function UserEventCheck({event}:PropsType){
+export default function UserEventCheck({event,onEdit}:PropsType){
   return(
     <div className="flex-1 overflow-y-auto scrollbar-hide pb-9">
       <div className="w-full p-5 flex flex-col gap-5">
@@ -72,7 +73,9 @@ export default function UserEventCheck({event}:PropsType){
         </div>
         <Button
           className="w-full h-[56px]" 
-          variant={"default"}>
+          variant={"default"}
+          onClick={onEdit}
+          >
             수정
         </Button>
       </div>

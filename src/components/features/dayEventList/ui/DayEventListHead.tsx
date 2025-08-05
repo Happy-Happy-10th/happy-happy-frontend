@@ -22,9 +22,10 @@ export default function DayEventListHead({date=new Date()}:props){
       <CustomDrawer
         trigger={
           <Button className='rounded-[50px] bg-[#C0C0C0] w-[24px] h-[24px]'>
-          <Plus size={24}/>
+            <Plus size={24}/>
           </Button>}
           contents={<UserEventForm/>}
+          type="create"
       />
     </div>
   )

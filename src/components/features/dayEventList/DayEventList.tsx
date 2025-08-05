@@ -1,39 +1,70 @@
-import { CalendarEventType } from "@/@types/calendar";
+'use client'
 
+import { CalendarEventType } from "@/@types/calendar";
 import DayEventListHead from "./ui/DayEventListHead";
 import DayEventBox from "./ui/DayEventBox";
 import clsx from "clsx";
-import { CustomDrawer } from "@/components/base";
+import { CustomDrawer, CustomDrawerHandle } from "@/components/base";
 import UserEventCheck from "@/components/layouts/UserEventCheck";
+import { UserEventForm } from "../Form";
+import { useRef } from "react";
 
 const datEvnetListStyle = clsx(
   "rounded-[8px]",
   "w-full h-full",
   "bg-white",
   "flex flex-col"
-)
+);
 
 type PropsType = {
-  selectedDate : Date,
-  dayEvents : CalendarEventType[]
-}
-export default function DayEventList({selectedDate,dayEvents}:PropsType){
-  return(
+  selectedDate: Date;
+  dayEvents: CalendarEventType[];
+};
+
+export default function DayEventList({ selectedDate, dayEvents }: PropsType) {
+  return (
     <div className={datEvnetListStyle}>
-      <DayEventListHead date={selectedDate}/>
+      <DayEventListHead date={selectedDate} />
       <div className="flex flex-col gap-[10px] w-full overflow-y-auto p-2 flex-1 min-h-0">
-        {dayEvents.length===0? 
-        <div className="w-full h-full flex justify-center items-center text-yoteyo-m-detail-sm text-yoteyo-gray-300">
-          <span>아직 등록된 일정이 없습니다</span>
-        </div> :
-        dayEvents.map((event,index)=>(
-          <CustomDrawer
-            key={`dayelist_${index}`}
-            trigger={<DayEventBox event={event}/>}
-            contents={<UserEventCheck event={event}/>}
-          />
-        )) }
+        {dayEvents.length === 0 ? (
+          <div className="w-full h-full flex justify-center items-center text-yoteyo-m-detail-sm text-yoteyo-gray-300">
+            <span>아직 등록된 일정이 없습니다</span>
+          </div>
+        ) : (
+          dayEvents.map((event, index) => {
+            const viewDrawerRef = useRef<CustomDrawerHandle>(null);
+            const editDrawerRef = useRef<CustomDrawerHandle>(null);
+            return (
+              <div key={`dayelist_${index}`}>
+                <CustomDrawer
+                  key={`dayelist_view_${index}`}
+                  ref={viewDrawerRef}
+                  trigger={<DayEventBox event={event} />}
+                  contents={
+                    <UserEventCheck
+                      event={event}
+                      onEdit={() => {
+                        viewDrawerRef.current?.close();
+                        setTimeout(() => {
+                          editDrawerRef.current?.open();
+                        }, 100);
+                      }}
+                    />
+                  }
+                  type="view"
+                />
+                <CustomDrawer
+                  key={`dayelist_edit_${index}`}
+                  ref={editDrawerRef}
+                  trigger={<div className="hidden" />}
+                  contents={<UserEventForm event={event} />}
+                  type="edit"
+                />
+              </div>
+            );
+          })
+        )}
       </div>
     </div>
-  )
+  );
 }

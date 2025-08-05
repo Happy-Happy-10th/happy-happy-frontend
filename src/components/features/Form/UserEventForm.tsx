@@ -9,14 +9,17 @@ import { Input } from "@/components/ui/input";
 import { ColorPicker, RepeatPicker } from "@/components/base";
 import { DateSelector } from "../dateSelector";
 import TextArea from "@/components/base/TextArea/TextArea";
+import { CalendarEventType } from "@/@types/calendar";
 
 
 const itemsStyle = clsx(
   "w-full bg-white rounded-[8px]"
 )
 
-type PropsType = {}
-export default function UserEventForm({}:PropsType){
+type PropsType = {
+  event ?: CalendarEventType
+}
+export default function UserEventForm({event}:PropsType){
     //크기가 커질때마다 스크롤을 같이 내리기
     const [scrollLocateText, setScrollLocateText] = useState("");
     const [scrollMemoText,setScrollMemoText] = useState("");
@@ -24,6 +27,7 @@ export default function UserEventForm({}:PropsType){
     const isInitialMount = useRef(true);
   
     useEffect(()=>{
+      console.log(JSON.stringify(event))
       if (isInitialMount.current) {
         isInitialMount.current = false;
         return;
