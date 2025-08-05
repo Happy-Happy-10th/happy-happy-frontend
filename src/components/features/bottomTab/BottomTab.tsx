@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { ActiveLink } from "./ui/ActiveLink";
+import { Icon, HomeActiveIcon, HomeInActiveIcon, FeedActiveIcon, FeedInActiveIcon } from "@/components/base";
 
 const navigatorFrame = clsx(
   "relative w-full h-[60px]",
@@ -33,13 +34,21 @@ export default function BottomTab() {
     <div className={navigatorFrame}>
       <div className={navigatorMain}>
         <div className={navItem}>
-          <ActiveLink navKey="home"/>
+          <ActiveLink 
+            navKey="home"
+            activeSvg={<HomeActiveIcon/>}
+            inActiveSvg={<HomeInActiveIcon/>}
+            />
         </div>
         <div className={centerButtonWrapper}>
           <div className={centerButton}>AI</div>
         </div>
         <div className={navItem}>
-          <ActiveLink navKey="feed"/>
+          <ActiveLink 
+            navKey="feed"
+            activeSvg={<FeedActiveIcon/>}
+            inActiveSvg={<FeedInActiveIcon/>}
+            />
         </div>
       </div>
     </div>

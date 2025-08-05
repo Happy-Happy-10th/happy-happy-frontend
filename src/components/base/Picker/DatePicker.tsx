@@ -1,3 +1,4 @@
+"use client"
 import { Calendar, dateFnsLocalizer, DateHeaderProps, HeaderProps, ToolbarProps } from 'react-big-calendar';
 import { format, parse, startOfWeek, getDay, addMonths, subMonths, isSameDay } from 'date-fns';
 import { ko } from 'date-fns/locale';

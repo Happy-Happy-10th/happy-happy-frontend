@@ -1,3 +1,4 @@
+"use client"
 import {
   Drawer,
   DrawerClose,
@@ -5,7 +6,6 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
-import { Button } from "@/components/ui/button";
 import {
   ReactNode,
   useState,
@@ -13,6 +13,7 @@ import {
   forwardRef,
 } from "react";
 import { DrawerType } from "@/@types";
+import { Button } from "@/components/ui/button";
 
 export type CustomDrawerHandle = {
   open: () => void;
