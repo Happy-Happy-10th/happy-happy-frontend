@@ -1,1 +1,0 @@
-export {default as UserEventForm} from './UserEventForm'
