@@ -7,8 +7,8 @@ export default function TestAddEvent(){
   return(
     <div>
       <CustomDrawer
-      trigger={<Button variant="outline">Open Drawer</Button>}
-      contents={ <UserEventForm/>}
+        trigger={<Button variant="outline">Open Drawer</Button>}
+        contents={ <UserEventForm/>}
       />
       <CustomSheet
       trigger={<Button variant="outline">Open sheet</Button>}
