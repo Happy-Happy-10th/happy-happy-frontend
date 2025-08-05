@@ -49,7 +49,7 @@ function Page() {
   return (
     <AuthLayout>
       <Box className="flex-col items-center justify-center h-full px-5">
-        {/* <img className="w-40 h-15" src="/images/yoteyo-text-primary.png" alt="요때요 텍스트 이미지" /> */}
+        <img className="w-40 h-15" src="/images/yoteyo-text-primary.png" alt="요때요 텍스트 이미지" />
 
         <Box className="flex-col w-full gap-y-3">
           <Label htmlFor="id" className="text-sm/[1.5] font-medium p-1">
