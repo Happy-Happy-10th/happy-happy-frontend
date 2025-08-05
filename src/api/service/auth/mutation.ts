@@ -8,7 +8,9 @@ const useSignIn = (
 ) => {
   return useMutation({
     mutationKey: ['sign-in'],
-    mutationFn: async (payload: useSignInPayload) => await PostSignIn({ ...payload }),
+    mutationFn: async (payload: useSignInPayload) => {
+      return (await PostSignIn({ ...payload })).json();
+    },
     ...options,
   });
 };
