@@ -8,8 +8,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'text-xl/[1.4] font-semibold bg-yoteyo-main text-white',
-        outline: 'text-xl/[1.4] font-semibold bg-white text-yoteyo-main border-2 border-yoteyo-main ',
+        default: 'text-lg/[1.5] font-bold bg-yoteyo-main text-white',
+        outline: 'text-lg/[1.5] font-bold bg-white text-yoteyo-main border-2 border-yoteyo-main ',
         icon: '',
       },
       size: {
