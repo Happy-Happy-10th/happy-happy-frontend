@@ -16,3 +16,9 @@ export {default as SettingIcon} from '../../../../public/icons/setting-icon.svg?
 
 export { default as CheckIcon } from '../../../../public/icons/check.svg?react';
 export { default as CloseIcon } from '../../../../public/icons/close.svg?react';
+
+export { default as MiniCalendarIcon } from '../../../../public/icons/mini-calendar-icon.svg?react';
+export { default as MiniClockIcon } from '../../../../public/icons/mini-clock-icon.svg?react'
+
+export { default as RadioOffIcon } from '../../../../public/icons/radio-off.svg?react'
+export { default as RadioOnIcon } from '../../../../public/icons/radio-on.svg?react'
