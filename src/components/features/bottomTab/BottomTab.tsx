@@ -43,7 +43,7 @@ export default function BottomTab() {
             />
         </div>
         <div className={centerButtonWrapper}>
-          <Link href={"/yoteyo"}>
+          <Link href={"/chat"}>
             <div 
               className={centerButton}
               >
