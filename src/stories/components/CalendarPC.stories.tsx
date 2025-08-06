@@ -6,14 +6,12 @@ import { calendarEvents } from '@/@mock/calendar';
 import { CustomCalendar } from '@/components/features/calendar';
 import { CalendarContext } from '@/components/features/calendar';
 
-
-
 const meta: Meta<typeof CustomCalendar> = {
   title: 'Components/CustomCalendar',
   component: CustomCalendar,
   args: {
     calendarHightPx: '645px',
-    calendarWidthPx: '1150px', 
+    calendarWidthPx: '1150px',
   },
   argTypes: {
     calendarHightPx: {
@@ -30,24 +28,25 @@ export const PCSize: Story = {
   render: () => {
     const [currentDate, setCurrentDate] = useState(new Date());
     const handleCurrentDate = (updater: Date | ((prev: Date) => Date)) => {
-      setCurrentDate(typeof updater === "function" ? updater(currentDate) : updater);
+      setCurrentDate(typeof updater === 'function' ? updater(currentDate) : updater);
     };
 
     return (
-      <div className='w-screen flex justify-center'>
-        <div className='w-[870px] h-[696px]'>
-        <CalendarContext.Provider
-          value={{
-            events: calendarEvents,
-            isMondayStart: true,
-            currentDate,
-            handleCurrentDate,
-          }}
-        >
-          <CustomCalendar.View />
-        </CalendarContext.Provider>
+      <div className="w-screen flex justify-center">
+        <div className="w-[870px] h-[696px]">
+          <CalendarContext.Provider
+            value={{
+              events: calendarEvents,
+              isMondayStart: true,
+              currentDate,
+              handleCurrentDate,
+              handleSetSelectedDate: () => {},
+            }}
+          >
+            <CustomCalendar.View />
+          </CalendarContext.Provider>
+        </div>
       </div>
-    </div>
     );
   },
 };

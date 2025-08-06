@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/nextjs';
-import TestCalendar from '../test/TestCalendar';
 import ServiceLayout from '../../components/layouts/ServiceLayout';
 import FeedPage from '@/components/layouts/FeedPage';
 
@@ -12,11 +11,11 @@ export default meta;
 type Story = StoryObj<typeof FeedPage>;
 
 export const feedPage: Story = {
-  render: (args) => (
+  render: args => (
     <div className="w-screen h-screen">
       <ServiceLayout>
-        <FeedPage/>
+        <FeedPage />
       </ServiceLayout>
     </div>
-  )
+  ),
 };
