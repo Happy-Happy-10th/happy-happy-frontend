@@ -7,6 +7,10 @@ import { Button } from '@/components/ui/button';
 import { CustomDrawer } from '@/components/base/CustomDrawer';
 import { UserEventForm } from "@/components/features/Form/";
 
+import {useAuthStore} from '@/store'
+import { useStore } from 'zustand';
+import { useEffect } from 'react';
+
 const head = clsx(
   "mb-[30px] pl-[24px] pr-[24px] pt-[20px] pb-[14px]",
   "w-full h-[24px]",
@@ -15,11 +19,15 @@ const head = clsx(
 
 type props ={date : Date}
 export default function DayEventListHead({date=new Date()}:props){
+  //로그인 체크
+  const { user } = useStore(useAuthStore);
+  
   const day = format(date, 'EEEE,dd', { locale: ko }); // 'EEE'는 Mon, Tue 같은 약칭
   return (
     <div className={head}>
       <span className='font-bold text-[22px]'>{day}</span>
-      <CustomDrawer
+      {user===null ?(
+        <CustomDrawer
         trigger={
           <Button className='rounded-[50px] bg-[#C0C0C0] w-[24px] h-[24px]'>
             <Plus size={24}/>
@@ -27,6 +35,11 @@ export default function DayEventListHead({date=new Date()}:props){
           contents={<UserEventForm/>}
           type="create"
       />
+      ):(
+      <Button className='rounded-[50px] bg-[#C0C0C0] w-[24px] h-[24px]'>
+          <Plus size={24}/>
+        </Button>
+      )}
     </div>
   )
 }
