@@ -1,7 +1,6 @@
+'use client'
 import { useEffect, useState } from "react"
 import clsx from "clsx"
-
-import { SetDateHandler } from "@/@types"
 import  CustomSelect  from "@/components/base/Select/Select"
 
 const timeSelectorFrame= clsx(
@@ -10,7 +9,7 @@ const timeSelectorFrame= clsx(
 
 type PropsType = {
   targetDate ?: Date, 
-  setTargetDate ?: SetDateHandler
+  setTargetDate ?: (date:Date)=>void
 }
 export default function TimePicker({targetDate = new Date(), setTargetDate = ()=>{}}:PropsType){
   const [ampm, setAmpm] = useState<'오전' | '오후'>('오전');

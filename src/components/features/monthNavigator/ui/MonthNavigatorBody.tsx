@@ -22,7 +22,8 @@ export default function MonthNavigatorBody({currentDate, onCurrentDate, onMonthP
   return (
     <div className={monthFrame}>
       {Month.map((month,index)=>(
-        <Button 
+        <Button
+          key={`monnav_${month}`}
           className="w-[58px] h-[32px]" 
           type="button" 
           variant={"outline"} 

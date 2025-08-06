@@ -1,3 +1,4 @@
+"use client"
 import { CalendarEventType } from "@/@types/calendar";
 import { createContext, useContext } from "react";
 
@@ -7,6 +8,7 @@ type CalendarContextType = {
   isMondayStart : boolean;
   currentDate : Date;
   handleCurrentDate : (updater: Date | ((prev: Date) => Date)) => void
+  handleSetSelectedDate:(today:Date) => void
 }
 
 export const CalendarContext = createContext<CalendarContextType|null>(null);

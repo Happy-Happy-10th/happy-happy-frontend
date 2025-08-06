@@ -3,12 +3,12 @@ import { cn } from "@/utils/tailwind-utils";
 
 
 interface PropsType extends React.ComponentProps<"textarea">{
-  placeholder:string;
+  placeholder?:string;
   rows?:number;
   className ?: string;
 }
 export default function TextArea({
-  placeholder,
+  placeholder="",
   rows=1, 
   className,
   ...props
@@ -17,7 +17,7 @@ export default function TextArea({
     <Textarea 
       rows={rows}
       placeholder={placeholder}
-      className={cn(className,"resize-none")}
+      className={cn(className,"resize-none disabled:cursor-auto disabled:text-black disabled:opacity-100")}
       {...props}
       />
   )

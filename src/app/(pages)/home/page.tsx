@@ -1,3 +1,7 @@
-export default function Home(){
-  return <span>home</span>
+import CalendarPage from "@/components/layouts/CalendarPage";
+
+export default function HomePage(){
+  return(
+    <CalendarPage/>
+  )
 }

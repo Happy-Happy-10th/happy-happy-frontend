@@ -1,8 +1,8 @@
 export * from './Select';
 
-export * from './TextInput';
+export * from './TextArea';
 
-export * from './Picker'
+export * from './Picker';
 
 export * from './Button';
 
@@ -12,4 +12,14 @@ export * from './Typography';
 
 export * from './Icon';
 
-export * from './CustomDrawer'
+export * from './CustomDrawer';
+
+export * from './CustomSheet';
+
+export * from './Input';
+
+export * from './CustomDrawer';
+
+export * from './CheckBox';
+
+export * from './Dialog';

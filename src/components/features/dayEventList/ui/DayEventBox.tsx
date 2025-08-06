@@ -3,6 +3,7 @@ import { cva } from "class-variance-authority";
 import { CalendarEventType } from "@/@types/calendar";
 import { cn } from "@/utils/tailwind-utils";
 import { convertEventDateToString } from "@/utils/calendar/dateConverter";
+import { forwardRef } from "react";
 
 const eventChildVariants = cva(
   `pl-[5px] w-[2px] h-full rounded-[8px]`, {
@@ -26,7 +27,8 @@ const eventChildVariants = cva(
 const eventBox=clsx(
   "border-1 border-solid rounded-[8px] border-[#EAEAEA]",
   "w-full h-[64px]",
-  "flex flex-row"
+  "flex flex-row",
+  "hover:cursor-pointer"
 );
 
 const eventContents =clsx(
@@ -37,15 +39,18 @@ const eventContents =clsx(
 type PropsType = {
   event : CalendarEventType
 }
-export default function DayEventBox({event}:PropsType){
+// export default function DayEventBox({event}:PropsType){
+const DayEventBox = forwardRef<HTMLDivElement, PropsType>(({ event }, ref) => {
   const viewEvent = convertEventDateToString(event);
   return(
-    <div className={eventBox}>
-      <div className={cn(eventChildVariants({variant:event.colorType}))}></div>
+    <div className={eventBox} ref={ref}>
+      <div className={cn(eventChildVariants({variant:event.color}))}></div>
       <div className={eventContents}>
         <div className="font-bold">{viewEvent.title}</div>
         <div>{`${viewEvent.start} ~ ${viewEvent.end}`}</div>
       </div>
     </div>
   )
-}
+});
+
+export default DayEventBox;

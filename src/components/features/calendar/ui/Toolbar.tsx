@@ -1,17 +1,15 @@
 "use client"
 import { useState } from 'react';
-import { format } from 'date-fns';
+import { format, isSameMonth } from 'date-fns';
 import { enUS } from 'date-fns/locale';
 import { ToolbarProps } from "react-big-calendar";
 import { ChevronDown, ChevronUp, RotateCcw, Settings } from 'lucide-react';
 
 import { CalendarEventType } from '@/@types/calendar';
-
-// import { MonthNavigator } from '@/components/features';
 import { MonthNavigator } from '@/components/features/monthNavigator';
-import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useCalendarContext } from '../provider/CalendarContext';
+import { BacktodayIcon, Button, Icon, SettingIcon } from '@/components/base';
 
 export default function CalendarToolbar({
   date,
@@ -24,13 +22,20 @@ export default function CalendarToolbar({
   const handleMonthPickerOn = ()=>setMonthPickerOpen(true);
   const handleMonthPickerOff = ()=> setMonthPickerOpen(false);
   
+  const today = new Date();
+  const isToday = isSameMonth(date, today)
+
   return (
     <div className="w-full flex justify-between bg-yoteyo-gray-100 pb-[10px]">
-      <div className='flex flex-row items-center gap-[6px]'>
-        <span className="text-[30px] font-bold w-[105px]">{formatted}</span>
+      <div className='flex flex-row items-center gap-[16px]'>
+        <span className="text-[30px] font-bold w-[110px]">{formatted}</span>
         <Popover open={monthPickerOpen} onOpenChange={setMonthPickerOpen}>
           <PopoverTrigger asChild>
-            <Button type='button' variant={"ghost"} onClick={handleMonthPickerOn}>
+            <Button
+              className='w-7 h-3'
+              type='button' 
+              variant={"icon"} 
+              onClick={handleMonthPickerOn}>
               {monthPickerOpen?<ChevronUp />:<ChevronDown />}
             </Button>
           </PopoverTrigger>
@@ -42,14 +47,25 @@ export default function CalendarToolbar({
           </PopoverContent>
         </Popover>
       </div>
-      <div className="flex flex-row items-center gap-[14px]">
-        <button className='w-[66px] h-[24px] rounded-[50px] border-1 border-solid flex justify-center items-center gap-[4px]'>
-          <RotateCcw size={'10px'}/>
-          <span>Today</span>
-        </button>
-        <Button type='button' variant={"ghost"}>
-          <Settings size={24}/>
-        </Button>
+      <div className="flex flex-row items-center gap-[18px]">
+        {!isToday && (
+          <div 
+            className='hover:cursor-pointer'
+            onClick={()=>{
+              handleCurrentDate(today);
+              onNavigate('DATE', today);
+            }}
+            >
+            <Icon className='w-20 h-6'>
+              <BacktodayIcon/>
+            </Icon>
+          </div>
+        )}
+        <div className='hover:cursor-pointer'>
+          <Icon className='w-6 h-6'>
+            <SettingIcon/>
+          </Icon>
+        </div>
       </div>
     </div>
   );

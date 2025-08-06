@@ -22,6 +22,7 @@ const calendarVariants = cva(
   [&_.rbc-date-cell]:!pb-[4px]
   [&_.rbc-event]:!mb-[1px]
   [&_.rbc-event]:!bg-transparent
+  [&_.rbc-event]:!pointer-events-none
   [&_.rbc-event-content]:truncate text-[11px]
   [&_.rbc-date-cell]:!flex
   [&_.rbc-date-cell]:!justify-center
@@ -43,7 +44,7 @@ const calendarVariants = cva(
 )
 
 export default function CalendarView() {
-  const { events, isMondayStart, currentDate, handleCurrentDate } = useCalendarContext();
+  const { events, isMondayStart, currentDate, handleCurrentDate, handleSetSelectedDate } = useCalendarContext();
   const containerRef = useRef<HTMLDivElement>(null);
   const lastScrollTime = useRef(0);
   const cooldown = 500;
@@ -59,9 +60,6 @@ export default function CalendarView() {
   });
 
   useEffect(() => {
-    //test
-    // const daynow = format(currentDate,"yyyy-MM-dd");
-    // alert(daynow);
     const container = containerRef.current;
     if (!container) return;
     const handleWheel = (e: WheelEvent) => {
@@ -98,10 +96,14 @@ export default function CalendarView() {
         startAccessor="start"
         endAccessor="end"
         view="month"
+        selectable
+        onSelectSlot={(slotInfo) => {
+          const date = new Date(slotInfo.start);
+          handleSetSelectedDate(date);
+        }}
         date={currentDate}
         onNavigate={handleCurrentDate}
         style={{ height: '100%', width : "100%" }}
-        popup
         components={{
           event: (eventProps) => isWide
             ? <CalendarEvent {...eventProps.event} />

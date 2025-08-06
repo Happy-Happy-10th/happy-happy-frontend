@@ -6,6 +6,18 @@
 
   --default-font-family: var(--font-sans);
   --default-mono-font-family: var(--font-serif);
+
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-md: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 26px;
+  --text-4xl: 28px;
+  --text-5xl: 30px;
+  --text-6xl: 32px;
+  --text-7xl: 34px;
 }
 
 @font-face {

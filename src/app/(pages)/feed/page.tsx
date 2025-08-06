@@ -1,3 +1,7 @@
+import FeedPage from "@/components/layouts/FeedPage";
+
 export default function Feed(){
-  return<span>feed</span>
+  return(
+    <FeedPage/>
+  )
 }
