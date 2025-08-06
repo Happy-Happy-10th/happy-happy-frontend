@@ -63,7 +63,7 @@ export function formatDateToString(date: Date): string {
   const month = date.getMonth()+1; // JS는 0부터 시작하므로 +1
   const day = date.getDate();
   const hour = date.getHours();
-  // const minute = date.getMinutes();
+  const minute = date.getMinutes();
 
-  return `${year}-${month}-${day}-${hour}`;
+  return `${year}.${month}.${day}T${hour}:${minute}`;
 }

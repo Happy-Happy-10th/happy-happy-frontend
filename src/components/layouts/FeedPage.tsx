@@ -1,6 +1,5 @@
 import { cn } from "@/utils/tailwind-utils";
 import {Text} from "@/components/base"
-import { calendarEvents } from "@/@mock/calendar";
 import { FeedEventList } from "../features";
 
 export default function FeedPage(){
@@ -19,17 +18,14 @@ export default function FeedPage(){
             <div className="w-full">
               {/* 일정 배열 받으면 보여줄 컴포넌트 추가 */}
               <div className="w-full">
-                <FeedEventList events={calendarEvents}/>
+                <FeedEventList key={'today'} noneEventMessage="등록된 오늘 일정이 없습니다" viewTargetEvent="today"/>
               </div>
-            </div>
-            <div className="w-full h-12 flex justify-center items-center border-1 border-yoteyo-outline rounded-[8px] mt-4">
-              <Text variant={"body3"}>오늘 일정 더 보기</Text>
             </div>
           </div>
         </div>
       </div>
       {/* 다가오는 일정 리스트 */}
-      <div className="xl:w-123 h-150 w-full bg-white rounded-[8px] p-6">
+      <div className="xl:w-123 xl:h-full h-150 w-full bg-white rounded-[8px] p-6">
         <div className="flex flex-row justify-between items-center">
           <Text variant={"title2"}>다가오는 일정</Text>
           <div className="w-22 h-7 flex justify-center items-center rounded-[8px] border-1 border-yoteyo-outline">
@@ -38,7 +34,7 @@ export default function FeedPage(){
         </div>
           <div className="flex w-full xl:xl:h-[calc(100vh-180px)] h-full xl:mt-5 mt-3">
             <div className="w-full flex-1 min-h-0 overflow-auto">
-              <FeedEventList events={calendarEvents}/>
+              <FeedEventList key={"comming"} noneEventMessage="앞으로 등록된 일정이 없습니다" viewTargetEvent="upcomming"/>
             </div>
           </div>
       </div>

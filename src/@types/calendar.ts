@@ -17,8 +17,7 @@ export type ApiCalendarEventType = {
   start: string;
   end: string;
   repeat : RepeatType;
-  color: string;
-  colorType : EventColor;
+  color: EventColor;
   locate : string;
   memo : string;
 }
