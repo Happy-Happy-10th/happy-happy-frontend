@@ -27,7 +27,6 @@ jobs:
           echo "Removing development-only files and directories..."
           rm -rf .storybook
           rm -rf src/stories
-          rm -rf src/@mock
           rm -f .github/workflows/storybook-deploy.yml
 
       - name: Remove Storybook dependencies
