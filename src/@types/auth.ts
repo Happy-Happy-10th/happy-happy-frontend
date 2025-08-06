@@ -1,5 +1,5 @@
 type useSignInPayload = {
-  username: string;
+  userid: string;
   password: string;
 };
 
