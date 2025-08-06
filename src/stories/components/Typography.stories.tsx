@@ -1,5 +1,6 @@
 import { Box, Button, Text } from '@/components/base';
 import type { Meta, StoryObj } from '@storybook/nextjs';
+import { motion } from 'motion/react';
 
 const meta = {
   title: 'Components/Typography',
@@ -30,6 +31,34 @@ export const Base: Story = {
 
         <Text variant="detail1">Detail1</Text>
         <Text variant="detail1">Detail2</Text>
+      </Box>
+    );
+  },
+};
+
+export const Typewriter: Story = {
+  render: () => {
+    const sentenceVariants = {
+      hidden: {},
+      visible: { opacity: 1, transition: { staggerChildren: 0.05 } },
+    };
+
+    const letterVariants = {
+      hidden: { opacity: 0 },
+      visible: { opacity: 1, transition: { opacity: { duration: 0 } } },
+    };
+
+    const text = `Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque fugit repellendus iusto a consequuntur mollitia voluptatum explicabo laudantium distinctio incidunt, expedita labore tempora, nemo accusamus totam voluptas delectus debitis eum impedit. Voluptas commodi exercitationem, animi eveniet totam, non nemo eligendi ratione accusantium dolores quasi error tempora omnis id corporis itaque delectus natus vero pariatur officia. Sed temporibus explicabo vero. Voluptatibus ipsa architecto minus ducimus cumque ipsam quaerat sequi suscipit dolorum, quod voluptates molestiae, consequuntur, et alias nam libero? Consequatur doloremque magni voluptatibus quisquam ipsum error quos excepturi beatae? Molestiae repellendus aliquam iusto et ex nesciunt totam illum corporis dolores voluptatum!`;
+
+    return (
+      <Box>
+        <motion.p key={text} variants={sentenceVariants} initial="hidden" animate="visible">
+          {text.split('').map((char, i) => (
+            <motion.span key={`${char}-${i}`} variants={letterVariants}>
+              {char}
+            </motion.span>
+          ))}
+        </motion.p>
       </Box>
     );
   },
