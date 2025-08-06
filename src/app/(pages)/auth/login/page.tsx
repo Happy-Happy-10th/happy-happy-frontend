@@ -20,17 +20,17 @@ function Page() {
     watch,
   } = useForm({
     defaultValues: {
-      username: '',
+      userid: '',
       password: '',
     },
     mode: 'onSubmit',
   });
 
   const onSubmit = async () => {
-    const isSuccess = await trigger(['username', 'password']);
+    const isSuccess = await trigger(['userid', 'password']);
     if (isSuccess) {
       mutate({
-        username: getValues('username'),
+        userid: getValues('userid'),
         password: getValues('password'),
       });
     }
@@ -58,17 +58,17 @@ function Page() {
           <Box className="flex-col">
             <Input
               id="id"
-              {...register('username', {
+              {...register('userid', {
                 required: '이메일을 입력해주세요.',
                 minLength: { value: 2, message: '최소 2자리 이상 입력해주세요.' },
               })}
               placeholder="이메일을 입력해주세요"
-              onBlur={() => trigger('username')}
-              variant={errors.username?.message ? 'error' : 'default'}
+              onBlur={() => trigger('userid')}
+              variant={errors.userid?.message ? 'error' : 'default'}
             />
 
             <Text variant="detail2" className="text-yoteyo-error p-1">
-              {errors.username?.message}
+              {errors.userid?.message}
             </Text>
           </Box>
         </Box>
