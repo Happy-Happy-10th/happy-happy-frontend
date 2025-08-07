@@ -20,8 +20,6 @@ function Page() {
     register,
     formState: { errors },
     getValues,
-    setValue,
-    watch,
   } = useForm({
     defaultValues: {
       userid: '',
