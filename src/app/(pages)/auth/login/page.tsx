@@ -7,17 +7,19 @@ import { Label } from '@/components/ui/label';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { setCookie } from 'cookies-next';
+import { useStore } from 'zustand';
+import { useAuthStore } from '@/store';
 
 function Page() {
   const router = useRouter();
 
+  const { setUser } = useStore(useAuthStore);
   const {
     trigger,
     register,
     formState: { errors },
     getValues,
-    setValue,
-    watch,
   } = useForm({
     defaultValues: {
       userid: '',
@@ -37,9 +39,9 @@ function Page() {
   };
 
   const { mutate } = useSignIn({
-    onSuccess: data => {
-      console.log(data);
-      console.log('success');
+    onSuccess: ({ data }) => {
+      setUser(data.memberInfo);
+      setCookie('yt-atk', data.accessToken, { path: '/' });
     },
     onError: () => {
       console.log('error');
