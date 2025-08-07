@@ -1,7 +1,7 @@
 import { RepeatType,EventColor } from "./pickerType";
 
 export type CalendarEventType = {
-  id:string;
+  id:number;
   calendarId:string;
   title: string;
   allDay : boolean;
@@ -15,7 +15,7 @@ export type CalendarEventType = {
 }
 
 export type ApiCalendarEventType = {
-  id:string;
+  id:number;
   calendarId:string;
   title: string;
   allDay : boolean;
@@ -26,14 +26,4 @@ export type ApiCalendarEventType = {
   locate : string;
   memo : string;
   holiday: boolean;
-}
-
-export type ApiResponseType = {
-  result : ApiCalendarEventType[],
-  status : number;
-}
-
-export interface GetEventsType{
-  isMondayStart : boolean;
-  result : ApiCalendarEventType[]
 }
