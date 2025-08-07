@@ -11,32 +11,82 @@ import TextArea from '@/components/base/TextArea/TextArea';
 import { CalendarEventType } from '@/@types/calendar';
 import { Text } from '@/components/base';
 import { cn } from '@/utils/tailwind-utils';
-import { format } from 'date-fns';
+
+import {useAuthStore} from '@/store'
+import { useStore } from 'zustand';
+import { DrawerClose } from '@/components/ui/drawer';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { queryKeys } from '@/api';
+import { Variable } from 'lucide-react';
+import { extractYear } from '@/utils/calendar/extractDate';
+import { calendarService } from '@/api/service/calendar';
 
 const itemsStyle = clsx('w-full bg-white rounded-[8px]');
 
 type PropsType = {
   event?: CalendarEventType;
+  mode ?: 'create' | 'edit'
 };
 
-export default function UserEventForm({ event }: PropsType) {
+export default function UserEventForm({ event, mode='create' }: PropsType) {
+  //스크롤 감시 추가
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  
+  const queryClient = useQueryClient();
+  // POST 전용 Mutate 생성
+  const CreateEventMutation= useMutation({
+    mutationFn:(apiData:CalendarEventType)=>calendarService.postEvent(apiData),
+    onSuccess:(_res, Variables)=>{
+      const year = extractYear(Variables.startDate);
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.calendar.events(year).queryKey,
+    });
+    }
+  })
+  // PUT 전용 Mutate 생성
+  const putEventMutation = useMutation({
+    mutationFn:(apiData:CalendarEventType)=>calendarService.putEvent(apiData),
+    onSuccess:(_res, Variables)=>{
+      const year = extractYear(Variables.startDate);
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.calendar.events(year).queryKey,
+    });
+    }    
+  })
 
+  //Zustand 캘린더 ID 가져오기
+  const { user } = useStore(useAuthStore);
+
+  //React-hook-form 선언
   const methods = useForm<CalendarEventType>({
     defaultValues: event || {
-      title: '',
+      id:"",
+      calendarId : "",
+      title: "",
       allDay: true,
-      start: new Date(),
-      end: new Date(),
-      repeat: null,
+      startDate: new Date(),
+      endDate: new Date(),
+      repeatCycle: null,
       color: 'yoteyoGreen',
       locate: '',
       memo: '',
     },
   });
-  const { control, handleSubmit, getValues } = methods;
+  const { control, handleSubmit, getValues,setValue } = methods;
+
   const onSubmit = (data: CalendarEventType) => {
-    alert(format(data.start,"yyyy-MM-dd : HH-mm"))
+    if (!user) return;
+    const apiData = { ...data, calendarId: user.calendarId };
+
+    // POST Mutate 함수 동작
+    if(mode === 'create'){
+      CreateEventMutation.mutate(apiData);
+    }
+    else if(mode ==='edit'){
+      // PUT Mutate 함수 동작
+      putEventMutation.mutate(apiData)
+    }
+    // alert(JSON.stringify(data));
   };
 
   return (
@@ -70,7 +120,7 @@ export default function UserEventForm({ event }: PropsType) {
           {/* 반복 */}
           <div className={itemsStyle}>
             <Controller
-              name="repeat"
+              name="repeatCycle"
               control={control}
               render={({ field }) => (
                 <RepeatPicker
@@ -146,12 +196,16 @@ export default function UserEventForm({ event }: PropsType) {
 
           {/* 버튼 */}
           <div className="w-full h-10 flex flex-row justify-end gap-2 mt-6">
-            <Button type="button" className="w-[105px] h-10" variant="outline">
-              <Text variant="body3">취소</Text>
-            </Button>
-            <Button type="submit" className="w-[105px] h-10" variant="default">
-              <Text variant="body3">저장</Text>
-            </Button>
+            <DrawerClose asChild>
+              <Button type="button" className="w-[105px] h-10" variant="outline">
+                <Text variant="body3">취소</Text>
+              </Button>
+            </DrawerClose>
+            <DrawerClose asChild>
+              <Button type="submit" className="w-[105px] h-10" variant="default">
+                <Text variant="body3">저장</Text>
+              </Button>
+            </DrawerClose>
           </div>
         </form>
       </div>
