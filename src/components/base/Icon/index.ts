@@ -22,3 +22,7 @@ export { default as MiniClockIcon } from '../../../../public/icons/mini-clock-ic
 
 export { default as RadioOffIcon } from '../../../../public/icons/radio-off.svg?react'
 export { default as RadioOnIcon } from '../../../../public/icons/radio-on.svg?react'
+
+export { default as AlertPurpleIcon } from '../../../../public/icons/alert-purple.svg?react'
+export { default as AlertRedIcon } from '../../../../public/icons/alert-red.svg?react'
+export { default as AlertCheckIcon } from '../../../../public/icons/alert-check.svg?react'
