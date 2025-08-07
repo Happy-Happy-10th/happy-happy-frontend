@@ -4,6 +4,8 @@ export const calendarEventsNone = []
 
 export const calendarEvents: CalendarEventType[] = [
   {
+    id:"",
+    calendarId:"123",
     title: "네이버",
     allDay: true,
     startDate: new Date("2025-08-05T10:00:00"),
@@ -15,6 +17,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
   {
+    id:"",
+    calendarId:"123",
     title: "카카오톡 선물하기",
     allDay: true,
     startDate: new Date("2025-08-09T09:00:00"),
@@ -26,6 +30,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
   {
+    id:"",
+    calendarId:"123",
     title: "G마켓",
     allDay: true,
     startDate: new Date("2025-08-01T13:00:00"),
@@ -37,6 +43,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
   {
+    id:"",
+    calendarId:"123",
     title: "무인양품",
     allDay: true,
     startDate: new Date("2025-08-05T13:00:00"),
@@ -48,6 +56,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
   {
+    id:"",
+    calendarId:"123",
     title: "11번가",
     allDay: true,
     startDate: new Date("2025-08-04T10:00:00"),
@@ -59,6 +69,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
   {
+    id:"",
+    calendarId:"123",
     title: "스타벅스",
     allDay: true,
     startDate: new Date("2025-08-05T11:00:00"),
@@ -70,6 +82,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
   {
+    id:"",
+    calendarId:"123",
     title: "위메프",
     allDay: true,
     startDate: new Date("2025-08-06T09:00:00"),
@@ -81,6 +95,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
   {
+    id:"",
+    calendarId:"123",
     title: "카카오톡 선물하기",
     allDay: true,
     startDate: new Date("2025-08-02T14:00:00"),
@@ -92,6 +108,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
   {
+    id:"",
+    calendarId:"123",
     title: "G마켓",
     allDay: true,
     startDate: new Date("2025-08-05T14:00:00"),
@@ -103,6 +121,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
   {
+    id:"",
+    calendarId:"123",
     title: "다이소",
     allDay: true,
     startDate: new Date("2025-08-06T13:00:00"),
@@ -114,6 +134,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
   {
+    id:"",
+    calendarId:"123",
     title: "홈플러스",
     allDay: true,
     startDate: new Date("2025-08-01T09:00:00"),
@@ -125,6 +147,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
   {
+    id:"",
+    calendarId:"123",
     title: "쿠팡",
     allDay: true,
     startDate: new Date("2025-08-03T13:00:00"),
@@ -136,6 +160,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
   {
+    id:"",
+    calendarId:"123",
     title: "무인양품",
     allDay: true,
     startDate: new Date("2025-08-06T10:00:00"),
@@ -147,6 +173,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
   {
+    id:"",
+    calendarId:"123",
     title: "무신사",
     allDay: true,
     startDate: new Date("2025-08-04T14:00:00"),
@@ -158,6 +186,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
   {
+    id:"",
+    calendarId:"123",
     title: "세븐일레븐",
     allDay: true,
     startDate: new Date("2025-08-06T10:00:00"),
@@ -169,6 +199,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
   {
+    id:"",
+    calendarId:"123",
     title: "무신사",
     allDay: true,
     startDate: new Date("2025-08-02T13:00:00"),
@@ -180,6 +212,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
   {
+    id:"",
+    calendarId:"123",
     title: "카카오톡 선물하기",
     allDay: true,
     startDate: new Date("2025-08-07T09:00:00"),
@@ -191,6 +225,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
   {
+    id:"",
+    calendarId:"123",
     title: "스타벅스",
     allDay: true,
     startDate: new Date("2025-08-05T14:00:00"),
@@ -202,6 +238,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
   {
+    id:"",
+    calendarId:"123",
     title: "스타벅스30",
     allDay: true,
     startDate: new Date("2025-08-07T14:00:00"),
@@ -213,6 +251,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
   {
+    id:"",
+    calendarId:"123",
     title: "올리브영30",
     allDay: true,
     startDate: new Date("2025-08-07T14:00:00"),
@@ -224,6 +264,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
   {
+    id:"",
+    calendarId:"123",
     title: "올리브영30",
     allDay: true,
     startDate: new Date("2025-08-28T14:00:00"),
@@ -235,6 +277,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
   {
+    id:"",
+    calendarId:"123",
     title: "올리브영31",
     allDay: true,
     startDate: new Date("2025-08-28T14:00:00"),
@@ -246,6 +290,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
   {
+    id:"",
+    calendarId:"123",
     title: "올리브영32",
     allDay: true,
     startDate: new Date("2025-08-28T14:00:00"),
@@ -257,6 +303,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
     {
+      id:"",
+      calendarId:"123",
     title: "올리브영33",
     allDay: true,
     startDate: new Date("2025-08-28T14:00:00"),
@@ -268,6 +316,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
   {
+    id:"",
+    calendarId:"123",
     title: "올리브영34",
     allDay: true,
     startDate: new Date("2025-08-28T14:00:00"),
@@ -279,6 +329,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
     {
+      id:"",
+      calendarId:"123",
     title: "올리브영35",
     allDay: true,
     startDate: new Date("2025-08-28T14:00:00"),
@@ -290,6 +342,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
       {
+        id:"",
+        calendarId:"123",
     title: "올리브영36",
     allDay: true,
     startDate: new Date("2025-08-28T14:00:00"),
@@ -301,6 +355,8 @@ export const calendarEvents: CalendarEventType[] = [
     holiday: false
   },
   {
+    id:"",
+    calendarId:"123",
     title: "올리브영37",
     allDay: true,
     startDate: new Date("2025-08-28T14:00:00"),

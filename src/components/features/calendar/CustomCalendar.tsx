@@ -17,12 +17,14 @@ type CustomCalendarType = {
   calendarWidthPx : string
 }
 export function CustomCalendar({children, calendarHightPx, calendarWidthPx}:CustomCalendarType){
-  const {data,status} = useQuery({
-    queryKey : queryKeys.calendar.events().queryKey,
-    queryFn : calendarService.events 
-  })
-  //캘린더에 view 될 날짜
+   // useQuery 적용
   const [currentDate, setCurrentDate] = useDateState(new Date());
+  const year = currentDate.getFullYear();
+  // year 파라미터를 클로저로 캡쳐해서 사용? (year)=>calendarService.getEvents(year) X
+  const {data}= useQuery({
+    queryKey : queryKeys.calendar.events(year).queryKey,
+    queryFn : ()=> calendarService.getEvents(year)
+  })
 
   //캘린더에서 선택될 날짜 데이터
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -32,25 +34,25 @@ export function CustomCalendar({children, calendarHightPx, calendarWidthPx}:Cust
     setSelectedDate(today);
     const selectedDayStart = startOfDay(today);
     const selectedDayEnd = endOfDay(today);
-    const filtered = (data?.events || []).filter((event) => {
+
+    const filtered = data?.filter((event) => {
       const eventStart = new Date(event.startDate);
       const eventEnd = new Date(event.endDate);
-  
       // 선택한 날짜가 이 이벤트 범위 안에 포함되어 있으면 true
       return isWithinInterval(selectedDayStart, { start: eventStart, end: eventEnd }) ||
             isWithinInterval(selectedDayEnd, { start: eventStart, end: eventEnd }) ||
             isWithinInterval(eventStart, { start: selectedDayStart, end: selectedDayEnd });
     });
-  
-    setDayEvents(filtered);
+
+    setDayEvents(filtered||[]);
   };
 
   if (status === 'pending') return <p>이벤트를 불러오는 중입니다...</p>;
   if (status !== 'success') return null;
   return (
     <CalendarContext.Provider value={{
-      events : data?.events || [],
-      isMondayStart : data?.isMondayStart||true,
+      events : data|| [],
+      isMondayStart :true,
       currentDate:currentDate,
       handleCurrentDate : setCurrentDate,
       handleSetSelectedDate

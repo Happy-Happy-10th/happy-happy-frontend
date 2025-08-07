@@ -15,6 +15,8 @@ export type CalendarEventType = {
 }
 
 export type ApiCalendarEventType = {
+  id:string;
+  calendarId:string;
   title: string;
   allDay : boolean;
   startDate: string;
