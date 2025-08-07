@@ -8,6 +8,9 @@ import DayEventList from "@/components/features/dayEventList/DayEventList";
 import { useDateState } from "@/hooks";
 import { CalendarEventType } from "@/@types/calendar";
 import { endOfDay, isWithinInterval, startOfDay } from 'date-fns';
+import { useQuery } from "@tanstack/react-query";
+import { queryKeys } from "@/api";
+import { calendarService } from "@/api/service/calendar";
 const contents =clsx(
   "w-full h-full flex gap-[20px] bg-yoteyo-gray-100",
   "xl:p-[30px] xl:pb-[5px]",
@@ -33,31 +36,38 @@ export default function CalendarPage(){
   //캘린더에서 선택될 날짜 데이터
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [dayEvents, setDayEvents] = useState<CalendarEventType[]>([]);
-  
+  //캘린더 선택시 이밴트 동작
   const handleSetSelectedDate = (today: Date) => {
     setSelectedDate(today);
-
     const selectedDayStart = startOfDay(today);
     const selectedDayEnd = endOfDay(today);
 
-    const filtered = calendarEvents.filter((event) => {
-      const eventStart = new Date(event.start);
-      const eventEnd = new Date(event.end);
+    const filtered = data?.filter((event) => {
+      const eventStart = new Date(event.startDate);
+      const eventEnd = new Date(event.endDate);
       // 선택한 날짜가 이 이벤트 범위 안에 포함되어 있으면 true
       return isWithinInterval(selectedDayStart, { start: eventStart, end: eventEnd }) ||
             isWithinInterval(selectedDayEnd, { start: eventStart, end: eventEnd }) ||
             isWithinInterval(eventStart, { start: selectedDayStart, end: selectedDayEnd });
     });
 
-    setDayEvents(filtered);
+    setDayEvents(filtered||[]);
   };
 
+  // useQuery 적용
+  const year = currentDate.getFullYear();
+  // year 파라미터를 클로저로 캡쳐해서 사용? (year)=>calendarService.getEvents(year) X
+  const {data}= useQuery({
+    queryKey : queryKeys.calendar.events(year).queryKey,
+    queryFn : ()=> calendarService.getEvents(year)
+  })
+  
   return (
     <div className={contents}>
       <div className={calendarSize}>
         <CalendarContext.Provider
           value={{
-            events: calendarEvents,
+            events: data||[],
             isMondayStart: true,
             currentDate,
             handleCurrentDate:setCurrentDate,
