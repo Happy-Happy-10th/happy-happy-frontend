@@ -9,6 +9,8 @@ import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "@/api";
 import { calendarService } from "@/api/service/calendar";
 import { extractYear } from "@/utils/calendar/extractDate";
+import { useStore } from "zustand";
+import { useAuthStore } from "@/store";
 
 type PropsType = {
   noneEventMessage : string;
@@ -17,10 +19,12 @@ type PropsType = {
 export default function FeedEventList({noneEventMessage, viewTargetEvent}:PropsType){
   const today = new Date();
   const year = extractYear(today);
-
+  const { user } = useStore(useAuthStore);
+  
   const {data}= useQuery({
     queryKey : queryKeys.calendar.events(year).queryKey,
-    queryFn : ()=> calendarService.getEvents(year)
+    queryFn : ()=> calendarService.getEvents(year, user!.calendarId),
+    enabled: !!user?.calendarId,
   })
 
   const [isClicked, setIsClicked] = useState(false);

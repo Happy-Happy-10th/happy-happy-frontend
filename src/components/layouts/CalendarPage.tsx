@@ -11,6 +11,8 @@ import { endOfDay, isWithinInterval, startOfDay } from 'date-fns';
 import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "@/api";
 import { calendarService } from "@/api/service/calendar";
+import { useStore } from "zustand";
+import { useAuthStore } from "@/store";
 const contents =clsx(
   "w-full h-full flex gap-[20px] bg-yoteyo-gray-100",
   "xl:p-[30px] xl:pb-[5px]",
@@ -56,10 +58,12 @@ export default function CalendarPage(){
 
   // useQuery 적용
   const year = currentDate.getFullYear();
+  const { user } = useStore(useAuthStore);
   // year 파라미터를 클로저로 캡쳐해서 사용? (year)=>calendarService.getEvents(year) X
   const {data}= useQuery({
     queryKey : queryKeys.calendar.events(year).queryKey,
-    queryFn : ()=> calendarService.getEvents(year)
+    queryFn : ()=> calendarService.getEvents(year, user!.calendarId),
+    enabled: !!user?.calendarId,
   })
   
   return (
