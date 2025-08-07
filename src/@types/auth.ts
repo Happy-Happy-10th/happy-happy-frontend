@@ -3,6 +3,16 @@ type useSignInPayload = {
   password: string;
 };
 
+type useSignUpPayload = {
+  nickname: string;
+  userid: string;
+  username: string;
+  password: string;
+  passwordCheck: string;
+  privacyAgreement: boolean;
+  passwordConfirmed: boolean;
+};
+
 type MemberInfo = {
   memberId: string;
   username: string;
@@ -19,4 +29,10 @@ type useSignInResponse = {
   status: number;
   message: string;
 };
-export type { useSignInPayload, useSignInResponse, MemberInfo };
+
+type useSignUpResponse = {
+  memberId: string;
+  userid: string;
+};
+
+export type { useSignInPayload, useSignInResponse, useSignUpPayload, useSignUpResponse, MemberInfo };

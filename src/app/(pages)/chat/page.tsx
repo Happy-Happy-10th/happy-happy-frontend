@@ -10,6 +10,8 @@ import { useCallback, useEffect, useState } from 'react';
 import { useStore } from 'zustand/react';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
+import { useHealth } from '@/api';
+import { usePostAIMessage } from '@/api/service/chat';
 
 type Message = {
   from: 'AI' | 'USER';
@@ -65,6 +67,10 @@ const AIHeader = ({ date }: { date: Date }) => {
 export default function Page() {
   const { user } = useStore(useAuthStore);
 
+  const { data } = useHealth();
+
+  const { mutate, isPending } = usePostAIMessage({});
+
   const [payload, setPayload] = useState<{ eventType: 'online' | 'offline' | ''; title: string; address: string }>({
     eventType: '',
     title: '',
@@ -95,6 +101,10 @@ export default function Page() {
         },
       ]);
     }, ttl);
+  };
+
+  const handleSubmit = () => {
+    if (isPending) return;
   };
 
   return (
@@ -235,7 +245,29 @@ export default function Page() {
         })}
       </Box>
 
-      <Box className="min-h-17.5 bg-white w-full mt-auto"></Box>
+      <Box className="py-3 bg-white w-full mt-auto px-5  gap-x-5 ">
+        <input className="w-full h-auto bg-[#F0F0F0] outline-0 rounded-full resize-none" />
+        <Button variant="icon" size="icon" disabled={isPending}>
+          <Icon className="flex items-center justify-center w-14 h-14 rounded-full bg-yoteyo-main">
+            <img className="w-6 h-6" src="/images/send-icon.png" alt="전송" />
+          </Icon>
+        </Button>
+
+        {/* <Button
+          onClick={() => {
+            mutate({
+              parameters: {
+                eventType: '온라인',
+                title: '스위프 개발완료기간이 궁금해',
+                // title: '올리브영 세일기간이 궁금해',
+                address: '',
+              },
+            });
+          }}
+        >
+          한번 요청해볼게
+        </Button> */}
+      </Box>
     </Box>
   );
 }

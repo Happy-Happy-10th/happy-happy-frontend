@@ -1,5 +1,5 @@
-import { useSignInPayload, useSignInResponse } from '@/@types';
-import { PostSignIn } from '@/api/fragments/auth';
+import { useSignInPayload, useSignInResponse, useSignUpPayload, useSignUpResponse } from '@/@types';
+import { PostSignIn, PostSignUp } from '@/api/fragments/auth';
 import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 import { HTTPError } from 'ky';
 
@@ -14,4 +14,17 @@ const useSignIn = (
     ...options,
   });
 };
-export { useSignIn };
+
+const useSignUp = (
+  options: Exclude<UseMutationOptions<useSignUpResponse, HTTPError, useSignUpPayload, unknown>, 'mutationFn'>,
+) => {
+  return useMutation({
+    mutationKey: ['sign-up'],
+    mutationFn: async (payload: useSignUpPayload) => {
+      return (await PostSignUp({ ...payload })).json();
+    },
+    ...options,
+  });
+};
+
+export { useSignIn, useSignUp };
