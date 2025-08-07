@@ -37,10 +37,10 @@ export default function UserEventCheck({event,onEdit}:PropsType){
             <div>시작</div>
             <div className="flex flex-row">
               <div className={cn(dateBox)}>
-                {format(event.start,"yyyy.MM.dd")}
+                {format(event.startDate,"yyyy.MM.dd")}
               </div>
               <div className={cn(dateBox)}>
-                {format(event.start,"a hh:mm",{locale: ko})}
+                {format(event.startDate,"a hh:mm",{locale: ko})}
               </div>
             </div>
           </div>
@@ -51,10 +51,10 @@ export default function UserEventCheck({event,onEdit}:PropsType){
             <div>종료</div>
             <div className="flex flex-row">
               <div className={cn(dateBox)}>
-                {format(event.end,"yyyy.MM.dd")}
+                {format(event.endDate,"yyyy.MM.dd")}
               </div>
               <div className={cn(dateBox)}>
-                {format(event.end,"a hh:mm",{locale: ko})}
+                {format(event.endDate,"a hh:mm",{locale: ko})}
               </div>
             </div>
           </div>

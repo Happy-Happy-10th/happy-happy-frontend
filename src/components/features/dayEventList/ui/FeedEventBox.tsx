@@ -15,8 +15,8 @@ export default function FeedEventBox({event}:PropsType){
   }
 
   const stringEvent = convertEventDateToString(event);
-  const startDateAndTime = stringEvent.start.split('T');
-  const endDateAndTime = stringEvent.end.split('T');
+  const startDateAndTime = stringEvent.startDate.split('T');
+  const endDateAndTime = stringEvent.endDate.split('T');
   return(
     <div className={cn("w-full h-27 flex flex-row p-4 justify-between border-1 border-yoteyo-outline rounded-[8px]")}>
       {/* 일정 */}

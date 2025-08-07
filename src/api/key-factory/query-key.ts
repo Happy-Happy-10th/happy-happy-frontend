@@ -6,7 +6,7 @@ import { createQueryKeys, mergeQueryKeys } from '@lukemorales/query-key-factory'
  * settings : 사용자 캘린더 설정 값 Api (로컬스토리지?)
  */
 const calendarKeys = createQueryKeys('calendar',{
-  events : ()=>({queryKey : ['events']}),
+  events : (year:number)=>({queryKey : ['events',year]}),
   settings : ()=>({queryKey : ['settings']}),
 })
 

@@ -93,8 +93,8 @@ export default function CalendarView() {
         className={calendarVariants({ variant: 'clearBorder' })}
         localizer={localizer}
         events={events}
-        startAccessor="start"
-        endAccessor="end"
+        startAccessor="startDate"
+        endAccessor="endDate"
         view="month"
         selectable
         onSelectSlot={(slotInfo) => {

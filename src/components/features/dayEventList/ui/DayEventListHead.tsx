@@ -10,7 +10,6 @@ import { UserEventForm } from "@/components/features/Form/";
 
 import {useAuthStore} from '@/store'
 import { useStore } from 'zustand';
-import { useEffect } from 'react';
 
 const head = clsx(
   "mb-[30px] pl-[24px] pr-[24px] pt-[20px] pb-[14px]",
