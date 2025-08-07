@@ -1,9 +1,14 @@
 import { yoteyoAPI } from "@/api";
 import { CalendarEventType, GetEventsType } from "@/@types/calendar";
 
-export async function getUserEvents(year:number){
+export async function getUserEvents(year:number,calendarId:string){
+  console.log("get api call");
   return await yoteyoAPI<GetEventsType>('calendar/events',{
     method : 'get',
+    searchParams:{
+      year: year.toString(),
+      calendarId,
+    },
     headers:{
       'Content-Type': 'application/json',
     }
@@ -11,9 +16,13 @@ export async function getUserEvents(year:number){
 }
 
 export async function postUserEvent(payload:CalendarEventType){
+  console.log("post api call")
+  console.log(JSON.stringify({...payload}));
   return await yoteyoAPI<GetEventsType>('calendar/events',{
     method:'post',
-    headers:{'Content-Type': 'application/json'},
+    headers:{
+      'Content-Type': 'application/json',
+    },
     body : JSON.stringify({...payload})
   })
 }

@@ -60,8 +60,8 @@ export default function UserEventForm({ event, mode='create' }: PropsType) {
   //React-hook-form 선언
   const methods = useForm<CalendarEventType>({
     defaultValues: event || {
-      id:"",
-      calendarId : "",
+      // id:"",
+      calendarId : user?.calendarId,
       title: "",
       allDay: true,
       startDate: new Date(),
@@ -70,6 +70,7 @@ export default function UserEventForm({ event, mode='create' }: PropsType) {
       color: 'yoteyoGreen',
       locate: '',
       memo: '',
+      holiday:false
     },
   });
   const { control, handleSubmit, getValues,setValue } = methods;
@@ -80,13 +81,14 @@ export default function UserEventForm({ event, mode='create' }: PropsType) {
 
     // POST Mutate 함수 동작
     if(mode === 'create'){
+      console.log(JSON.stringify(data));
       CreateEventMutation.mutate(apiData);
     }
+    // PUT Mutate 함수 동작
     else if(mode ==='edit'){
-      // PUT Mutate 함수 동작
+      console.log(JSON.stringify(data));
       putEventMutation.mutate(apiData)
     }
-    // alert(JSON.stringify(data));
   };
 
   return (

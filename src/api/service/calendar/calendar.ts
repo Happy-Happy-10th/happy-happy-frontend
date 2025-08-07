@@ -3,8 +3,8 @@ import { getUserEvents, getUserSetting, postUserEvent, putUserEvent } from "@/ap
 import { convertEventsStringToDate } from "@/utils/calendar/dateConverter";
 
 const calendarService = {
-  getEvents : async (year:number)=> {
-    const {result} = await getUserEvents(year).then(res => res.json());
+  getEvents : async (year:number,calendarId:string)=> {
+    const {result} = await getUserEvents(year,calendarId).then(res => res.json());
     const events = convertEventsStringToDate(result);
     return events
   },
