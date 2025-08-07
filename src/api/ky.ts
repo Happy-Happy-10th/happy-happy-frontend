@@ -1,3 +1,4 @@
+import { getCookie } from 'cookies-next/client';
 import ky from 'ky';
 
 const END_POINT = process.env.YOTEYO_API_URL;
@@ -6,20 +7,26 @@ const yoteyoAPI = ky.create({
   prefixUrl: END_POINT,
   hooks: {
     beforeRequest: [
-      async () => {
-        // API 요청 전처리
-        console.log('before!');
+      async request => {
+        const accessTkn = getCookie('yt-atk');
+        if (accessTkn) {
+          request.headers.set('Authorization', `Bearer ${accessTkn}`);
+          return;
+        }
       },
     ],
     afterResponse: [
-      async () => {
-        // API 요청 후처리
-        console.log('after!');
+      async (request, _options, respose) => {
+        return respose;
       },
     ],
     beforeError: [
       error => {
-        // 에러 객체 초기화 / 재정의
+        const { response } = error;
+        if (response && response.body) {
+          error.cause = { code: response.status };
+        }
+
         return error;
       },
     ],
