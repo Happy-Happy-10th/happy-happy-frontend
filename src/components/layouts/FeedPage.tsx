@@ -3,7 +3,6 @@ import {Text} from "@/components/base"
 import { FeedEventList } from "../features";
 
 export default function FeedPage(){
-  // const todayevent = calendarEvents;
   return(
     <div className={cn("xl:h-full w-hull flex xl:flex-row flex-col gap-5 xl:p-7.5 p-5 bg-yoteyo-gray-100 h-full overflow-scroll")}>
       <div className="flex flex-col xl:gap-5 gap-3">

@@ -2,30 +2,43 @@
 import { CalendarEventType } from "@/@types/calendar"
 import {Button, Text} from "@/components/base"
 import FeedEventBox from "./ui/FeedEventBox"
-import { calendarEvents } from "@/@mock/calendar";
 import { getTodayEvents, getUpcomingEvents } from "@/utils/calendar/getTargetEvents";
 import { useEffect, useState } from "react";
 import { cn } from "@/utils/tailwind-utils";
+import { useQuery } from "@tanstack/react-query";
+import { queryKeys } from "@/api";
+import { calendarService } from "@/api/service/calendar";
+import { extractYear } from "@/utils/calendar/extractDate";
 
 type PropsType = {
   noneEventMessage : string;
   viewTargetEvent : string;
 }
 export default function FeedEventList({noneEventMessage, viewTargetEvent}:PropsType){
+  const today = new Date();
+  const year = extractYear(today);
+
+  const {data}= useQuery({
+    queryKey : queryKeys.calendar.events(year).queryKey,
+    queryFn : ()=> calendarService.getEvents(year)
+  })
+
   const [isClicked, setIsClicked] = useState(false);
   const [events,setEvents] = useState<CalendarEventType[]>([]);
+
   const handleMoreEvents = ()=>{
-    viewTargetEvent === 'today'&&setEvents(getTodayEvents(calendarEvents));
+    viewTargetEvent === 'today'&&setEvents(getTodayEvents(data||[]));
     setIsClicked(true);
   }
   useEffect(()=>{
+    if(data||[].length<5) setIsClicked(true)
+
     if(viewTargetEvent === 'today'){
-      setEvents(getTodayEvents(calendarEvents,4))
+      setEvents(getTodayEvents(data||[],5))
     }
     if(viewTargetEvent === 'upcomming'){
-      setEvents(getUpcomingEvents(calendarEvents,5))
+      setEvents(getUpcomingEvents(data||[],5))
     }
-
   },[])
   
   return (
