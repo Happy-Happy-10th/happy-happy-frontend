@@ -18,6 +18,7 @@ type MemberInfo = {
   username: string;
   nickname: string;
   imageUrl: string;
+  calendarId: number;
 };
 
 type useSignInResponse = {
