@@ -9,3 +9,10 @@ export * from './drawer';
 export * from './pickerType';
 
 export * from './chat';
+
+export type ErrorFormat = {
+  status: number;
+  message: string;
+  code: string;
+  timeStamp: string;
+};

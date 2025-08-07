@@ -42,6 +42,7 @@ function Page() {
     onSuccess: ({ data }) => {
       setUser(data.memberInfo);
       setCookie('yt-atk', data.accessToken, { path: '/' });
+      router.push('/home');
     },
     onError: () => {
       console.log('error');
@@ -109,15 +110,15 @@ function Page() {
           로그인
         </Button>
 
-        <Box className="mt-12.5 mb-6 w-full items-center">
+        {/* <Box className="mt-12.5 mb-6 w-full items-center">
           <Box className="flex-1 w-full h-[1px] bg-yoteyo-outline" />
           <Text variant="detail1" className="mx-4 text-yoteyo-gray-400">
             SNS 간편 로그인
           </Text>
           <Box className=" flex-1 w-full h-[1px] bg-yoteyo-outline" />
-        </Box>
+        </Box> */}
 
-        <Box className="gap-x-5">
+        {/* <Box className="gap-x-5">
           <Box className="flex-col">
             <Button size="icon" variant="icon">
               <Icon className="w-15 h-15 border-1 border-yoteyo-outline rounded-full">
@@ -141,7 +142,7 @@ function Page() {
               카카오톡
             </Text>
           </Box>
-        </Box>
+        </Box> */}
       </Box>
     </AuthLayout>
   );

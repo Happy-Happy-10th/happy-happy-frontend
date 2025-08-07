@@ -18,17 +18,21 @@ import {
 } from '@/components/base';
 import AuthLayout from '@/components/layouts/AuthLayout';
 import { Label } from '@/components/ui/label';
-import React from 'react';
+import { cn } from '@/utils/tailwind-utils';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 interface Props {}
 
 function Page() {
+  const [isAuthUserId, setIsAuthUserId] = useState(false);
+  const [isAuthUserEmail, setIsAuthUserEmail] = useState(false);
   const {
     trigger,
     register,
     formState: { errors },
     getValues,
+    watch,
   } = useForm({
     defaultValues: {
       nickname: '',
@@ -47,12 +51,12 @@ function Page() {
     if (isSuccess) {
       mutate({
         username: getValues('username'),
-        nickname: getValues('nickname').length ? getValues('nickname') : getValues('username'),
+        nickname: getValues('nickname'),
         userid: getValues('userid'),
         password: getValues('password'),
         passwordCheck: getValues('passwordCheck'),
-        passwordConfirmed: true,
-        privacyAgreement: true,
+        passwordConfirmed: getValues('password') === getValues('passwordCheck'),
+        privacyAgreement: getValues('privacyAgreement'),
       });
       // mutate({
       //   userid: getValues('userid'),
@@ -67,8 +71,15 @@ function Page() {
       // setUser(data.memberInfo);
       // setCookie('yt-atk', data.accessToken, { path: '/' });
     },
-    onError: () => {
-      console.log('error');
+    onError: async error => {
+      const response = await error.response.json();
+
+      const messages = response?.message ?? '';
+
+      const message = messages.split('.,')[0];
+      // 에러노출
+      console.log(message);
+      console.log('error', error);
     },
   });
 
@@ -87,17 +98,17 @@ function Page() {
           <Label className={`gap-0 after:content-["*"] after:text-yoteyo-error`}>이름</Label>
           <Box className="flex-col gap-y-2">
             <Input
-              {...register('username', {
+              {...register('nickname', {
                 required: '이름을 입력해주세요.',
                 minLength: { value: 2, message: '최소 2자리 이상 입력해주세요.' },
               })}
-              onBlur={() => trigger('username')}
+              onBlur={() => trigger('nickname')}
               placeholder="이름을 입력해주세요"
-              variant={errors.username?.message ? 'error' : 'default'}
+              variant={errors.nickname?.message ? 'error' : 'default'}
             />
-            {errors.username?.message && (
+            {errors.nickname?.message && (
               <Text variant="detail2" className="text-yoteyo-error p-1">
-                {errors.username?.message}
+                {errors.nickname?.message}
               </Text>
             )}
             {/* <Text variant="detail2" className="text-yoteyo-gray-200">
@@ -107,21 +118,69 @@ function Page() {
         </Box>
 
         <Box className="flex-col gap-y-3">
-          <Label className={`gap-0 after:content-["*"] after:text-yoteyo-error`}>이메일</Label>
+          <Label className={`gap-0 after:content-["*"] after:text-yoteyo-error`}>아이디</Label>
           <Box className="flex-col gap-y-2">
             <Input
               {...register('userid', {
-                required: '이메일을 입력해주세요.',
+                required: '아이디를 입력해주세요.',
                 minLength: { value: 2, message: '최소 2자리 이상 입력해주세요.' },
               })}
               onBlur={() => trigger('userid')}
-              placeholder="이메일을 입력해주세요"
+              placeholder="아이디를 입력해주세요"
               variant={errors.userid?.message ? 'error' : 'default'}
+              iconProps={{
+                end: (
+                  <Button
+                    variant="icon"
+                    size="icon"
+                    className={cn(
+                      'px-4 py-2 flex items-center justify-center',
+                      isAuthUserId ? 'bg-[#E2E2E2] text-yoteyo-gray-300' : 'bg-[#F5ECFF] text-yoteyo-main ',
+                    )}
+                  >
+                    <Text className="!text-[14px] font-semibold">중복확인</Text>
+                  </Button>
+                ),
+              }}
             />
-
             {errors.userid?.message && (
               <Text variant="detail2" className="text-yoteyo-error p-1">
                 {errors.userid?.message}
+              </Text>
+            )}
+          </Box>
+        </Box>
+
+        <Box className="flex-col gap-y-3">
+          <Label className={`gap-0 after:content-["*"] after:text-yoteyo-error`}>이메일</Label>
+          <Box className="flex-col gap-y-2">
+            <Input
+              {...register('username', {
+                required: '이메일을 입력해주세요.',
+                minLength: { value: 2, message: '최소 2자리 이상 입력해주세요.' },
+              })}
+              onBlur={() => trigger('username')}
+              placeholder="이메일을 입력해주세요"
+              variant={errors.username?.message ? 'error' : 'default'}
+              iconProps={{
+                end: (
+                  <Button
+                    variant="icon"
+                    size="icon"
+                    className={cn(
+                      'px-4 py-2 flex items-center justify-center',
+                      isAuthUserEmail ? 'bg-[#E2E2E2] text-yoteyo-gray-300' : 'bg-[#F5ECFF] text-yoteyo-main ',
+                    )}
+                  >
+                    <Text className="!text-[14px] font-semibold">중복확인</Text>
+                  </Button>
+                ),
+              }}
+            />
+
+            {errors.username?.message && (
+              <Text variant="detail2" className="text-yoteyo-error p-1">
+                {errors.username?.message}
               </Text>
             )}
           </Box>
@@ -153,8 +212,8 @@ function Page() {
           <Box className="flex-col gap-y-2">
             <Input
               {...register('passwordCheck', {
-                required: '비밀번호를 입력해주세요.',
-                minLength: { value: 2, message: '최소 2자리 이상 입력해주세요.' },
+                required: '비밀번호 확인을 입력해주세요.',
+                validate: value => value === watch('password') || '비밀번호가 일치하지 않습니다.',
               })}
               onBlur={() => trigger('passwordCheck')}
               placeholder="비밀번호를 입력해주세요"
@@ -173,7 +232,12 @@ function Page() {
       <Box className="flex-col mt-15 px-5 pb-12">
         <Box className="justify-between px-2">
           <Box className="gap-x-3">
-            <Checkbox id="terms" />
+            <Checkbox
+              id="terms"
+              {...register('privacyAgreement', {
+                required: '약관에 동의해주세요.',
+              })}
+            />
             <Label htmlFor="terms">개인정보 수집 및 이용 동의(필수)</Label>
           </Box>
           <Dialog>
