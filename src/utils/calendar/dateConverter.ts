@@ -9,8 +9,8 @@ export function convertEventStringToDate
 (event:ApiCalendarEventType):CalendarEventType{
   return {
     ...event,
-    start : fixDate(parseDateString(event.start)),
-    end : fixDate(parseDateString(event.end)),
+    startDate : fixDate(parseDateString(event.startDate)),
+    endDate : fixDate(parseDateString(event.endDate)),
   }
 }
 export function convertEventsStringToDate
@@ -29,8 +29,8 @@ export function convertEventDateToString
 (event:CalendarEventType):ApiCalendarEventType{
   return {
     ...event,
-    start : formatDateToString(event.start),
-    end : formatDateToString(event.end),
+    startDate : formatDateToString(event.startDate),
+    endDate : formatDateToString(event.endDate),
   }
 }
 

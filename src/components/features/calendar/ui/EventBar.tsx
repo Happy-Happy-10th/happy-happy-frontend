@@ -20,6 +20,6 @@ const evnetBarVariants = cva(`w-full h-[6px] rounded-[2px]`, {
   },
 });
 
-export default function EventBar({ title, allDay, start, end, repeat, color, locate, memo }: CalendarEventType) {
+export default function EventBar({ title, allDay, startDate, endDate, repeatCycle, color, locate, memo }: CalendarEventType) {
   return <div className={cn(evnetBarVariants({ variant: color }))}></div>;
 }

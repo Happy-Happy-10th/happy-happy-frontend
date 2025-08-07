@@ -33,8 +33,8 @@ export function CustomCalendar({children, calendarHightPx, calendarWidthPx}:Cust
     const selectedDayStart = startOfDay(today);
     const selectedDayEnd = endOfDay(today);
     const filtered = (data?.events || []).filter((event) => {
-      const eventStart = new Date(event.start);
-      const eventEnd = new Date(event.end);
+      const eventStart = new Date(event.startDate);
+      const eventEnd = new Date(event.endDate);
   
       // 선택한 날짜가 이 이벤트 범위 안에 포함되어 있으면 true
       return isWithinInterval(selectedDayStart, { start: eventStart, end: eventEnd }) ||

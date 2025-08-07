@@ -9,8 +9,8 @@ export function getTodayEvents(
   const todayEnd = endOfDay(new Date());
 
   const todayEvents = events.filter((event) => {
-    const eventStart = event.start;
-    const eventEnd = event.end;
+    const eventStart = event.startDate;
+    const eventEnd = event.endDate;
 
     const startsBeforeOrToday =
       isBefore(eventStart, todayEnd) || isEqual(eventStart, todayEnd);
@@ -28,7 +28,7 @@ export function getUpcomingEvents(events:CalendarEventType[],count:number):Calen
   const todayEnd = endOfDay(new Date());
 
   return events
-    .filter((event) => isAfter(event.start, todayEnd))
-    .sort((a, b) => a.start.getTime() - b.start.getTime())
+    .filter((event) => isAfter(event.startDate, todayEnd))
+    .sort((a, b) => a.startDate.getTime() - b.startDate.getTime())
     .slice(0, count);
 }
