@@ -13,6 +13,7 @@ export const PostAIMessage = async (payload: usePostAIMessagePayload) => {
   return await yoteyoAPI<any>(`chat`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
+    timeout: 30000,
     body: JSON.stringify({ ...Requestbody }),
   });
 };
