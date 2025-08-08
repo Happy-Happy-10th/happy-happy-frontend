@@ -9,8 +9,8 @@ export function convertEventStringToDate
 (event:ApiCalendarEventType):CalendarEventType{
   return {
     ...event,
-    start : fixDate(parseDateString(event.start)),
-    end : fixDate(parseDateString(event.end)),
+    startDate : fixDate(parseDateString(event.startDate)),
+    endDate : fixDate(parseDateString(event.endDate)),
   }
 }
 export function convertEventsStringToDate
@@ -29,8 +29,8 @@ export function convertEventDateToString
 (event:CalendarEventType):ApiCalendarEventType{
   return {
     ...event,
-    start : formatDateToString(event.start),
-    end : formatDateToString(event.end),
+    startDate : formatDateToString(event.startDate),
+    endDate : formatDateToString(event.endDate),
   }
 }
 
@@ -63,7 +63,7 @@ export function formatDateToString(date: Date): string {
   const month = date.getMonth()+1; // JS는 0부터 시작하므로 +1
   const day = date.getDate();
   const hour = date.getHours();
-  // const minute = date.getMinutes();
+  const minute = date.getMinutes();
 
-  return `${year}-${month}-${day}-${hour}`;
+  return `${year}.${month}.${day}T${hour}:${minute}`;
 }

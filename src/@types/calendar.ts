@@ -1,34 +1,29 @@
 import { RepeatType,EventColor } from "./pickerType";
 
 export type CalendarEventType = {
+  id:number;
+  calendarId:number;
   title: string;
   allDay : boolean;
-  start: Date;
-  end: Date;
-  repeat : RepeatType;
+  startDate: Date;
+  endDate: Date;
+  repeatCycle : RepeatType;
   color: EventColor;
   locate : string;
   memo : string;
+  holiday: boolean;
 }
 
 export type ApiCalendarEventType = {
+  id:number;
+  calendarId:number;
   title: string;
   allDay : boolean;
-  start: string;
-  end: string;
-  repeat : RepeatType;
-  color: string;
-  colorType : EventColor;
+  startDate: string;
+  endDate: string;
+  repeatCycle : RepeatType;
+  color: EventColor;
   locate : string;
   memo : string;
-}
-
-export type ApiResponseType = {
-  result : ApiCalendarEventType[],
-  status : number;
-}
-
-export interface GetEventsType{
-  isMondayStart : boolean;
-  result : ApiCalendarEventType[]
+  holiday: boolean;
 }

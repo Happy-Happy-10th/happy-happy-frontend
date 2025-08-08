@@ -51,48 +51,7 @@ const CustomDrawer = forwardRef<CustomDrawerHandle, PropsType>(
             <div className="mx-auto w-full max-w-sm h-full flex flex-col">
               <DrawerHeader className="p-0">
                 <DrawerTitle className="sr-only">이벤트 추가/수정</DrawerTitle>
-
-                {/* {type === "view" && (
-                  <div className="flex flex-row justify-end">
-                    <DrawerClose asChild>
-                      <Button variant="ghost">
-                        <span className="text-[18px]">닫기</span>
-                      </Button>
-                    </DrawerClose>
-                  </div>
-                )}
-
-                {type === "create" && (
-                  <div className="flex flex-row justify-between">
-                    <DrawerClose asChild>
-                      <Button variant="ghost">
-                        <span className="text-[18px]">취소</span>
-                      </Button>
-                    </DrawerClose>
-                    <DrawerClose asChild>
-                      <Button variant="ghost">
-                        <span className="text-yoteyo-main text-[18px]">저장</span>
-                      </Button>
-                    </DrawerClose>
-                  </div>
-                )}
-
-                {type === "edit" && (
-                  <div className="flex flex-row justify-between">
-                    <DrawerClose asChild>
-                      <Button variant="ghost">
-                        <span className="text-[18px]">취소</span>
-                      </Button>
-                    </DrawerClose>
-                    <DrawerClose asChild>
-                      <Button variant="ghost">
-                        <span className="text-yoteyo-main text-[18px]">수정</span>
-                      </Button>
-                    </DrawerClose>
-                  </div>
-                )} */}
               </DrawerHeader>
-
               {contents}
             </div>
           </DrawerContent>
