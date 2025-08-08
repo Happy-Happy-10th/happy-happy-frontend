@@ -60,6 +60,12 @@ export default function CalendarView() {
   });
 
   useEffect(() => {
+    console.log("📅 전달된 이벤트", events);
+    if (events.length > 0) {
+      console.log("▶️ 예시 이벤트:", events[0]);
+      console.log("startDate:", events[0].startDate instanceof Date, events[0].startDate);
+      console.log("endDate:", events[0].endDate instanceof Date, events[0].endDate);
+    }
     const container = containerRef.current;
     if (!container) return;
     const handleWheel = (e: WheelEvent) => {
@@ -85,7 +91,7 @@ export default function CalendarView() {
       container.removeEventListener('wheel', handleWheel);
       observer.disconnect();
     }
-  }, [isMondayStart,currentDate]);
+  }, [isMondayStart,currentDate,events]);
 
   return (
     <div ref={containerRef} className="h-full w-full">

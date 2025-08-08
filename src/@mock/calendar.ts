@@ -1,4 +1,4 @@
-import { CalendarEventType } from "@/@types/calendar"
+import { ApiCalendarEventType, CalendarEventType } from "@/@types/calendar"
 
 export const calendarEventsNone = []
 
@@ -365,6 +365,23 @@ export const calendarEvents: CalendarEventType[] = [
     color: "yoteyoEmerald",
     locate: "전국 스타벅스",
     memo: "올리브영 관련 세일 이벤트",
+    holiday: false
+  },
+]
+
+
+export const calendarApiResponse: ApiCalendarEventType[] = [
+  {
+    id: 1,
+    calendarId: 1,
+    title: "2025 무신사 블랙 프라이데이",
+    allDay: true,
+    startDate: "2025-08-26T00:00:00",
+    endDate: "2025-08-26T23:59:59",
+    repeatCycle: null,
+    color: "yoteyoPurple",
+    locate: "서울 강남 무신사 매장",
+    memo: "최대 80% 할인, 오프라인 이벤트 포함",
     holiday: false
   },
 ]

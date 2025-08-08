@@ -24,7 +24,7 @@ export function CustomCalendar({children, calendarHightPx, calendarWidthPx}:Cust
   const year = currentDate.getFullYear();
   // year 파라미터를 클로저로 캡쳐해서 사용? (year)=>calendarService.getEvents(year) X
   const { user } = useStore(useAuthStore);
-  const {data}= useQuery({
+  const {data,status }= useQuery({
     queryKey : queryKeys.calendar.events(year).queryKey,
     queryFn : ()=> calendarService.getEvents(year,user!.calendarId),
     enabled: !!user?.calendarId,
