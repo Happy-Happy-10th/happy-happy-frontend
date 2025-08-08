@@ -107,7 +107,6 @@ export default function UserEventForm({ event, mode='create' }: PropsType) {
                 <EventTextInput
                   placeholder="일정을 입력하세요"
                   disabled={false}
-                  color={getValues().color}
                   {...field}
                 />
               )}

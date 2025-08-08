@@ -3,7 +3,7 @@ import { Input } from '@/components/ui/input';
 import { cn } from '@/utils/tailwind-utils';
 import { cva } from 'class-variance-authority';
 import { Text } from '@/components/base';
-import { ComponentProps, ReactNode } from 'react';
+import { ComponentProps, ReactNode, useEffect } from 'react';
 import { EventColor } from '@/@types';
 import { useFormContext } from 'react-hook-form';
 
@@ -39,11 +39,11 @@ export default function EventTextInput({
   className,
   ...inputProps
 }: PropsTpye) {
-
-  const { watch } = useFormContext();
+  const form = useFormContext();
+  const variant = form?.watch?.("color") ?? color;
   return (
     <div className={cn('relative w-full h-15')}>
-      <div className={cn(eventChildVariants({ variant: watch("color")||"default" }))}></div>
+      <div className={cn(eventChildVariants({ variant: variant}))}></div>
       <Input
         placeholder={placeholder}
         disabled={disabled}
