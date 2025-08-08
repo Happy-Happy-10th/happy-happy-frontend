@@ -1,5 +1,26 @@
-import { ErrorFormat, useSignInPayload, useSignInResponse, useSignUpPayload, useSignUpResponse } from '@/@types';
-import { PostSignIn, PostSignUp } from '@/api/fragments/auth';
+import {
+  ErrorFormat,
+  useCheckUserIdPayload,
+  useCheckUserIdResponse,
+  useCheckUserNamePayload,
+  useCheckUserNameResponse,
+  useSendCodePayload,
+  useSendCodeResponse,
+  useSignInPayload,
+  useSignInResponse,
+  useSignUpPayload,
+  useSignUpResponse,
+  useVerifyCodePayload,
+  useVerifyCodeResponse,
+} from '@/@types';
+import {
+  PostCheckUserId,
+  PostCheckUserName,
+  PostSendCode,
+  PostSignIn,
+  PostSignUp,
+  PostVerifyCode,
+} from '@/api/fragments/auth';
 import { useMutation, UseMutationOptions } from '@tanstack/react-query';
 import { HTTPError } from 'ky';
 
@@ -33,4 +54,64 @@ const useSignUp = (
   });
 };
 
-export { useSignIn, useSignUp };
+const useCheckUserName = (
+  options: Exclude<
+    UseMutationOptions<useCheckUserNameResponse, HTTPError<ErrorFormat>, useCheckUserNamePayload, unknown>,
+    'mutationFn'
+  >,
+) => {
+  return useMutation({
+    mutationKey: ['check-username'],
+    mutationFn: async (payload: useCheckUserNamePayload) => {
+      return (await PostCheckUserName({ ...payload })).json();
+    },
+    ...options,
+  });
+};
+
+const useCheckUserId = (
+  options: Exclude<
+    UseMutationOptions<useCheckUserIdResponse, HTTPError<ErrorFormat>, useCheckUserIdPayload, unknown>,
+    'mutationFn'
+  >,
+) => {
+  return useMutation({
+    mutationKey: ['check-userId'],
+    mutationFn: async (payload: useCheckUserIdPayload) => {
+      return (await PostCheckUserId({ ...payload })).json();
+    },
+    ...options,
+  });
+};
+
+const useSendCode = (
+  options: Exclude<
+    UseMutationOptions<useSendCodeResponse, HTTPError<ErrorFormat>, useSendCodePayload, unknown>,
+    'mutationFn'
+  >,
+) => {
+  return useMutation({
+    mutationKey: ['send-code'],
+    mutationFn: async (payload: useSendCodePayload) => {
+      return (await PostSendCode({ ...payload })).json();
+    },
+    ...options,
+  });
+};
+
+const useVerifyCode = (
+  options: Exclude<
+    UseMutationOptions<useVerifyCodeResponse, HTTPError<ErrorFormat>, useVerifyCodePayload, unknown>,
+    'mutationFn'
+  >,
+) => {
+  return useMutation({
+    mutationKey: ['verify-code'],
+    mutationFn: async (payload: useVerifyCodePayload) => {
+      return (await PostVerifyCode({ ...payload })).json();
+    },
+    ...options,
+  });
+};
+
+export { useSignIn, useSignUp, useCheckUserName, useCheckUserId, useSendCode, useVerifyCode };
