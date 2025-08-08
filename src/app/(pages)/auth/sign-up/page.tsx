@@ -1,7 +1,7 @@
 'use client';
 
 import { TERMS } from '@/@mock';
-import { useSignUp } from '@/api';
+import { useCheckUserId, useCheckUserName, useSendCode, useSignUp, useVerifyCode } from '@/api';
 import {
   Box,
   Button,
@@ -22,11 +22,14 @@ import { cn } from '@/utils/tailwind-utils';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-interface Props {}
-
 function Page() {
   const [isAuthUserId, setIsAuthUserId] = useState(false);
   const [isAuthUserEmail, setIsAuthUserEmail] = useState(false);
+  const [checked, setChecked] = useState(false);
+
+  const [isVerifyEmail, setIsVerifyEmail] = useState(false);
+  const [code, setCode] = useState('');
+
   const {
     trigger,
     register,
@@ -35,13 +38,11 @@ function Page() {
     watch,
   } = useForm({
     defaultValues: {
-      nickname: '',
-      userid: '',
-      username: '',
+      nickname: '', // 이름
+      userid: '', // 아이디
+      username: '', // 이메일
       password: '',
       passwordCheck: '',
-      privacyAgreement: false,
-      passwordConfirmed: false,
     },
     mode: 'onSubmit',
   });
@@ -56,7 +57,7 @@ function Page() {
         password: getValues('password'),
         passwordCheck: getValues('passwordCheck'),
         passwordConfirmed: getValues('password') === getValues('passwordCheck'),
-        privacyAgreement: getValues('privacyAgreement'),
+        privacyAgreement: checked,
       });
       // mutate({
       //   userid: getValues('userid'),
@@ -74,13 +75,57 @@ function Page() {
     onError: async error => {
       const response = await error.response.json();
 
-      const messages = response?.message ?? '';
+      const messages = response?.message.split('.,') ?? [];
 
-      const message = messages.split('.,')[0];
+      const message = messages.length ? messages[0] : '';
+
       // 에러노출
       console.log(message);
       console.log('error', error);
     },
+  });
+
+  //아이디 중복확인
+  const { mutate: userIdCheckMutate } = useCheckUserId({
+    onSuccess: data => {
+      if (data.status === 200) {
+        setIsAuthUserId(true);
+      }
+    },
+    onError: () => {},
+  });
+
+  //이메일 중복확인
+  const { mutate: userNameCheckMutate } = useCheckUserName({
+    onSuccess: data => {
+      if (data.status === 200) {
+        sendCodeMutate({
+          username: getValues('username'),
+        });
+        setIsAuthUserEmail(true);
+      }
+    },
+    onError: () => {},
+  });
+
+  // 이메일 전송
+  const { mutate: sendCodeMutate } = useSendCode({
+    onSuccess: data => {
+      // 이메일이 발송되었습니다.
+      if (data.status === 200) {
+      }
+    },
+    onError: () => {},
+  });
+
+  //이메일 인증
+  const { mutate: verifyCodeMutate } = useVerifyCode({
+    onSuccess: data => {
+      if (data.status === 200) {
+        setIsVerifyEmail(true);
+      }
+    },
+    onError: () => {},
   });
 
   return (
@@ -125,6 +170,7 @@ function Page() {
                 required: '아이디를 입력해주세요.',
                 minLength: { value: 2, message: '최소 2자리 이상 입력해주세요.' },
               })}
+              disabled={isAuthUserId}
               onBlur={() => trigger('userid')}
               placeholder="아이디를 입력해주세요"
               variant={errors.userid?.message ? 'error' : 'default'}
@@ -137,6 +183,11 @@ function Page() {
                       'px-4 py-2 flex items-center justify-center',
                       isAuthUserId ? 'bg-[#E2E2E2] text-yoteyo-gray-300' : 'bg-[#F5ECFF] text-yoteyo-main ',
                     )}
+                    onClick={() => {
+                      userIdCheckMutate({
+                        userid: getValues('userid'),
+                      });
+                    }}
                   >
                     <Text className="!text-[14px] font-semibold">중복확인</Text>
                   </Button>
@@ -159,6 +210,7 @@ function Page() {
                 required: '이메일을 입력해주세요.',
                 minLength: { value: 2, message: '최소 2자리 이상 입력해주세요.' },
               })}
+              disabled={isAuthUserEmail}
               onBlur={() => trigger('username')}
               placeholder="이메일을 입력해주세요"
               variant={errors.username?.message ? 'error' : 'default'}
@@ -171,6 +223,11 @@ function Page() {
                       'px-4 py-2 flex items-center justify-center',
                       isAuthUserEmail ? 'bg-[#E2E2E2] text-yoteyo-gray-300' : 'bg-[#F5ECFF] text-yoteyo-main ',
                     )}
+                    onClick={() => {
+                      userNameCheckMutate({
+                        username: getValues('username'),
+                      });
+                    }}
                   >
                     <Text className="!text-[14px] font-semibold">중복확인</Text>
                   </Button>
@@ -185,6 +242,39 @@ function Page() {
             )}
           </Box>
         </Box>
+
+        {isAuthUserEmail && (
+          <Box className="flex-col gap-y-3">
+            <Label className={`gap-0 after:content-["*"] after:text-yoteyo-error`}>이메일 인증</Label>
+            <Box className="flex-col gap-y-2">
+              <Input
+                placeholder="코드를 입력해주세요"
+                value={code}
+                onChange={e => setCode(e.target.value)}
+                iconProps={{
+                  end: (
+                    <Button
+                      variant="icon"
+                      size="icon"
+                      className={cn(
+                        'px-4 py-2 flex items-center justify-center',
+                        isVerifyEmail ? 'bg-[#E2E2E2] text-yoteyo-gray-300' : 'bg-[#F5ECFF] text-yoteyo-main ',
+                      )}
+                      onClick={() => {
+                        verifyCodeMutate({
+                          username: getValues('username'),
+                          code,
+                        });
+                      }}
+                    >
+                      <Text className="!text-[14px] font-semibold">인증</Text>
+                    </Button>
+                  ),
+                }}
+              />
+            </Box>
+          </Box>
+        )}
 
         <Box className="flex-col gap-y-3">
           <Label className={`gap-0 after:content-["*"] after:text-yoteyo-error`}>비밀번호</Label>
@@ -234,15 +324,16 @@ function Page() {
           <Box className="gap-x-3">
             <Checkbox
               id="terms"
-              {...register('privacyAgreement', {
-                required: '약관에 동의해주세요.',
-              })}
+              checked={checked}
+              onCheckedChange={(check: boolean) => {
+                setChecked(check);
+              }}
             />
             <Label htmlFor="terms">개인정보 수집 및 이용 동의(필수)</Label>
           </Box>
           <Dialog>
             <DialogTrigger>
-              <Text variant="detail1" className="text-[#aaaaaa] underline">
+              <Text variant="detail1" className="text-[#aaaaaa] underline cursor-pointer">
                 내용보기
               </Text>
             </DialogTrigger>
@@ -261,6 +352,7 @@ function Page() {
             </DialogContent>
           </Dialog>
         </Box>
+
         <Button className="mt-4" onClick={onSubmit}>
           가입완료
         </Button>
