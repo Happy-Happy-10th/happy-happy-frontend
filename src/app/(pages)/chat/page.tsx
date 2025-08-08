@@ -11,6 +11,7 @@ import { useStore } from 'zustand/react';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import { usePostAIMessage } from '@/api/service/chat';
+import { useRouter } from 'next/navigation';
 
 type Message = {
   from: 'AI' | 'USER';
@@ -70,9 +71,46 @@ const AIHeader = ({ date, from }: { date: Date; from: Message['from'] }) => {
 
 export default function Page() {
   const { user } = useStore(useAuthStore);
+  const router = useRouter();
 
   const { mutate, isPending } = usePostAIMessage({
-    gcTime: 0,
+    onSuccess: data => {
+      if (data.status === 200) {
+        if (data.code === 'COMMON-ERR-000003') {
+          // setMessages(prev => [
+          //   ...prev,
+          //   {
+          //     from: 'AI',
+          //     date: new Date(data.timeStamp),
+          //     value: data.data as string,
+          //   },
+          // ]);
+
+          return;
+        }
+
+        const { data: res } = data;
+
+        const target = res.list[0];
+
+        setMessages(prev => [
+          ...prev,
+          {
+            from: 'AI',
+            date: new Date(data.timeStamp),
+            value: `사용자 제공 데이터의 답변입니다.\n
+제목 : ${target.title}
+${`날짜 : ${target.start_date.length ? dayjs(target.start_date).format('YYYY.MM.DD') : '정보없음'} ~ ${
+  target.end_date.length ? dayjs(target.end_date).format('YYYY.MM.DD') : '정보없음'
+}`}
+${`장소 : ${target.location.length ? target.location : '정보없음'}`}
+${`URL : ${target.homepage_url.length ? target.homepage_url : '정보없음'}\n`}
+일정요약 :\n${target.memo.join('\n')}`,
+          },
+        ]);
+      }
+    },
+    onError: () => {},
   });
 
   const [payload, setPayload] = useState<{ eventType: 'online' | 'offline' | ''; title: string; address: string }>({
@@ -82,6 +120,8 @@ export default function Page() {
   });
   const [firstTime] = useState(new Date());
   const [messages, setMessages] = useState<Message[]>([]);
+
+  // const [isPending, setIsPending] = useState(false);
 
   const handlePostAIMessage = ({
     ttl = 1000,
@@ -118,9 +158,16 @@ export default function Page() {
     return false;
   }, [payload]);
 
-  const handleSubmit = () => {
-    if (isPending) return;
+  const handleSubmit = async () => {
+    // await PostAIMessage({
+    //   parameters: {
+    //     ...payload,
+    //   },
+    // }).then(() => {
+    //   setIsPending(false);
+    // });
 
+    if (isPending) return;
     setMessages(prev => [
       ...prev,
       {
@@ -129,6 +176,7 @@ export default function Page() {
         value: payload.title,
       },
     ]);
+
     mutate({
       parameters: {
         ...payload,
@@ -140,7 +188,7 @@ export default function Page() {
   return (
     <Box className="w-full h-full flex-col bg-linear-[180deg,#FFFFFF_0%,#F5EBFF_100%]">
       <Box className="z-10 fixed top-0 h-21.5 w-full px-5 items-center gap-x-4 bg-white">
-        <Button size="icon" variant="icon" className="rounded-none">
+        <Button size="icon" variant="icon" className="rounded-none" onClick={() => router.back()}>
           <img src="/images/arrow-left-black.png" className="w-2 h-4" alt="뒤로가기 아이콘" />
         </Button>
 
