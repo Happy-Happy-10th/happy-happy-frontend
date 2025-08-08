@@ -1,6 +1,5 @@
 import { EventColor } from '@/@types';
 import clsx from 'clsx';
-import { cn } from '@/utils/tailwind-utils';
 
 const colorClassMap: Record<EventColor, string> = {
   yoteyoRed: 'yoteyo-red',

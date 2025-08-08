@@ -15,22 +15,25 @@ export async function getUserEvents(year:number,calendarId:number){
 }
 
 export async function postUserEvent(payload:CalendarEventType){
-  console.log("post api call")
-  console.log(JSON.stringify({...payload}));
+  const { id, ...rest } = payload;
   return await yoteyoAPI<ApiCalendarEventType>('calendar/events',{
     method:'post',
     headers:{
       'Content-Type': 'application/json',
     },
-    body : JSON.stringify({...payload})
+    body : JSON.stringify({...rest})
   })
 }
 
 export async function putUserEvent(payload:CalendarEventType){
-  return await yoteyoAPI<ApiCalendarEventType>(`calendar/events/${payload.id}`,{
+  const { id, ...rest } = payload;
+  console.log(rest.startDate);
+  console.log(rest.endDate);
+  console.log(JSON.stringify(rest))
+  return await yoteyoAPI<ApiCalendarEventType>(`calendar/events/${id}`,{
     method:'put',
     headers:{'Content-Type': 'application/json'},
-    body : JSON.stringify({...payload})
+    body : JSON.stringify({...rest})
   })
 }
 

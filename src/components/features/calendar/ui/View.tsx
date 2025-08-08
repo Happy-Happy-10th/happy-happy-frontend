@@ -85,7 +85,7 @@ export default function CalendarView() {
       container.removeEventListener('wheel', handleWheel);
       observer.disconnect();
     }
-  }, [isMondayStart,currentDate]);
+  }, [isMondayStart,currentDate,events]);
 
   return (
     <div ref={containerRef} className="h-full w-full">

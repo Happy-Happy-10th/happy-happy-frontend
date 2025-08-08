@@ -41,7 +41,16 @@ const eventChildVariants = cva(`pl-[5px] w-[2px] h-[16.5px] rounded-[4px]`, {
   },
 });
 
-export default function CalendarEvent({ title, allDay, startDate, endDate, repeatCycle, color, locate, memo }: CalendarEventType) {
+export default function CalendarEvent({ 
+  title, 
+  allDay, 
+  startDate, 
+  endDate, 
+  repeatCycle, 
+  color="yoteyoGreen", 
+  locate, 
+  memo 
+}: CalendarEventType) {
   return (
     <div className={cn(evnetBarVariants({ variant: color }))}>
       <div className={cn(eventChildVariants({ variant: color }))}></div>

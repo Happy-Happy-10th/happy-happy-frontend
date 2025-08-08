@@ -21,7 +21,7 @@ const dateSelectorbody = clsx(
  */
 type PropsType = {}
 export default function DateSelector({}:PropsType){
-  const { watch, setValue } = useFormContext();
+  const { watch, setValue,getValues } = useFormContext();
   const allDay = watch("allDay");
   const handleAllDayChange = (checked: boolean) => {
     setValue("allDay", checked);

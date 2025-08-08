@@ -69,7 +69,7 @@ export default function DayEventList({ selectedDate, dayEvents }: PropsType) {
                   key={`dayelist_edit_${index}`}
                   ref={editDrawerRef}
                   trigger={<div className="hidden" />}
-                  contents={<UserEventForm event={event} />}
+                  contents={<UserEventForm event={event} mode="edit"/>}
                   type="edit"
                 />
               </div>

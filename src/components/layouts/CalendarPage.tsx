@@ -67,10 +67,6 @@ export default function CalendarPage(){
     enabled: !!user?.calendarId,
   })
   
-  useEffect(()=>{
-    console.log('data changed:', data);
-  },[data])
-
   return (
     <div className={contents}>
       <div className={calendarSize}>
