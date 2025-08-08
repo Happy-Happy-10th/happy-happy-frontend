@@ -202,7 +202,12 @@ function Page() {
 
       <AuthLayout>
         <Box className="w-full h-14 justify-center items-center relative">
-          <Button size="icon" variant="icon" className="absolute left-5 w-6 h-6 rounded-none">
+          <Button
+            size="icon"
+            variant="icon"
+            className="absolute left-5 w-6 h-6 rounded-none"
+            onClick={() => router.back()}
+          >
             <img src="/images/arrow-left.png" className="w-2 h-4" alt="뒤로가기 아이콘" />
           </Button>
 
