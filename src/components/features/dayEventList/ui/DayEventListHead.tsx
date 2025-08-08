@@ -30,10 +30,8 @@ export default function DayEventListHead({date=new Date()}:props){
   const router = useRouter();
   const [inLoginAlert, setInLoginAlert] = useState<boolean>(false)
   const handleDialogOpen = ()=>setInLoginAlert(true)
-  const handleDialogClose = ()=>{
-    setInLoginAlert(false)
-    router.push("/auth/login");
-  }
+  const handleDialogClose = ()=>{setInLoginAlert(false)}
+  const pageMove = ()=>{router.push("/auth/login");}
 
   const day = format(date, 'EEEE,dd', { locale: ko }); // 'EEE'는 Mon, Tue 같은 약칭
   return (
@@ -60,9 +58,11 @@ export default function DayEventListHead({date=new Date()}:props){
       <CustomDialog
           open={inLoginAlert}
           onClose={handleDialogClose}
+          onBtnClick={pageMove}
           icon={<AlertPurpleIcon/>}
           mainMsg="앗 아직 로그인을 안하셨군요"
           subMsg="로그인하고 요때요 서비스를 사용해보세요"
+          btntext='로그인'
         />
     </div>
   )

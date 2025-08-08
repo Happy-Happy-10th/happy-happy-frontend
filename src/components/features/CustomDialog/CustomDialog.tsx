@@ -19,6 +19,7 @@ import { ReactNode } from 'react';
 type CustomDialogType = {
   open: boolean;
   onClose: () => void;
+  onBtnClick?: (()=>void)|null;
   icon: ReactNode;
   mainMsg?: string;
   subMsg?: string;
@@ -28,6 +29,7 @@ type CustomDialogType = {
 export default function CustomDialog({
   open,
   onClose,
+  onBtnClick=null,
   icon = <AlertRedIcon />,
   mainMsg,
   subMsg,
@@ -56,7 +58,7 @@ export default function CustomDialog({
             {subMsg}
           </Text>
         </Box>
-        <Button type="button" variant={'default'} onClick={onClose}>
+        <Button type="button" variant={'default'} onClick={onBtnClick?onBtnClick:onClose}>
           <Text variant={'body3'}>{btntext}</Text>
         </Button>
       </DialogContent>
