@@ -73,24 +73,31 @@ export default function UserEventForm({ event, mode='create' }: PropsType) {
       holiday:false
     },
   });
-  const { control, handleSubmit, getValues,setValue } = methods;
+  const { control, handleSubmit } = methods;
 
   const onSubmit = (data: CalendarEventType) => {
     if (!user) return;
-    const apiData = { ...data, calendarId: user.calendarId };
 
+    const startDate = new Date(data.startDate);
+    const endDate = new Date(data.endDate);
+    const timezoneOffset = startDate.getTimezoneOffset() * 60000;
+    const adjustedStartDate = new Date(startDate.getTime() - timezoneOffset);
+    const adjustedEndDate = new Date(endDate.getTime() - timezoneOffset);
+    const payload ={
+      ...data,
+      startDate : adjustedStartDate,
+      endDate : adjustedEndDate,
+      calendarId : user.calendarId
+    }
     // POST Mutate 함수 동작
     if(mode === 'create'){
-      console.log(JSON.stringify(data));
-      CreateEventMutation.mutate(apiData);
+      CreateEventMutation.mutate(payload);
     }
     // PUT Mutate 함수 동작
     else if(mode ==='edit'){
-      console.log(JSON.stringify(data));
-      putEventMutation.mutate(apiData)
+      putEventMutation.mutate(payload)
     }
   };
-
   return (
     // ✅ FormProvider로 methods 전달
     <FormProvider {...methods}>
@@ -180,7 +187,7 @@ export default function UserEventForm({ event, mode='create' }: PropsType) {
                     className="border-none yoteyo-m-detail-lg rounded-t-none"
                     rows={10}
                     placeholder="메모"
-                    onChange={(e) => {
+                    onFocus={(e) => {
                       field.onChange(e);
                       setTimeout(() => {
                         scrollContainerRef.current?.scrollTo({
