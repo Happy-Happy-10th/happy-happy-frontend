@@ -6,11 +6,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useAuthStore } from '@/store';
 import { cn } from '@/utils/tailwind-utils';
 import { motion } from 'motion/react';
-import { useCallback, useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useStore } from 'zustand/react';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
-import { useHealth } from '@/api';
 import { usePostAIMessage } from '@/api/service/chat';
 
 type Message = {
@@ -55,31 +54,33 @@ const CustomSelect = ({ ...props }: React.ComponentProps<typeof Select>) => {
   );
 };
 
-const AIHeader = ({ date }: { date: Date }) => {
+const AIHeader = ({ date, from }: { date: Date; from: Message['from'] }) => {
   return (
-    <Box className="gap-x-3 items-center mb-3">
-      <Icon className="w-9 h-9 rounded-full">
-        <img src="/images/chat-profile.png" alt="요때요 아이콘" className="object-contain" />
-      </Icon>
+    <Box className={cn('gap-x-3 items-center mb-3', from === 'AI' ? '' : 'ml-auto')}>
+      {from === 'AI' && (
+        <Icon className="w-9 h-9 rounded-full">
+          <img src="/images/chat-profile.png" alt="요때요 아이콘" className="object-contain" />
+        </Icon>
+      )}
+
       <Text className="text-yoteyo-gray-300 !text-[12px] font-medium">{dayjs(date).format('A h:mm')}</Text>
     </Box>
   );
 };
 
 export default function Page() {
-  const [message, setMessage] = useState('');
   const { user } = useStore(useAuthStore);
 
-  const { data } = useHealth();
-
-  const { mutate, isPending } = usePostAIMessage({});
+  const { mutate, isPending } = usePostAIMessage({
+    gcTime: 0,
+  });
 
   const [payload, setPayload] = useState<{ eventType: 'online' | 'offline' | ''; title: string; address: string }>({
     eventType: '',
     title: '',
     address: '',
   });
-  const [firstTime, setFirstTime] = useState(new Date());
+  const [firstTime] = useState(new Date());
   const [messages, setMessages] = useState<Message[]>([]);
 
   const handlePostAIMessage = ({
@@ -106,8 +107,34 @@ export default function Page() {
     }, ttl);
   };
 
+  const chatVisible = useMemo(() => {
+    if (payload.eventType === 'offline') {
+      return payload.eventType && payload.address;
+    }
+    if (payload.eventType === 'online') {
+      return true;
+    }
+
+    return false;
+  }, [payload]);
+
   const handleSubmit = () => {
     if (isPending) return;
+
+    setMessages(prev => [
+      ...prev,
+      {
+        from: 'USER',
+        date: new Date(),
+        value: payload.title,
+      },
+    ]);
+    mutate({
+      parameters: {
+        ...payload,
+      },
+    });
+    setPayload(prev => ({ ...prev, title: '' }));
   };
 
   return (
@@ -202,8 +229,8 @@ export default function Page() {
                           onValueChange={value => {
                             setPayload(prev => ({ ...prev, address: value }));
                             setMessages(prev => [...prev, { from: 'USER', value }]);
-                            handlePostAIMessage({ message: CHAT.step3.offline[0] });
-                            handlePostAIMessage({ message: CHAT.step3.offline[1] });
+                            handlePostAIMessage({ message: CHAT.step3.offline[0], date: new Date() });
+                            handlePostAIMessage({ message: CHAT.step3.offline[1], date: new Date() });
                           }}
                         />
                       ),
@@ -217,7 +244,6 @@ export default function Page() {
             </Box>
           </Box>
         </motion.div>
-
         {messages.map((item, idx) => {
           if (item.value)
             return (
@@ -228,7 +254,7 @@ export default function Page() {
                 transition={{ duration: 0.8 }}
               >
                 <Box className="flex-col">
-                  {item.date && <AIHeader date={item.date} />}
+                  {item.date && <AIHeader date={item.date} from={item.from} />}
 
                   <Box>
                     <ChatBox from={item.from} message={item.value} />
@@ -251,31 +277,63 @@ export default function Page() {
             </motion.div>
           );
         })}
+
+        {isPending ? (
+          <Box className="gap-x-3 mt-3 items-center">
+            <Icon className="w-6 h-6 text-yoteyo-main">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="animate-spin lucide lucide-loader-circle-icon lucide-loader-circle"
+              >
+                <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+              </svg>
+            </Icon>
+
+            <Text variant="body2">잠시만 기다려주세요...</Text>
+          </Box>
+        ) : (
+          <></>
+        )}
       </Box>
 
-      <Box className="py-3 bg-white w-full mt-auto px-5  gap-x-5 ">
-        <input className="w-full h-auto bg-[#F0F0F0] outline-0 rounded-full px-5" placeholder="메세지 입력" />
-        <Button variant="icon" size="icon" disabled={isPending}>
-          <Icon className="flex items-center justify-center w-14 h-14 rounded-full bg-yoteyo-main">
-            <img className="w-6 h-6" src="/images/send-icon.png" alt="전송" />
-          </Icon>
-        </Button>
+      {chatVisible ? (
+        <Box className="py-3 bg-white w-full mt-auto px-5  gap-x-5 ">
+          <input
+            className="w-full h-auto bg-[#F0F0F0] outline-0 rounded-full px-5"
+            placeholder="메세지 입력"
+            value={payload.title}
+            onChange={e => setPayload(prev => ({ ...prev, title: e.target.value }))}
+            onKeyUp={e => {
+              if (e.key === 'Enter') {
+                handleSubmit();
+              }
+            }}
+          />
 
-        {/* <Button
-          onClick={() => {
-            mutate({
-              parameters: {
-                eventType: '온라인',
-                title: '스위프 개발완료기간이 궁금해',
-                // title: '올리브영 세일기간이 궁금해',
-                address: '',
-              },
-            });
-          }}
-        >
-          한번 요청해볼게
-        </Button> */}
-      </Box>
+          <Button
+            variant="icon"
+            size="icon"
+            disabled={isPending}
+            onClick={() => {
+              handleSubmit();
+            }}
+          >
+            <Icon className="flex items-center justify-center w-14 h-14 rounded-full bg-yoteyo-main">
+              <img className="w-6 h-6" src="/images/send-icon.png" alt="전송" />
+            </Icon>
+          </Button>
+        </Box>
+      ) : (
+        <></>
+      )}
     </Box>
   );
 }

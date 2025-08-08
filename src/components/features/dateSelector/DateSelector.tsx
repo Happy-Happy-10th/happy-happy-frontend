@@ -26,13 +26,13 @@ export default function DateSelector({}:PropsType){
   const handleAllDayChange = (checked: boolean) => {
     setValue("allDay", checked);
   };
-  const start = watch("start");
+  const start = watch("startDate");
   const handleStartChange = (date: Date) => {
-    setValue("start", date);
+    setValue("startDate", date);
   };
-  const end = watch("end");
+  const end = watch("endDate");
   const handleEndChange = (date: Date) => {
-    setValue("end", date);
+    setValue("endDate", date);
   };
   
   return(

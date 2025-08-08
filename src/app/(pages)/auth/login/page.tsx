@@ -1,7 +1,7 @@
 'use client';
 
 import { useSignIn } from '@/api/service/auth';
-import { Box, Button, Icon, Input, Text } from '@/components/base';
+import { AlertRedIcon, Box, Button, Icon, Input, Text } from '@/components/base';
 import AuthLayout from '@/components/layouts/AuthLayout';
 import { Label } from '@/components/ui/label';
 import { useRouter } from 'next/navigation';
@@ -10,9 +10,11 @@ import { useForm } from 'react-hook-form';
 import { setCookie } from 'cookies-next';
 import { useStore } from 'zustand';
 import { useAuthStore } from '@/store';
+import { CustomDialog } from '@/components/features';
 
 function Page() {
   const router = useRouter();
+  const [dialogState, setDialogState] = useState({ open: false, message: '' });
 
   const { setUser } = useStore(useAuthStore);
   const {
@@ -44,73 +46,83 @@ function Page() {
       setCookie('yt-atk', data.accessToken, { path: '/' });
       router.push('/home');
     },
-    onError: () => {
-      console.log('error');
+    onError: async error => {
+      const res = await error.response.json();
+      console.log(res.message);
+      setDialogState({ open: true, message: res.message });
     },
   });
 
   return (
-    <AuthLayout>
-      <Box className="flex-col items-center justify-center h-full px-5">
-        <img className="w-40 h-15" src="/images/yoteyo-text-primary.png" alt="요때요 텍스트 이미지" />
+    <>
+      <CustomDialog
+        open={dialogState.open}
+        onClose={() => setDialogState({ open: false, message: '' })}
+        icon={<AlertRedIcon />}
+        mainMsg={dialogState.message}
+      />
 
-        <Box className="flex-col w-full gap-y-3">
-          <Label htmlFor="id" className="text-sm/[1.5] font-medium p-1">
-            아이디
-          </Label>
-          <Box className="flex-col">
-            <Input
-              id="id"
-              {...register('userid', {
-                required: '이메일을 입력해주세요.',
-                minLength: { value: 2, message: '최소 2자리 이상 입력해주세요.' },
-              })}
-              placeholder="이메일을 입력해주세요"
-              onBlur={() => trigger('userid')}
-              variant={errors.userid?.message ? 'error' : 'default'}
-            />
+      <AuthLayout>
+        <Box className="flex-col items-center justify-center h-full px-5">
+          <img className="w-40 h-15" src="/images/yoteyo-text-primary.png" alt="요때요 텍스트 이미지" />
 
-            <Text variant="detail2" className="text-yoteyo-error p-1">
-              {errors.userid?.message}
-            </Text>
+          <Box className="flex-col w-full gap-y-3">
+            <Label htmlFor="id" className="text-sm/[1.5] font-medium p-1">
+              아이디
+            </Label>
+            <Box className="flex-col">
+              <Input
+                id="id"
+                {...register('userid', {
+                  required: '이메일을 입력해주세요.',
+                  minLength: { value: 2, message: '최소 2자리 이상 입력해주세요.' },
+                })}
+                placeholder="이메일을 입력해주세요"
+                onBlur={() => trigger('userid')}
+                variant={errors.userid?.message ? 'error' : 'default'}
+              />
+
+              <Text variant="detail2" className="text-yoteyo-error p-1">
+                {errors.userid?.message}
+              </Text>
+            </Box>
           </Box>
-        </Box>
 
-        <Box className="flex-col w-full gap-y-3 mt-6">
-          <Label htmlFor="pw" className="text-sm/[1.5] font-medium p-1">
-            비밀번호
-          </Label>
-          <Box className="flex-col">
-            <Input
-              id="pw"
-              {...register('password', {
-                required: '비밀번호를 입력해주세요.',
-                minLength: { value: 2, message: '최소 2자리 이상 입력해주세요.' },
-              })}
-              type="password"
-              placeholder="비밀번호를 입력해주세요"
-              onBlur={() => trigger('password')}
-              variant={errors.password?.message ? 'error' : 'default'}
-            />
-            <Text variant="detail2" className="text-yoteyo-error p-1">
-              {errors.password?.message}
-            </Text>
+          <Box className="flex-col w-full gap-y-3 mt-6">
+            <Label htmlFor="pw" className="text-sm/[1.5] font-medium p-1">
+              비밀번호
+            </Label>
+            <Box className="flex-col">
+              <Input
+                id="pw"
+                {...register('password', {
+                  required: '비밀번호를 입력해주세요.',
+                  minLength: { value: 2, message: '최소 2자리 이상 입력해주세요.' },
+                })}
+                type="password"
+                placeholder="비밀번호를 입력해주세요"
+                onBlur={() => trigger('password')}
+                variant={errors.password?.message ? 'error' : 'default'}
+              />
+              <Text variant="detail2" className="text-yoteyo-error p-1">
+                {errors.password?.message}
+              </Text>
+            </Box>
           </Box>
-        </Box>
 
-        <Box className="w-full justify-end mt-6">
-          <Button size="icon" variant="icon" onClick={() => router.push('/auth/sign-up')}>
-            <Text variant="detail1" className="text-yoteyo-main">
-              회원가입
-            </Text>
+          <Box className="w-full justify-end mt-6">
+            <Button size="icon" variant="icon" onClick={() => router.push('/auth/sign-up')}>
+              <Text variant="detail1" className="text-yoteyo-main">
+                회원가입
+              </Text>
+            </Button>
+          </Box>
+
+          <Button className="mt-12" onClick={onSubmit}>
+            로그인
           </Button>
-        </Box>
 
-        <Button className="mt-12" onClick={onSubmit}>
-          로그인
-        </Button>
-
-        {/* <Box className="mt-12.5 mb-6 w-full items-center">
+          {/* <Box className="mt-12.5 mb-6 w-full items-center">
           <Box className="flex-1 w-full h-[1px] bg-yoteyo-outline" />
           <Text variant="detail1" className="mx-4 text-yoteyo-gray-400">
             SNS 간편 로그인
@@ -118,7 +130,7 @@ function Page() {
           <Box className=" flex-1 w-full h-[1px] bg-yoteyo-outline" />
         </Box> */}
 
-        {/* <Box className="gap-x-5">
+          {/* <Box className="gap-x-5">
           <Box className="flex-col">
             <Button size="icon" variant="icon">
               <Icon className="w-15 h-15 border-1 border-yoteyo-outline rounded-full">
@@ -143,8 +155,9 @@ function Page() {
             </Text>
           </Box>
         </Box> */}
-      </Box>
-    </AuthLayout>
+        </Box>
+      </AuthLayout>
+    </>
   );
 }
 

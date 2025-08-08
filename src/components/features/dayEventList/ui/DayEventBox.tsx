@@ -47,7 +47,7 @@ const DayEventBox = forwardRef<HTMLDivElement, PropsType>(({ event }, ref) => {
       <div className={cn(eventChildVariants({variant:event.color}))}></div>
       <div className={eventContents}>
         <div className="font-bold">{viewEvent.title}</div>
-        <div>{`${viewEvent.start} ~ ${viewEvent.end}`}</div>
+        <div>{`${viewEvent.startDate} ~ ${viewEvent.endDate}`}</div>
       </div>
     </div>
   )
