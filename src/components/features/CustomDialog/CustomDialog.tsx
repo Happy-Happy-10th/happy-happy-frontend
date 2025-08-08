@@ -12,6 +12,7 @@ import {
   Icon,
   AlertRedIcon,
 } from '@/components/base';
+import { cn } from '@/utils/tailwind-utils';
 import { X } from 'lucide-react';
 import { ReactNode } from 'react';
 
@@ -22,6 +23,7 @@ type CustomDialogType = {
   mainMsg ?: string;
   subMsg ?: string;
   btntext?:string;
+  className ?:string;
 }
 export default function CustomDialog({
   open, 
@@ -29,11 +31,12 @@ export default function CustomDialog({
   icon=<AlertRedIcon/>, 
   mainMsg, 
   subMsg,
-  btntext="확인"
+  btntext="확인",
+  className
 }:CustomDialogType){
   return(
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent showCloseButton={false} className='w-full'>
+      <DialogContent showCloseButton={false} className={cn(className,'w-full')}>
         <DialogHeader>
           <DialogClose asChild>
             <Box className='w-full flex justify-end'>

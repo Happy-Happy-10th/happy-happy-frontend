@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 
 import { CustomCalendar, CalendarContext } from '@/components/features/calendar';
@@ -39,6 +39,7 @@ export default function CalendarPage(){
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [dayEvents, setDayEvents] = useState<CalendarEventType[]>([]);
   //캘린더 선택시 이밴트 동작
+
   const handleSetSelectedDate = (today: Date) => {
     setSelectedDate(today);
     const selectedDayStart = startOfDay(today);
@@ -66,6 +67,10 @@ export default function CalendarPage(){
     enabled: !!user?.calendarId,
   })
   
+  useEffect(()=>{
+    console.log('data changed:', data);
+  },[data])
+
   return (
     <div className={contents}>
       <div className={calendarSize}>

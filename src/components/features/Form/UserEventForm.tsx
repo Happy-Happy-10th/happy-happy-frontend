@@ -60,8 +60,8 @@ export default function UserEventForm({ event, mode='create' }: PropsType) {
   //React-hook-form 선언
   const methods = useForm<CalendarEventType>({
     defaultValues: event || {
-      // id:"",
-      calendarId : user?.calendarId,
+      id:0,
+      calendarId : user!.calendarId,
       title: "",
       allDay: true,
       startDate: new Date(),

@@ -2,7 +2,7 @@ import { RepeatType,EventColor } from "./pickerType";
 
 export type CalendarEventType = {
   id:number;
-  calendarId:string;
+  calendarId:number;
   title: string;
   allDay : boolean;
   startDate: Date;
@@ -16,7 +16,7 @@ export type CalendarEventType = {
 
 export type ApiCalendarEventType = {
   id:number;
-  calendarId:string;
+  calendarId:number;
   title: string;
   allDay : boolean;
   startDate: string;

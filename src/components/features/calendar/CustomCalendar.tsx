@@ -10,6 +10,8 @@ import CalendarView from "./ui/View";
 import { useDateState } from "@/hooks";
 import { CalendarEventType } from "@/@types/calendar";
 import { endOfDay, isWithinInterval, startOfDay } from "date-fns";
+import { useStore } from "zustand";
+import { useAuthStore } from "@/store";
 
 type CustomCalendarType = {
   children : ReactNode
@@ -21,9 +23,11 @@ export function CustomCalendar({children, calendarHightPx, calendarWidthPx}:Cust
   const [currentDate, setCurrentDate] = useDateState(new Date());
   const year = currentDate.getFullYear();
   // year 파라미터를 클로저로 캡쳐해서 사용? (year)=>calendarService.getEvents(year) X
+  const { user } = useStore(useAuthStore);
   const {data}= useQuery({
     queryKey : queryKeys.calendar.events(year).queryKey,
-    queryFn : ()=> calendarService.getEvents(year)
+    queryFn : ()=> calendarService.getEvents(year,user!.calendarId),
+    enabled: !!user?.calendarId,
   })
 
   //캘린더에서 선택될 날짜 데이터
