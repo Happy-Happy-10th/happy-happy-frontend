@@ -10,5 +10,4 @@ export type EventColor =
 "yoteyoBlue"|
 "yoteyoPurple"|
 "yoteyoPink"|
-"yoteyoBlack"|
-null;
+"yoteyoBlack";
