@@ -27,14 +27,15 @@ export async function postUserEvent(payload:CalendarEventType){
 
 export async function putUserEvent(payload:CalendarEventType){
   const { id, ...rest } = payload;
-  console.log(rest.startDate);
-  console.log(rest.endDate);
-  console.log(JSON.stringify(rest))
   return await yoteyoAPI<ApiCalendarEventType>(`calendar/events/${id}`,{
     method:'put',
     headers:{'Content-Type': 'application/json'},
     body : JSON.stringify({...rest})
   })
+}
+
+export async function DeleteEvent(eventId:number){
+
 }
 
 export async function getUserSetting(){
