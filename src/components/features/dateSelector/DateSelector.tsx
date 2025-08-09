@@ -5,9 +5,9 @@ import clsx from "clsx"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
-import { useDateState } from "@/hooks"
 import SetDate from "./ui/SetDate"
 import { useFormContext } from "react-hook-form"
+import { Text } from "@/components/base"
 
 const dateSelectorFrame = clsx(
   "pt-2 pb-2 pl-5 pr-5"
@@ -21,7 +21,7 @@ const dateSelectorbody = clsx(
  */
 type PropsType = {}
 export default function DateSelector({}:PropsType){
-  const { watch, setValue,getValues } = useFormContext();
+  const { watch, setValue } = useFormContext();
   const allDay = watch("allDay");
   const handleAllDayChange = (checked: boolean) => {
     setValue("allDay", checked);
@@ -38,7 +38,9 @@ export default function DateSelector({}:PropsType){
   return(
     <div className={dateSelectorFrame}>
       <div className={dateSelectorbody}>
-        <Label htmlFor="all-day-switch" className="yoteyo-m-detail-lg">하루종일</Label>
+        <Label htmlFor="all-day-switch" className="yoteyo-m-detail-lg">
+          <Text variant={"body4"} >하루종일</Text>
+        </Label>
         <Switch 
           id="all-day-switch" 
           className="w-[56px] h-[32px] data-[state=checked]:bg-yoteyo-main"

@@ -6,7 +6,8 @@ import { ko } from 'date-fns/locale';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { cva } from 'class-variance-authority';
 import { cn } from '@/utils/tailwind-utils';
-import { SetDateHandler } from '@/@types';
+import { Text } from '@/components/base';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const calendarVariants = cva(
   `[&_.rbc-row-bg]:!right-[0]
@@ -59,7 +60,7 @@ export default function DatePicker({ targetDate = new Date(), setTargetDate = ()
       endAccessor="end"
       localizer={localizer}
       view="month"
-      style={{ height: '200px', width: '100%' }}
+      style={{ height: '100%', width: '100%' }}
       components={{
         toolbar: Toolbar,
         month: {
@@ -77,10 +78,16 @@ function Toolbar({ date, onNavigate }: ToolbarProps) {
   const goToNext = () => onNavigate('NEXT');
   return (
     <div className="flex justify-between items-center p-2">
-      <span className="yoteyo-m-detail-lg">{formatted}</span>
+      <span className="yoteyo-m-detail-lg">
+        <Text variant={"title3"} >{formatted}</Text>
+      </span>
       <div className="flex gap-2">
-        <button type="button" onClick={goToBack}>◀</button>
-        <button type="button" onClick={goToNext}>▶</button>
+        <button type="button" onClick={goToBack}>
+          <ChevronLeft />
+        </button>
+        <button type="button" onClick={goToNext}>
+          <ChevronRight />
+        </button>
       </div>
     </div>
   );
@@ -89,8 +96,13 @@ function Toolbar({ date, onNavigate }: ToolbarProps) {
 function MonthHeader({ date }: HeaderProps) {
   const day = format(date, 'EEE', { locale: ko }); // 'EEE'는 Mon, Tue 같은 약칭
 
-  return <div className="text-center font-bold border-none text-yoteyo-gray-300 yoteyo-m-detail-md">{day}</div>;
+  return <div className="flex justify-center items-center text-center font-bold border-none text-yoteyo-gray-300 yoteyo-m-detail-md">
+    <Text variant={"body4"}>
+      {day}
+    </Text>
+  </div>;
 }
+
 type DateHeaderType = DateHeaderProps & {
   setTargetDate: (date:Date)=>void;
   targetDate: Date;
@@ -117,7 +129,9 @@ function DateHeader({ date, isOffRange, targetDate, setTargetDate }: DateHeaderT
           isToday && 'bg-yoteyo-main rounded-full text-white font-normal',
         )}
       >
-        {format(date, 'd')}
+        <Text variant={"body3"}>
+          {format(date, 'd')}
+        </Text>
       </div>
     </div>
   );
