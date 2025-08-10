@@ -5,7 +5,6 @@ import {
   Text
 } from "@/components/base";
 import { convertEventStringToDate, base64UrlDecodeToString } from "@/utils";
-import { format } from "date-fns";
 import { UserEventForm } from "@/components/features";
 
 type SharedPageType = {searchParams: Promise<{ d?: string }>;}

@@ -110,7 +110,7 @@ export default function DayEventList({ selectedDate, dayEvents }: PropsType) {
       <CustomDialog
         open={deleteDialog.open}
         onClose={() => setDeleteDialog({open: false, eventId: null})}
-        onBtnClick={() => {
+        onSubmit={() => {
           if (deleteDialog.eventId) {
             deleteMutation.mutate(deleteDialog.eventId);
           }
