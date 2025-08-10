@@ -23,11 +23,11 @@ export default async function SharedPage({searchParams}:SharedPageType){
   }
 
   return(
-    <Box className="w-full h-full flex flex-col justify-center items-center bg-yoteyo-bg-default">
+    <Box className="w-full h-full flex flex-col justify-center items-center bg-yoteyo-bg-default overflow-hidden">
       <Box className="bg-yoteyo-main xl:w-123 w-[80%] h-17 text-white flex justify-center items-center rounded-[8px]">
         <Text variant={"title2"}>공유 받은 일정을 확인해보세요</Text>
       </Box>
-      <Box className="flex flex-col xl:w-123 w-[80%]">
+      <Box className="flex flex-col xl:w-123 w-[80%] flex-1 min-h-0 h-full overflow-auto">
         <UserEventForm event={event} mode="shared"/>
       </Box>
     </Box>
