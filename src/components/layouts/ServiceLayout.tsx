@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { ReactNode } from 'react';
 import { BottomTab } from '@/components/features';
 
-const rootFrame = clsx('w-full h-full flex flex-col', 'max-w-[1280px]', 'bg-yoteyo-gray-100');
+const rootFrame = clsx('w-full h-full flex flex-col', 'max-w-[1280px]', 'bg-yoteyo-gray-100 overflow-hidden');
 
 const contentsFrame = clsx(
   'flex-1 flex',
@@ -18,7 +18,7 @@ type PropsType = { children: ReactNode; showBottomTab?: boolean };
 
 export default function ServiceLayout({ children, showBottomTab = true }: PropsType) {
   return (
-    <div className="w-screen h-screen flex justify-center ">
+    <div className="w-dvw h-dvh flex justify-center ">
       <div className={rootFrame}>
         <div className={contentsFrame}>
           <div className={contentsBody}>{children}</div>
