@@ -1,18 +1,13 @@
 import { cn } from "@/utils/tailwind-utils"
 import clsx from "clsx"
-import { AlertRedIcon, Box, Button, EventTextInput } from "@/components/base"
+import { AlertRedIcon, Box, Button, EventTextInput,Text } from "@/components/base"
 import { CalendarEventType } from "@/@types/calendar"
 import { Separator } from "@radix-ui/react-select"
 import { ko } from "date-fns/locale"
 import { format } from "date-fns"
 import TextArea from "../base/TextArea/TextArea"
-import { useMutation, UseMutationResult } from "@tanstack/react-query"
-import { KyResponse } from "ky"
-import { extractYear } from "@/utils/calendar/extractDate"
-import { queryClient, queryKeys } from "@/api"
-import { calendarService } from "@/api/service/calendar"
 import { useState } from "react"
-import { CustomDialog } from "../features"
+import { base64UrlEncode, copyText } from "@/utils"
 
 const itemsStyle = clsx(
   "w-full bg-white rounded-[8px]"
@@ -30,8 +25,34 @@ type PropsType = {
   onDelete ?: ()=>void
 }
 export default function UserEventCheck({event,onEdit,onDelete}:PropsType){
+  const [shared, setShared] = useState<boolean>(false);
+  const [textURL, setTextURL] = useState<String>("");
+  const handleShared = ()=>{
+    setShared(true)
+    //인코딩
+    const URLText = base64UrlEncode(JSON.stringify(event));
+    //URL 설정
+    const SHARE_ROUTE = "/shared";
+    const url = new URL(SHARE_ROUTE, window.location.origin);
+    url.searchParams.set("d", URLText);
+    const sharedURL = url.toString();
+    // 클립보드 복사
+    copyText(sharedURL);
+  }
   return(
     <div className="flex-1 overflow-y-auto scrollbar-hide pb-9">
+      <Box className="flex flex-col gap-2 pt-5 pl-5 pr-5">
+        <Box className="w-full flex justify-end">
+          <Button className="w-30 h-10" variant={"default"} type="button" onClick={handleShared}>
+            <Text variant={"body3"}>공유하기</Text>
+          </Button>
+        </Box>
+        {shared &&(
+          <Box className="w-full p-3 bg-white flex flex-col">
+            <Text variant={"body2"}>클립보드 복사완료.</Text>
+          </Box>
+        )}
+      </Box>
       <div className="w-full p-5 flex flex-col gap-5">
         <div className={cn(itemsStyle,"relative w-full h-15")}>
           <EventTextInput
