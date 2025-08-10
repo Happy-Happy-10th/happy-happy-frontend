@@ -1,11 +1,18 @@
 import { cn } from "@/utils/tailwind-utils"
 import clsx from "clsx"
-import { Button, EventTextInput } from "../base"
+import { AlertRedIcon, Box, Button, EventTextInput } from "@/components/base"
 import { CalendarEventType } from "@/@types/calendar"
 import { Separator } from "@radix-ui/react-select"
 import { ko } from "date-fns/locale"
 import { format } from "date-fns"
 import TextArea from "../base/TextArea/TextArea"
+import { useMutation, UseMutationResult } from "@tanstack/react-query"
+import { KyResponse } from "ky"
+import { extractYear } from "@/utils/calendar/extractDate"
+import { queryClient, queryKeys } from "@/api"
+import { calendarService } from "@/api/service/calendar"
+import { useState } from "react"
+import { CustomDialog } from "../features"
 
 const itemsStyle = clsx(
   "w-full bg-white rounded-[8px]"
@@ -20,8 +27,30 @@ const dateBox = clsx(
 type PropsType = {
   event : CalendarEventType
   onEdit ?: ()=>void
+  onDelete ?: ()=>void
+  onDrawerClose ?: ()=>void
 }
-export default function UserEventCheck({event,onEdit}:PropsType){
+export default function UserEventCheck({event,onEdit,onDelete,onDrawerClose}:PropsType){
+  // Delete check Alert
+  const [dialog, setDialog] = useState<boolean>(false);
+  const handleOpen = ()=> {
+    setDialog(true)
+  };
+  const handleClose = ()=>setDialog(false);
+
+  // DeleteApi 호출을 위한 훅
+  const year = extractYear(event.startDate);
+  const deleteMutation = useMutation({
+    mutationFn : (eventId:number)=>{
+      handleClose();
+      return calendarService.deleteEvent(eventId)
+    },
+    onSuccess:()=>{
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.calendar.events(year).queryKey,
+      });
+    }
+  })
   return(
     <div className="flex-1 overflow-y-auto scrollbar-hide pb-9">
       <div className="w-full p-5 flex flex-col gap-5">
@@ -71,14 +100,34 @@ export default function UserEventCheck({event,onEdit}:PropsType){
             disabled={true}
           />
         </div>
-        <Button
-          className="w-full h-[56px]" 
-          variant={"default"}
-          onClick={onEdit}
-          >
-            수정
-        </Button>
+        <Box className="w-full flex flex-row gap-2">
+          <Button
+            type="button"
+            className="w-1/2 h-[56px] bg-yoteyo-error" 
+            variant={"default"}
+            onClick={onDelete}
+            >
+              삭제
+          </Button>
+
+          <Button
+            type="button"
+            className="w-1/2 h-[56px]" 
+            variant={"default"}
+            onClick={onEdit}
+            >
+              수정
+          </Button>
+        </Box>
       </div>
+      <CustomDialog
+          open={dialog}
+          onClose={handleClose}
+          onBtnClick={()=>deleteMutation.mutate(event.id)}
+          icon={<AlertRedIcon/>}
+          mainMsg="일정을 정말로 삭제하시겠 습니까?"
+          subMsg="삭제한 일정은 되돌릴 수 없습니다."
+        />
     </div>
   )
 }

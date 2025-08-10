@@ -35,7 +35,10 @@ export async function putUserEvent(payload:CalendarEventType){
 }
 
 export async function DeleteEvent(eventId:number){
-
+  return await yoteyoAPI(`calendar/events/${eventId}`,{
+    method:'delete',
+    headers:{'Content-Type': 'application/json'},
+  })
 }
 
 export async function getUserSetting(){

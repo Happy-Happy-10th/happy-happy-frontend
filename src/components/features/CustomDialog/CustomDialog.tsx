@@ -38,7 +38,7 @@ export default function CustomDialog({
 }: CustomDialogType) {
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent showCloseButton={false} className={cn(className, 'w-full')}>
+      <DialogContent showCloseButton={false} className={cn(className, 'w-full z-[9999]')}>
         <DialogTitle hidden />
         <DialogHeader>
           <DialogClose asChild>

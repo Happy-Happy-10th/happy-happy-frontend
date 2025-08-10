@@ -4,11 +4,16 @@ import { CalendarEventType } from "@/@types/calendar";
 import DayEventListHead from "./ui/DayEventListHead";
 import DayEventBox from "./ui/DayEventBox";
 import clsx from "clsx";
-import { CustomDrawer, CustomDrawerHandle } from "@/components/base";
+import { CustomDrawer, CustomDrawerHandle, AlertRedIcon } from "@/components/base";
 import UserEventCheck from "@/components/layouts/UserEventCheck";
 import { UserEventForm } from "../Form";
-import { useMemo, useRef } from "react";
+import { CustomDialog } from "../CustomDialog";
+import { useEffect, useMemo, useRef, useState } from "react";
 import React from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { queryKeys } from "@/api";
+import { extractYear } from "@/utils/calendar/extractDate";
+import { calendarService } from "@/api/service/calendar";
 
 const datEvnetListStyle = clsx(
   "rounded-[8px]",
@@ -23,16 +28,38 @@ type PropsType = {
 };
 
 export default function DayEventList({ selectedDate, dayEvents }: PropsType) {
-  // ✅ ref 배열을 useRef로 고정
+  // ref 배열을 useRef로 고정
   const viewDrawerRefs = useRef<React.RefObject<CustomDrawerHandle | null>[]>([]);
   const editDrawerRefs = useRef<React.RefObject<CustomDrawerHandle | null>[]>([]);
+  
+  // 삭제 다이얼로그 상태 관리
+  const [deleteDialog, setDeleteDialog] = useState<{open: boolean, eventId: number | null}>({open: false, eventId: null});
 
-  // ✅ 이벤트 수에 따라 ref를 초기화
+  // queryClient 훅 사용
+  const queryClient = useQueryClient();
+
+  // 삭제 mutation
+  const deleteMutation = useMutation({
+    mutationFn: (eventId: number) => calendarService.deleteEvent(eventId),
+    onSuccess: () => {
+      // 삭제 성공 시 캘린더 데이터 새로고침
+      const year = extractYear(selectedDate);
+      queryClient.invalidateQueries({
+        queryKey: queryKeys.calendar.events(year).queryKey,
+      });
+      setDeleteDialog({open: false, eventId: null});
+    },
+    onError: (error) => {
+      console.error('삭제 실패:', error);
+      setDeleteDialog({open: false, eventId: null});
+    }
+  });
+
+  // 이벤트 수에 따라 ref를 초기화
   useMemo(() => {
     viewDrawerRefs.current = dayEvents.map(() => React.createRef<CustomDrawerHandle>());
     editDrawerRefs.current = dayEvents.map(() => React.createRef<CustomDrawerHandle>());
   }, [dayEvents]);
-
   return (
     <div className={datEvnetListStyle}>
       <DayEventListHead date={selectedDate} />
@@ -55,6 +82,11 @@ export default function DayEventList({ selectedDate, dayEvents }: PropsType) {
                   contents={
                     <UserEventCheck
                       event={event}
+                      onDrawerClose={()=>viewDrawerRef.current?.close()}
+                      onDelete={() => {
+                        setDeleteDialog({open: true, eventId: event.id});
+                        viewDrawerRef.current?.close();
+                      }}
                       onEdit={() => {
                         viewDrawerRef.current?.close();
                         setTimeout(() => {
@@ -77,6 +109,21 @@ export default function DayEventList({ selectedDate, dayEvents }: PropsType) {
           })
         )}
       </div>
+      
+      {/* 삭제 확인 다이얼로그 */}
+      <CustomDialog
+        open={deleteDialog.open}
+        onClose={() => setDeleteDialog({open: false, eventId: null})}
+        onBtnClick={() => {
+          if (deleteDialog.eventId) {
+            deleteMutation.mutate(deleteDialog.eventId);
+          }
+        }}
+        icon={<AlertRedIcon />}
+        mainMsg="일정을 정말로 삭제하시겠습니까?"
+        subMsg="삭제된 일정은 복구할 수 없습니다."
+        btntext="삭제"
+      />
     </div>
   );
 }
