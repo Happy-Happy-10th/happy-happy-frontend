@@ -19,7 +19,7 @@ import { ReactNode } from 'react';
 type CustomDialogType = {
   open: boolean;
   onClose: () => void;
-  onBtnClick?: (()=>void)|null;
+  onSubmit?: () => void;
   icon: ReactNode;
   mainMsg?: string;
   subMsg?: string;
@@ -29,12 +29,12 @@ type CustomDialogType = {
 export default function CustomDialog({
   open,
   onClose,
-  onBtnClick=null,
   icon = <AlertRedIcon />,
   mainMsg,
   subMsg,
   btntext = '확인',
   className,
+  onSubmit,
 }: CustomDialogType) {
   return (
     <Dialog open={open} onOpenChange={onClose}>
@@ -58,7 +58,16 @@ export default function CustomDialog({
             {subMsg}
           </Text>
         </Box>
-        <Button type="button" variant={'default'} onClick={onBtnClick?onBtnClick:onClose}>
+        <Button
+          type="button"
+          variant={'default'}
+          onClick={() => {
+            if (onSubmit) {
+              onSubmit();
+            }
+            onClose();
+          }}
+        >
           <Text variant={'body3'}>{btntext}</Text>
         </Button>
       </DialogContent>
