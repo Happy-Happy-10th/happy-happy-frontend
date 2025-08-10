@@ -229,6 +229,11 @@ ${`URL : ${target.homepageUrl.length ? target.homepageUrl : '정보없음'}\n`}
     <>
       <CustomDialog
         open={dialogState.open}
+        onSubmit={() => {
+          if (dialogState.message === '로그인이 필요합니다.') {
+            router.push('/auth/login');
+          }
+        }}
         onClose={() => setDialogState({ open: false, message: '', type: 'success' })}
         icon={<AlertCheckIcon />}
         mainMsg={dialogState.message}
