@@ -58,7 +58,7 @@ export default function DayEventListHead({date=new Date()}:props){
       <CustomDialog
           open={inLoginAlert}
           onClose={handleDialogClose}
-          onBtnClick={pageMove}
+          onSubmit={pageMove}
           icon={<AlertPurpleIcon/>}
           mainMsg="앗 아직 로그인을 안하셨군요"
           subMsg="로그인하고 요때요 서비스를 사용해보세요"

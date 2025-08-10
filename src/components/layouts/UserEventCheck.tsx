@@ -1,11 +1,13 @@
 import { cn } from "@/utils/tailwind-utils"
 import clsx from "clsx"
-import { Button, EventTextInput } from "../base"
+import { AlertRedIcon, Box, Button, EventTextInput,Text } from "@/components/base"
 import { CalendarEventType } from "@/@types/calendar"
 import { Separator } from "@radix-ui/react-select"
 import { ko } from "date-fns/locale"
 import { format } from "date-fns"
 import TextArea from "../base/TextArea/TextArea"
+import { useState } from "react"
+import { base64UrlEncode, copyText } from "@/utils"
 
 const itemsStyle = clsx(
   "w-full bg-white rounded-[8px]"
@@ -20,10 +22,37 @@ const dateBox = clsx(
 type PropsType = {
   event : CalendarEventType
   onEdit ?: ()=>void
+  onDelete ?: ()=>void
 }
-export default function UserEventCheck({event,onEdit}:PropsType){
+export default function UserEventCheck({event,onEdit,onDelete}:PropsType){
+  const [shared, setShared] = useState<boolean>(false);
+  const [textURL, setTextURL] = useState<String>("");
+  const handleShared = ()=>{
+    setShared(true)
+    //인코딩
+    const URLText = base64UrlEncode(JSON.stringify(event));
+    //URL 설정
+    const SHARE_ROUTE = "/shared";
+    const url = new URL(SHARE_ROUTE, window.location.origin);
+    url.searchParams.set("d", URLText);
+    const sharedURL = url.toString();
+    // 클립보드 복사
+    copyText(sharedURL);
+  }
   return(
     <div className="flex-1 overflow-y-auto scrollbar-hide pb-9">
+      <Box className="flex flex-col gap-2 pt-5 pl-5 pr-5">
+        <Box className="w-full flex justify-end">
+          <Button className="w-30 h-10" variant={"default"} type="button" onClick={handleShared}>
+            <Text variant={"body3"}>공유하기</Text>
+          </Button>
+        </Box>
+        {shared &&(
+          <Box className="w-full p-3 bg-white flex flex-col">
+            <Text variant={"body2"}>클립보드 복사완료.</Text>
+          </Box>
+        )}
+      </Box>
       <div className="w-full p-5 flex flex-col gap-5">
         <div className={cn(itemsStyle,"relative w-full h-15")}>
           <EventTextInput
@@ -71,13 +100,25 @@ export default function UserEventCheck({event,onEdit}:PropsType){
             disabled={true}
           />
         </div>
-        <Button
-          className="w-full h-[56px]" 
-          variant={"default"}
-          onClick={onEdit}
-          >
-            수정
-        </Button>
+        <Box className="w-full flex flex-row gap-2">
+          <Button
+            type="button"
+            className="w-1/2 h-[56px] bg-yoteyo-error" 
+            variant={"default"}
+            onClick={onDelete}
+            >
+              삭제
+          </Button>
+
+          <Button
+            type="button"
+            className="w-1/2 h-[56px]" 
+            variant={"default"}
+            onClick={onEdit}
+            >
+              수정
+          </Button>
+        </Box>
       </div>
     </div>
   )

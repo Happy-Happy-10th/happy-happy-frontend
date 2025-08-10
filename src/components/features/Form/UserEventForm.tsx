@@ -25,7 +25,7 @@ const itemsStyle = clsx('w-full bg-white rounded-[8px]');
 
 type PropsType = {
   event?: CalendarEventType;
-  mode ?: 'create' | 'edit'
+  mode ?: 'create' | 'edit' | 'shared'
 };
 
 export default function UserEventForm({ event, mode='create' }: PropsType) {
@@ -203,20 +203,22 @@ export default function UserEventForm({ event, mode='create' }: PropsType) {
           </div>
 
           {/* 버튼 */}
-          <div className="w-full h-10 flex flex-row justify-end gap-2 mt-6">
-            <DrawerClose asChild>
-              <Button type="button" className="w-[105px] h-10" variant="outline">
-                <Text variant="body3">취소</Text>
-              </Button>
-            </DrawerClose>
-            <DrawerClose asChild>
-              <Button type="submit" className="w-[105px] h-10" variant="default">
-                <Text variant="body3">저장</Text>
-              </Button>
-            </DrawerClose>
-          </div>
-        </form>
-      </div>
+          {mode!=='shared' &&(
+            <div className="w-full h-10 flex flex-row justify-end gap-2 mt-6">
+              <DrawerClose asChild>
+                <Button type="button" className="w-[105px] h-10" variant="outline">
+                  <Text variant="body3">취소</Text>
+                </Button>
+              </DrawerClose>
+              <DrawerClose asChild>
+                <Button type="submit" className="w-[105px] h-10" variant="default">
+                  <Text variant="body3">저장</Text>
+                </Button>
+              </DrawerClose>
+            </div>
+          )}
+          </form>
+        </div>
     </FormProvider>
   );
 }
