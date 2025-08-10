@@ -1,10 +1,10 @@
 type APIMessage = {
   title: string;
-  start_date: string;
-  end_date: string;
-  homepage_url: string;
-  detail_page_url: string;
-  memo: string[];
+  startDate: string;
+  endDate: string;
+  homepageUrl: string;
+  detailPageUrl: string;
+  memo: string;
   location: 'string';
   confidence: number;
 };
@@ -27,4 +27,29 @@ type usePostAIMessageResponse = {
   timeStamp: string;
 };
 
-export type { usePostAIMessageResponse, usePostAIMessagePayload };
+type usePostAIEventPayload = {
+  calendarId: number;
+  title: string;
+  startDate: string;
+  endDate: string;
+  memo: string;
+  location: string;
+  homepageUrl: string;
+  detailPageUrl: string;
+  confidence: number;
+};
+
+type usePostAIEventResponse = {
+  status: number;
+  message: string;
+  data: string;
+  timeStamp: string;
+};
+
+export type {
+  usePostAIMessageResponse,
+  usePostAIMessagePayload,
+  usePostAIEventPayload,
+  usePostAIEventResponse,
+  APIMessage,
+};

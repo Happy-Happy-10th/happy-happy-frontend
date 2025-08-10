@@ -1,4 +1,9 @@
-import { usePostAIMessagePayload } from '@/@types';
+import {
+  usePostAIEventPayload,
+  usePostAIEventResponse,
+  usePostAIMessagePayload,
+  usePostAIMessageResponse,
+} from '@/@types';
 import { yoteyoAPI } from '@/api/ky';
 
 export const PostAIMessage = async (payload: usePostAIMessagePayload) => {
@@ -10,10 +15,18 @@ export const PostAIMessage = async (payload: usePostAIMessagePayload) => {
     },
   };
 
-  return await yoteyoAPI<any>(`chat`, {
+  return await yoteyoAPI<usePostAIMessageResponse>(`chat`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     timeout: 30000,
     body: JSON.stringify({ ...Requestbody }),
+  });
+};
+
+export const PostAIEvent = async (payload: usePostAIEventPayload) => {
+  return await yoteyoAPI<usePostAIEventResponse>(`calendar/events/ai-event`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ...payload }),
   });
 };
