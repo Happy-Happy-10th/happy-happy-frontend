@@ -28,29 +28,8 @@ type PropsType = {
   event : CalendarEventType
   onEdit ?: ()=>void
   onDelete ?: ()=>void
-  onDrawerClose ?: ()=>void
 }
-export default function UserEventCheck({event,onEdit,onDelete,onDrawerClose}:PropsType){
-  // Delete check Alert
-  const [dialog, setDialog] = useState<boolean>(false);
-  const handleOpen = ()=> {
-    setDialog(true)
-  };
-  const handleClose = ()=>setDialog(false);
-
-  // DeleteApi 호출을 위한 훅
-  const year = extractYear(event.startDate);
-  const deleteMutation = useMutation({
-    mutationFn : (eventId:number)=>{
-      handleClose();
-      return calendarService.deleteEvent(eventId)
-    },
-    onSuccess:()=>{
-      queryClient.invalidateQueries({
-        queryKey: queryKeys.calendar.events(year).queryKey,
-      });
-    }
-  })
+export default function UserEventCheck({event,onEdit,onDelete}:PropsType){
   return(
     <div className="flex-1 overflow-y-auto scrollbar-hide pb-9">
       <div className="w-full p-5 flex flex-col gap-5">
@@ -120,14 +99,6 @@ export default function UserEventCheck({event,onEdit,onDelete,onDrawerClose}:Pro
           </Button>
         </Box>
       </div>
-      <CustomDialog
-          open={dialog}
-          onClose={handleClose}
-          onBtnClick={()=>deleteMutation.mutate(event.id)}
-          icon={<AlertRedIcon/>}
-          mainMsg="일정을 정말로 삭제하시겠 습니까?"
-          subMsg="삭제한 일정은 되돌릴 수 없습니다."
-        />
     </div>
   )
 }

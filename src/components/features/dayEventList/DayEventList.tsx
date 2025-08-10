@@ -11,7 +11,7 @@ import { CustomDialog } from "../CustomDialog";
 import { useEffect, useMemo, useRef, useState } from "react";
 import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { queryKeys } from "@/api";
+import { queryClient, queryKeys } from "@/api";
 import { extractYear } from "@/utils/calendar/extractDate";
 import { calendarService } from "@/api/service/calendar";
 
@@ -34,9 +34,6 @@ export default function DayEventList({ selectedDate, dayEvents }: PropsType) {
   
   // 삭제 다이얼로그 상태 관리
   const [deleteDialog, setDeleteDialog] = useState<{open: boolean, eventId: number | null}>({open: false, eventId: null});
-
-  // queryClient 훅 사용
-  const queryClient = useQueryClient();
 
   // 삭제 mutation
   const deleteMutation = useMutation({
@@ -82,7 +79,6 @@ export default function DayEventList({ selectedDate, dayEvents }: PropsType) {
                   contents={
                     <UserEventCheck
                       event={event}
-                      onDrawerClose={()=>viewDrawerRef.current?.close()}
                       onDelete={() => {
                         setDeleteDialog({open: true, eventId: event.id});
                         viewDrawerRef.current?.close();
