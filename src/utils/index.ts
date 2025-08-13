@@ -1,23 +1,16 @@
-export * from "./config";
+export * from './config';
+
+export * from './chat';
 
 export {
   convertEventStringToDate,
   convertEventsStringToDate,
   convertEventDateToString,
-  convertEventsDateToString
-} from './calendar/dateConverter'
+  convertEventsDateToString,
+} from './calendar/dateConverter';
 
-export {
-  setActionLinkValue, 
-  iconMap,
-  type IconKey
-} from './bottomTab/setActionLinkValue'
+export { setActionLinkValue, iconMap, type IconKey } from './bottomTab/setActionLinkValue';
 
-export {
-  base64UrlDecodeToString,
-  base64UrlEncode
-} from './calendar/URLBase64'
+export { base64UrlDecodeToString, base64UrlEncode } from './calendar/URLBase64';
 
-export {
-  copyText
-} from './copyTextClipBord'
+export { copyText } from './copyTextClipBord';

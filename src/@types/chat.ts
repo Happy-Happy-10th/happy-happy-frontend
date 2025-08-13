@@ -1,3 +1,10 @@
+type Message = {
+  from: 'AI' | 'USER';
+  value?: string;
+  render?: React.ReactNode;
+  date?: Date;
+};
+
 type APIMessage = {
   title: string;
   startDate: string;
@@ -52,4 +59,5 @@ export type {
   usePostAIEventPayload,
   usePostAIEventResponse,
   APIMessage,
+  Message,
 };
