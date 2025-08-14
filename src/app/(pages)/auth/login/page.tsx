@@ -122,39 +122,47 @@ function Page() {
             로그인
           </Button>
 
-          {/* <Box className="mt-12.5 mb-6 w-full items-center">
-          <Box className="flex-1 w-full h-[1px] bg-yoteyo-outline" />
-          <Text variant="detail1" className="mx-4 text-yoteyo-gray-400">
-            SNS 간편 로그인
-          </Text>
-          <Box className=" flex-1 w-full h-[1px] bg-yoteyo-outline" />
-        </Box> */}
-
-          {/* <Box className="gap-x-5">
-          <Box className="flex-col">
-            <Button size="icon" variant="icon">
-              <Icon className="w-15 h-15 border-1 border-yoteyo-outline rounded-full">
-                <img className="w-8 h-8" src="/images/google.png" alt="" />
-              </Icon>
-            </Button>
-
-            <Text variant="detail1" className="text-center text-gray-400 mt-2.5">
-              구글
+          <Box className="mt-12.5 mb-6 w-full items-center">
+            <Box className="flex-1 w-full h-[1px] bg-yoteyo-outline" />
+            <Text variant="detail1" className="mx-4 text-yoteyo-gray-400">
+              SNS 간편 로그인
             </Text>
+            <Box className=" flex-1 w-full h-[1px] bg-yoteyo-outline" />
           </Box>
 
-          <Box className="flex-col">
-            <Button size="icon" variant="icon">
-              <Icon className="w-15 h-15 bg-[#FAE100] rounded-full">
-                <img className="w-8 h-8" src="/images/kakao.png" alt="" />
-              </Icon>
-            </Button>
+          <Box className="gap-x-5">
+            <Box className="flex-col">
+              <Button
+                size="icon"
+                variant="icon"
+                onClick={() => (window.location.href = `${process.env.YOTEYO_API_URL}/oauth2/authorization/google`)}
+              >
+                <Icon className="w-15 h-15 border-1 border-yoteyo-outline rounded-full">
+                  <img className="w-8 h-8" src="/images/google.png" alt="" />
+                </Icon>
+              </Button>
 
-            <Text variant="detail1" className="text-center text-gray-400 mt-2.5">
-              카카오톡
-            </Text>
+              <Text variant="detail1" className="text-center text-gray-400 mt-2.5">
+                구글
+              </Text>
+            </Box>
+
+            <Box className="flex-col">
+              <Button
+                size="icon"
+                variant="icon"
+                onClick={() => (window.location.href = `${process.env.YOTEYO_API_URL}/oauth2/authorization/kakao`)}
+              >
+                <Icon className="w-15 h-15 bg-[#FAE100] rounded-full">
+                  <img className="w-8 h-8" src="/images/kakao.png" alt="" />
+                </Icon>
+              </Button>
+
+              <Text variant="detail1" className="text-center text-gray-400 mt-2.5">
+                카카오톡
+              </Text>
+            </Box>
           </Box>
-        </Box> */}
         </Box>
       </AuthLayout>
     </>
