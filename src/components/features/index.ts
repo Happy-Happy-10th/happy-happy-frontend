@@ -1,4 +1,4 @@
-export {CustomCalendar} from './calendar'
+export {CustomCalendar} from './CustomCalendar'
 export {DayEventList, FeedEventList} from './dayEventList'
 export {BottomTab} from './bottomTab'
 export {MonthNavigator} from './monthNavigator'

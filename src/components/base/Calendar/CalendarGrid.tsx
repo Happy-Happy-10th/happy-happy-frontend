@@ -1,8 +1,7 @@
 'use client'
 
-import { useMemo } from 'react';
-// type
-import { CalendarEventType } from '@/@types';
+import { useMemo, useRef } from 'react';
+import { CalendarEventType, SetDateHandler } from '@/@types';
 // react-big-calendar
 import { Calendar, Components, SlotInfo, View } from "react-big-calendar";
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -11,6 +10,8 @@ import { cn } from '@/utils/tailwind-utils';
 import { cva } from 'class-variance-authority';
 // CustomCalendar base Components
 import {createLocalizer} from '@/utils';
+import { useCalendarSwipeWheelNav } from '@/hooks';
+import { addMonths, subMonths } from 'date-fns';
 
 
 const calendarVariants = cva(`
@@ -48,7 +49,7 @@ type CustomCalendarPropsType={
   view?:View;
   isMondayStart ?: boolean;
   onSelectSlot?: (slot: SlotInfo) => void;
-  onNavigate?: (date:Date)=>void
+  onNavigate?: SetDateHandler;
   components?: Components<CalendarEventType, object>; // ✅ 제네릭 고정
 }
 export function CalendarGrid({
@@ -65,21 +66,33 @@ export function CalendarGrid({
   // 시작일이 바뀌지않으면 다시 연산하지 않음.
   const localizer = useMemo(
     () => createLocalizer(isMondayStart),
-    [isMondayStart] );
-    
+    [isMondayStart]
+  );
+  //캘린더 달 이동 훅 처리
+  const onPrev = () => onNavigate?.((prev) => subMonths(prev, 1));
+  const onNext = () => onNavigate?.((prev) => addMonths(prev, 1));
+
+  const targetRef = useRef<HTMLDivElement | null>(null);
+  useCalendarSwipeWheelNav({
+    targetRef, 
+    onPrev, 
+    onNext
+  });
   return(
-    <Calendar
-      className={cn(calendarVariants({variant:'clearBorder'}), className)}
-      date={viewDate}
-      events={events}
-      view={view}
-      startAccessor="startDate"
-      endAccessor="endDate"
-      localizer={localizer}
-      selectable
-      onSelectSlot={onSelectSlot}
-      onNavigate={onNavigate}
-      components={components}
-    /> 
+    <div ref={targetRef} className='w-full h-full'>
+      <Calendar
+        className={cn(calendarVariants({variant:'clearBorder'}), className)}
+        date={viewDate}
+        events={events}
+        view={view}
+        startAccessor="startDate"
+        endAccessor="endDate"
+        localizer={localizer}
+        selectable
+        onSelectSlot={onSelectSlot}
+        onNavigate={onNavigate}
+        components={components}
+      /> 
+    </div>
   )
 }

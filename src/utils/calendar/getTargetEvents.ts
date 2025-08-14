@@ -1,5 +1,5 @@
 import { CalendarEventType } from "@/@types/calendar";
-import { startOfDay, endOfDay, areIntervalsOverlapping } from "date-fns";
+import { startOfDay, endOfDay, areIntervalsOverlapping, isAfter } from "date-fns";
 
 /**
  * targetDate가 (startDate ~ endDate)에 포함되는 모든 이벤트를 반환하는 함수
@@ -19,4 +19,13 @@ export function getEventsByDay
       { inclusive: true }
     )
   })
+}
+
+export function getUpcomingEvents(events:CalendarEventType[],count:number):CalendarEventType[]{
+  const todayEnd = endOfDay(new Date());
+
+  return events
+    .filter((event) => isAfter(event.startDate, todayEnd))
+    .sort((a, b) => a.startDate.getTime() - b.startDate.getTime())
+    .slice(0, count);
 }
