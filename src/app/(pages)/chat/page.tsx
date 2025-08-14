@@ -1,7 +1,7 @@
 'use client';
 
 import { CHAT, SIDO } from '@/@mock/chat';
-import { AlertCheckIcon, Box, Button, ChatBox, Icon, Text } from '@/components/base';
+import { AlertCheckIcon, AlertRedIcon, Box, Button, ChatBox, Icon, Text } from '@/components/base';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useAuthStore } from '@/store';
 import { cn } from '@/utils/tailwind-utils';
@@ -12,73 +12,28 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import { usePostAIEvent, usePostAIMessage } from '@/api/service/chat';
 import { useRouter } from 'next/navigation';
-import { APIMessage } from '@/@types';
+import { APIMessage, Message } from '@/@types';
 import { CustomDialog } from '@/components/features';
+import { ChatButton, ChatSelect, ChatHeader } from './_components';
+import { convertChatMessage } from '@/utils';
 
-type Message = {
-  from: 'AI' | 'USER';
-  value?: string;
-  render?: React.ReactNode;
-  date?: Date;
-};
 dayjs.locale('ko');
-
-const CustomButton = ({ isSelect, ...props }: React.ComponentProps<'button'> & { isSelect: boolean }) => {
-  return (
-    <button
-      className={cn(
-        'w-27 h-8 border-1 bg-white rounded-[8px] cursor-pointer flex justify-center items-center',
-        isSelect ? 'text-yoteyo-main border-yoteyo-main' : 'text-yoteyo-gray-200 border-[#C0C0C0]',
-      )}
-      {...props}
-    >
-      {props.children}
-    </button>
-  );
-};
-
-const CustomSelect = ({ ...props }: React.ComponentProps<typeof Select>) => {
-  return (
-    <Select {...props}>
-      <SelectTrigger className="bg-white data-[state=open]:border-yoteyo-main ring-0 focus-visible:ring-0 focus-visible:border-none aria-invalid:border-none">
-        <SelectValue placeholder="시도" />
-      </SelectTrigger>
-
-      <SelectContent className="border-none">
-        {SIDO.map(item => {
-          return (
-            <SelectItem key={item} value={item} className="focus:bg-white focus:text-yoteyo-main cursor-pointer">
-              {item}
-            </SelectItem>
-          );
-        })}
-      </SelectContent>
-    </Select>
-  );
-};
-
-const AIHeader = ({ date, from }: { date: Date; from: Message['from'] }) => {
-  return (
-    <Box className={cn('gap-x-3 items-center mb-3', from === 'AI' ? '' : 'ml-auto')}>
-      {from === 'AI' && (
-        <Icon className="w-9 h-9 rounded-full">
-          <img src="/images/chat-profile.png" alt="요때요 아이콘" className="object-contain" />
-        </Icon>
-      )}
-
-      <Text className="text-yoteyo-gray-300 !text-[12px] font-medium">{dayjs(date).format('A h:mm')}</Text>
-    </Box>
-  );
-};
 
 export default function Page() {
   const { user } = useStore(useAuthStore);
   const router = useRouter();
 
+  const [firstTime] = useState(new Date());
+  const [messages, setMessages] = useState<Message[]>([]);
   const [dialogState, setDialogState] = useState<{ open: boolean; message: string; type: 'error' | 'success' }>({
     open: false,
     message: '',
     type: 'success',
+  });
+  const [payload, setPayload] = useState<{ eventType: 'online' | 'offline' | ''; title: string; address: string }>({
+    eventType: '',
+    title: '',
+    address: '',
   });
 
   const handleClick = (payload: APIMessage) => {
@@ -115,18 +70,7 @@ export default function Page() {
 
         setMessages(prev => [
           ...prev,
-          {
-            from: 'AI',
-            date: new Date(data.timeStamp),
-            value: `사용자 제공 데이터의 답변입니다.\n
-제목 : ${target.title}
-${`날짜 : ${target.startDate.length ? dayjs(target.startDate).format('YYYY.MM.DD') : '정보없음'} ~ ${
-  target.endDate.length ? dayjs(target.endDate).format('YYYY.MM.DD') : '정보없음'
-}`}
-${`장소 : ${target.location.length ? target.location : '정보없음'}`}
-${`URL : ${target.homepageUrl.length ? target.homepageUrl : '정보없음'}\n`}
-일정요약 :\n${target.memo}`,
-          },
+          convertChatMessage({ message: target, timeStamp: data.timeStamp }),
           {
             from: 'AI',
             render: (
@@ -152,14 +96,6 @@ ${`URL : ${target.homepageUrl.length ? target.homepageUrl : '정보없음'}\n`}
       ]);
     },
   });
-
-  const [payload, setPayload] = useState<{ eventType: 'online' | 'offline' | ''; title: string; address: string }>({
-    eventType: '',
-    title: '',
-    address: '',
-  });
-  const [firstTime] = useState(new Date());
-  const [messages, setMessages] = useState<Message[]>([]);
 
   // const [isPending, setIsPending] = useState(false);
 
@@ -199,14 +135,6 @@ ${`URL : ${target.homepageUrl.length ? target.homepageUrl : '정보없음'}\n`}
   }, [payload]);
 
   const handleSubmit = async () => {
-    // await PostAIMessage({
-    //   parameters: {
-    //     ...payload,
-    //   },
-    // }).then(() => {
-    //   setIsPending(false);
-    // });
-
     if (isPending) return;
     setMessages(prev => [
       ...prev,
@@ -235,7 +163,7 @@ ${`URL : ${target.homepageUrl.length ? target.homepageUrl : '정보없음'}\n`}
           }
         }}
         onClose={() => setDialogState({ open: false, message: '', type: 'success' })}
-        icon={<AlertCheckIcon />}
+        icon={dialogState.type === 'success' ? <AlertCheckIcon /> : <AlertRedIcon />}
         mainMsg={dialogState.message}
       />
 
@@ -297,7 +225,7 @@ ${`URL : ${target.homepageUrl.length ? target.homepageUrl : '정보없음'}\n`}
                 <Box className="w-9 mr-3" />
 
                 <Box className="gap-x-3 mt-3">
-                  <CustomButton
+                  <ChatButton
                     onClick={() => {
                       setPayload(prev => ({ ...prev, eventType: 'online' }));
                       setMessages(prev => [
@@ -313,8 +241,8 @@ ${`URL : ${target.homepageUrl.length ? target.homepageUrl : '정보없음'}\n`}
                     isSelect={payload.eventType === 'online'}
                   >
                     <Text variant="body2">온라인</Text>
-                  </CustomButton>
-                  <CustomButton
+                  </ChatButton>
+                  <ChatButton
                     onClick={() => {
                       setPayload(prev => ({ ...prev, eventType: 'offline' }));
                       setMessages(prev => [
@@ -328,7 +256,7 @@ ${`URL : ${target.homepageUrl.length ? target.homepageUrl : '정보없음'}\n`}
                       handlePostAIMessage({ message: CHAT.step2.offline[0], date: new Date() });
                       handlePostAIMessage({
                         render: (
-                          <CustomSelect
+                          <ChatSelect
                             onValueChange={value => {
                               setPayload(prev => ({ ...prev, address: value }));
                               setMessages(prev => [...prev, { from: 'USER', value }]);
@@ -342,7 +270,7 @@ ${`URL : ${target.homepageUrl.length ? target.homepageUrl : '정보없음'}\n`}
                     isSelect={payload.eventType === 'offline'}
                   >
                     <Text variant="body2">오프라인</Text>
-                  </CustomButton>
+                  </ChatButton>
                 </Box>
               </Box>
             </Box>
@@ -357,7 +285,7 @@ ${`URL : ${target.homepageUrl.length ? target.homepageUrl : '정보없음'}\n`}
                   transition={{ duration: 0.8 }}
                 >
                   <Box className="flex-col">
-                    {item.date && <AIHeader date={item.date} from={item.from} />}
+                    {item.date && <ChatHeader date={item.date} from={item.from} />}
 
                     <Box>
                       <ChatBox from={item.from} message={item.value} />
