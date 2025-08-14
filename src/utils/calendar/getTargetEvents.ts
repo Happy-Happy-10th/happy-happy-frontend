@@ -1,34 +1,22 @@
 import { CalendarEventType } from "@/@types/calendar";
-import { isAfter, isBefore, isEqual, startOfDay, endOfDay } from "date-fns";
+import { startOfDay, endOfDay, areIntervalsOverlapping } from "date-fns";
 
-export function getTodayEvents(
-  events: CalendarEventType[],
-  limit?: number
-): CalendarEventType[] {
-  const todayStart = startOfDay(new Date());
-  const todayEnd = endOfDay(new Date());
+/**
+ * targetDate가 (startDate ~ endDate)에 포함되는 모든 이벤트를 반환하는 함수
+ * @param events Api를 통해 받아온 이밴트들
+ * @param targetDate 필터링할 이밴트 날짜(없으면 오늘로 처리)
+ * @returns 필터 결과값
+ */
+export function getEventsByDay
+(events : CalendarEventType[],targetDate : Date = new Date()):CalendarEventType[]{
+  const dayStart = startOfDay(targetDate);
+  const dayEnd = endOfDay(targetDate);
 
-  const todayEvents = events.filter((event) => {
-    const eventStart = event.startDate;
-    const eventEnd = event.endDate;
-
-    const startsBeforeOrToday =
-      isBefore(eventStart, todayEnd) || isEqual(eventStart, todayEnd);
-    const endsAfterOrToday =
-      isAfter(eventEnd, todayStart) || isEqual(eventEnd, todayStart);
-
-    return startsBeforeOrToday && endsAfterOrToday;
-  });
-
-  return limit ? todayEvents.slice(0, limit) : todayEvents;
-}
-
-
-export function getUpcomingEvents(events:CalendarEventType[],count:number):CalendarEventType[]{
-  const todayEnd = endOfDay(new Date());
-
-  return events
-    .filter((event) => isAfter(event.startDate, todayEnd))
-    .sort((a, b) => a.startDate.getTime() - b.startDate.getTime())
-    .slice(0, count);
+  return events.filter((e)=>{
+    areIntervalsOverlapping(
+      { start: e.startDate, end: e.endDate },
+      { start: dayStart, end: dayEnd },
+      { inclusive: true }
+    )
+  })
 }

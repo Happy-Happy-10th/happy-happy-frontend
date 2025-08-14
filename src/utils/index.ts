@@ -1,13 +1,6 @@
 export * from "./config";
 
 export {
-  convertEventStringToDate,
-  convertEventsStringToDate,
-  convertEventDateToString,
-  convertEventsDateToString
-} from './calendar/dateConverter'
-
-export {
   setActionLinkValue, 
   iconMap,
   type IconKey
@@ -21,3 +14,5 @@ export {
 export {
   copyText
 } from './copyTextClipBord'
+
+export * from './calendar'
