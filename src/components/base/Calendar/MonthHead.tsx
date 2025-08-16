@@ -8,7 +8,7 @@ export function CalendarMonthHeader({ date }: HeaderProps) {
   const day = format(date, 'EEE', { locale: ko }); // 'EEE'는 Mon, Tue 같은 약칭
 
   return (
-    <div className="text-center h-6 text-yoteyo-gray-300">
+    <div className="flex justify-center items-center h-6 text-yoteyo-gray-300">
       <Text variant={"body4"}>
         {day}
       </Text>
