@@ -1,18 +1,23 @@
 "use client"
 import { useEffect, useState } from "react";
 import clsx from "clsx";
+import { SlotInfo } from "react-big-calendar";
 
-import { CustomCalendar } from '@/components/features/CustomCalendar';
-import DayEventList from "@/components/features/dayEventList/DayEventList";
-import { useDateState } from "@/hooks";
-import { CalendarEventType } from "@/@types/calendar";
-import { useQuery } from "@tanstack/react-query";
-import { queryKeys } from "@/api";
-import { calendarService } from "@/api/service/calendar";
+//zustand
 import { useStore } from "zustand";
 import { useAuthStore } from "@/store";
+//api
+import { queryKeys } from "@/api";
+import { calendarService } from "@/api/service/calendar";
+import { useQuery } from "@tanstack/react-query";
+
+import { CalendarEventType } from "@/@types/calendar";
+import { useDateState } from "@/hooks";
 import { getEventsByDay } from "@/utils";
-import { SlotInfo } from "react-big-calendar";
+
+import { CustomCalendar, DayEventList } from '@/components/features';
+import { calendarEvents } from "@/@mock/calendar";
+
 
 const contents =clsx(
   "w-full h-full flex gap-[20px] bg-yoteyo-gray-100",
@@ -61,7 +66,8 @@ export default function CalendarPage(){
   
   useEffect(()=>{
     //최초 or 슬록 선택시 뷰 제어
-    setDayEvents(getEventsByDay(safeData, selectedDate))
+    // setDayEvents(getEventsByDay(safeData, selectedDate))
+    setDayEvents(getEventsByDay(calendarEvents, selectedDate))
   },[data, selectedDate])
 
   return (
@@ -69,7 +75,8 @@ export default function CalendarPage(){
       <div className={calendarSize}>
         <CustomCalendar
           className="w-full h-full"
-          events={data}
+          // events={data}
+          events={calendarEvents}
           viewDate={currentDate}
           onChangeViewDate={setCurrentDate}
           onSlotSelected={handleSlotSelected}

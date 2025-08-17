@@ -12,13 +12,15 @@ export function getEventsByDay
   const dayStart = startOfDay(targetDate);
   const dayEnd = endOfDay(targetDate);
 
-  return events.filter((e)=>{
-    areIntervalsOverlapping(
+  const result= events.filter((e)=>{
+    return areIntervalsOverlapping(
       { start: e.startDate, end: e.endDate },
       { start: dayStart, end: dayEnd },
       { inclusive: true }
     )
   })
+  console.log(result);
+  return result;
 }
 
 export function getUpcomingEvents(events:CalendarEventType[],count:number):CalendarEventType[]{

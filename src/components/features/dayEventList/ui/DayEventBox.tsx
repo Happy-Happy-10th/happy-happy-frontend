@@ -39,7 +39,6 @@ const eventContents =clsx(
 type PropsType = {
   event : CalendarEventType
 }
-// export default function DayEventBox({event}:PropsType){
 const DayEventBox = forwardRef<HTMLDivElement, PropsType>(({ event }, ref) => {
   const viewEvent = convertEventDateToString(event);
   return(

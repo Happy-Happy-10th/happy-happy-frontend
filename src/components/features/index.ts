@@ -1,5 +1,5 @@
 export {CustomCalendar} from './CustomCalendar'
-export {DayEventList, FeedEventList} from './dayEventList'
+export {DayEventList, FeedEventList} from './DayEventList'
 export {BottomTab} from './BottomTab'
 export {MonthNavigator} from './monthNavigator'
 export {DateSelector} from './dateSelector'
