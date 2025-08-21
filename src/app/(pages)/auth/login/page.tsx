@@ -42,8 +42,7 @@ function Page() {
 
   const { mutate } = useSignIn({
     onSuccess: ({ data }) => {
-      setUser(data.memberInfo);
-      setCookie('yt-atk', data.accessToken, { path: '/' });
+      setUser(data);
       router.push('/home');
     },
     onError: async error => {

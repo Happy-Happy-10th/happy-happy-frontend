@@ -8,7 +8,7 @@ const yoteyoAPI = ky.create({
   hooks: {
     beforeRequest: [
       async request => {
-        const accessTkn = getCookie('yt-atk');
+        const accessTkn = getCookie('accessToken');
         if (accessTkn) {
           request.headers.set('Authorization', `Bearer ${accessTkn}`);
           return;
