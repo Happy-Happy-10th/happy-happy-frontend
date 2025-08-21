@@ -1,25 +1,25 @@
-import { useSyncExternalStore } from "react";
+import { useSyncExternalStore } from 'react';
 /**
  * 뷰 포트를 감지 하는 훅
  * @param query min-width : oopx 형태로 전달
  * @param defaultValue : SSR일때 false는 Mobild, true는 PC
- * @returns boolean 
+ * @returns boolean
  */
-export function useMediaQuery(query:string, defaultValue=false){
-  const getServerSnapshot = ()=>defaultValue;
-  const getClientSnapshot = ()=>{
-    if(typeof window ==='undefined') return defaultValue;
+export function useMediaQuery(query: string, defaultValue = false) {
+  const getServerSnapshot = () => defaultValue;
+  const getClientSnapshot = () => {
+    if (typeof window === 'undefined') return defaultValue;
     return window.matchMedia(query).matches;
-  }
+  };
 
-  const subscribe = (onStoreChange:()=>void)=>{
+  const subscribe = (onStoreChange: () => void) => {
     const mediaQueryList = window.matchMedia(query);
-    const handler = ()=>onStoreChange();
+    const handler = () => onStoreChange();
     mediaQueryList.addEventListener('change', handler);
     return () => mediaQueryList.removeEventListener('change', handler);
-  }
+  };
 
-  return useSyncExternalStore(subscribe,getClientSnapshot,getServerSnapshot)
+  return useSyncExternalStore(subscribe, getClientSnapshot, getServerSnapshot);
 }
 
 /** useSyncExternalStore : (react18) React 외부의 데이터 저장소를 React 컴포넌트와 동기화 하는 훅

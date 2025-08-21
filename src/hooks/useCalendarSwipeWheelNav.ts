@@ -21,16 +21,16 @@ type HooksType = {
   onNext: () => void;
   // 휠(마우스/트랙패드)
   wheelAxis?: 'x' | 'y' | 'auto'; // 기본 auto: 더 큰 축 채택
-  wheelMinDelta?: number;         // 데드존(노이즈 컷)
-  wheelThrottleMs?: number;       // 누적 모드 OFF일 때 사용
+  wheelMinDelta?: number; // 데드존(노이즈 컷)
+  wheelThrottleMs?: number; // 누적 모드 OFF일 때 사용
   // 트랙패드 튜닝(누적 모드)
-  wheelAggregate?: boolean;           //누적 모드 ON/OFF
-  wheelAggregateThreshold?: number;   //누적 임계값(px)
-  wheelCooldownMs?: number;           //트리거 후 쿨다운(ms)
+  wheelAggregate?: boolean; //누적 모드 ON/OFF
+  wheelAggregateThreshold?: number; //누적 임계값(px)
+  wheelCooldownMs?: number; //트리거 후 쿨다운(ms)
   // 스와이프(모바일 터치)
   swipeThresholdPx?: number;
-  ignoreVertical?: boolean;   // 세로 이동이 더 크면 무시
-  swipeCooldownMs?: number;   // 스와이프 후 쿨다운
+  ignoreVertical?: boolean; // 세로 이동이 더 크면 무시
+  swipeCooldownMs?: number; // 스와이프 후 쿨다운
 };
 
 export function useCalendarSwipeWheelNav({
@@ -43,7 +43,7 @@ export function useCalendarSwipeWheelNav({
   wheelThrottleMs = 400,
   // 트랙패드 누적 모드
   wheelAggregate = true,
-  wheelAggregateThreshold = 800,
+  wheelAggregateThreshold = 300,
   wheelCooldownMs = 260,
   // 터치 스와이프
   swipeThresholdPx = 48,
@@ -53,8 +53,12 @@ export function useCalendarSwipeWheelNav({
   // 최신 콜백 유지=> 리랜더링을 위한 Ref?
   const prevRef = useRef(onPrev);
   const nextRef = useRef(onNext);
-  useEffect(() => { prevRef.current = onPrev; }, [onPrev]);
-  useEffect(() => { nextRef.current = onNext; }, [onNext]);
+  useEffect(() => {
+    prevRef.current = onPrev;
+  }, [onPrev]);
+  useEffect(() => {
+    nextRef.current = onNext;
+  }, [onNext]);
 
   const now = () => (typeof performance !== 'undefined' ? performance.now() : Date.now());
 
@@ -85,9 +89,9 @@ export function useCalendarSwipeWheelNav({
           else nextRef.current?.();
         },
         wheelThrottleMs,
-        { leading: true, trailing: false }
+        { leading: true, trailing: false },
       ),
-    [wheelThrottleMs]
+    [wheelThrottleMs],
   );
 
   useEffect(() => {
@@ -107,10 +111,7 @@ export function useCalendarSwipeWheelNav({
       const dx = norm(e.deltaX, e.deltaMode);
       const dy = norm(e.deltaY, e.deltaMode);
 
-      const axis: 'x' | 'y' =
-        wheelAxis === 'auto'
-          ? (Math.abs(dx) >= Math.abs(dy) ? 'x' : 'y')
-          : wheelAxis;
+      const axis: 'x' | 'y' = wheelAxis === 'auto' ? (Math.abs(dx) >= Math.abs(dy) ? 'x' : 'y') : wheelAxis;
 
       const delta = axis === 'x' ? dx : dy;
       if (Math.abs(delta) < wheelMinDelta) return;
