@@ -40,24 +40,6 @@ export function convertEventsDateToString
     convertEventDateToString(event)
   ))
 }
-
-/* String 날짜 데이터를 Date 객채로 변경하기 위한 서브 함수들 */
-type DateInput = {
-  year: number;
-  month: number; // 1~12
-  day: number;
-  hour?: number;
-  minute?: number;
-};
-function parseDateString(str: string): DateInput {
-  const [year, month, day, hour, minute] = str.split('-').map(Number);
-  return { year, month, day, hour, minute };
-}
-
-function fixDate({ year, month, day, hour = 0, minute = 0 }: DateInput): Date {
-  return new Date(year, month - 1, day, hour, minute);
-}
-
 export function formatDateToString(date: Date): string {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");

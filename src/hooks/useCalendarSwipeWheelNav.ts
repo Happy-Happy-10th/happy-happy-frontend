@@ -11,8 +11,6 @@ import throttle from 'lodash.throttle';
  * @swipeThresholdPx 모바일 스와이프 임계값 기본 48
  * @ignoreVertical 세로로 움직인 거리가 가로보다 크면, 스와이프로 처리하지 않고 무시
  * @swipeCooldownMs 스와이프 후 쿨다운 기본 250
- *
- * (추가)
  * @wheelAggregate 트랙패드 델타를 누적해 임계값을 넘을 때만 이동(기본 true)
  * @wheelAggregateThreshold 누적 임계값(px) 기본 140
  * @wheelCooldownMs 휠 트리거 후 짧은 쿨다운(ms) 기본 260
@@ -21,17 +19,14 @@ type HooksType = {
   targetRef: RefObject<HTMLElement | null>;
   onPrev: () => void;
   onNext: () => void;
-
   // 휠(마우스/트랙패드)
   wheelAxis?: 'x' | 'y' | 'auto'; // 기본 auto: 더 큰 축 채택
   wheelMinDelta?: number;         // 데드존(노이즈 컷)
   wheelThrottleMs?: number;       // 누적 모드 OFF일 때 사용
-
   // 트랙패드 튜닝(누적 모드)
-  wheelAggregate?: boolean;           // ✅ 누적 모드 ON/OFF
-  wheelAggregateThreshold?: number;   // ✅ 누적 임계값(px)
-  wheelCooldownMs?: number;           // ✅ 트리거 후 쿨다운(ms)
-
+  wheelAggregate?: boolean;           //누적 모드 ON/OFF
+  wheelAggregateThreshold?: number;   //누적 임계값(px)
+  wheelCooldownMs?: number;           //트리거 후 쿨다운(ms)
   // 스와이프(모바일 터치)
   swipeThresholdPx?: number;
   ignoreVertical?: boolean;   // 세로 이동이 더 크면 무시
@@ -42,23 +37,20 @@ export function useCalendarSwipeWheelNav({
   targetRef,
   onPrev,
   onNext,
-
   // 휠/트랙패드
   wheelAxis = 'auto',
   wheelMinDelta = 4,
   wheelThrottleMs = 400,
-
   // 트랙패드 누적 모드
   wheelAggregate = true,
   wheelAggregateThreshold = 800,
   wheelCooldownMs = 260,
-
   // 터치 스와이프
   swipeThresholdPx = 48,
   ignoreVertical = true,
   swipeCooldownMs = 250,
 }: HooksType) {
-  // 최신 콜백 유지(재렌더로 인한 인스턴스 리셋 방지)
+  // 최신 콜백 유지=> 리랜더링을 위한 Ref?
   const prevRef = useRef(onPrev);
   const nextRef = useRef(onNext);
   useEffect(() => { prevRef.current = onPrev; }, [onPrev]);
