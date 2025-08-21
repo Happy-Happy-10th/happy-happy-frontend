@@ -115,6 +115,14 @@ function Page() {
   //아이디 중복확인
   const { mutate: userIdCheckMutate } = useCheckUserId({
     onSuccess: data => {
+      if (!data.data.available) {
+        setDialogState({
+          open: true,
+          type: 'error',
+          message: '이미 사용 중인 아이디입니다.',
+        });
+        return;
+      }
       if (data.status === 200) {
         setIsAuthUserId(true);
       }
@@ -134,6 +142,15 @@ function Page() {
   //이메일 중복확인
   const { mutate: userNameCheckMutate } = useCheckUserName({
     onSuccess: data => {
+      if (!data.data.available) {
+        setDialogState({
+          open: true,
+          type: 'error',
+          message: '이미 사용 중인 이메일입니다.',
+        });
+        return;
+      }
+
       if (data.status === 200) {
         sendCodeMutate({
           username: getValues('username'),
