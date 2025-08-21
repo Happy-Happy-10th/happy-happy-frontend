@@ -1,31 +1,20 @@
+
 import { DateHeaderProps } from 'react-big-calendar';
 import { format, isSameDay } from 'date-fns';
-
-import { cva } from 'class-variance-authority';
+//CSS
 import { cn } from '@/utils/tailwind-utils';
+//components
+import {Text} from '@/components/base'
 
-const dateHeadVariants = cva(
-  ``,
-  {
-    variants: {
-      variant: {
-        custom: `
-          flex justify-center items-center
-          w-[48px] h-[24px] text-[14px]
-        `
-      }
-    }
-  }
-);
 
-export default function CalendarDateHeader(props: DateHeaderProps) {
+export function CalendarDateHeader(props: DateHeaderProps) {
   const { date, label, isOffRange } = props;
 
   const day = date.getDay(); // 0 = Sun, 6 = Sat
   const isToday = isSameDay(date, new Date()); // 오늘 날짜 비교
 
   return (
-    <div className={cn(dateHeadVariants({ variant: 'custom' }))}>
+    <div className={cn('flex justify-center items-center h-6')}>
       <div
         className={cn(
           'm-0 p-o w-[20px] h-[20px] flex justify-center items-center',
@@ -35,7 +24,9 @@ export default function CalendarDateHeader(props: DateHeaderProps) {
           isToday && 'bg-yoteyo-main rounded-full text-white font-normal'
         )}
       >
-        {format(date, 'd')} {/* 일(day) 출력 */}
+        <Text variant={"body4"}>
+          {format(date, 'd')}
+        </Text> {/* 일(day) 출력 */}
       </div>
     </div>
   );

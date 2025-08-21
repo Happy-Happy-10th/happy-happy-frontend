@@ -33,6 +33,7 @@
     "dayjs": "^1.11.13",
     "framer-motion": "^12.23.12",
     "ky": "^1.8.1",
+    "lodash.throttle": "^4.1.1",
     "lucide-react": "^0.525.0",
     "motion": "^12.23.11",
     "next": "15.3.5",
@@ -49,6 +50,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/config": "^3.3.5",
+    "@types/lodash.throttle": "^4.1.9",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-big-calendar": "^1.16.2",

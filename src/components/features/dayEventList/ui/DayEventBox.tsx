@@ -4,6 +4,7 @@ import { CalendarEventType } from "@/@types/calendar";
 import { cn } from "@/utils/tailwind-utils";
 import { convertEventDateToString } from "@/utils/calendar/dateConverter";
 import { forwardRef } from "react";
+import { Text } from "@/components/base";
 
 const eventChildVariants = cva(
   `pl-[5px] w-[2px] h-full rounded-[8px]`, {
@@ -39,15 +40,16 @@ const eventContents =clsx(
 type PropsType = {
   event : CalendarEventType
 }
-// export default function DayEventBox({event}:PropsType){
 const DayEventBox = forwardRef<HTMLDivElement, PropsType>(({ event }, ref) => {
   const viewEvent = convertEventDateToString(event);
+  const startDate = viewEvent.startDate.split('T');
+  const endDate = viewEvent.endDate.split('T');
   return(
     <div className={eventBox} ref={ref}>
       <div className={cn(eventChildVariants({variant:event.color}))}></div>
       <div className={eventContents}>
-        <div className="font-bold">{viewEvent.title}</div>
-        <div>{`${viewEvent.startDate} ~ ${viewEvent.endDate}`}</div>
+        <Text variant={"body3"} className="font-bold">{viewEvent.title}</Text>
+        <Text variant={"body4"}>{`${startDate[0]} ~ ${endDate[0]}`}</Text>
       </div>
     </div>
   )

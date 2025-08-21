@@ -17,7 +17,7 @@ import { useStore } from 'zustand';
 import { DrawerClose } from '@/components/ui/drawer';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { queryKeys } from '@/api';
-import { Variable } from 'lucide-react';
+
 import { extractYear } from '@/utils/calendar/extractDate';
 import { calendarService } from '@/api/service/calendar';
 
