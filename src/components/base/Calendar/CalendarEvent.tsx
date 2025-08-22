@@ -1,6 +1,6 @@
 import { cn } from '@/utils/tailwind-utils';
 import { cva } from 'class-variance-authority';
-import {Text} from '@/components/base'
+import { Text } from '@/components/base';
 //test
 import { CalendarEventType } from '@/@types/calendar';
 const COLOR_MAP = {
@@ -17,46 +17,44 @@ const COLOR_MAP = {
   default: 'bg-yoteyo-main',
 } as const;
 
-const evnetBarVariants = cva(
-  `w-full h-full flex flex-row justify-between rounded-[4px] overflow-hidden select-none`,{
-    variants: {variant: COLOR_MAP},
-    defaultVariants : {variant:'yoteyoGreen'}
+const evnetBarVariants = cva(`w-full h-full flex flex-row justify-between rounded-[4px] overflow-hidden select-none`, {
+  variants: { variant: COLOR_MAP },
+  defaultVariants: { variant: 'yoteyoGreen' },
 });
 
-const evnetMinimalBarVariants = cva(
-  `w-full h-[6px] rounded-[2px]`, {
-    variants: {variant: COLOR_MAP},
-    defaultVariants : {variant:'yoteyoGreen'}
+const evnetMinimalBarVariants = cva(`w-full h-[6px] rounded-[2px]`, {
+  variants: { variant: COLOR_MAP },
+  defaultVariants: { variant: 'yoteyoGreen' },
 });
 
-export function CalendarEventDetail({ 
-  title, 
-  allDay, 
-  startDate, 
-  endDate, 
-  repeatCycle, 
-  color="yoteyoGreen", 
-  locate, 
-  memo 
+export function CalendarEventDetail({
+  title,
+  allDay,
+  startDate,
+  endDate,
+  repeatCycle,
+  color = 'yoteyoGreen',
+  locate,
+  memo,
 }: CalendarEventType) {
   return (
     <div className={cn(evnetBarVariants({ variant: color }))}>
       <div className="w-[95%] flex justify-center">
-        <Text variant={"detail2"}>{title}</Text>
+        <Text variant={'detail2'}>{title}</Text>
       </div>
     </div>
   );
 }
 
-export function CalendarEventMinimal({ 
-  title, 
-  allDay, 
-  startDate, 
-  endDate, 
-  repeatCycle, 
-  color="yoteyoGreen", 
-  locate, 
-  memo 
+export function CalendarEventMinimal({
+  title,
+  allDay,
+  startDate,
+  endDate,
+  repeatCycle,
+  color = 'yoteyoGreen',
+  locate,
+  memo,
 }: CalendarEventType) {
   return <div className={cn(evnetMinimalBarVariants({ variant: color }))}></div>;
 }
