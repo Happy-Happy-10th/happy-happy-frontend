@@ -80,14 +80,16 @@ export default function UserEventCheck({ event, onEdit, onDelete }: PropsType) {
         </div>
         <div className={cn(itemsStyle)}>
           <TextArea
-            className="border-none yoteyo-m-detail-lg rounded-b-none"
-            placeholder={event.locate}
+            className="min-h-1 border-none rounded-none text-[20px] md:text-[20px] placeholder:text-[20px]"
+            value={event.locate}
+            rows={3}
             disabled={true}
           />
           <TextArea
-            className="border-none yoteyo-m-detail-lg rounded-t-none"
-            placeholder={event.memo}
+            className="min-h-20 text-[20px] md:text-[20px] border-none rounded-none"
+            value={event.memo}
             disabled={true}
+            rows={3}
           />
         </div>
         <Box className="w-full flex flex-row gap-2">

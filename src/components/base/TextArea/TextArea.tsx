@@ -1,24 +1,20 @@
-import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/utils/tailwind-utils";
+import { Textarea } from '@/components/ui/textarea';
+import { cn } from '@/utils/tailwind-utils';
 
-
-interface PropsType extends React.ComponentProps<"textarea">{
-  placeholder?:string;
-  rows?:number;
-  className ?: string;
+interface PropsType extends React.ComponentProps<'textarea'> {
+  rows?: number;
+  value?: string;
+  placeholder?: string;
+  className?: string;
 }
-export default function TextArea({
-  placeholder="",
-  rows=1, 
-  className,
-  ...props
-}:PropsType){
+export default function TextArea({ placeholder = '', rows = 1, className, value = '', ...props }: PropsType) {
   return (
-    <Textarea 
+    <Textarea
       rows={rows}
       placeholder={placeholder}
-      className={cn(className,"resize-none disabled:cursor-auto disabled:text-black disabled:opacity-100")}
+      value={value}
+      className={cn('resize-none disabled:cursor-auto disabled:text-black disabled:opacity-100', className)}
       {...props}
-      />
-  )
+    />
+  );
 }
