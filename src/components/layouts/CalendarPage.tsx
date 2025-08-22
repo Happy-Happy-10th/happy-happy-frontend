@@ -61,8 +61,8 @@ export default function CalendarPage() {
 
   useEffect(() => {
     //최초 or 슬록 선택시 뷰 제어
-    // setDayEvents(getEventsByDay(safeData, selectedDate))
-    setDayEvents(getEventsByDay(calendarEvents, selectedDate));
+    setDayEvents(getEventsByDay(safeData, selectedDate));
+    // setDayEvents(getEventsByDay(calendarEvents, selectedDate));
   }, [data, selectedDate]);
 
   return (
@@ -70,8 +70,8 @@ export default function CalendarPage() {
       <div className={calendarSize}>
         <CustomCalendar
           className="w-full h-full"
-          // events={data}
-          events={calendarEvents}
+          events={data}
+          // events={calendarEvents}
           viewDate={currentDate}
           onChangeViewDate={setCurrentDate}
           onSlotSelected={handleSlotSelected}
