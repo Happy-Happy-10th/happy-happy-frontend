@@ -30,6 +30,8 @@ const calendarVariants = cva(
   [&_.rbc-show-more]:!w-full
   [&_.rbc-show-more]:!text-center
   [&_.rbc-show-more]:!text-yoteyo-gray-300
+  [&_.rbc-show-more]:!pointer-events-none
+  [&_.rbc-show-more]:!cursor-default
   `,
   {
     variants: {
