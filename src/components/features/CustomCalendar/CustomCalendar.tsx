@@ -43,6 +43,7 @@ export function CustomCalendar({
       isMondayStart={isMondayStart}
       onNavigate={onChangeViewDate}
       onSelectSlot={onSlotSelected}
+      messages={{ showMore: n => `+${n}` }}
       components={components}
     />
   );

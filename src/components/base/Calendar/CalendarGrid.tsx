@@ -3,7 +3,7 @@
 import { useMemo, useRef } from 'react';
 import { CalendarEventType, SetDateHandler } from '@/@types';
 // react-big-calendar
-import { Calendar, Components, SlotInfo, View } from 'react-big-calendar';
+import { Calendar, CalendarProps, Components, SlotInfo, View } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 // CSS
 import { cn } from '@/utils/tailwind-utils';
@@ -26,9 +26,10 @@ const calendarVariants = cva(
   [&_.rbc-event]:!mb-[1px]
   [&_.rbc-event]:!bg-transparent
   [&_.rbc-event]:!pointer-events-none
-  [&_.rbc-date-cell]:!flex
-  [&_.rbc-date-cell]:!justify-center
   [&_.rbc-month-view]:!rounded-[8px]
+  [&_.rbc-show-more]:!w-full
+  [&_.rbc-show-more]:!text-center
+  [&_.rbc-show-more]:!text-yoteyo-gray-300
   `,
   {
     variants: {
@@ -54,6 +55,7 @@ type CustomCalendarPropsType = {
   onSelectSlot?: (slot: SlotInfo) => void;
   onNavigate?: SetDateHandler;
   components?: Components<CalendarEventType, object>; //제네릭 고정
+  messages?: CalendarProps<CalendarEventType>['messages'];
 };
 export function CalendarGrid({
   className,
@@ -64,6 +66,7 @@ export function CalendarGrid({
   onSelectSlot,
   onNavigate,
   components,
+  messages,
 }: CustomCalendarPropsType) {
   // 시작일이 바뀌지않으면 다시 연산하지 않음.
   const localizer = useMemo(() => createLocalizer(isMondayStart), [isMondayStart]);
@@ -90,6 +93,7 @@ export function CalendarGrid({
         selectable
         onSelectSlot={onSelectSlot}
         onNavigate={onNavigate}
+        messages={messages}
         components={components}
       />
     </div>
