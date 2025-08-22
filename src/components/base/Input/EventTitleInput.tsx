@@ -1,4 +1,4 @@
-"use client"
+'use client';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/utils/tailwind-utils';
 import { cva } from 'class-variance-authority';
@@ -30,6 +30,7 @@ type PropsTpye = {
   disabled?: boolean;
   color?: EventColor;
   children?: ReactNode;
+  className?: string;
 } & ComponentProps<typeof Input>;
 export default function EventTextInput({
   placeholder = '',
@@ -37,24 +38,21 @@ export default function EventTextInput({
   color = 'yoteyoGreen',
   children,
   className,
+  value,
   ...inputProps
 }: PropsTpye) {
   const form = useFormContext();
-  const variant = form?.watch?.("color") ?? color;
+  const variant = form?.watch?.('color') ?? color;
   return (
     <div className={cn('relative w-full h-15')}>
-      <div className={cn(eventChildVariants({ variant: variant}))}></div>
+      <div className={cn(eventChildVariants({ variant: variant }))}></div>
       <Input
+        className={cn('pl-4 h-15', className)}
         placeholder={placeholder}
+        value={value}
         disabled={disabled}
-        className={cn('pl-4 h-15 text-black opacity-100 disabled:opacity-100 disabled:text-black', className)}
         {...inputProps}
       />
-      {children && (
-        <div className="absolute inset-0 pl-4 flex items-center pointer-events-none text-black">
-          <Text variant={'body3'}>{children}</Text>
-        </div>
-      )}
     </div>
   );
 }

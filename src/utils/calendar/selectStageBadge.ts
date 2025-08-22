@@ -1,4 +1,4 @@
-export default function selectStageBadge(stage:number){
+export function selectStageBadge(stage:number){
   switch(stage){
     case 1 :
       return '/calendar/badge-1.png'

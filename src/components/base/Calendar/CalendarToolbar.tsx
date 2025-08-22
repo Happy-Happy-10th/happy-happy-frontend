@@ -1,34 +1,48 @@
 "use client"
 import { useState } from 'react';
+
+// Date
 import { format, isSameMonth } from 'date-fns';
 import { enUS } from 'date-fns/locale';
+// react-big-calendar
 import { ToolbarProps } from "react-big-calendar";
-import { ChevronDown, ChevronUp, RotateCcw, Settings } from 'lucide-react';
-
-import { CalendarEventType } from '@/@types/calendar';
-import { MonthNavigator } from '@/components/features/monthNavigator';
+// Icon
+import { ChevronDown, ChevronUp } from 'lucide-react';
+//Type
+import { SetDateHandler,CalendarEventType } from '@/@types';
+//Components
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { useCalendarContext } from '../provider/CalendarContext';
-import { BacktodayIcon, Button, Icon, SettingIcon } from '@/components/base';
+import { BacktodayIcon, Button, Icon, SettingIcon, Text } from '@/components/base';
+import { MonthNavigator } from '@/components/features/monthNavigator';
 
-export default function CalendarToolbar({
+
+type CalendarToolbarType = {
+  onChangeViewDate:SetDateHandler
+}
+export function CalendarToolbar({
   date,
   onNavigate,
-}: ToolbarProps<CalendarEventType>) {
-  const { events, isMondayStart, currentDate, handleCurrentDate } = useCalendarContext();
+  onChangeViewDate
+}: ToolbarProps<CalendarEventType, object>&CalendarToolbarType) {
+  // ToolBar 해더에 표시될 날짜
   const formatted = format(date, 'yyyy.M', { locale: enUS });
 
+  // 년/월 선택용 Popover
   const [monthPickerOpen,setMonthPickerOpen ] = useState(false);
   const handleMonthPickerOn = ()=>setMonthPickerOpen(true);
   const handleMonthPickerOff = ()=> setMonthPickerOpen(false);
   
+  //달 같은 달의 경우 Today버튼 사라짐
   const today = new Date();
   const isToday = isSameMonth(date, today)
 
   return (
     <div className="w-full flex justify-between bg-yoteyo-gray-100 pb-[10px]">
       <div className='flex flex-row items-center gap-[16px]'>
-        <span className="text-[30px] font-bold w-[110px]">{formatted}</span>
+        {/* 캘린더 상남 년 월 */}
+        <Text variant={"title1"}>
+          {formatted}
+        </Text>
         <Popover open={monthPickerOpen} onOpenChange={setMonthPickerOpen}>
           <PopoverTrigger asChild>
             <Button
@@ -41,8 +55,8 @@ export default function CalendarToolbar({
           </PopoverTrigger>
           <PopoverContent className='w-[230px] h-[231px] p-0 m-0'>
             <MonthNavigator 
-              currentDate={currentDate} 
-              handleCurrentDate={handleCurrentDate} 
+              currentDate={date} 
+              handleCurrentDate={onChangeViewDate} 
               handleMonthPickerOff={handleMonthPickerOff}/>
           </PopoverContent>
         </Popover>
@@ -52,7 +66,7 @@ export default function CalendarToolbar({
           <div 
             className='hover:cursor-pointer'
             onClick={()=>{
-              handleCurrentDate(today);
+              onChangeViewDate(today);
               onNavigate('DATE', today);
             }}
             >
