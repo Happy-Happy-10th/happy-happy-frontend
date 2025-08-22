@@ -1,9 +1,10 @@
 type MemberInfo = {
-  memberId: string;
-  username: string;
-  nickname: string;
-  imageUrl: string;
   calendarId: number;
+  imageUrl: string | null;
+  marketingAgreedAt: string;
+  memberId: string;
+  nickname: string;
+  username: string;
 };
 
 type useSignInPayload = {
@@ -22,11 +23,7 @@ type useSignUpPayload = {
 };
 
 type useSignInResponse = {
-  data: {
-    accessToken: string;
-    refreshToken: null | string;
-    memberInfo: MemberInfo;
-  };
+  data: MemberInfo;
   status: number;
   message: string;
 };

@@ -1,4 +1,4 @@
 module.exports = {
   NEXT_PUBLIC_APP_ENV: 'LOCAL',
-  YOTEYO_API_URL: 'https://yottaeyo.site/api',
+  YOTEYO_API_URL: 'http://49.50.133.140:8080',
 };
