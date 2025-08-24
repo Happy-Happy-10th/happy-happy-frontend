@@ -26,7 +26,16 @@ const calendarVariants = cva(
   [&_.rbc-event]:!mb-[1px]
   [&_.rbc-event]:!bg-transparent
   [&_.rbc-event]:!pointer-events-none
-  [&_.rbc-month-view]:!rounded-[8px]
+
+  /* month-view만 둥글게 보이도록 */
+  [&_.rbc-month-view]:rounded-[8px]
+  [&_.rbc-month-view]:!overflow-hidden
+  [&_.rbc-month-view]:bg-white
+  [&_.rbc-month-view]:!bg-clip-padding
+  [&_.rbc-month-view]:!pl-[3px]
+  [&_.rbc-month-view]:!pr-[3px]
+
+  /* show more 스타일 */
   [&_.rbc-show-more]:!w-full
   [&_.rbc-show-more]:!text-center
   [&_.rbc-show-more]:!text-yoteyo-gray-300
@@ -37,11 +46,15 @@ const calendarVariants = cva(
     variants: {
       variant: {
         plain: `
-          [&_.rbc-month-view]:!border-none
-          [&_.rbc-day-bg]:!border-none
+          [&_.rbc-day-bg]:!border-0
+          [&_.rbc-month-row]:!border-yoteyo-gray-200
           [&_.rbc-month-view_.rbc-header]:!border-b
+          [&_.rbc-month-view_.rbc-header]:!border-yoteyo-gray-200
           [&_.rbc-month-view_.rbc-header+_.rbc-header]:!border-l-0
-          `,
+          [&_.rbc-month-view]:!border-[1px]
+          [&_.rbc-month-view]:!border-solid
+          [&_.rbc-month-view]:!border-white
+        `,
         default: ``,
       },
     },
@@ -83,9 +96,9 @@ export function CalendarGrid({
     onNext,
   });
   return (
-    <div ref={targetRef} className="w-full h-full">
+    <div ref={targetRef} className="w-full h-full bg-yoteyo-bg-default">
       <Calendar
-        className={cn(calendarVariants({ variant: 'plain' }), className)}
+        className={cn('', calendarVariants({ variant: 'plain' }), className)}
         date={viewDate}
         events={events}
         view={view}
