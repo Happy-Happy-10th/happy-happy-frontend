@@ -18,7 +18,7 @@ const eventChildVariants = cva(`pl-[5px] w-[6px] h-full rounded-l-[8px]`, {
       yoteyoBlue: `bg-yoteyo-blue`,
       yoteyoPurple: `bg-yoteyo-purple`,
       yoteyoPink: `bg-yoteyo-pink`,
-      yoteyoBlack: `bg-yoteyo-black`,
+      yoteyoNavy: `bg-yoteyo-navy`,
       default: 'bg-yoteyo-main',
     },
   },
