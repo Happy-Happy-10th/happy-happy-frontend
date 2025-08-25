@@ -34,6 +34,7 @@ const calendarVariants = cva(
   [&_.rbc-month-view]:!bg-clip-padding
   [&_.rbc-month-view]:!pl-[3px]
   [&_.rbc-month-view]:!pr-[3px]
+  [&_.rbc-month-view]:!shadow-[var(--shadow-box)]
 
   /* show more 스타일 */
   [&_.rbc-show-more]:!w-full
