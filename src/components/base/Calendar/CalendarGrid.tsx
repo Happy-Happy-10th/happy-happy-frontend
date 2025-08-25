@@ -107,6 +107,7 @@ export function CalendarGrid({
         endAccessor="endDate"
         localizer={localizer}
         selectable
+        longPressThreshold={30}
         onSelectSlot={onSelectSlot}
         onNavigate={onNavigate}
         messages={messages}
