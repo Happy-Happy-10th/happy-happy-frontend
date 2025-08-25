@@ -28,7 +28,7 @@ const calendarSize = clsx(
   'bg-white',
   'ml-[20px] mr-[20px] mt-[26px]',
   'xl:ml-0 xl:mr-0 xl:mt-0',
-  'min-h-[650px] xl:max-h-full xl:min-h-0 [@media(max-height:6700px)]:min-h-[450px]',
+  'min-h-[650px] xl:max-h-full xl:min-h-0 [@media(max-height:670px)]:min-h-[450px]',
   'xl:max-w-[896px] xl:w-full',
 );
 
