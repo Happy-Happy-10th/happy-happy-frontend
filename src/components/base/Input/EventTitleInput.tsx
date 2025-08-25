@@ -20,6 +20,7 @@ const eventChildVariants = cva(`absolute top-0 bottom-0 left-0 w-[8px] rounded-l
       yoteyoPurple: `bg-yoteyo-purple`,
       yoteyoPink: `bg-yoteyo-pink`,
       yoteyoNavy: `bg-yoteyo-navy`,
+      yoteyoGray: `bg-yoteyo-gray`,
       default: 'bg-yoteyo-main',
     },
   },

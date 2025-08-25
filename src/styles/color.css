@@ -51,6 +51,9 @@
 
   --color-yoteyo-pink: var(--yoteyo-pink);
   --color-yoteyo-pink-sub: var(--yoteyo-pink-sub);
+
+  --color-yoteyo-gray: var(--yoteyo-gray);
+  --color-yoteyo-gray-sub: var(--yoteyo-gray-sub);
 }
 :root {
   /*메인 테마 색상 정의*/
@@ -81,33 +84,36 @@
   --yoteyo-body-sm: 12px;
 
   /*캘린더 이밴트 색상 정의*/
-  --yoteyo-red: #ffeae8;
-  --yoteyo-red-sub: #fb5445;
+  --yoteyo-red: #fb5445;
+  --yoteyo-red-sub: #ffeae8;
 
-  --yoteyo-orange: #ffece2;
-  --yoteyo-orange-sub: #ff6e20;
+  --yoteyo-orange: #ff6e20;
+  --yoteyo-orange-sub: #ffece2;
 
-  --yoteyo-yellow: #ffefcb;
-  --yoteyo-yellow-sub: #eba300;
+  --yoteyo-yellow: #eba300;
+  --yoteyo-yellow-sub: #ffefcb;
 
-  --yoteyo-green: #dfffe5;
-  --yoteyo-green-sub: #11c436;
+  --yoteyo-green: #11c436;
+  --yoteyo-green-sub: #dfffe5;
 
-  --yoteyo-emerald: #defff8;
-  --yoteyo-emerald-sub: #01d0a4;
+  --yoteyo-emerald: #01d0a4;
+  --yoteyo-emerald-sub: #defff8;
 
-  --yoteyo-sky: #e9f8ff;
-  --yoteyo-sky-sub: #01abff;
+  --yoteyo-sky: #01abff;
+  --yoteyo-sky-sub: #e9f8ff;
 
-  --yoteyo-blue: #e9f8ff;
-  --yoteyo-blue-sub: #01abff;
+  --yoteyo-blue: #01abff;
+  --yoteyo-blue-sub: #e9f8ff;
 
-  --yoteyo-navy: #e9f8ff;
-  --yoteyo-navy-sub: #01abff;
+  --yoteyo-navy: #01abff;
+  --yoteyo-navy-sub: #e9f8ff;
 
-  --yoteyo-purple: #e9e8ff;
-  --yoteyo-purple-sub: #5c55f3;
+  --yoteyo-purple: #b063ff;
+  --yoteyo-purple-sub: #f5ecff;
 
-  --yoteyo-pink: #ffe7f4;
-  --yoteyo-pink-sub: #ff44a7;
+  --yoteyo-pink: #ff44a7;
+  --yoteyo-pink-sub: #ffe7f4;
+
+  --yoteyo-gray: #999999;
+  --yoteyo-gray-sub: #f0f0f0;
 }

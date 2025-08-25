@@ -68,6 +68,7 @@ type CustomCalendarPropsType = {
   events?: CalendarEventType[];
   view?: View;
   isMondayStart?: boolean;
+  selectedDate?: Date;
   onSelectSlot?: (slot: SlotInfo) => void;
   onNavigate?: SetDateHandler;
   components?: Components<CalendarEventType, object>; //제네릭 고정
@@ -79,6 +80,7 @@ export function CalendarGrid({
   events = [],
   view = 'month',
   isMondayStart = true,
+  selectedDate,
   onSelectSlot,
   onNavigate,
   components,
@@ -107,7 +109,13 @@ export function CalendarGrid({
         endAccessor="endDate"
         localizer={localizer}
         selectable
+        longPressThreshold={50}
         onSelectSlot={onSelectSlot}
+        //모바일에서 캘린더쪽에서 발생하는 드레그 차단
+        onSelecting={(range: { start: Date; end: Date; slots?: Date[] }) => {
+          if (range?.slots) return range.slots.length === 1;
+          return +range.end - +range.start <= 1; // 사실상 동일 슬롯
+        }}
         onNavigate={onNavigate}
         messages={messages}
         components={components}

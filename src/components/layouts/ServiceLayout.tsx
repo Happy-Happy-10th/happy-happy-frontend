@@ -4,11 +4,7 @@ import { BottomTab } from '@/components/features';
 
 const rootFrame = clsx('w-full h-full flex flex-col', 'max-w-[1280px]', 'bg-yoteyo-gray-100 overflow-hidden');
 
-const contentsFrame = clsx(
-  'flex-1 flex',
-  // "xl:p-[30px] xl:pb-[5px]",
-  'overflow-hidden',
-);
+const contentsFrame = clsx('flex-1 flex', 'overflow-hidden');
 
 const contentsBody = clsx('flex-1 w-full', 'rounded-[8px] bg-white');
 
