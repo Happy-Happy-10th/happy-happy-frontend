@@ -3,7 +3,7 @@ import { cva } from 'class-variance-authority';
 import { Text } from '@/components/base';
 //test
 import { CalendarEventType } from '@/@types/calendar';
-const MAIN_COLOR_MAP = {
+const BOLD_COLORMAP = {
   yoteyoRed: 'bg-yoteyo-red',
   yoteyoOrange: 'bg-yoteyo-orange',
   yoteyoYellow: 'bg-yoteyo-yellow',
@@ -13,31 +13,48 @@ const MAIN_COLOR_MAP = {
   yoteyoBlue: 'bg-yoteyo-blue',
   yoteyoPurple: 'bg-yoteyo-purple',
   yoteyoPink: 'bg-yoteyo-pink',
-  yoteyoNavy: 'bg-yoteyo-black',
+  yoteyoNavy: 'bg-yoteyo-navy',
+  yoteyoGray: 'bg-yoteyo-gray',
   default: 'bg-yoteyo-main',
 } as const;
 
-const SUB_TEXT_COLOR_MAP = {
-  yoteyoRed: 'text-yoteyo-red-sub',
-  yoteyoOrange: 'text-yoteyo-orange-sub',
-  yoteyoYellow: 'text-yoteyo-yellow-sub',
-  yoteyoGreen: 'text-yoteyo-green-sub',
-  yoteyoEmerald: 'text-yoteyo-emerald-sub',
-  yoteyoSky: 'text-yoteyo-sky-sub',
-  yoteyoBlue: 'text-yoteyo-blue-sub',
-  yoteyoNavy: 'text-yoteyo-navy-sub',
-  yoteyoPurple: 'text-yoteyo-purple-sub',
-  yoteyoPink: 'text-yoteyo-pink-sub',
-  default: 'text-white',
-};
+const BOLD_TEXT_COLORMAP = {
+  yoteyoRed: 'text-yoteyo-red',
+  yoteyoOrange: 'text-yoteyo-orange',
+  yoteyoYellow: 'text-yoteyo-yellow',
+  yoteyoGreen: 'text-yoteyo-green',
+  yoteyoEmerald: 'text-yoteyo-emerald',
+  yoteyoSky: 'text-yoteyo-sky',
+  yoteyoBlue: 'text-yoteyo-blue',
+  yoteyoPurple: 'text-yoteyo-purple',
+  yoteyoPink: 'text-yoteyo-pink',
+  yoteyoNavy: 'text-yoteyo-navy',
+  yoteyoGray: 'text-yoteyo-gray',
+  default: 'text-yoteyo-main',
+} as const;
+
+const SOFT_COLORMAP = {
+  yoteyoRed: 'bg-yoteyo-red-sub',
+  yoteyoOrange: 'bg-yoteyo-orange-sub',
+  yoteyoYellow: 'bg-yoteyo-yellow-sub',
+  yoteyoGreen: 'bg-yoteyo-green-sub',
+  yoteyoEmerald: 'bg-yoteyo-emerald-sub',
+  yoteyoSky: 'bg-yoteyo-sky-sub',
+  yoteyoBlue: 'bg-yoteyo-blue-sub',
+  yoteyoNavy: 'bg-yoteyo-navy-sub',
+  yoteyoPurple: 'bg-yoteyo-purple-sub',
+  yoteyoPink: 'bg-yoteyo-pink-sub',
+  yoteyoGray: 'bg-yoteyo-gray-sub',
+  default: 'bg-white',
+} as const;
 
 const evnetBarVariants = cva(`w-full h-full flex flex-row justify-between rounded-[4px] overflow-hidden select-none`, {
-  variants: { variant: MAIN_COLOR_MAP },
+  variants: { variant: SOFT_COLORMAP },
   defaultVariants: { variant: 'yoteyoGreen' },
 });
 
 const evnetMinimalBarVariants = cva(`w-full h-[6px] rounded-[2px]`, {
-  variants: { variant: MAIN_COLOR_MAP },
+  variants: { variant: BOLD_COLORMAP },
   defaultVariants: { variant: 'yoteyoGreen' },
 });
 
@@ -54,7 +71,7 @@ export function CalendarEventDetail({
   return (
     <div className={cn(evnetBarVariants({ variant: color }))}>
       <div className="w-[95%] flex justify-center">
-        <Text variant={'detail2'} className={SUB_TEXT_COLOR_MAP[color]}>
+        <Text variant={'detail2'} className={BOLD_TEXT_COLORMAP[color]}>
           {title}
         </Text>
       </div>
