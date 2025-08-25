@@ -13,6 +13,7 @@ type CustomCalendarPropsType = {
   events?: CalendarEventType[];
   isMondayStart?: boolean;
   onChangeViewDate?: SetDateHandler;
+  selectedDate?: Date;
   onSlotSelected?: (slot: SlotInfo) => void;
 };
 
@@ -24,6 +25,7 @@ export function CustomCalendar({
   events = [],
   isMondayStart = true,
   onChangeViewDate = NOOP_SET_DATE,
+  selectedDate,
   onSlotSelected,
 }: CustomCalendarPropsType) {
   //뷰포트 감시
@@ -44,6 +46,7 @@ export function CustomCalendar({
       onNavigate={onChangeViewDate}
       onSelectSlot={onSlotSelected}
       messages={{ showMore: n => `+${n}` }}
+      selectedDate={selectedDate}
       components={components}
     />
   );

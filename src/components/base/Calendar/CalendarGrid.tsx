@@ -68,6 +68,7 @@ type CustomCalendarPropsType = {
   events?: CalendarEventType[];
   view?: View;
   isMondayStart?: boolean;
+  selectedDate?: Date;
   onSelectSlot?: (slot: SlotInfo) => void;
   onNavigate?: SetDateHandler;
   components?: Components<CalendarEventType, object>; //제네릭 고정
@@ -79,6 +80,7 @@ export function CalendarGrid({
   events = [],
   view = 'month',
   isMondayStart = true,
+  selectedDate,
   onSelectSlot,
   onNavigate,
   components,
