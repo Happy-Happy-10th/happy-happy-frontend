@@ -109,8 +109,13 @@ export function CalendarGrid({
         endAccessor="endDate"
         localizer={localizer}
         selectable
-        longPressThreshold={30}
+        longPressThreshold={50}
         onSelectSlot={onSelectSlot}
+        //모바일에서 캘린더쪽에서 발생하는 드레그 차단
+        onSelecting={(range: { start: Date; end: Date; slots?: Date[] }) => {
+          if (range?.slots) return range.slots.length === 1;
+          return +range.end - +range.start <= 1; // 사실상 동일 슬롯
+        }}
         onNavigate={onNavigate}
         messages={messages}
         components={components}

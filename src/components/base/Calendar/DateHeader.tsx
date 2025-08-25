@@ -15,7 +15,7 @@ export function CalendarDateHeader(props: DateHeaderProps) {
     <div className={cn('flex justify-center items-center h-6 pt-1')}>
       <div
         className={cn(
-          'm-0 p-o w-[20px] h-[24px] flex justify-center items-center',
+          'm-0 p-o w-[24px] h-[24px] flex justify-center items-center',
           day === 0 && 'text-red-500',
           day === 6 && 'text-blue-500',
           isOffRange && 'opacity-50',

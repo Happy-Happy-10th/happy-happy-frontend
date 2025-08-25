@@ -28,11 +28,11 @@ const calendarSize = clsx(
   'bg-white',
   'ml-[20px] mr-[20px] mt-[26px]',
   'xl:ml-0 xl:mr-0 xl:mt-0',
-  'min-h-[650px] xl:max-h-full xl:min-h-0 [@media(max-height:670px)]:min-h-[450px]',
+  'min-h-[650px] xl:max-h-full xl:min-h-0 [@media(max-height:750px)]:min-h-[480px]',
   'xl:max-w-[896px] xl:w-full',
 );
 
-const eventList = clsx('bg-white rounded-[8px]', 'xl:w-[304px] xl:h-auto xl:mt-15', 'pl-5 pr-5');
+const eventList = clsx('bg-white rounded-[8px]', 'xl:w-[304px] xl:h-auto xl:mt-15 flex-1', 'pl-5 pr-5 pb-5');
 export default function CalendarPage() {
   //캘린더에 View 될 날짜
   const [currentDate, setCurrentDate] = useDateState(new Date());
