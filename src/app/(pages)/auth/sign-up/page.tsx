@@ -16,6 +16,7 @@ import {
   DialogTrigger,
   Icon,
   Input,
+  Spinner,
   Text,
 } from '@/components/base';
 import { CustomDialog } from '@/components/features';
@@ -25,6 +26,7 @@ import { cn } from '@/utils/tailwind-utils';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import Countdown, { zeroPad } from 'react-countdown';
 
 function Page() {
   const [isAuthUserId, setIsAuthUserId] = useState(false);
@@ -155,7 +157,6 @@ function Page() {
         sendCodeMutate({
           username: getValues('username'),
         });
-        setIsAuthUserEmail(true);
       }
     },
     onError: async error => {
@@ -175,6 +176,7 @@ function Page() {
     onSuccess: data => {
       // 이메일이 발송되었습니다.
       if (data.status === 200) {
+        setIsAuthUserEmail(true);
       }
     },
     onError: async error => {
@@ -210,6 +212,7 @@ function Page() {
 
   return (
     <>
+      <Spinner className="w-4 h-4" />
       <CustomDialog
         open={dialogState.open}
         onClose={() => setDialogState({ open: false, message: '', type: 'error' })}
@@ -338,9 +341,12 @@ function Page() {
 
           {isAuthUserEmail && (
             <Box className="flex-col gap-y-3">
-              <Label className={`gap-0 after:content-["*"] after:text-yoteyo-error`}>이메일 인증</Label>
+              <Label htmlFor="code" className={`gap-0 after:content-["*"] after:text-yoteyo-error`}>
+                이메일 인증
+              </Label>
               <Box className="flex-col gap-y-2">
                 <Input
+                  id="code"
                   placeholder="코드를 입력해주세요"
                   value={code}
                   onChange={e => setCode(e.target.value)}
@@ -363,6 +369,21 @@ function Page() {
                         <Text className="!text-[14px] font-semibold">인증</Text>
                       </Button>
                     ),
+                  }}
+                />
+
+                <Countdown
+                  date={Date.now() + 300 * 1000}
+                  renderer={props => {
+                    return (
+                      <Text variant="detail2">
+                        * 인증키 유효시간{' '}
+                        <Text variant="detail2" className="text-yoteyo-main">
+                          {zeroPad(props.minutes, 2)}:{zeroPad(props.seconds, 2)}
+                        </Text>{' '}
+                        남았습니다.
+                      </Text>
+                    );
                   }}
                 />
               </Box>

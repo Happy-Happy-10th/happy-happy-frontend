@@ -39,6 +39,7 @@
     "nuqs": "^2.4.3",
     "react": "^19.0.0",
     "react-big-calendar": "^1.19.4",
+    "react-countdown": "^2.3.6",
     "react-day-picker": "^9.8.1",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.62.0",
