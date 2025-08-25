@@ -10,4 +10,5 @@ export type EventColor =
   | 'yoteyoBlue'
   | 'yoteyoNavy'
   | 'yoteyoPurple'
-  | 'yoteyoPink';
+  | 'yoteyoPink'
+  | 'yoteyoGray';

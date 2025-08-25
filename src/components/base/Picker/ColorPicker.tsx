@@ -1,7 +1,9 @@
 import { EventColor } from '@/@types';
 import clsx from 'clsx';
 
-const colorClassMap: Record<EventColor, string> = {
+// Gray 색상은 취소된 일정에만 적용해야 함으로 키 제거
+type NonGrayColorMap = Exclude<EventColor, 'yoteyoGray'>;
+const colorClassMap: Record<NonGrayColorMap, string> = {
   yoteyoRed: 'yoteyo-red',
   yoteyoOrange: 'yoteyo-orange',
   yoteyoYellow: 'yoteyo-yellow',
@@ -14,7 +16,7 @@ const colorClassMap: Record<EventColor, string> = {
   yoteyoPink: 'yoteyo-pink',
 };
 
-const colors: EventColor[] = Object.keys(colorClassMap) as EventColor[];
+const colors: NonGrayColorMap[] = Object.keys(colorClassMap) as NonGrayColorMap[];
 
 type PropsType = {
   value?: EventColor;
