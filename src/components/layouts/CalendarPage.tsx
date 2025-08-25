@@ -16,7 +16,7 @@ import { useDateState } from '@/hooks';
 import { getEventsByDay } from '@/utils';
 
 import { CustomCalendar, DayEventList } from '@/components/features';
-import { calendarEvents } from '@/@mock/calendar';
+import { cn } from '@/utils/tailwind-utils';
 
 const contents = clsx(
   'w-full h-full flex gap-[20px] bg-yoteyo-gray-100',
@@ -31,7 +31,7 @@ const calendarSize = clsx(
   'xl:ml-0 xl:mr-0 xl:mt-0',
 );
 
-const eventList = clsx('bg-white', 'xl:w-[304px] h-[187px] xl:h-auto xl:mt-[48px]', 'rounded-[8px]');
+const eventList = clsx('bg-white', 'xl:w-[304px] h-[187px] xl:h-auto xl:mt-15', 'rounded-[8px]');
 export default function CalendarPage() {
   //캘린더에 View 될 날짜
   const [currentDate, setCurrentDate] = useDateState(new Date());
@@ -77,7 +77,7 @@ export default function CalendarPage() {
           onSlotSelected={handleSlotSelected}
         />
       </div>
-      <div className={eventList}>
+      <div className={cn(eventList, "shadow-box")}>
         <DayEventList selectedDate={selectedDate} dayEvents={dayEvents} />
       </div>
     </div>
