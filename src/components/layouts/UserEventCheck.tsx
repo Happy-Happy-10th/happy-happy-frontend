@@ -9,6 +9,7 @@ import TextArea from '../base/TextArea/TextArea';
 import { useState } from 'react';
 import { base64UrlEncode, copyText } from '@/utils';
 import { ChevronUp } from 'lucide-react';
+import { ShareEventDialog } from '../features';
 
 const itemsStyle = clsx('w-full bg-white rounded-[8px]');
 const dateBox = clsx(
@@ -24,19 +25,8 @@ type UserEventCheckFrameType = {
   onDelete?: () => void;
 };
 export function UserEventCheck({ event, onEdit, onDelete }: UserEventCheckFrameType) {
-  const [shared, setShared] = useState<boolean>(false);
-  const handleShared = () => {
-    setShared(true);
-    //인코딩
-    const URLText = base64UrlEncode(JSON.stringify(event));
-    //URL 설정
-    const SHARE_ROUTE = '/shared';
-    const url = new URL(SHARE_ROUTE, window.location.origin);
-    url.searchParams.set('d', URLText);
-    const sharedURL = url.toString();
-    // 클립보드 복사
-    copyText(sharedURL);
-  };
+  const [dialogState, setDialogState] = useState<boolean>(false);
+
   return (
     <div className="flex flex-col flex-1 overflow-y-auto scrollbar-hide pb-9">
       <EventCheckForm event={event} />
@@ -52,10 +42,11 @@ export function UserEventCheck({ event, onEdit, onDelete }: UserEventCheckFrameT
         </Box>
       </Box>
       <Box className="w-full flex justify-end mt-auto">
-        <button className="w-20 h-20 hover:cursor-pointer" type="button" onClick={() => console.log('hi')}>
+        <button className="w-20 h-20 hover:cursor-pointer" type="button" onClick={() => setDialogState(true)}>
           <FloatingOpenIcon />
         </button>
       </Box>
+      <ShareEventDialog open={dialogState} onClose={() => setDialogState(false)} event={event} />
     </div>
   );
 }
