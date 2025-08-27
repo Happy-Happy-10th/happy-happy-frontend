@@ -30,3 +30,7 @@ export { default as AlertPurpleIcon } from '../../../../public/icons/alert-purpl
 export { default as FloatingOpenIcon } from '../../../../public/icons/floating-open.svg?react';
 export { default as ShareKakaoIcon } from '../../../../public/icons/share-kakao.svg?react';
 export { default as ShareUrlIcon } from '../../../../public/icons/share-url.svg?react';
+
+export { default as MapPinIcon } from '../../../../public/icons/map-pin-icon.svg?react';
+export { default as LinkIcon } from '../../../../public/icons/link-icon.svg?react';
+export { default as NoteIcon } from '../../../../public/icons/note-icon.svg?react';
