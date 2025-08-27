@@ -28,8 +28,8 @@ export type ApiCalendarEventType = {
   locate: string;
   memo: string;
   holiday: boolean;
-  // isPending: boolean;
-  // isYoteyo: boolean;
+  isPending: boolean;
+  isYoteyo: boolean;
 };
 
 export type ApiGetEvnetsResponseType = {

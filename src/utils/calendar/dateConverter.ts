@@ -9,8 +9,6 @@ import { ApiCalendarEventType, CalendarEventType } from '@/@types/calendar';
 export function convertEventStringToDate(event: ApiCalendarEventType): CalendarEventType {
   return {
     ...event,
-    isPending: false, //test
-    isYoteyo: false, //test
     startDate: new Date(event.startDate),
     endDate: new Date(event.endDate),
   };
