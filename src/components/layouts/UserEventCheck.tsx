@@ -1,3 +1,4 @@
+'use client';
 import { cn } from '@/utils/tailwind-utils';
 import clsx from 'clsx';
 import { Box, Button, EventTextInput, FloatingOpenIcon, Icon, MapPinIcon, NoteIcon } from '@/components/base';
@@ -7,8 +8,6 @@ import { ko } from 'date-fns/locale';
 import { format } from 'date-fns';
 import TextArea from '../base/TextArea/TextArea';
 import { useState } from 'react';
-import { base64UrlEncode, copyText } from '@/utils';
-import { ChevronUp } from 'lucide-react';
 import { ShareEventDialog } from '../features';
 
 const itemsStyle = clsx('w-full bg-white rounded-[8px]');
@@ -54,7 +53,7 @@ export function UserEventCheck({ event, onEdit, onDelete }: UserEventCheckFrameT
 type EventCheckFormType = { event: CalendarEventType };
 export function EventCheckForm({ event }: EventCheckFormType) {
   return (
-    <div className="w-full p-5 flex flex-col gap-5">
+    <div className="w-full flex flex-col gap-5">
       <div className={cn(itemsStyle, 'relative w-full h-15')}>
         <EventTextInput
           className="disabled:text-yoteyo-black disabled:text-[22px] disabled:font-bold disabled:opacity-100"
