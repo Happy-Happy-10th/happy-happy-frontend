@@ -5,3 +5,4 @@ export { MonthNavigator } from './monthNavigator';
 export { DateSelector } from './dateSelector';
 export { UserEventForm, LoginForm } from './Form';
 export { CustomDialog, ShareEventDialog } from './CustomDialog';
+export { RouteButton } from './RouteButton';

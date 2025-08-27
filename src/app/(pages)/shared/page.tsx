@@ -1,10 +1,11 @@
-import { notFound, redirect } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import { CalendarEventType } from '@/@types/calendar';
 import { Box, Button, Text } from '@/components/base';
 
 import { base64UrlDecodeToString } from '@/utils/calendar/URLBase64';
 import { convertEventStringToDate } from '@/utils/calendar/dateConverter';
 import { EventCheckForm } from '@/components/layouts/UserEventCheck';
+import { RouteButton } from '@/components/features';
 
 type SharedPageType = { searchParams: Promise<{ d?: string; sendUser?: string }> };
 export default async function SharedPage({ searchParams }: SharedPageType) {
@@ -32,9 +33,9 @@ export default async function SharedPage({ searchParams }: SharedPageType) {
         </Box>
         <Box className="flex flex-col xl:w-123 w-full h-full gap-7">
           <EventCheckForm event={event} />
-          <Button className="h-16 xl:w-123 w-full" type="button" variant={'default'}>
+          <RouteButton className="h-16 xl:w-123 w-full" variant={'default'} routePath={'/intoduce'}>
             <Text variant={'body2'}>요때요 서비스 이용하러가기</Text>
-          </Button>
+          </RouteButton>
         </Box>
       </Box>
     </Box>
