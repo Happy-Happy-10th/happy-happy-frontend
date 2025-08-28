@@ -18,6 +18,7 @@ import { useStore } from 'zustand';
 import { useAuthStore } from '@/store';
 import { base64UrlEncode, copyText } from '@/utils';
 import { CalendarEventType } from '@/@types';
+import { useEffect } from 'react';
 
 type PropsType = {
   open: boolean;
@@ -38,7 +39,30 @@ export default function ShareEventDialog({ open, onClose, event }: PropsType) {
 
   //카카오 공유 함수
   const handleShareKakao = () => {
-    alert('카카오전송 넣기');
+    const kakao = window.Kakao;
+    if (!kakao) return;
+
+    kakao.Share.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: 'Yoteyo를 통해 공유받은 일정을 확인하세요.',
+        description: `${user?.nickname ?? '누군가'}님이 공유한 일정을 확인해보세요!`,
+        imageUrl: `${window.location.origin}/images/kakao-share-img.png`,
+        link: {
+          webUrl: sharedURL,
+          mobileWebUrl: sharedURL,
+        },
+      },
+      buttons: [
+        {
+          title: '일정 확인하기',
+          link: {
+            webUrl: sharedURL,
+            mobileWebUrl: sharedURL,
+          },
+        },
+      ],
+    });
     onClose();
   };
 
@@ -48,6 +72,12 @@ export default function ShareEventDialog({ open, onClose, event }: PropsType) {
     toast('클립보드에 복사되었습니다.', { duration: 1500 });
     onClose();
   };
+
+  useEffect(() => {
+    if (window.Kakao && !window.Kakao.isInitialized()) {
+      window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_JS_KEY!);
+    }
+  }, []);
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent showCloseButton={false} className={'w-[320px] h-[208px] z-[9999]'}>
