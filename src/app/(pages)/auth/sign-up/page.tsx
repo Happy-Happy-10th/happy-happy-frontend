@@ -212,7 +212,6 @@ function Page() {
 
   return (
     <>
-      <Spinner className="w-4 h-4" />
       <CustomDialog
         open={dialogState.open}
         onClose={() => setDialogState({ open: false, message: '', type: 'error' })}

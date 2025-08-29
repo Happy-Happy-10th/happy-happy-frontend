@@ -43,7 +43,7 @@ function Page() {
   const { mutate } = useSignIn({
     onSuccess: ({ data }) => {
       setUser(data);
-      router.push('/home');
+      router.replace('/home');
     },
     onError: async error => {
       const res = await error.response.json();
