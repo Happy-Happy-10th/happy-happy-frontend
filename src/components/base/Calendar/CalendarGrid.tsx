@@ -48,9 +48,9 @@ const calendarVariants = cva(
       variant: {
         plain: `
           [&_.rbc-day-bg]:!border-0
-          [&_.rbc-month-row]:!border-yoteyo-gray-200
+          [&_.rbc-month-row]:!border-yoteyo-gray-400
           [&_.rbc-month-view_.rbc-header]:!border-b
-          [&_.rbc-month-view_.rbc-header]:!border-yoteyo-gray-200
+          [&_.rbc-month-view_.rbc-header]:!border-yoteyo-gray-400
           [&_.rbc-month-view_.rbc-header+_.rbc-header]:!border-l-0
           [&_.rbc-month-view]:!border-[1px]
           [&_.rbc-month-view]:!border-solid
@@ -119,6 +119,25 @@ export function CalendarGrid({
         onNavigate={onNavigate}
         messages={messages}
         components={components}
+        dayPropGetter={date => {
+          if (selectedDate === undefined) return {};
+          const selectedYear = selectedDate.getFullYear();
+          const selectedMonth = selectedDate.getMonth();
+          const selectedDay = selectedDate.getDate();
+          if (
+            date.getFullYear() === selectedYear &&
+            date.getMonth() === selectedMonth &&
+            date.getDate() === selectedDay
+          ) {
+            return {
+              style: {
+                backgroundColor: '#EBEBEB',
+                borderRadius: '8px',
+              },
+            };
+          }
+          return {};
+        }}
       />
     </div>
   );

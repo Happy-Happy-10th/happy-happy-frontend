@@ -45,7 +45,7 @@ export default function ShareEventDialog({ open, onClose, event }: PropsType) {
     kakao.Share.sendDefault({
       objectType: 'feed',
       content: {
-        title: 'Yoteyo를 통해 공유받은 일정을 확인하세요.',
+        title: '요때요를 통해 공유받은 일정을 확인하세요.',
         description: `${user?.nickname ?? '누군가'}님이 공유한 일정을 확인해보세요!`,
         imageUrl: `${window.location.origin}/images/kakao-share-img.png`,
         link: {

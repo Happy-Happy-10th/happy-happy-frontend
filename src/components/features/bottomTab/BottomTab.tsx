@@ -26,7 +26,6 @@ const navItem = clsx('flex flex-col items-center text-gray-400 text-sm');
 const centerButtonWrapper = clsx(
   'absolute -top-[11px] z-10',
   'w-[62px] h-[62px] rounded-full bg-white flex items-center justify-center',
-  'shadow-[0_4px_4px_rgba(0,0,0,0.25)]',
   'relative overflow-visible',
 );
 
