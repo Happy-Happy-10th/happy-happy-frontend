@@ -119,6 +119,25 @@ export function CalendarGrid({
         onNavigate={onNavigate}
         messages={messages}
         components={components}
+        dayPropGetter={date => {
+          if (selectedDate === undefined) return {};
+          const selectedYear = selectedDate.getFullYear();
+          const selectedMonth = selectedDate.getMonth();
+          const selectedDay = selectedDate.getDate();
+          if (
+            date.getFullYear() === selectedYear &&
+            date.getMonth() === selectedMonth &&
+            date.getDate() === selectedDay
+          ) {
+            return {
+              style: {
+                backgroundColor: '#EBEBEB',
+                borderRadius: '8px',
+              },
+            };
+          }
+          return {};
+        }}
       />
     </div>
   );
