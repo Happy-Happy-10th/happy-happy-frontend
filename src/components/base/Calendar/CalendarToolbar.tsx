@@ -12,8 +12,10 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import { SetDateHandler, CalendarEventType } from '@/@types';
 //Components
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { BacktodayIcon, Button, Icon, SettingIcon, Text } from '@/components/base';
+import { BacktodayIcon, Box, Button, Icon, SettingIcon, Text } from '@/components/base';
 import { MonthNavigator } from '@/components/features/monthNavigator';
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from '@/components/ui/drawer';
+import CalendarSettingForm from '@/components/features/Form/CalendarSettingFrom';
 
 type CalendarToolbarType = {
   onChangeViewDate: SetDateHandler;
@@ -70,9 +72,23 @@ export function CalendarToolbar({
           </div>
         )}
         <div className="hover:cursor-pointer">
-          <Icon className="w-6 h-6">
-            <SettingIcon />
-          </Icon>
+          <Drawer>
+            <DrawerTrigger asChild>
+              <Icon className="w-6 h-6">
+                <SettingIcon />
+              </Icon>
+            </DrawerTrigger>
+            <DrawerContent className="bg-yoteyo-bg-modal">
+              <DrawerHeader>
+                <DrawerTitle>
+                  <Text variant={'title2'}>환경설정</Text>
+                </DrawerTitle>
+              </DrawerHeader>
+              <Box className="pl-5 pr-5">
+                <CalendarSettingForm />
+              </Box>
+            </DrawerContent>
+          </Drawer>
         </div>
       </div>
     </div>

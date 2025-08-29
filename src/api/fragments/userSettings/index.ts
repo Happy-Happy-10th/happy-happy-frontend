@@ -5,6 +5,8 @@ import {
   ApiCalendarSettingType,
   ApiTimeFormayType,
   ApiWeekStartDayType,
+  ApiSidoCodeName,
+  ApiSigunguCodeName,
 } from '@/@types';
 import { yoteyoAPI } from '@/api';
 //사용자 설정 가져오기
@@ -44,5 +46,27 @@ export async function patchUserAiSerchRegion(caldnarId: number, payload: ApiAiSe
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(payload),
+  });
+}
+// 전체 시도 목록을 조회
+export async function getRegionSido() {
+  return yoteyoAPI<ApiSidoCodeName>('/regions/sido', {
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+}
+
+//특정 시군구 목록을 조회
+export async function getRegionSigungu(sidoCode: string) {
+  return yoteyoAPI<ApiSigunguCodeName>('/regions/sigungu', {
+    method: 'get',
+    searchParams: {
+      sidoCode: sidoCode,
+    },
+    headers: {
+      'Content-Type': 'application/json',
+    },
   });
 }
