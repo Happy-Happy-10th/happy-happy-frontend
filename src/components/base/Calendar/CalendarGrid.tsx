@@ -48,9 +48,9 @@ const calendarVariants = cva(
       variant: {
         plain: `
           [&_.rbc-day-bg]:!border-0
-          [&_.rbc-month-row]:!border-yoteyo-gray-200
+          [&_.rbc-month-row]:!border-yoteyo-gray-400
           [&_.rbc-month-view_.rbc-header]:!border-b
-          [&_.rbc-month-view_.rbc-header]:!border-yoteyo-gray-200
+          [&_.rbc-month-view_.rbc-header]:!border-yoteyo-gray-400
           [&_.rbc-month-view_.rbc-header+_.rbc-header]:!border-l-0
           [&_.rbc-month-view]:!border-[1px]
           [&_.rbc-month-view]:!border-solid

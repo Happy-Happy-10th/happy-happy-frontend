@@ -19,7 +19,7 @@ import { CustomCalendar, DayEventList } from '@/components/features';
 import { cn } from '@/utils/tailwind-utils';
 
 const contents = clsx(
-  'w-full h-full flex gap-[20px] bg-yoteyo-gray-100',
+  'w-full h-full flex gap-[20px] bg-yoteyo-bg-default',
   'xl:p-[30px] xl:pb-[5px]',
   'flex-col xl:flex-row',
   'xl:overflow-hidden overflow-y-scroll',

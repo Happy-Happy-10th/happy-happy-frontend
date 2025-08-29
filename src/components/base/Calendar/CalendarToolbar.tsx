@@ -38,7 +38,7 @@ export function CalendarToolbar({
   const isToday = isSameMonth(date, today);
 
   return (
-    <div className="w-full flex justify-between bg-yoteyo-gray-100 pb-[10px] pl-[5px] pr-[5px]">
+    <div className="w-full flex justify-between bg-yoteyo-bg-default pb-[10px] pl-[5px] pr-[5px]">
       <div className="flex flex-row items-center gap-[16px]">
         {/* 캘린더 상남 년 월 */}
         <Text variant={'title1'}>{formatted}</Text>
