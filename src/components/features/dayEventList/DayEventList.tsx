@@ -10,11 +10,11 @@ import { queryClient, queryKeys } from '@/api';
 import { extractYear } from '@/utils/calendar/extractDate';
 import { calendarService } from '@/api/service/calendar';
 
-import UserEventCheck from '@/components/layouts/UserEventCheck';
 import { CustomDrawer, CustomDrawerHandle, AlertRedIcon } from '@/components/base';
 //자식 ui components
 import DayEventListHead from './ui/DayEventListHead';
 import DayEventBox from './ui/DayEventBox';
+import { UserEventCheck } from '@/components/layouts/UserEventCheck';
 
 const datEvnetListStyle = clsx('rounded-[8px]', 'w-full h-full', 'bg-white', 'flex flex-col');
 

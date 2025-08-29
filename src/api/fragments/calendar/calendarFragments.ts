@@ -40,12 +40,3 @@ export async function DeleteEvent(eventId: number) {
     headers: { 'Content-Type': 'application/json' },
   });
 }
-
-export async function getUserSetting() {
-  return await yoteyoAPI('getUserSettings', {
-    method: 'get',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-}

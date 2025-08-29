@@ -1,11 +1,5 @@
 import { CalendarEventType } from '@/@types/calendar';
-import {
-  DeleteEvent,
-  getUserEvents,
-  getUserSetting,
-  postUserEvent,
-  putUserEvent,
-} from '@/api/fragments/calendar/calendarFragments';
+import { DeleteEvent, getUserEvents, postUserEvent, putUserEvent } from '@/api/fragments/calendar/calendarFragments';
 import { convertEventsStringToDate } from '@/utils/calendar/dateConverter';
 
 const calendarService = {
@@ -17,7 +11,6 @@ const calendarService = {
   deleteEvent: async (eventId: number) => await DeleteEvent(eventId),
   postEvent: async (payload: CalendarEventType) => (await postUserEvent(payload)).json(),
   putEvent: async (payload: CalendarEventType) => (await putUserEvent(payload)).json(),
-  setting: async () => (await getUserSetting()).json(),
 };
 
 export { calendarService };
