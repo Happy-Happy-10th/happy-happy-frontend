@@ -1,19 +1,25 @@
 'use client';
 
-import { Box, Button, Input, Tabs, TabsContent, TabsList, TabsTrigger, Text } from '@/components/base';
+import { Box, Button, Icon, Input, Tabs, TabsContent, TabsList, TabsTrigger, Text } from '@/components/base';
 import { FindUserIdForm, FindUserPassWordForm } from '@/components/features/Form';
 import AuthLayout from '@/components/layouts/AuthLayout';
 import { Label } from '@/components/ui/label';
+import { useRouter } from 'next/navigation';
 import { parseAsString, useQueryState } from 'nuqs';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
 function Page() {
+  const router = useRouter();
   const [type, setType] = useQueryState('type', parseAsString.withDefault('id'));
 
   return (
     <AuthLayout>
-      <Box className="h-14 items-center justify-center">
+      <Box className="h-14 items-center justify-center relative ">
+        <Button size="icon" variant="icon" className="rounded-none absolute left-5" onClick={() => router.back()}>
+          <img src="/images/arrow-left-black.png" className="w-2 h-4" alt="뒤로가기 아이콘" />
+        </Button>
+
         <Text>아이디/비밀번호 찾기</Text>
       </Box>
       <Box className="flex-col">
