@@ -16,6 +16,7 @@ import { useDateState } from '@/hooks';
 import { getEventsByDay } from '@/utils';
 
 import { CustomCalendar, DayEventList } from '@/components/features';
+import { cn } from '@/utils/tailwind-utils';
 
 const contents = clsx(
   'w-full h-full flex gap-[20px] bg-yoteyo-gray-100',
@@ -94,7 +95,7 @@ export default function CalendarPage() {
           onSlotSelected={handleSlotSelected}
         />
       </div>
-      <div className={eventList}>
+      <div className={cn(eventList, 'shadow-[var(--shadow-box)]')}>
         <DayEventList selectedDate={selectedDate} dayEvents={dayEvents} />
       </div>
     </div>
