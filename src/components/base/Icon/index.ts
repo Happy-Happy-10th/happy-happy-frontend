@@ -9,20 +9,28 @@ export { default as HomeInActiveIcon } from '../../../../public/icons/home-inact
 export { default as FeedActiveIcon } from '../../../../public/icons/feed-active-icon.svg?react';
 export { default as FeedInActiveIcon } from '../../../../public/icons/feed-inactive-icon.svg?react';
 
-export {default as YoteyoChatIcon} from '../../../../public/icons/yoteyo-chat-icon.svg?react';
+export { default as YoteyoChatIcon } from '../../../../public/icons/yoteyo-chat-icon.svg?react';
 
-export {default as BacktodayIcon} from '../../../../public/icons/back-today.svg?react'
-export {default as SettingIcon} from '../../../../public/icons/setting-icon.svg?react'
+export { default as BacktodayIcon } from '../../../../public/icons/back-today.svg?react';
+export { default as SettingIcon } from '../../../../public/icons/setting-icon.svg?react';
 
 export { default as CheckIcon } from '../../../../public/icons/check.svg?react';
 export { default as CloseIcon } from '../../../../public/icons/close.svg?react';
 
 export { default as MiniCalendarIcon } from '../../../../public/icons/mini-calendar-icon.svg?react';
-export { default as MiniClockIcon } from '../../../../public/icons/mini-clock-icon.svg?react'
+export { default as MiniClockIcon } from '../../../../public/icons/mini-clock-icon.svg?react';
 
-export { default as RadioOffIcon } from '../../../../public/icons/radio-off.svg?react'
-export { default as RadioOnIcon } from '../../../../public/icons/radio-on.svg?react'
+export { default as RadioOffIcon } from '../../../../public/icons/radio-off.svg?react';
+export { default as RadioOnIcon } from '../../../../public/icons/radio-on.svg?react';
 
-export { default as AlertRedIcon } from '../../../../public/icons/alert-red.svg?react'
-export { default as AlertCheckIcon } from '../../../../public/icons/alert-check.svg?react'
-export { default as AlertPurpleIcon } from '../../../../public/icons/alert-purple.svg?react'
+export { default as AlertRedIcon } from '../../../../public/icons/alert-red.svg?react';
+export { default as AlertCheckIcon } from '../../../../public/icons/alert-check.svg?react';
+export { default as AlertPurpleIcon } from '../../../../public/icons/alert-purple.svg?react';
+
+export { default as FloatingOpenIcon } from '../../../../public/icons/floating-open.svg?react';
+export { default as ShareKakaoIcon } from '../../../../public/icons/share-kakao.svg?react';
+export { default as ShareUrlIcon } from '../../../../public/icons/share-url.svg?react';
+
+export { default as MapPinIcon } from '../../../../public/icons/map-pin-icon.svg?react';
+export { default as LinkIcon } from '../../../../public/icons/link-icon.svg?react';
+export { default as NoteIcon } from '../../../../public/icons/note-icon.svg?react';

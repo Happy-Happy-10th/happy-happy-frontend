@@ -438,7 +438,7 @@ export const calendarApiResponse: ApiCalendarEventType[] = [
     locate: '서울 강남 무신사 매장',
     memo: '최대 80% 할인, 오프라인 이벤트 포함',
     holiday: false,
-    // isPending:false,
-    // isYoteyo:false
+    isPending: false,
+    isYoteyo: false,
   },
 ];

@@ -5,7 +5,7 @@ import { useForm, Controller, FormProvider } from 'react-hook-form';
 import clsx from 'clsx';
 
 import { Input } from '@/components/ui/input';
-import { Button, ColorPicker, EventTextInput, RepeatPicker } from '@/components/base';
+import { Button, ColorPicker, EventTextInput, MapPinIcon, NoteIcon, RepeatPicker } from '@/components/base';
 import { DateSelector } from '../dateSelector';
 import TextArea from '@/components/base/TextArea/TextArea';
 import { CalendarEventType } from '@/@types/calendar';
@@ -152,9 +152,10 @@ export default function UserEventForm({ event, mode = 'create' }: PropsType) {
                 render={({ field }) => (
                   <TextArea
                     {...field}
-                    className="border-none yoteyo-m-detail-lg rounded-b-none min-h-1"
-                    rows={10}
+                    className="text-[20px] md:text-[20px] border-none yoteyo-m-detail-lg rounded-b-none min-h-1"
+                    rows={1}
                     placeholder="위치"
+                    icon={<MapPinIcon />}
                     onChange={e => {
                       field.onChange(e);
                       setTimeout(() => {
@@ -174,9 +175,10 @@ export default function UserEventForm({ event, mode = 'create' }: PropsType) {
                 render={({ field }) => (
                   <TextArea
                     {...field}
-                    className="border-none yoteyo-m-detail-lg rounded-t-none min-h-20"
-                    rows={10}
+                    className="text-[20px] md:text-[20px] border-none yoteyo-m-detail-lg rounded-t-none min-h-20"
+                    rows={3}
                     placeholder="메모"
+                    icon={<NoteIcon />}
                     onFocus={e => {
                       field.onChange(e);
                       setTimeout(() => {
