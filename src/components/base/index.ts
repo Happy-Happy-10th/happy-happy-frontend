@@ -25,3 +25,5 @@ export * from './Dialog';
 export * from './Spinner';
 
 export * from './Calendar';
+
+export * from './Tabs';
