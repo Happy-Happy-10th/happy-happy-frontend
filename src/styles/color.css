@@ -61,13 +61,12 @@
   --yoteyo-sub: #d8ff7c;
   --yoteyo-error: #ff6366;
   --yoteyo-black: #222222;
-  --yoteyo-gray-100: #fafafa;
-  --yoteyo-gray-200: #c0c0c0;
-  --yoteyo-gray-300: #999999;
-  --yoteyo-gray-400: #666666;
-  --yoteyo-gray-500: #222222;
-  --yoteyo-disabled: #e2e2e2;
-
+  --yoteyo-gray-100: #f0f0f0;
+  --yoteyo-gray-200: #eaeaea;
+  --yoteyo-gray-300: #c0c0c0;
+  --yoteyo-gray-400: #eaeaea;
+  --yoteyo-gray-500: #999999;
+  --yoteyo-disabled: #666666;
   /* 배경 및 외각 색상 정의*/
   --yoteyo-bg-default: #fafafa;
   --yoteyo-bg-modal: #f9f8fb;
