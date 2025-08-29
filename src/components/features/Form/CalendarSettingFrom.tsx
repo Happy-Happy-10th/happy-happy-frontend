@@ -8,11 +8,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useStore } from 'zustand';
 
-type PropsType = {
-  weekStartDay: WeekStartDayEnum;
-  timeFormat: TimeFormatEnum;
-};
-export default function CalendarSettingForm({ weekStartDay = 'MONDAY', timeFormat = 'TWELVE_HOUR' }: PropsType) {
+type PropsType = {};
+export default function CalendarSettingForm({}: PropsType) {
   const { user } = useStore(useAuthStore);
   const { settings, setUserSetting } = useStore(useUserSettingStore);
   if (!settings) return '설정을 가져오는 중.';
