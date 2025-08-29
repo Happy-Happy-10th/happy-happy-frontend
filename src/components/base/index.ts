@@ -22,4 +22,8 @@ export * from './CheckBox';
 
 export * from './Dialog';
 
-export * from './Calendar'
+export * from './Spinner';
+
+export * from './Calendar';
+
+export * from './Tabs';

@@ -11,6 +11,7 @@ import { setCookie } from 'cookies-next';
 import { useStore } from 'zustand';
 import { useAuthStore } from '@/store';
 import { CustomDialog } from '@/components/features';
+import Link from 'next/link';
 
 function Page() {
   const router = useRouter();
@@ -43,7 +44,7 @@ function Page() {
   const { mutate } = useSignIn({
     onSuccess: ({ data }) => {
       setUser(data);
-      router.push('/home');
+      router.replace('/home');
     },
     onError: async error => {
       const res = await error.response.json();
@@ -109,7 +110,22 @@ function Page() {
             </Box>
           </Box>
 
-          <Box className="w-full justify-end mt-6">
+          <Box className="w-full justify-between mt-6">
+            <Box className="items-center gap-x-3">
+              <Button variant="icon" size="icon">
+                <Text variant="detail1" className="text-yoteyo-gray-400">
+                  <Link href="/auth/accounts?type=id">아이디 찾기</Link>
+                </Text>
+              </Button>
+
+              <Box className="w-[1px] h-[10px] bg-[#CCCCCC]" />
+              <Button variant="icon" size="icon">
+                <Text variant="detail1" className="text-yoteyo-gray-400">
+                  <Link href="/auth/accounts?type=password">비밀번호 찾기</Link>
+                </Text>
+              </Button>
+            </Box>
+
             <Button size="icon" variant="icon" onClick={() => router.push('/auth/sign-up')}>
               <Text variant="detail1" className="text-yoteyo-main">
                 회원가입
