@@ -33,7 +33,7 @@ export default async function SharedPage({ searchParams }: SharedPageType) {
         </Box>
         <Box className="flex flex-col xl:w-123 w-full h-full gap-7">
           <EventCheckForm event={event} />
-          <RouteButton className="h-16 xl:w-123 w-full" variant={'default'} routePath={'/intoduce'}>
+          <RouteButton className="h-16 xl:w-123 w-full" variant={'default'} routePath={'/introduce'}>
             <Text variant={'body2'}>요때요 서비스 이용하러가기</Text>
           </RouteButton>
         </Box>
