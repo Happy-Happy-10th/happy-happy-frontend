@@ -5,19 +5,19 @@ import { useForm, Controller, FormProvider } from 'react-hook-form';
 import clsx from 'clsx';
 
 import { Input } from '@/components/ui/input';
-import { Button, ColorPicker, EventTextInput, RepeatPicker } from '@/components/base';
+import { Button, ColorPicker, EventTextInput, MapPinIcon, NoteIcon, RepeatPicker } from '@/components/base';
 import { DateSelector } from '../dateSelector';
 import TextArea from '@/components/base/TextArea/TextArea';
 import { CalendarEventType } from '@/@types/calendar';
 import { Text } from '@/components/base';
 import { cn } from '@/utils/tailwind-utils';
 
-import {useAuthStore} from '@/store'
+import { useAuthStore } from '@/store';
 import { useStore } from 'zustand';
 import { DrawerClose } from '@/components/ui/drawer';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { queryKeys } from '@/api';
-import { Variable } from 'lucide-react';
+
 import { extractYear } from '@/utils/calendar/extractDate';
 import { calendarService } from '@/api/service/calendar';
 
@@ -25,34 +25,34 @@ const itemsStyle = clsx('w-full bg-white rounded-[8px]');
 
 type PropsType = {
   event?: CalendarEventType;
-  mode ?: 'create' | 'edit' | 'shared'
+  mode?: 'create' | 'edit' | 'shared';
 };
 
-export default function UserEventForm({ event, mode='create' }: PropsType) {
+export default function UserEventForm({ event, mode = 'create' }: PropsType) {
   //스크롤 감시 추가
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  
+
   const queryClient = useQueryClient();
   // POST 전용 Mutate 생성
-  const CreateEventMutation= useMutation({
-    mutationFn:(apiData:CalendarEventType)=>calendarService.postEvent(apiData),
-    onSuccess:(_res, Variables)=>{
+  const CreateEventMutation = useMutation({
+    mutationFn: (apiData: CalendarEventType) => calendarService.postEvent(apiData),
+    onSuccess: (_res, Variables) => {
       const year = extractYear(Variables.startDate);
       queryClient.invalidateQueries({
         queryKey: queryKeys.calendar.events(year).queryKey,
-    });
-    }
-  })
+      });
+    },
+  });
   // PUT 전용 Mutate 생성
   const putEventMutation = useMutation({
-    mutationFn:(apiData:CalendarEventType)=>calendarService.putEvent(apiData),
-    onSuccess:(_res, Variables)=>{
+    mutationFn: (apiData: CalendarEventType) => calendarService.putEvent(apiData),
+    onSuccess: (_res, Variables) => {
       const year = extractYear(Variables.startDate);
       queryClient.invalidateQueries({
         queryKey: queryKeys.calendar.events(year).queryKey,
-    });
-    }    
-  })
+      });
+    },
+  });
 
   //Zustand 캘린더 ID 가져오기
   const { user } = useStore(useAuthStore);
@@ -60,9 +60,9 @@ export default function UserEventForm({ event, mode='create' }: PropsType) {
   //React-hook-form 선언
   const methods = useForm<CalendarEventType>({
     defaultValues: event || {
-      id:0,
-      calendarId : user!.calendarId,
-      title: "",
+      id: 0,
+      calendarId: user!.calendarId,
+      title: '',
       allDay: true,
       startDate: new Date(),
       endDate: new Date(),
@@ -70,10 +70,10 @@ export default function UserEventForm({ event, mode='create' }: PropsType) {
       color: 'yoteyoGreen',
       locate: '',
       memo: '',
-      holiday:false
+      holiday: false,
     },
   });
-  const { control, handleSubmit } = methods;
+  const { control, handleSubmit, getValues } = methods;
 
   const onSubmit = (data: CalendarEventType) => {
     if (!user) return;
@@ -83,36 +83,36 @@ export default function UserEventForm({ event, mode='create' }: PropsType) {
     const timezoneOffset = startDate.getTimezoneOffset() * 60000;
     const adjustedStartDate = new Date(startDate.getTime() - timezoneOffset);
     const adjustedEndDate = new Date(endDate.getTime() - timezoneOffset);
-    const payload ={
+    const payload = {
       ...data,
-      startDate : adjustedStartDate,
-      endDate : adjustedEndDate,
-      calendarId : user.calendarId
-    }
+      startDate: adjustedStartDate,
+      endDate: adjustedEndDate,
+      calendarId: user.calendarId,
+    };
     // POST Mutate 함수 동작
-    if(mode === 'create'){
+    if (mode === 'create') {
       CreateEventMutation.mutate(payload);
     }
     // PUT Mutate 함수 동작
-    else if(mode ==='edit'){
-      putEventMutation.mutate(payload)
+    else if (mode === 'edit') {
+      putEventMutation.mutate(payload);
     }
   };
   return (
-    // ✅ FormProvider로 methods 전달
+    //FormProvider로 methods 전달
     <FormProvider {...methods}>
       <div ref={scrollContainerRef} className="flex-1 overflow-y-auto scrollbar-hide pb-9">
         <form onSubmit={handleSubmit(onSubmit)} className="w-full p-5 flex flex-col gap-5">
-          
           {/* 일정 타이틀 입력 */}
           <div className={cn(itemsStyle)}>
             <Controller
               name="title"
               control={control}
-              rules={{ required: "제목은 필수입니다" }}
+              rules={{ required: '제목은 필수입니다' }}
               render={({ field }) => (
                 <EventTextInput
-                  placeholder="일정을 입력하세요"
+                  className="text-black !text-[22px] placeholder:text-[22px] font-bold"
+                  placeholder="일정을 입력하세요."
                   disabled={false}
                   {...field}
                 />
@@ -130,12 +130,7 @@ export default function UserEventForm({ event, mode='create' }: PropsType) {
             <Controller
               name="repeatCycle"
               control={control}
-              render={({ field }) => (
-                <RepeatPicker
-                  value={field.value}
-                  onChange={field.onChange}
-                />
-              )}
+              render={({ field }) => <RepeatPicker value={field.value} onChange={field.onChange} />}
             />
           </div>
 
@@ -144,12 +139,7 @@ export default function UserEventForm({ event, mode='create' }: PropsType) {
             <Controller
               name="color"
               control={control}
-              render={({ field }) => (
-                <ColorPicker 
-                  value={field.value} 
-                  onChange={field.onChange} 
-                />
-              )}
+              render={({ field }) => <ColorPicker value={field.value} onChange={field.onChange} />}
             />
           </div>
 
@@ -162,10 +152,11 @@ export default function UserEventForm({ event, mode='create' }: PropsType) {
                 render={({ field }) => (
                   <TextArea
                     {...field}
-                    className="border-none yoteyo-m-detail-lg rounded-b-none"
-                    rows={10}
+                    className="text-[20px] md:text-[20px] border-none yoteyo-m-detail-lg rounded-b-none min-h-1"
+                    rows={1}
                     placeholder="위치"
-                    onChange={(e) => {
+                    icon={<MapPinIcon />}
+                    onChange={e => {
                       field.onChange(e);
                       setTimeout(() => {
                         scrollContainerRef.current?.scrollTo({
@@ -184,10 +175,11 @@ export default function UserEventForm({ event, mode='create' }: PropsType) {
                 render={({ field }) => (
                   <TextArea
                     {...field}
-                    className="border-none yoteyo-m-detail-lg rounded-t-none"
-                    rows={10}
+                    className="text-[20px] md:text-[20px] border-none yoteyo-m-detail-lg rounded-t-none min-h-20"
+                    rows={3}
                     placeholder="메모"
-                    onFocus={(e) => {
+                    icon={<NoteIcon />}
+                    onFocus={e => {
                       field.onChange(e);
                       setTimeout(() => {
                         scrollContainerRef.current?.scrollTo({
@@ -203,7 +195,7 @@ export default function UserEventForm({ event, mode='create' }: PropsType) {
           </div>
 
           {/* 버튼 */}
-          {mode!=='shared' &&(
+          {mode !== 'shared' && (
             <div className="w-full h-10 flex flex-row justify-end gap-2 mt-6">
               <DrawerClose asChild>
                 <Button type="button" className="w-[105px] h-10" variant="outline">
@@ -217,8 +209,8 @@ export default function UserEventForm({ event, mode='create' }: PropsType) {
               </DrawerClose>
             </div>
           )}
-          </form>
-        </div>
+        </form>
+      </div>
     </FormProvider>
   );
 }

@@ -1,26 +1,22 @@
-'use client'
+'use client';
+import React, { useMemo, useRef, useState } from 'react';
 
-import { CalendarEventType } from "@/@types/calendar";
-import DayEventListHead from "./ui/DayEventListHead";
-import DayEventBox from "./ui/DayEventBox";
-import clsx from "clsx";
-import { CustomDrawer, CustomDrawerHandle, AlertRedIcon } from "@/components/base";
-import UserEventCheck from "@/components/layouts/UserEventCheck";
-import { UserEventForm } from "../Form";
-import { CustomDialog } from "../CustomDialog";
-import { useEffect, useMemo, useRef, useState } from "react";
-import React from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { queryClient, queryKeys } from "@/api";
-import { extractYear } from "@/utils/calendar/extractDate";
-import { calendarService } from "@/api/service/calendar";
+import { CalendarEventType } from '@/@types/calendar';
+import clsx from 'clsx';
+import { UserEventForm } from '../Form';
+import { CustomDialog } from '../CustomDialog';
+import { useMutation } from '@tanstack/react-query';
+import { queryClient, queryKeys } from '@/api';
+import { extractYear } from '@/utils/calendar/extractDate';
+import { calendarService } from '@/api/service/calendar';
 
-const datEvnetListStyle = clsx(
-  "rounded-[8px]",
-  "w-full h-full",
-  "bg-white",
-  "flex flex-col"
-);
+import { CustomDrawer, CustomDrawerHandle, AlertRedIcon } from '@/components/base';
+//자식 ui components
+import DayEventListHead from './ui/DayEventListHead';
+import DayEventBox from './ui/DayEventBox';
+import { UserEventCheck } from '@/components/layouts/UserEventCheck';
+
+const datEvnetListStyle = clsx('rounded-[8px]', 'w-full h-full', 'bg-white', 'flex flex-col');
 
 type PropsType = {
   selectedDate: Date;
@@ -31,9 +27,12 @@ export default function DayEventList({ selectedDate, dayEvents }: PropsType) {
   // ref 배열을 useRef로 고정
   const viewDrawerRefs = useRef<React.RefObject<CustomDrawerHandle | null>[]>([]);
   const editDrawerRefs = useRef<React.RefObject<CustomDrawerHandle | null>[]>([]);
-  
+
   // 삭제 다이얼로그 상태 관리
-  const [deleteDialog, setDeleteDialog] = useState<{open: boolean, eventId: number | null}>({open: false, eventId: null});
+  const [deleteDialog, setDeleteDialog] = useState<{ open: boolean; eventId: number | null }>({
+    open: false,
+    eventId: null,
+  });
 
   // 삭제 mutation
   const deleteMutation = useMutation({
@@ -44,12 +43,12 @@ export default function DayEventList({ selectedDate, dayEvents }: PropsType) {
       queryClient.invalidateQueries({
         queryKey: queryKeys.calendar.events(year).queryKey,
       });
-      setDeleteDialog({open: false, eventId: null});
+      setDeleteDialog({ open: false, eventId: null });
     },
-    onError: (error) => {
+    onError: error => {
       console.error('삭제 실패:', error);
-      setDeleteDialog({open: false, eventId: null});
-    }
+      setDeleteDialog({ open: false, eventId: null });
+    },
   });
 
   // 이벤트 수에 따라 ref를 초기화
@@ -60,7 +59,7 @@ export default function DayEventList({ selectedDate, dayEvents }: PropsType) {
   return (
     <div className={datEvnetListStyle}>
       <DayEventListHead date={selectedDate} />
-      <div className="flex flex-col gap-[10px] w-full overflow-y-auto p-2 flex-1 min-h-0">
+      <div className="flex flex-col gap-[10px] w-full overflow-y-auto flex-1 min-h-0">
         {dayEvents.length === 0 ? (
           <div className="w-full h-full flex justify-center items-center text-yoteyo-m-detail-sm text-yoteyo-gray-300">
             <span>아직 등록된 일정이 없습니다</span>
@@ -80,7 +79,7 @@ export default function DayEventList({ selectedDate, dayEvents }: PropsType) {
                     <UserEventCheck
                       event={event}
                       onDelete={() => {
-                        setDeleteDialog({open: true, eventId: event.id});
+                        setDeleteDialog({ open: true, eventId: event.id });
                         viewDrawerRef.current?.close();
                       }}
                       onEdit={() => {
@@ -97,7 +96,7 @@ export default function DayEventList({ selectedDate, dayEvents }: PropsType) {
                   key={`dayelist_edit_${index}`}
                   ref={editDrawerRef}
                   trigger={<div className="hidden" />}
-                  contents={<UserEventForm event={event} mode="edit"/>}
+                  contents={<UserEventForm event={event} mode="edit" />}
                   type="edit"
                 />
               </div>
@@ -105,11 +104,11 @@ export default function DayEventList({ selectedDate, dayEvents }: PropsType) {
           })
         )}
       </div>
-      
+
       {/* 삭제 확인 다이얼로그 */}
       <CustomDialog
         open={deleteDialog.open}
-        onClose={() => setDeleteDialog({open: false, eventId: null})}
+        onClose={() => setDeleteDialog({ open: false, eventId: null })}
         onSubmit={() => {
           if (deleteDialog.eventId) {
             deleteMutation.mutate(deleteDialog.eventId);

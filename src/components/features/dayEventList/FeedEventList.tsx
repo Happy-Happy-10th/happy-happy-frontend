@@ -2,7 +2,7 @@
 import { CalendarEventType } from "@/@types/calendar"
 import {Button, Text} from "@/components/base"
 import FeedEventBox from "./ui/FeedEventBox"
-import { getTodayEvents, getUpcomingEvents } from "@/utils/calendar/getTargetEvents";
+import { getEventsByDay, getUpcomingEvents } from "@/utils";
 import { useEffect, useState } from "react";
 import { cn } from "@/utils/tailwind-utils";
 import { useQuery } from "@tanstack/react-query";
@@ -31,14 +31,14 @@ export default function FeedEventList({noneEventMessage, viewTargetEvent}:PropsT
   const [events,setEvents] = useState<CalendarEventType[]>([]);
 
   const handleMoreEvents = ()=>{
-    viewTargetEvent === 'today'&&setEvents(getTodayEvents(data||[]));
+    viewTargetEvent === 'today'&&setEvents(getEventsByDay(data||[]));
     setIsClicked(true);
   }
   useEffect(()=>{
     if(data||[].length<5) setIsClicked(true)
 
     if(viewTargetEvent === 'today'){
-      setEvents(getTodayEvents(data||[],5))
+      setEvents(getEventsByDay(data||[]))
     }
     if(viewTargetEvent === 'upcomming'){
       setEvents(getUpcomingEvents(data||[],5))

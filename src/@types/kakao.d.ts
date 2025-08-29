@@ -4,7 +4,7 @@ declare global {
       VERSION: string;
       cleanup: () => void;
       init: (appKey: string) => void;
-      isInitialized: () => void;
+      isInitialized: () => boolean;
       Share: {
         sendDefault: (payload: any) => void;
       };

@@ -23,15 +23,37 @@
 
   /*이밴트 테마 정의*/
   --color-yoteyo-red: var(--yoteyo-red);
+  --color-yoteyo-red-sub: var(--yoteyo-red-sub);
+
   --color-yoteyo-orange: var(--yoteyo-orange);
+  --color-yoteyo-orange-sub: var(--yoteyo-orange-sub);
+
   --color-yoteyo-yellow: var(--yoteyo-yellow);
+  --color-yoteyo-yellow-sub: var(--yoteyo-yellow-sub);
+
   --color-yoteyo-green: var(--yoteyo-green);
+  --color-yoteyo-green-sub: var(--yoteyo-green-sub);
+
   --color-yoteyo-emerald: var(--yoteyo-emerald);
+  --color-yoteyo-emerald-sub: var(--yoteyo-emerald-sub);
+
   --color-yoteyo-sky: var(--yoteyo-sky);
+  --color-yoteyo-sky-sub: var(--yoteyo-sky-sub);
+
   --color-yoteyo-blue: var(--yoteyo-blue);
+  --color-yoteyo-blue-sub: var(--yoteyo-blue-sub);
+
+  --color-yoteyo-navy: var(--yoteyo-navy);
+  --color-yoteyo-navy-sub: var(--yoteyo-navy-sub);
+
   --color-yoteyo-purple: var(--yoteyo-purple);
+  --color-yoteyo-purple-sub: var(--yoteyo-purple-sub);
+
   --color-yoteyo-pink: var(--yoteyo-pink);
-  --color-yoteyo-black: var(--yoteyo-black);
+  --color-yoteyo-pink-sub: var(--yoteyo-pink-sub);
+
+  --color-yoteyo-gray: var(--yoteyo-gray);
+  --color-yoteyo-gray-sub: var(--yoteyo-gray-sub);
 }
 :root {
   /*메인 테마 색상 정의*/
@@ -63,13 +85,35 @@
 
   /*캘린더 이밴트 색상 정의*/
   --yoteyo-red: #fb5445;
-  --yoteyo-orange: #ff8132;
-  --yoteyo-yellow: #ffc43d;
-  --yoteyo-green: #2ec94e;
+  --yoteyo-red-sub: #ffeae8;
+
+  --yoteyo-orange: #ff6e20;
+  --yoteyo-orange-sub: #ffece2;
+
+  --yoteyo-yellow: #eba300;
+  --yoteyo-yellow-sub: #ffefcb;
+
+  --yoteyo-green: #11c436;
+  --yoteyo-green-sub: #dfffe5;
+
   --yoteyo-emerald: #01d0a4;
-  --yoteyo-sky: #1dc1ff;
-  --yoteyo-blue: #6284e7;
-  --yoteyo-purple: #7671ec;
-  --yoteyo-pink: #eb7acf;
-  --yoteyo-black: #010001;
+  --yoteyo-emerald-sub: #defff8;
+
+  --yoteyo-sky: #01abff;
+  --yoteyo-sky-sub: #e9f8ff;
+
+  --yoteyo-blue: #01abff;
+  --yoteyo-blue-sub: #e9f8ff;
+
+  --yoteyo-navy: #01abff;
+  --yoteyo-navy-sub: #e9f8ff;
+
+  --yoteyo-purple: #b063ff;
+  --yoteyo-purple-sub: #f5ecff;
+
+  --yoteyo-pink: #ff44a7;
+  --yoteyo-pink-sub: #ffe7f4;
+
+  --yoteyo-gray: #999999;
+  --yoteyo-gray-sub: #f0f0f0;
 }

@@ -1,4 +1,5 @@
 module.exports = {
   NEXT_PUBLIC_APP_ENV: 'LOCAL',
   YOTEYO_API_URL: 'http://49.50.133.140:8080',
+  NEXT_PUBLIC_KAKAO_JS_KEY: 'b61dc56053863ae2871eab1f4aa23bd9',
 };
