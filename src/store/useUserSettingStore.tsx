@@ -2,12 +2,14 @@ import { ApiCalendarSettingType } from '@/@types';
 import { createStore } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
+type Setting = Omit<ApiCalendarSettingType, 'calendarId'>;
+
 type State = {
-  settings: Omit<ApiCalendarSettingType, 'calendarId'> | null;
+  settings: Setting | null;
   isInitialized: boolean;
 };
 type Action = {
-  setUserSetting: (settings: State) => void;
+  setUserSetting: (settings: Setting) => void;
   setIsInitStore: (isInitStore: boolean) => void;
 };
 
@@ -20,9 +22,7 @@ export const useUserSettingStore = createStore<State & Action>()(
   persist<State & Action>(
     set => ({
       ...defaultInitState,
-      setUserSetting: settings => {
-        settings;
-      },
+      setUserSetting: settings => set(() => ({ settings })),
       setIsInitStore: isInitialized => set(() => ({ isInitialized })),
     }),
     {

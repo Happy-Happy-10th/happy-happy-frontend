@@ -21,7 +21,7 @@ export type ApiWeekStartDayType = {
   weekStartDay: WeekStartDayEnum;
 };
 export type ApiTimeFormayType = {
-  timeFormat: WeekStartDayEnum;
+  timeFormat: TimeFormatEnum;
 };
 
 export type ApiAiSearchRegionType = {

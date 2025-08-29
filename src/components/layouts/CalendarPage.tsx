@@ -5,9 +5,9 @@ import { SlotInfo } from 'react-big-calendar';
 
 //zustand
 import { useStore } from 'zustand';
-import { useAuthStore } from '@/store';
+import { useAuthStore, useUserSettingStore } from '@/store';
 //api
-import { queryKeys } from '@/api';
+import { queryKeys, userSettingsService } from '@/api';
 import { calendarService } from '@/api/service/calendar';
 import { useQuery } from '@tanstack/react-query';
 
@@ -34,6 +34,10 @@ const calendarSize = clsx(
 
 const eventList = clsx('bg-white rounded-[8px]', 'xl:w-[304px] xl:h-auto xl:mt-15 flex-1', 'pl-5 pr-5 pb-5');
 export default function CalendarPage() {
+  //전역 상태 불러오기
+  const { user } = useStore(useAuthStore);
+  const { setUserSetting } = useStore(useUserSettingStore);
+
   //캘린더에 View 될 날짜
   const [currentDate, setCurrentDate] = useDateState(new Date());
 
@@ -49,29 +53,41 @@ export default function CalendarPage() {
 
   // useQuery 적용
   const year = currentDate.getFullYear();
-  const { user } = useStore(useAuthStore);
   // year 파라미터를 클로저로 캡쳐해서 사용? (year)=>calendarService.getEvents(year) X
-  const { data } = useQuery({
+  const { data: eventsData } = useQuery({
     queryKey: queryKeys.calendar.events(year).queryKey,
     queryFn: () => calendarService.getEvents(year, user!.calendarId),
     enabled: !!user?.calendarId,
   });
 
+  const { data: userSettings, isSuccess } = useQuery({
+    queryKey: queryKeys.calendar.userSettings().queryKey,
+    queryFn: () => userSettingsService.getUserSetting(user!.calendarId),
+    enabled: !!user?.calendarId,
+  });
+
+  useEffect(() => {
+    if (isSuccess) {
+      setUserSetting(userSettings);
+    }
+  }, [userSettings, isSuccess]);
+
   const EMPTY: CalendarEventType[] = [];
-  const safeData = data ?? EMPTY;
+  const safeData = eventsData ?? EMPTY;
 
   useEffect(() => {
     //최초 or 슬록 선택시 뷰 제어
     setDayEvents(getEventsByDay(safeData, selectedDate));
     // setDayEvents(getEventsByDay(calendarEvents, selectedDate));
-  }, [data, selectedDate]);
+  }, [eventsData, selectedDate]);
 
   return (
     <div className={contents}>
       <div className={calendarSize}>
         <CustomCalendar
           className="w-full h-full"
-          events={data}
+          events={eventsData}
+          isMondayStart={userSettings?.weekStartDay === 'MONDAY' ? true : false}
           viewDate={currentDate}
           onChangeViewDate={setCurrentDate}
           selectedDate={selectedDate}
