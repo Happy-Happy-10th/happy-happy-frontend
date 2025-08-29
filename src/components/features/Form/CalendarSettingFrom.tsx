@@ -69,7 +69,7 @@ export default function CalendarSettingForm({}: PropsType) {
   return (
     <Box className="w-full xl:max-w-[393px] h-201 m-auto flex flex-col gap-5">
       <Box className="flex flex-col w-full">
-        <Text className="text-yoteyo-gray-200 mb-2" variant={'body4'}>
+        <Text className="text-yoteyo-gray-300 mb-2" variant={'body4'}>
           AI 캘린더 설정
         </Text>
         {/* 요일설정 부분 */}
@@ -77,7 +77,7 @@ export default function CalendarSettingForm({}: PropsType) {
           <Text variant={'body3'}>주 요일 선택</Text>
           <Box className="flex gap-2">
             <Button
-              className="w-20 h-9 bg-yoteyo-gray-200 rounded-[8px] text-black"
+              className="w-20 h-9 bg-yoteyo-gray-100 rounded-[8px] text-black"
               variant={'default'}
               onClick={() => handleChangeWeekStartDay('MONDAY')}
             >
@@ -86,7 +86,7 @@ export default function CalendarSettingForm({}: PropsType) {
               </Text>
             </Button>
             <Button
-              className="w-20 h-9 bg-yoteyo-gray-200 rounded-[8px] text-black"
+              className="w-20 h-9 bg-yoteyo-gray-100 rounded-[8px] text-black"
               variant={'default'}
               onClick={() => handleChangeWeekStartDay('SUNDAY')}
             >
@@ -104,7 +104,7 @@ export default function CalendarSettingForm({}: PropsType) {
               <Text variant={'body3'}>시간 형식</Text>
               <Box className="flex gap-2">
                 <Button
-                  className="w-20 h-9 bg-yoteyo-gray-200 rounded-[8px] text-black"
+                  className="w-20 h-9 bg-yoteyo-gray-100 rounded-[8px] text-black"
                   variant={'default'}
                   onClick={() => handleChangeTimeFormay('TWELVE_HOUR')}
                 >
@@ -113,7 +113,7 @@ export default function CalendarSettingForm({}: PropsType) {
                   </Text>
                 </Button>
                 <Button
-                  className="w-20 h-9 bg-yoteyo-gray-200 rounded-[8px] text-black"
+                  className="w-20 h-9 bg-yoteyo-gray-100 rounded-[8px] text-black"
                   variant={'default'}
                   onClick={() => handleChangeTimeFormay('TWENTY_FOUR_HOUR')}
                 >
@@ -129,7 +129,7 @@ export default function CalendarSettingForm({}: PropsType) {
             <Separator />
             <Box className="h-[50px] flex items-center justify-between">
               <Text variant={'body3'}>시간 예시</Text>
-              <Box className="bg-yoteyo-gray-200 w-[170] h-9 flex justify-center items-center rounded-[8px]">
+              <Box className="bg-yoteyo-gray-100 w-[170] h-9 flex justify-center items-center rounded-[8px]">
                 <Text variant={'body3'}>{settings.timeFormat === 'TWELVE_HOUR' ? 'PM 11:00' : 'PM 23:00'}</Text>
               </Box>
             </Box>
@@ -138,16 +138,16 @@ export default function CalendarSettingForm({}: PropsType) {
       </Box>
       {/* 검색 위치 설정 */}
       <Box className="flex flex-col w-full">
-        <Text className="text-yoteyo-gray-200" variant={'body4'}>
+        <Text className="text-yoteyo-gray-300" variant={'body4'}>
           AI 검색 위치 설정
         </Text>
         <Box className="flex flex-row bg-white justify-between items-center w-[354px] h-[50px] pl-3 pr-3 rounded-[8px]">
           <Text variant={'body3'}>위치</Text>
           <Box className="flex gap-2">
-            <Button className="w-20 h-9 bg-yoteyo-gray-200 rounded-[8px] text-black" variant={'default'}>
+            <Button className="w-20 h-9 bg-yoteyo-gray-100 rounded-[8px] text-black" variant={'default'}>
               <Text variant={'body3'}>서울특별시</Text>
             </Button>
-            <Button className="w-20 h-9 bg-yoteyo-gray-200 rounded-[8px] text-black" variant={'default'}>
+            <Button className="w-20 h-9 bg-yoteyo-gray-100 rounded-[8px] text-black" variant={'default'}>
               <Text variant={'body3'}>강남구</Text>
             </Button>
           </Box>
@@ -155,21 +155,21 @@ export default function CalendarSettingForm({}: PropsType) {
       </Box>
       {/* 약관 */}
       <Box className="flex flex-col w-full">
-        <Text className="text-yoteyo-gray-200" variant={'body4'}>
+        <Text className="text-yoteyo-gray-300" variant={'body4'}>
           서비스 운영 방침
         </Text>
         <Box className="flex flex-row bg-white justify-between items-center w-[354px] h-[100px] pl-3 pr-3 rounded-[8px]">
           <Box className="flex flex-col h-full w-full">
             <Box className="h-[50px] flex items-center justify-between">
               <Text variant={'body3'}>사이트 정보A</Text>
-              <Button className="bg-yoteyo-gray-200 text-balck w-[170] h-9 flex justify-center items-center rounded-[8px]">
+              <Button className="bg-yoteyo-gray-100 text-balck w-[170] h-9 flex justify-center items-center rounded-[8px]">
                 <Text variant={'body3'}>이용약관</Text>
               </Button>
             </Box>
             <Separator />
             <Box className="h-[50px] flex items-center justify-between">
               <Text variant={'body3'}>사이트 정보B</Text>
-              <Button className="bg-yoteyo-gray-200 text-balck w-[170] h-9 flex justify-center items-center rounded-[8px]">
+              <Button className="bg-yoteyo-gray-100 text-balck w-[170] h-9 flex justify-center items-center rounded-[8px]">
                 <Text variant={'body3'}>개인 정보처리 방침</Text>
               </Button>
             </Box>

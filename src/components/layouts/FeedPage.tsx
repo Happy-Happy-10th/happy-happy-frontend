@@ -6,7 +6,7 @@ export default function FeedPage() {
   return (
     <div
       className={cn(
-        'xl:h-full w-hull flex xl:flex-row flex-col gap-5 xl:p-7.5 p-5 bg-yoteyo-bg-default h-full overflow-hidden',
+        'xl:h-full w-hull flex xl:flex-row flex-col gap-5 xl:p-7.5 p-5 bg-yoteyo-bg-default h-full xl:overflow-hidden overflow-scroll',
       )}
     >
       <div className="flex flex-col xl:gap-5 gap-3">
@@ -35,7 +35,7 @@ export default function FeedPage() {
           <Text variant={'title2'}>다가오는 일정</Text>
         </div>
         <div className="flex w-full xl:xl:h-[calc(100vh-180px)] h-full xl:mt-5 mt-3">
-          <div className="w-full flex-1 min-h-0 overflow-auto">
+          <div className="w-full">
             <FeedEventList
               key={'comming'}
               noneEventMessage="앞으로 등록된 일정이 없습니다"

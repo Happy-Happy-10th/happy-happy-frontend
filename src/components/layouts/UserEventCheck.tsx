@@ -13,7 +13,7 @@ import { ShareEventDialog } from '../features';
 const itemsStyle = clsx('w-full bg-white rounded-[8px]');
 const dateBox = clsx(
   'flex justify-center items-center',
-  'bg-yoteyo-gray-100 font-yoteyo-p-body-lg rounded-md',
+  'bg-yoteyo-gray-400 font-yoteyo-p-body-lg rounded-md',
   'hover:cursor-pointer hover:text-yoteyo-main',
   'w-[107px] h-9 xl:h-8',
 );
@@ -65,7 +65,7 @@ export function EventCheckForm({ event }: EventCheckFormType) {
       <div className={cn(itemsStyle, 'pl-5 pr-5 pt-2 pb-2')}>
         <div className="flex flex-row items-center justify-between">
           <div>시작</div>
-          <div className="flex flex-row">
+          <div className="flex flex-row gap-2">
             <div className={cn(dateBox)}>{format(event.startDate, 'yyyy.MM.dd')}</div>
             <div className={cn(dateBox)}>{format(event.startDate, 'a hh:mm', { locale: ko })}</div>
           </div>
@@ -75,7 +75,7 @@ export function EventCheckForm({ event }: EventCheckFormType) {
 
         <div className="flex flex-row items-center justify-between">
           <div>종료</div>
-          <div className="flex flex-row">
+          <div className="flex flex-row gap-2">
             <div className={cn(dateBox)}>{format(event.endDate, 'yyyy.MM.dd')}</div>
             <div className={cn(dateBox)}>{format(event.endDate, 'a hh:mm', { locale: ko })}</div>
           </div>

@@ -8,8 +8,8 @@ const repeatPickerFrame = clsx('w-full h-27 pt-5 pb-5 pl-4 pr-4', 'yoteyo-m-titl
 
 const buttonStyle = clsx(
   'w-12 h-8 yoteyo-m-body-lg',
-  'border-1 border-soild border-yoteyo-gray-400 rounded-[8px]',
-  'flex justify-center items-center text-yoteyo-gray-100',
+  'border-1 border-soild border-yoteyo-gray-300 rounded-[8px]',
+  'flex justify-center items-center text-yoteyo-gray-500',
   'hover:cursor-pointer',
 );
 

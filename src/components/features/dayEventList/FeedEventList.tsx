@@ -46,15 +46,19 @@ export default function FeedEventList({ noneEventMessage, viewTargetEvent }: Pro
   }, [data, viewTargetEvent]);
 
   return (
-    <div className="w-full h-full flex flex-col gap-2">
+    <div className="w-full h-full flex flex-col gap-2 mt-5">
       {events.length === 0 ? (
-        <div className="flex w-full h-full justify-center items-center">
+        <div className="flex w-full justify-center items-center">
           <Text className="text-yoteyo-gray-200" variant={'body1'}>
             {noneEventMessage}
           </Text>
         </div>
       ) : (
-        events.map((event, index) => <FeedEventBox key={`feedEvent${index}`} event={event} />)
+        <div className="flex flex-col gap-3">
+          {events.map((event, index) => (
+            <FeedEventBox key={`feedEvent${index}`} event={event} />
+          ))}
+        </div>
       )}
       {viewTargetEvent === 'today' && (
         <Button
@@ -62,7 +66,7 @@ export default function FeedEventList({ noneEventMessage, viewTargetEvent }: Pro
           variant={'outline'}
           onClick={handleMoreEvents}
           className={cn(
-            'w-full h-12 flex justify-center items-center border-1 border-yoteyo-outline rounded-[8px] mt-4 text-black',
+            'w-full h-12 flex justify-center items-center border-1 border-yoteyo-outline rounded-[8px] mt-auto text-black',
             isClicked && 'text-yoteyo-gray-400 border-yoteyo-gray-400',
           )}
         >
