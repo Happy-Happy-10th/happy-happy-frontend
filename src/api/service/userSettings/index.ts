@@ -1,5 +1,12 @@
 import { ApiAiSearchRegionType, ApiTimeFormayType, ApiWeekStartDayType } from '@/@types';
-import { getUserSetting, patchUserAiSerchRegion, patchUserTimeFormat, patchUserWeekStartDay } from '@/api';
+import {
+  getRegionSido,
+  getRegionSigungu,
+  getUserSetting,
+  patchUserAiSerchRegion,
+  patchUserTimeFormat,
+  patchUserWeekStartDay,
+} from '@/api';
 
 export const userSettingsService = {
   getUserSetting: async (calendarId: number) => {
@@ -14,4 +21,7 @@ export const userSettingsService = {
 
   patchUserAiSerchRegion: async (calendarId: number, payload: ApiAiSearchRegionType) =>
     await patchUserAiSerchRegion(calendarId, payload),
+
+  getRegionSido: async () => (await getRegionSido()).json(),
+  getRegionSigungu: async (sidoCode: string) => (await getRegionSigungu(sidoCode)).json(),
 };

@@ -28,3 +28,13 @@ export type ApiAiSearchRegionType = {
   sidoCode: string;
   sigunguCode: string;
 };
+
+export type ApiSidoCodeName = {
+  sigunguCode: string;
+  sigunguName: string;
+};
+
+export type ApiSigunguCodeName = {
+  sigunguCode: string;
+  sigunguName: string;
+};
