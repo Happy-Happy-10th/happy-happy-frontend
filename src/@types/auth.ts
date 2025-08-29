@@ -88,7 +88,21 @@ type useVerifyCodeResponse = {
   timeStamp: string;
 };
 
+type useSendCodeForFindUserIdPayload = {
+  username: string;
+  nickname: string;
+};
+
+type useSendCodeForFindUserIdResponse = {
+  data: { success: boolean; message: string; ttl: number };
+
+  message: string;
+  status: number;
+  timeStamp: string;
+};
+
 export type {
+  MemberInfo,
   useSignInPayload,
   useSignInResponse,
   useSignUpPayload,
@@ -101,5 +115,6 @@ export type {
   useSendCodeResponse,
   useVerifyCodePayload,
   useVerifyCodeResponse,
-  MemberInfo,
+  useSendCodeForFindUserIdPayload,
+  useSendCodeForFindUserIdResponse,
 };

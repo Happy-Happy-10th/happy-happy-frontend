@@ -3,6 +3,8 @@ import {
   useCheckUserIdResponse,
   useCheckUserNamePayload,
   useCheckUserNameResponse,
+  useSendCodeForFindUserIdPayload,
+  useSendCodeForFindUserIdResponse,
   useSendCodePayload,
   useSendCodeResponse,
   useSignInPayload,
@@ -55,6 +57,14 @@ export const PostCheckUserId = async (payload: useCheckUserIdPayload) => {
 
 export const PostSendCode = async (payload: useSendCodePayload) => {
   return await yoteyoAPI<useSendCodeResponse>(`auth/send-code`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ...payload }),
+  });
+};
+
+export const PostSendCodeForFindUserId = async (payload: useSendCodeForFindUserIdPayload) => {
+  return await yoteyoAPI<useSendCodeForFindUserIdResponse>(`auth/find-userid/send-code`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ ...payload }),
