@@ -1,15 +1,19 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { useQueryState, parseAsString, parseAsBoolean, useQueryStates } from 'nuqs';
+import { parseAsString, parseAsBoolean, useQueryStates } from 'nuqs';
 import { useRouter } from 'next/navigation';
 import { AlertRedIcon } from '@/components/base';
 import { CustomDialog } from '@/components/features';
 import { useMyInfo } from '@/api';
+import { useStore } from 'zustand';
+import { useAuthStore } from '@/store';
 
 interface Props {}
 
 function Page() {
   const router = useRouter();
+
+  const { setUser } = useStore(useAuthStore);
 
   const [dialogState, setDialogState] = useState({ open: false, main: '', sub: '' });
 
@@ -20,9 +24,12 @@ function Page() {
   const { refetch } = useMyInfo();
 
   const handle = async () => {
-    const res = await refetch();
-    console.log(res);
-    router.push('/home');
+    const { data } = await refetch();
+
+    if (data?.status === 200) {
+      setUser(data?.data);
+      router.push('/home');
+    }
   };
 
   useEffect(() => {

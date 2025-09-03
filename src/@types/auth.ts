@@ -6,6 +6,12 @@ type MemberInfo = {
   nickname: string;
   username: string;
 };
+type useMyInfoResponse = {
+  data: MemberInfo;
+  message: string;
+  status: number;
+  timeStamp: string;
+};
 
 type useSignInPayload = {
   userid: string;
@@ -117,4 +123,5 @@ export type {
   useVerifyCodeResponse,
   useSendCodeForFindUserIdPayload,
   useSendCodeForFindUserIdResponse,
+  useMyInfoResponse,
 };
