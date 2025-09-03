@@ -4,8 +4,14 @@ import {
   useCheckUserIdResponse,
   useCheckUserNamePayload,
   useCheckUserNameResponse,
+  useFindUserIdPayload,
+  useFindUserIdResponse,
+  useResetPasswordPayload,
+  useResetPasswordResponse,
   useSendCodeForFindUserIdPayload,
   useSendCodeForFindUserIdResponse,
+  useSendCodeForFindUserPwPayload,
+  useSendCodeForFindUserPwResponse,
   useSendCodePayload,
   useSendCodeResponse,
   useSignInPayload,
@@ -18,8 +24,11 @@ import {
 import {
   PostCheckUserId,
   PostCheckUserName,
+  PostFindUserId,
+  PostResetUserPassword,
   PostSendCode,
   PostSendCodeForFindUserId,
+  PostSendCodeForFindUserPw,
   PostSignIn,
   PostSignUp,
   PostVerifyCode,
@@ -132,4 +141,60 @@ const useSendCodeForFindUserID = (
   });
 };
 
-export { useSignIn, useSignUp, useCheckUserName, useCheckUserId, useSendCode, useVerifyCode, useSendCodeForFindUserID };
+const useSendCodeForFindUserPw = (
+  options: Exclude<
+    UseMutationOptions<useSendCodeForFindUserPwResponse, HTTPError<ErrorFormat>, useSendCodeForFindUserPwPayload>,
+    'mutationFn'
+  >,
+) => {
+  return useMutation({
+    mutationKey: ['send-code-find-userpw'],
+    mutationFn: async (payload: useSendCodeForFindUserPwPayload) => {
+      return (await PostSendCodeForFindUserPw({ ...payload })).json();
+    },
+    ...options,
+  });
+};
+
+const useFindUserId = (
+  options: Exclude<
+    UseMutationOptions<useFindUserIdResponse, HTTPError<ErrorFormat>, useFindUserIdPayload>,
+    'mutationFn'
+  >,
+) => {
+  return useMutation({
+    mutationKey: ['find-userId'],
+    mutationFn: async (payload: useFindUserIdPayload) => {
+      return (await PostFindUserId({ ...payload })).json();
+    },
+    ...options,
+  });
+};
+
+const useResetUserPassword = (
+  options: Exclude<
+    UseMutationOptions<useResetPasswordResponse, HTTPError<ErrorFormat>, useResetPasswordPayload>,
+    'mutationFn'
+  >,
+) => {
+  return useMutation({
+    mutationKey: ['reset-password'],
+    mutationFn: async (payload: useResetPasswordPayload) => {
+      return (await PostResetUserPassword({ ...payload })).json();
+    },
+    ...options,
+  });
+};
+
+export {
+  useSignIn,
+  useSignUp,
+  useCheckUserName,
+  useCheckUserId,
+  useSendCode,
+  useVerifyCode,
+  useSendCodeForFindUserID,
+  useFindUserId,
+  useSendCodeForFindUserPw,
+  useResetUserPassword,
+};
