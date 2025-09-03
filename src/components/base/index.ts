@@ -22,4 +22,6 @@ export * from './CheckBox';
 
 export * from './Dialog';
 
-export * from './Calendar'
+export * from './Calendar';
+
+export * from './SidePanel';

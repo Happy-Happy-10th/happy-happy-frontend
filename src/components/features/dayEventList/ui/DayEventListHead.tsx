@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useStore } from 'zustand';
-import { useAuthStore } from '@/store';
+import { useAuthStore, useSidePanelStore } from '@/store';
 
 import clsx from 'clsx';
 import { format } from 'date-fns';
@@ -16,6 +16,7 @@ import { UserEventForm } from '@/components/features/Form/';
 
 import { CustomDialog } from '../../CustomDialog';
 import { AlertPurpleIcon } from '@/components/base';
+import { useMediaQuery } from '@/hooks';
 
 const head = clsx('mb-[20px] pt-6 pb-5', 'w-full h-[24px]', 'flex flex-row justify-between');
 
@@ -33,20 +34,40 @@ export default function DayEventListHead({ date = new Date() }: props) {
     router.push('/auth/login');
   };
 
-  const day = format(date, 'EEEE,dd', { locale: ko }); // 'EEE'는 Mon, Tue 같은 약칭
+  const day = format(date, 'EEEE,dd', { locale: ko });
+
+  // 뷰포트에 따라 Drawer vs 사이드패널
+  const BREAKPOINT = '1000px' as const;
+  const isWide = useMediaQuery(`(min-width:${BREAKPOINT})`, true);
+
+  // ✅ 사이드패널 오픈 함수
+  const openPanel = useSidePanelStore(s => s.open);
+
   return (
     <div className={head}>
       <span className="font-bold text-[22px]">{day}</span>
       {user !== null ? (
-        <CustomDrawer
-          trigger={
-            <Button type="button" className="rounded-[50px] bg-[#C0C0C0] w-[24px] h-[24px]">
-              <Plus size={24} />
-            </Button>
-          }
-          contents={<UserEventForm />}
-          type="create"
-        />
+        isWide ? (
+          // ✅ 데스크탑: 사이드패널 오픈 버튼
+          <Button
+            type="button"
+            className="rounded-[50px] bg-[#C0C0C0] w-[24px] h-[24px]"
+            onClick={() => openPanel('calendarRoot')} // CalendarPage 최상단 PanelAnchor와 연결
+          >
+            <Plus size={24} />
+          </Button>
+        ) : (
+          // ✅ 모바일: 기존 Drawer 사용
+          <CustomDrawer
+            trigger={
+              <Button type="button" className="rounded-[50px] bg-[#C0C0C0] w-[24px] h-[24px]">
+                <Plus size={24} />
+              </Button>
+            }
+            contents={<UserEventForm />}
+            type="create"
+          />
+        )
       ) : (
         <Button
           type="button"

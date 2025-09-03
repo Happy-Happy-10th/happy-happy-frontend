@@ -5,21 +5,22 @@ import { SlotInfo } from 'react-big-calendar';
 
 //zustand
 import { useStore } from 'zustand';
-import { useAuthStore, useUserSettingStore } from '@/store';
+import { useAuthStore, useUserSettingStore, useSidePanelStore } from '@/store';
 //api
 import { queryKeys, userSettingsService } from '@/api';
 import { calendarService } from '@/api/service/calendar';
 import { useQuery } from '@tanstack/react-query';
 
 import { CalendarEventType } from '@/@types/calendar';
-import { useDateState } from '@/hooks';
+import { useDateState, useMediaQuery } from '@/hooks';
 import { getEventsByDay } from '@/utils';
 
 import { CustomCalendar, DayEventList } from '@/components/features';
 import { cn } from '@/utils/tailwind-utils';
+import { SidePanelWrapper, SidePanel } from '@/components/base';
 
 const contents = clsx(
-  'w-full h-full flex gap-[20px] bg-yoteyo-bg-default',
+  'content relative w-full h-full flex gap-[20px] bg-yoteyo-bg-default',
   'xl:p-[30px] xl:pb-[5px]',
   'flex-col xl:flex-row',
   'xl:overflow-hidden overflow-y-scroll',
@@ -33,7 +34,7 @@ const calendarSize = clsx(
   'xl:max-w-[896px] xl:w-full',
 );
 
-const eventList = clsx('bg-white rounded-[8px]', 'xl:w-[304px] xl:h-auto xl:mt-15 flex-1', 'pl-5 pr-5 pb-5');
+const eventList = clsx('bg-white rounded-[8px]', 'xl:w-[304px] xl:h-auto xl:mt-15 flex-1');
 export default function CalendarPage() {
   //전역 상태 불러오기
   const { user } = useStore(useAuthStore);
@@ -82,11 +83,15 @@ export default function CalendarPage() {
     // setDayEvents(getEventsByDay(calendarEvents, selectedDate));
   }, [eventsData, selectedDate]);
 
+  // 뷰포트에 따라 Drawer vs 사이드패널
+  const BREAKPOINT = '1000px' as const;
+  const isWide = useMediaQuery(`(min-width:${BREAKPOINT})`, true);
+  const isOpen = useSidePanelStore(s => s.isOpen('calendarRoot'));
   return (
     <div className={contents}>
       <div className={calendarSize}>
         <CustomCalendar
-          className="w-full h-full"
+          className={cn('w-full h-full', isWide && isOpen && 'w-[750px]')}
           events={eventsData}
           isMondayStart={userSettings?.weekStartDay === 'MONDAY' ? true : false}
           viewDate={currentDate}
