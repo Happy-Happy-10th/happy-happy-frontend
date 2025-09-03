@@ -1,3 +1,4 @@
+'use client';
 import { useResetUserPassword } from '@/api/service/auth';
 import {
   AlertCheckIcon,
