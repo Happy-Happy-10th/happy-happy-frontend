@@ -101,10 +101,24 @@ type useSendCodeForFindUserIdPayload = {
 
 type useSendCodeForFindUserIdResponse = {
   data: { success: boolean; message: string; ttl: number };
-
   message: string;
   status: number;
   timeStamp: string;
+};
+
+type useFindUserIdResponse = {
+  data: {
+    message: string;
+    success: boolean;
+    userId: string;
+  };
+  message: string;
+  status: number;
+  timeStamp: string;
+};
+type useFindUserIdPayload = {
+  username: string;
+  nickname: string;
 };
 
 export type {
@@ -124,4 +138,6 @@ export type {
   useSendCodeForFindUserIdPayload,
   useSendCodeForFindUserIdResponse,
   useMyInfoResponse,
+  useFindUserIdResponse,
+  useFindUserIdPayload,
 };

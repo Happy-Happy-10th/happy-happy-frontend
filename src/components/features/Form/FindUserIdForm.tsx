@@ -1,30 +1,33 @@
 'use client';
 
-import { useSendCodeForFindUserID, useVerifyCode } from '@/api';
-import { AlertCheckIcon, AlertRedIcon, Box, Button, Input, Spinner, Text } from '@/components/base';
+import { useFindUserId, useSendCodeForFindUserID, useVerifyCode } from '@/api';
+import { AlertCheckIcon, AlertRedIcon, Box, Button, Icon, Input, Spinner, Text, UserIcon } from '@/components/base';
 import { cn } from '@/utils/tailwind-utils';
 import React, { useMemo, useState } from 'react';
 import Countdown, { zeroPad } from 'react-countdown';
 import { useForm } from 'react-hook-form';
 import { CustomDialog } from '../CustomDialog';
+import { useRouter } from 'next/navigation';
 
 function FindUserIdForm() {
+  const router = useRouter();
+
   const [code, setCode] = useState('');
   const [isSend, setIsSend] = useState(false);
-  const [isVerifyEmail, setIsVerifyEmail] = useState(false);
+  const [userId, setUserId] = useState<string | undefined>(undefined);
+  const [time, setTime] = useState(0);
   const [dialogState, setDialogState] = useState<{ open: boolean; message: string; type: 'error' | 'success' }>({
     open: false,
     message: '',
     type: 'error',
   });
 
-  const [time, setTime] = useState(0);
-
   const {
     trigger,
     register,
     formState: { errors },
     getValues,
+    watch,
   } = useForm({
     defaultValues: {
       username: '',
@@ -32,7 +35,7 @@ function FindUserIdForm() {
     },
     mode: 'onSubmit',
   });
-
+  //이메일 코드 전송
   const { mutate, isPending } = useSendCodeForFindUserID({
     onSuccess: data => {
       setTime(Date.now() + data.data.ttl * 1000);
@@ -50,11 +53,31 @@ function FindUserIdForm() {
     },
   });
 
+  // 이메일 찾기
+  const { mutate: findUserIdMutate } = useFindUserId({
+    onSuccess: data => {
+      if (data.data.userId) setUserId(data.data.userId);
+    },
+    onError: async error => {
+      const response = await error.response.json();
+      if (response.message) {
+        setDialogState({
+          open: true,
+          type: 'error',
+          message: response.message,
+        });
+      }
+    },
+  });
+
   //이메일 인증
   const { mutate: verifyCodeMutate } = useVerifyCode({
     onSuccess: data => {
       if (data.status === 200) {
-        setIsVerifyEmail(true);
+        findUserIdMutate({
+          username: getValues('username'),
+          nickname: getValues('nickname'),
+        });
       }
     },
     onError: async error => {
@@ -91,63 +114,79 @@ function FindUserIdForm() {
 
       {isSend ? (
         <Box className="flex-col px-5 pt-9">
-          <Text>이메일 인증코드를 입력해 주세요.</Text>
+          {userId ? (
+            <Box className="flex-col items-center">
+              <Icon className="w-8 h-8">
+                <UserIcon />
+              </Icon>
+              <Text variant="body2" className="mt-6 text-yoteyo-gray-400">
+                {watch('nickname')} 회원님의 아이디입니다.
+              </Text>
+              <Text variant="body1" className="mt-4 font-medium">
+                {userId}
+              </Text>
+              <Button className="mt-10" onClick={() => router.push('/auth/login')}>
+                로그인
+              </Button>
+            </Box>
+          ) : (
+            <>
+              <Text>이메일 인증코드를 입력해 주세요.</Text>
 
-          <Box className="flex-col mt-6">
-            <Input
-              inputMode="numeric"
-              id="code"
-              placeholder="코드를 입력해주세요"
-              value={code}
-              onChange={e => setCode(e.target.value)}
-              iconProps={{
-                end: (
-                  <Button
-                    variant="icon"
-                    size="icon"
-                    className={cn(
-                      'px-4 py-2 flex items-center justify-center',
-                      isVerifyEmail ? 'bg-[#E2E2E2] text-yoteyo-gray-300' : 'bg-[#F5ECFF] text-yoteyo-main ',
-                    )}
-                    onClick={() => {
-                      mutate({
-                        username: getValues('username'),
-                        nickname: getValues('nickname'),
-                      });
-                    }}
-                  >
-                    {isPending ? <Spinner /> : <Text className="!text-[14px] font-semibold">재전송</Text>}
-                  </Button>
-                ),
-              }}
-            />
-            <Countdown
-              date={time}
-              renderer={props => {
-                return (
-                  <Text variant="detail2" className="mt-2">
-                    * 인증키 유효시간{' '}
-                    <Text variant="detail2" className="text-yoteyo-main">
-                      {zeroPad(props.minutes, 2)}:{zeroPad(props.seconds, 2)}
-                    </Text>{' '}
-                    남았습니다.
-                  </Text>
-                );
-              }}
-            />
+              <Box className="flex-col mt-6">
+                <Input
+                  inputMode="numeric"
+                  id="code"
+                  placeholder="코드를 입력해주세요"
+                  value={code}
+                  onChange={e => setCode(e.target.value)}
+                  iconProps={{
+                    end: (
+                      <Button
+                        variant="icon"
+                        size="icon"
+                        className={cn('px-4 py-2 flex items-center justify-center bg-[#F5ECFF] text-yoteyo-main')}
+                        onClick={() => {
+                          mutate({
+                            username: getValues('username'),
+                            nickname: getValues('nickname'),
+                          });
+                        }}
+                      >
+                        {isPending ? <Spinner /> : <Text className="!text-[14px] font-semibold">재전송</Text>}
+                      </Button>
+                    ),
+                  }}
+                />
+                <Countdown
+                  date={time}
+                  renderer={props => {
+                    return (
+                      <Text variant="detail2" className="mt-2">
+                        * 인증키 유효시간{' '}
+                        <Text variant="detail2" className="text-yoteyo-main">
+                          {zeroPad(props.minutes, 2)}:{zeroPad(props.seconds, 2)}
+                        </Text>{' '}
+                        남았습니다.
+                      </Text>
+                    );
+                  }}
+                />
 
-            <Button
-              className="mt-6"
-              onClick={() => {
-                verifyCodeMutate({
-                  username: getValues('username'),
-                  code,
-                });
-              }}
-            >
-              인증완료
-            </Button>
-          </Box>
+                <Button
+                  className="mt-6"
+                  onClick={() => {
+                    verifyCodeMutate({
+                      username: getValues('username'),
+                      code,
+                    });
+                  }}
+                >
+                  인증완료
+                </Button>
+              </Box>
+            </>
+          )}
         </Box>
       ) : (
         <Box className="flex-col px-5 pt-9">

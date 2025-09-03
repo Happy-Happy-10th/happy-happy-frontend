@@ -34,3 +34,5 @@ export { default as ShareUrlIcon } from '../../../../public/icons/share-url.svg?
 export { default as MapPinIcon } from '../../../../public/icons/map-pin-icon.svg?react';
 export { default as LinkIcon } from '../../../../public/icons/link-icon.svg?react';
 export { default as NoteIcon } from '../../../../public/icons/note-icon.svg?react';
+
+export { default as UserIcon } from '../../../../public/icons/user.svg?react';

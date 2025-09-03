@@ -4,6 +4,8 @@ import {
   useCheckUserIdResponse,
   useCheckUserNamePayload,
   useCheckUserNameResponse,
+  useFindUserIdPayload,
+  useFindUserIdResponse,
   useSendCodeForFindUserIdPayload,
   useSendCodeForFindUserIdResponse,
   useSendCodePayload,
@@ -18,6 +20,7 @@ import {
 import {
   PostCheckUserId,
   PostCheckUserName,
+  PostFindUserId,
   PostSendCode,
   PostSendCodeForFindUserId,
   PostSignIn,
@@ -132,4 +135,28 @@ const useSendCodeForFindUserID = (
   });
 };
 
-export { useSignIn, useSignUp, useCheckUserName, useCheckUserId, useSendCode, useVerifyCode, useSendCodeForFindUserID };
+const useFindUserId = (
+  options: Exclude<
+    UseMutationOptions<useFindUserIdResponse, HTTPError<ErrorFormat>, useFindUserIdPayload>,
+    'mutationFn'
+  >,
+) => {
+  return useMutation({
+    mutationKey: ['find-userId'],
+    mutationFn: async (payload: useFindUserIdPayload) => {
+      return (await PostFindUserId({ ...payload })).json();
+    },
+    ...options,
+  });
+};
+
+export {
+  useSignIn,
+  useSignUp,
+  useCheckUserName,
+  useCheckUserId,
+  useSendCode,
+  useVerifyCode,
+  useSendCodeForFindUserID,
+  useFindUserId,
+};

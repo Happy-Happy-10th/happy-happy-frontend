@@ -3,6 +3,8 @@ import {
   useCheckUserIdResponse,
   useCheckUserNamePayload,
   useCheckUserNameResponse,
+  useFindUserIdPayload,
+  useFindUserIdResponse,
   useSendCodeForFindUserIdPayload,
   useSendCodeForFindUserIdResponse,
   useSendCodePayload,
@@ -80,6 +82,14 @@ export const PostSendCodeForFindUserId = async (payload: useSendCodeForFindUserI
 
 export const PostVerifyCode = async (payload: useVerifyCodePayload) => {
   return await yoteyoAPI<useVerifyCodeResponse>(`auth/verify-code`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ...payload }),
+  });
+};
+
+export const PostFindUserId = async (payload: useFindUserIdPayload) => {
+  return await yoteyoAPI<useFindUserIdResponse>(`auth/find-userid`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ ...payload }),
