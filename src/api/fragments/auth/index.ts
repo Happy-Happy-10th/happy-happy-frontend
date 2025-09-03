@@ -23,6 +23,13 @@ export const getHealth = async () => {
   });
 };
 
+export const getMyInfo = async () => {
+  return await yoteyoAPI(`auth/me`, {
+    method: 'get',
+    headers: { 'Content-Type': 'application/json' },
+  });
+};
+
 export const PostSignIn = async (payload: useSignInPayload) => {
   return await yoteyoAPI<useSignInResponse>(`auth/login`, {
     method: 'POST',

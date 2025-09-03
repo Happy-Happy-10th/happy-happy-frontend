@@ -4,6 +4,7 @@ import { useQueryState, parseAsString, parseAsBoolean, useQueryStates } from 'nu
 import { useRouter } from 'next/navigation';
 import { AlertRedIcon } from '@/components/base';
 import { CustomDialog } from '@/components/features';
+import { useMyInfo } from '@/api';
 
 interface Props {}
 
@@ -16,10 +17,17 @@ function Page() {
     success: parseAsBoolean.withDefault(false),
     error: parseAsString.withDefault(''),
   });
+  const { refetch } = useMyInfo();
+
+  const handle = async () => {
+    const res = await refetch();
+    console.log(res);
+    router.push('/home');
+  };
 
   useEffect(() => {
     if (payload.success) {
-      router.push('/home');
+      handle();
     }
     if (payload.error === 'already_registered') {
       setDialogState({
