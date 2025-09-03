@@ -106,6 +106,19 @@ type useSendCodeForFindUserIdResponse = {
   timeStamp: string;
 };
 
+type useSendCodeForFindUserPwPayload = {
+  nickname: string;
+  userid: string;
+  username: string;
+};
+
+type useSendCodeForFindUserPwResponse = {
+  data: { success: boolean; message: string; ttl: number };
+  message: string;
+  status: number;
+  timeStamp: string;
+};
+
 type useFindUserIdResponse = {
   data: {
     message: string;
@@ -119,6 +132,19 @@ type useFindUserIdResponse = {
 type useFindUserIdPayload = {
   username: string;
   nickname: string;
+};
+
+type useResetPasswordResponse = {
+  message: string;
+  status: number;
+  timeStamp: string;
+};
+type useResetPasswordPayload = {
+  username: string;
+  userid: string;
+  newPassword: string;
+  passwordCheck: string;
+  passwordConfirmed: boolean;
 };
 
 export type {
@@ -140,4 +166,8 @@ export type {
   useMyInfoResponse,
   useFindUserIdResponse,
   useFindUserIdPayload,
+  useSendCodeForFindUserPwPayload,
+  useSendCodeForFindUserPwResponse,
+  useResetPasswordResponse,
+  useResetPasswordPayload,
 };

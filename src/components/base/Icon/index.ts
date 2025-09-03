@@ -36,3 +36,6 @@ export { default as LinkIcon } from '../../../../public/icons/link-icon.svg?reac
 export { default as NoteIcon } from '../../../../public/icons/note-icon.svg?react';
 
 export { default as UserIcon } from '../../../../public/icons/user.svg?react';
+
+export { default as EyeOnIcon } from '../../../../public/icons/eye-on.svg?react';
+export { default as EyeOffIcon } from '../../../../public/icons/eye-off.svg?react';

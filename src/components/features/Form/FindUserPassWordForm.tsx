@@ -1,16 +1,15 @@
 'use client';
 
-import { AlertCheckIcon, AlertRedIcon, Box, Button, Input, Spinner, Text } from '@/components/base';
+import { AlertCheckIcon, AlertRedIcon, Box, Button, Icon, Input, Spinner, Text } from '@/components/base';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { CustomDialog } from '../CustomDialog';
 import Countdown, { zeroPad } from 'react-countdown';
-import { useSendCodeForFindUserID, useVerifyCode } from '@/api';
+import { useSendCodeForFindUserPw, useVerifyCode } from '@/api';
 import { cn } from '@/utils/tailwind-utils';
+import ResetPasswordForm from './ResetPasswordForm';
 
-interface Props {}
-
-function FindUserPassWordForm(props: Props) {
+function FindUserPassWordForm() {
   const [code, setCode] = useState('');
   const [isSend, setIsSend] = useState(false);
   const [isVerifyEmail, setIsVerifyEmail] = useState(false);
@@ -36,7 +35,8 @@ function FindUserPassWordForm(props: Props) {
     mode: 'onSubmit',
   });
 
-  const { mutate, isPending } = useSendCodeForFindUserID({
+  //이메일 코드 전송
+  const { mutate, isPending } = useSendCodeForFindUserPw({
     onSuccess: data => {
       setTime(Date.now() + data.data.ttl * 1000);
       setIsSend(true);
@@ -79,6 +79,7 @@ function FindUserPassWordForm(props: Props) {
       mutate({
         username: getValues('username'),
         nickname: getValues('nickname'),
+        userid: getValues('userid'),
       });
     }
   };
@@ -93,63 +94,67 @@ function FindUserPassWordForm(props: Props) {
 
       {isSend ? (
         <Box className="flex-col px-5 pt-9">
-          <Text>이메일 인증코드를 입력해 주세요.</Text>
+          {isVerifyEmail ? (
+            <ResetPasswordForm userid={getValues('userid')} username={getValues('username')} />
+          ) : (
+            <>
+              <Text className="font-medium">이메일 인증코드를 입력해 주세요.</Text>
 
-          <Box className="flex-col mt-6">
-            <Input
-              inputMode="numeric"
-              id="code"
-              placeholder="코드를 입력해주세요"
-              value={code}
-              onChange={e => setCode(e.target.value)}
-              iconProps={{
-                end: (
-                  <Button
-                    variant="icon"
-                    size="icon"
-                    className={cn(
-                      'px-4 py-2 flex items-center justify-center',
-                      isVerifyEmail ? 'bg-[#E2E2E2] text-yoteyo-gray-300' : 'bg-[#F5ECFF] text-yoteyo-main ',
-                    )}
-                    onClick={() => {
-                      mutate({
-                        username: getValues('username'),
-                        nickname: getValues('nickname'),
-                      });
-                    }}
-                  >
-                    {isPending ? <Spinner /> : <Text className="!text-[14px] font-semibold">재전송</Text>}
-                  </Button>
-                ),
-              }}
-            />
-            <Countdown
-              date={time}
-              renderer={props => {
-                return (
-                  <Text variant="detail2" className="mt-2">
-                    * 인증키 유효시간{' '}
-                    <Text variant="detail2" className="text-yoteyo-main">
-                      {zeroPad(props.minutes, 2)}:{zeroPad(props.seconds, 2)}
-                    </Text>{' '}
-                    남았습니다.
-                  </Text>
-                );
-              }}
-            />
+              <Box className="flex-col mt-6">
+                <Input
+                  inputMode="numeric"
+                  id="code"
+                  placeholder="코드를 입력해주세요"
+                  value={code}
+                  onChange={e => setCode(e.target.value)}
+                  iconProps={{
+                    end: (
+                      <Button
+                        variant="icon"
+                        size="icon"
+                        className={cn('px-4 py-2 flex items-center justify-center bg-[#F5ECFF] text-yoteyo-main')}
+                        onClick={() => {
+                          mutate({
+                            username: getValues('username'),
+                            nickname: getValues('nickname'),
+                            userid: getValues('userid'),
+                          });
+                        }}
+                      >
+                        {isPending ? <Spinner /> : <Text className="!text-[14px] font-semibold">재전송</Text>}
+                      </Button>
+                    ),
+                  }}
+                />
+                <Countdown
+                  date={time}
+                  renderer={props => {
+                    return (
+                      <Text variant="detail2" className="mt-2">
+                        * 인증키 유효시간{' '}
+                        <Text variant="detail2" className="text-yoteyo-main">
+                          {zeroPad(props.minutes, 2)}:{zeroPad(props.seconds, 2)}
+                        </Text>{' '}
+                        남았습니다.
+                      </Text>
+                    );
+                  }}
+                />
 
-            <Button
-              className="mt-6"
-              onClick={() => {
-                verifyCodeMutate({
-                  username: getValues('username'),
-                  code,
-                });
-              }}
-            >
-              인증완료
-            </Button>
-          </Box>
+                <Button
+                  className="mt-6"
+                  onClick={() => {
+                    verifyCodeMutate({
+                      username: getValues('username'),
+                      code,
+                    });
+                  }}
+                >
+                  인증완료
+                </Button>
+              </Box>
+            </>
+          )}
         </Box>
       ) : (
         <Box className="flex-col px-5 pt-9">

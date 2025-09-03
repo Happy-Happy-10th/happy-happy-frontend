@@ -5,8 +5,12 @@ import {
   useCheckUserNameResponse,
   useFindUserIdPayload,
   useFindUserIdResponse,
+  useResetPasswordPayload,
+  useResetPasswordResponse,
   useSendCodeForFindUserIdPayload,
   useSendCodeForFindUserIdResponse,
+  useSendCodeForFindUserPwPayload,
+  useSendCodeForFindUserPwResponse,
   useSendCodePayload,
   useSendCodeResponse,
   useSignInPayload,
@@ -80,6 +84,14 @@ export const PostSendCodeForFindUserId = async (payload: useSendCodeForFindUserI
   });
 };
 
+export const PostSendCodeForFindUserPw = async (payload: useSendCodeForFindUserPwPayload) => {
+  return await yoteyoAPI<useSendCodeForFindUserPwResponse>(`auth/find-password/send-code`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ...payload }),
+  });
+};
+
 export const PostVerifyCode = async (payload: useVerifyCodePayload) => {
   return await yoteyoAPI<useVerifyCodeResponse>(`auth/verify-code`, {
     method: 'POST',
@@ -90,6 +102,14 @@ export const PostVerifyCode = async (payload: useVerifyCodePayload) => {
 
 export const PostFindUserId = async (payload: useFindUserIdPayload) => {
   return await yoteyoAPI<useFindUserIdResponse>(`auth/find-userid`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ...payload }),
+  });
+};
+
+export const PostResetUserPassword = async (payload: useResetPasswordPayload) => {
+  return await yoteyoAPI<useResetPasswordResponse>(`auth/reset-password`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ ...payload }),
