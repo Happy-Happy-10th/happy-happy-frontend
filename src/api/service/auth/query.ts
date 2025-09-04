@@ -1,4 +1,5 @@
-import { getHealth } from '@/api/fragments';
+import { useMyInfoResponse } from '@/@types';
+import { getHealth, getMyInfo } from '@/api/fragments';
 import { useQuery } from '@tanstack/react-query';
 
 const useHealth = () => {
@@ -7,4 +8,13 @@ const useHealth = () => {
     queryFn: async () => (await getHealth()).json(),
   });
 };
-export { useHealth };
+
+const useMyInfo = () => {
+  return useQuery<useMyInfoResponse>({
+    queryKey: ['my-info'],
+    queryFn: async () => (await getMyInfo()).json(),
+    enabled: false,
+  });
+};
+
+export { useHealth, useMyInfo };

@@ -6,6 +6,12 @@ type MemberInfo = {
   nickname: string;
   username: string;
 };
+type useMyInfoResponse = {
+  data: MemberInfo;
+  message: string;
+  status: number;
+  timeStamp: string;
+};
 
 type useSignInPayload = {
   userid: string;
@@ -88,7 +94,61 @@ type useVerifyCodeResponse = {
   timeStamp: string;
 };
 
+type useSendCodeForFindUserIdPayload = {
+  username: string;
+  nickname: string;
+};
+
+type useSendCodeForFindUserIdResponse = {
+  data: { success: boolean; message: string; ttl: number };
+  message: string;
+  status: number;
+  timeStamp: string;
+};
+
+type useSendCodeForFindUserPwPayload = {
+  nickname: string;
+  userid: string;
+  username: string;
+};
+
+type useSendCodeForFindUserPwResponse = {
+  data: { success: boolean; message: string; ttl: number };
+  message: string;
+  status: number;
+  timeStamp: string;
+};
+
+type useFindUserIdResponse = {
+  data: {
+    message: string;
+    success: boolean;
+    userId: string;
+  };
+  message: string;
+  status: number;
+  timeStamp: string;
+};
+type useFindUserIdPayload = {
+  username: string;
+  nickname: string;
+};
+
+type useResetPasswordResponse = {
+  message: string;
+  status: number;
+  timeStamp: string;
+};
+type useResetPasswordPayload = {
+  username: string;
+  userid: string;
+  newPassword: string;
+  passwordCheck: string;
+  passwordConfirmed: boolean;
+};
+
 export type {
+  MemberInfo,
   useSignInPayload,
   useSignInResponse,
   useSignUpPayload,
@@ -101,5 +161,13 @@ export type {
   useSendCodeResponse,
   useVerifyCodePayload,
   useVerifyCodeResponse,
-  MemberInfo,
+  useSendCodeForFindUserIdPayload,
+  useSendCodeForFindUserIdResponse,
+  useMyInfoResponse,
+  useFindUserIdResponse,
+  useFindUserIdPayload,
+  useSendCodeForFindUserPwPayload,
+  useSendCodeForFindUserPwResponse,
+  useResetPasswordResponse,
+  useResetPasswordPayload,
 };
