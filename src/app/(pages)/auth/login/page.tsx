@@ -1,7 +1,7 @@
 'use client';
 
 import { useSignIn } from '@/api/service/auth';
-import { AlertRedIcon, Box, Button, Icon, Input, Text } from '@/components/base';
+import { AlertRedIcon, Box, Button, EyeOffIcon, EyeOnIcon, Icon, Input, Text } from '@/components/base';
 import AuthLayout from '@/components/layouts/AuthLayout';
 import { Label } from '@/components/ui/label';
 import { useRouter } from 'next/navigation';
@@ -16,6 +16,7 @@ import Link from 'next/link';
 function Page() {
   const router = useRouter();
   const [dialogState, setDialogState] = useState({ open: false, message: '' });
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const { setUser } = useStore(useAuthStore);
   const {
@@ -99,7 +100,14 @@ function Page() {
                   required: '비밀번호를 입력해주세요.',
                   minLength: { value: 2, message: '최소 2자리 이상 입력해주세요.' },
                 })}
-                type="password"
+                iconProps={{
+                  end: (
+                    <Button variant="icon" size="icon" onClick={() => setPasswordVisible(prev => !prev)}>
+                      <Icon className="w-5 h-5">{passwordVisible ? <EyeOffIcon /> : <EyeOnIcon />}</Icon>
+                    </Button>
+                  ),
+                }}
+                type={passwordVisible ? 'text' : 'password'}
                 placeholder="비밀번호를 입력해주세요"
                 onBlur={() => trigger('password')}
                 variant={errors.password?.message ? 'error' : 'default'}
