@@ -16,6 +16,8 @@ import { BacktodayIcon, Box, Button, Icon, SettingIcon, Text } from '@/component
 import { MonthNavigator } from '@/components/features/monthNavigator';
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from '@/components/ui/drawer';
 import CalendarSettingForm from '@/components/features/Form/CalendarSettingFrom';
+import { useSidePanelStore } from '@/store';
+import { useMediaQuery } from '@/hooks';
 
 type CalendarToolbarType = {
   onChangeViewDate: SetDateHandler;
@@ -36,6 +38,11 @@ export function CalendarToolbar({
   //달 같은 달의 경우 Today버튼 사라짐
   const today = new Date();
   const isToday = isSameMonth(date, today);
+
+  //뷰포트 감시
+  const BREAKPOINT = '1000px' as const;
+  const isWide = useMediaQuery(`(min-width:${BREAKPOINT})`, true);
+  const openPanel = useSidePanelStore(s => s.open);
 
   return (
     <div className="w-full flex justify-between bg-yoteyo-bg-default pb-[10px] pl-[5px] pr-[5px]">
@@ -72,23 +79,30 @@ export function CalendarToolbar({
           </div>
         )}
         <div className="hover:cursor-pointer">
-          <Drawer>
-            <DrawerTrigger asChild>
-              <Icon className="w-6 h-6">
-                <SettingIcon />
-              </Icon>
-            </DrawerTrigger>
-            <DrawerContent className="bg-yoteyo-bg-modal">
-              <DrawerHeader>
-                <DrawerTitle>
-                  <Text variant={'title2'}>환경설정</Text>
-                </DrawerTitle>
-              </DrawerHeader>
-              <Box className="pl-5 pr-5">
-                <CalendarSettingForm />
-              </Box>
-            </DrawerContent>
-          </Drawer>
+          {isWide && (
+            <Icon className="w-6 h-6" onClick={() => openPanel('calendarRoot', 'setting')}>
+              <SettingIcon />
+            </Icon>
+          )}
+          {!isWide && (
+            <Drawer>
+              <DrawerTrigger asChild>
+                <Icon className="w-6 h-6">
+                  <SettingIcon />
+                </Icon>
+              </DrawerTrigger>
+              <DrawerContent className="bg-yoteyo-bg-modal">
+                <DrawerHeader>
+                  <DrawerTitle className="sr-only">
+                    <Text variant={'title2'}>환경설정</Text>
+                  </DrawerTitle>
+                </DrawerHeader>
+                <Box className="pl-5 pr-5">
+                  <CalendarSettingForm />
+                </Box>
+              </DrawerContent>
+            </Drawer>
+          )}
         </div>
       </div>
     </div>

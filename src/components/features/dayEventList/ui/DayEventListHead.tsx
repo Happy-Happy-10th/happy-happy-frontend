@@ -40,24 +40,23 @@ export default function DayEventListHead({ date = new Date() }: props) {
   const BREAKPOINT = '1000px' as const;
   const isWide = useMediaQuery(`(min-width:${BREAKPOINT})`, true);
 
-  // ✅ 사이드패널 오픈 함수
+  //사이드패널 오픈 함수
   const openPanel = useSidePanelStore(s => s.open);
-
   return (
     <div className={head}>
       <span className="font-bold text-[22px]">{day}</span>
       {user !== null ? (
         isWide ? (
-          // ✅ 데스크탑: 사이드패널 오픈 버튼
+          // 데스크탑: 사이드패널 오픈 버튼
           <Button
             type="button"
             className="rounded-[50px] bg-[#C0C0C0] w-[24px] h-[24px]"
-            onClick={() => openPanel('calendarRoot')} // CalendarPage 최상단 PanelAnchor와 연결
+            onClick={() => openPanel('calendarRoot', 'create')}
           >
             <Plus size={24} />
           </Button>
         ) : (
-          // ✅ 모바일: 기존 Drawer 사용
+          // 모바일: 기존 Drawer 사용
           <CustomDrawer
             trigger={
               <Button type="button" className="rounded-[50px] bg-[#C0C0C0] w-[24px] h-[24px]">
@@ -65,7 +64,6 @@ export default function DayEventListHead({ date = new Date() }: props) {
               </Button>
             }
             contents={<UserEventForm />}
-            type="create"
           />
         )
       ) : (

@@ -5,7 +5,6 @@ import { Separator } from '@/components/ui/separator';
 import { useAuthStore, useUserSettingStore } from '@/store';
 import { cn } from '@/utils/tailwind-utils';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useEffect } from 'react';
 import { useStore } from 'zustand';
 
 type PropsType = {};
@@ -68,12 +67,15 @@ export default function CalendarSettingForm({}: PropsType) {
 
   return (
     <Box className="w-full xl:max-w-[393px] h-201 m-auto flex flex-col gap-5">
-      <Box className="flex flex-col w-full">
+      <Box className="w-full flex justify-center">
+        <Text variant={'title2'}>환경설정</Text>
+      </Box>
+      <Box className="flex flex-col w-full justify-center">
         <Text className="text-yoteyo-gray-300 mb-2" variant={'body4'}>
           AI 캘린더 설정
         </Text>
         {/* 요일설정 부분 */}
-        <Box className="flex flex-row bg-white justify-between items-center w-[354px] h-[50px] pl-3 pr-3 rounded-[8px]">
+        <Box className="flex flex-row bg-white justify-between items-center w-full h-[50px] pl-3 pr-3 rounded-[8px]">
           <Text variant={'body3'}>주 요일 선택</Text>
           <Box className="flex gap-2">
             <Button
@@ -98,7 +100,7 @@ export default function CalendarSettingForm({}: PropsType) {
         </Box>
 
         {/* 시간 형식 설정 */}
-        <Box className="flex flex-row bg-white w-[354px] h-[100px] pl-3 pr-3 mt-3 rounded-[8px]">
+        <Box className="flex flex-row bg-white w-full h-[100px] pl-3 pr-3 mt-3 rounded-[8px]">
           <Box className="flex flex-col h-full w-full">
             <Box className="h-[50px] flex items-center justify-between">
               <Text variant={'body3'}>시간 형식</Text>
@@ -141,7 +143,7 @@ export default function CalendarSettingForm({}: PropsType) {
         <Text className="text-yoteyo-gray-300" variant={'body4'}>
           AI 검색 위치 설정
         </Text>
-        <Box className="flex flex-row bg-white justify-between items-center w-[354px] h-[50px] pl-3 pr-3 rounded-[8px]">
+        <Box className="flex flex-row bg-white justify-between items-center w-full h-[50px] pl-3 pr-3 rounded-[8px]">
           <Text variant={'body3'}>위치</Text>
           <Box className="flex gap-2">
             <Button className="w-20 h-9 bg-yoteyo-gray-100 rounded-[8px] text-black" variant={'default'}>
@@ -158,7 +160,7 @@ export default function CalendarSettingForm({}: PropsType) {
         <Text className="text-yoteyo-gray-300" variant={'body4'}>
           서비스 운영 방침
         </Text>
-        <Box className="flex flex-row bg-white justify-between items-center w-[354px] h-[100px] pl-3 pr-3 rounded-[8px]">
+        <Box className="flex flex-row bg-white justify-between items-center w-full h-[100px] pl-3 pr-3 rounded-[8px]">
           <Box className="flex flex-col h-full w-full">
             <Box className="h-[50px] flex items-center justify-between">
               <Text variant={'body3'}>사이트 정보A</Text>

@@ -27,3 +27,5 @@ export * from './SidePanel';
 export * from './Spinner';
 
 export * from './Tabs';
+
+export * from './Calendar';
