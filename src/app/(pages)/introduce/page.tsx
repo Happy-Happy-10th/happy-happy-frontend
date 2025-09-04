@@ -20,7 +20,7 @@ function Page() {
         <Text variant="title2" className="font-semibold mt-5">
           당신만의 AI 캘린더 비서 요때요
         </Text>
-        <Text variant="body2" className="text-yoteyo-gray-400 mt-2.5">
+        <Text variant="body2" className="text-yoteyo-gray-500 mt-2.5">
           일정 예측부터 자동 등록까지 한번에!
         </Text>
 

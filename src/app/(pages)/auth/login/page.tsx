@@ -147,7 +147,7 @@ function Page() {
 
           <Box className="mt-12.5 mb-6 w-full items-center">
             <Box className="flex-1 w-full h-[1px] bg-yoteyo-outline" />
-            <Text variant="detail1" className="mx-4 text-yoteyo-gray-400">
+            <Text variant="detail1" className="mx-4 text-yoteyo-disabled">
               SNS 간편 로그인
             </Text>
             <Box className=" flex-1 w-full h-[1px] bg-yoteyo-outline" />

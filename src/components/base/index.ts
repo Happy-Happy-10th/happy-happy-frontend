@@ -22,8 +22,10 @@ export * from './CheckBox';
 
 export * from './Dialog';
 
+export * from './SidePanel';
+
 export * from './Spinner';
 
-export * from './Calendar';
-
 export * from './Tabs';
+
+export * from './Calendar';

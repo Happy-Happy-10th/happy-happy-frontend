@@ -12,7 +12,7 @@ import { CalendarEventType } from '@/@types/calendar';
 import { Text } from '@/components/base';
 import { cn } from '@/utils/tailwind-utils';
 
-import { useAuthStore } from '@/store';
+import { useAuthStore, useSidePanelStore } from '@/store';
 import { useStore } from 'zustand';
 import { DrawerClose } from '@/components/ui/drawer';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -20,6 +20,7 @@ import { queryKeys } from '@/api';
 
 import { extractYear } from '@/utils/calendar/extractDate';
 import { calendarService } from '@/api/service/calendar';
+import { useMediaQuery } from '@/hooks';
 
 const itemsStyle = clsx('w-full bg-white rounded-[8px]');
 
@@ -31,7 +32,10 @@ type PropsType = {
 export default function UserEventForm({ event, mode = 'create' }: PropsType) {
   //스크롤 감시 추가
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-
+  //뷰포트 감시
+  const BREAKPOINT = '1000px' as const;
+  const isWide = useMediaQuery(`(min-width:${BREAKPOINT})`, true);
+  const closePanel = useSidePanelStore(s => s.close);
   const queryClient = useQueryClient();
   // POST 전용 Mutate 생성
   const CreateEventMutation = useMutation({
@@ -41,6 +45,7 @@ export default function UserEventForm({ event, mode = 'create' }: PropsType) {
       queryClient.invalidateQueries({
         queryKey: queryKeys.calendar.events(year).queryKey,
       });
+      if (isWide) closePanel();
     },
   });
   // PUT 전용 Mutate 생성
@@ -51,6 +56,7 @@ export default function UserEventForm({ event, mode = 'create' }: PropsType) {
       queryClient.invalidateQueries({
         queryKey: queryKeys.calendar.events(year).queryKey,
       });
+      if (isWide) closePanel();
     },
   });
 
@@ -195,7 +201,20 @@ export default function UserEventForm({ event, mode = 'create' }: PropsType) {
           </div>
 
           {/* 버튼 */}
-          {mode !== 'shared' && (
+          {mode !== 'shared' && isWide && (
+            <div className="w-full h-10 flex flex-row justify-end gap-2 mt-6">
+              <DrawerClose asChild>
+                <Button type="button" className="w-[105px] h-10" variant="outline">
+                  <Text variant="body3">취소</Text>
+                </Button>
+              </DrawerClose>
+              <Button type="submit" className="w-[105px] h-10" variant="default">
+                <Text variant="body3">저장</Text>
+              </Button>
+            </div>
+          )}
+
+          {mode !== 'shared' && !isWide && (
             <div className="w-full h-10 flex flex-row justify-end gap-2 mt-6">
               <DrawerClose asChild>
                 <Button type="button" className="w-[105px] h-10" variant="outline">
