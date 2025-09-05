@@ -5,6 +5,7 @@ const END_POINT = process.env.YOTEYO_API_URL;
 
 const yoteyoAPI = ky.create({
   prefixUrl: END_POINT,
+  credentials: 'include',
   hooks: {
     beforeRequest: [
       async request => {
